@@ -6,6 +6,11 @@ body
     margin-right: 10px;
 }
 
+.cf_footer
+{
+    color: rgb(218, 218, 218);
+}
+
 .cf_load img
 {
     width: 50px;
