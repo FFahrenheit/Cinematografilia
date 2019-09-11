@@ -17,7 +17,7 @@
     <?php getNavBar() ?>
     <div class="form">
         <h2>¡Inicia sesión para mantener el seguimiento de tus películas!</h2>
-        <img src="../../img/load.jpg"> 
+        <img id="load" src="../../img/load.jpg" alt="Login for a cool animation"> 
         <form id="formulario" novalidate>
             <div class="form-group">
                 <label for="">Nombre de usuario: </label>
@@ -26,7 +26,7 @@
                     placeholder="Escriba su nombre de usuario" class="form-control"
                     required>
                 <div class="invalid-feedback">
-                    Ingresa datos
+                    Ingresa el nombre de usuario
                 </div>
             </div>
             <div class="form-group">
@@ -35,7 +35,7 @@
                 <input name="password" type="password" placeholder="Escriba su contraseña" class="form-control"
                     required>
                 <div class="invalid-feedback">
-                    Ingresa datos
+                    La contraseña no puede estar vacía
                 </div>
             </div>
             <div class="form-group">
@@ -56,6 +56,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js"
         crossorigin="anonymous"></script>
     <script src ="../../js/main.js"></script>
+    <script src="../../js/login.js"></script>
 </body>
 
 </html>
