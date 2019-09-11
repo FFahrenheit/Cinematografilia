@@ -6,34 +6,73 @@ body
     margin-right: 10px;
 }
 
-.cf_footer
+.sa_footer
 {
     color: rgb(218, 218, 218);
 }
 
-.cf_load img
+.sa_load img
 {
     width: 50px;
 }
 
-.cf_nav
+.sa_nav
 {
+    background-color: #000000;
     text-align: center;
 }
 
-.cf_nav a:hover 
+.sa_nav a:hover 
 {
     opacity: 0.7;
 }
 
-.cf_nav img
+.sa_nav img
 {
     width: 50px;
 }
 
 
-.cf_nav span
+.sa_nav span
 {
     color: white;
     align-content: center;
+}
+
+.sa_link a 
+{
+    text-decoration: none;
+    color: antiquewhite;
+}
+
+.sa_link a:hover 
+{
+    text-decoration: underline;
+}
+
+.form 
+{
+    padding-top: 10px;
+    background: rgb(29, 29, 29);
+    text-align: center;
+    color:#F6C519;
+    align-content: center;
+    padding-bottom: 15px;
+}
+
+.form img 
+{
+    width: 10%;
+}
+
+.form input
+{
+    display: inline-block;
+    width: 50%;
+}
+
+.form a 
+{
+    color: #F6C519;
+    text-decoration: underline;
 }
