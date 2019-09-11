@@ -62,7 +62,7 @@
                 <span id="passwordError"></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-warning">Iniciar sesión</button>
+                <button type="submit" class="btn btn-warning quote">"This is where the fun begins."</button>
             </div>
         </form>
         <p>¿Ya tienes una cuenta?

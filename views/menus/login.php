@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-warning">Iniciar sesión</button>
+                <button type="submit" class="btn btn-warning quote">"Let the games begin."</button>
             </div>
         </form>
         <p>¿No tienes una cuenta?

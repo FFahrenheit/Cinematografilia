@@ -76,3 +76,30 @@ body
     color: #F6C519;
     text-decoration: underline;
 }
+
+.basic img 
+{
+    width: 15%;
+}
+
+.basic h1 
+{
+    font-style: oblique;
+    padding-top: 10px;
+}
+
+.basic
+{
+    padding-top: 10px;
+    background: rgb(29, 29, 29);
+    text-align: center;
+    color:#F6C519;
+    align-content: center;
+    padding-bottom: 15px;
+}
+
+.quote
+{
+    font-style: oblique;
+    text-shadow: 3px 3px 3px #000000;
+}

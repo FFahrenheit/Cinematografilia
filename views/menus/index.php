@@ -15,7 +15,9 @@
 
 <body>
     <?php getNavBar() ?>
-    <h1>Hola</h1>
+    <div class="form">
+        <marquee>Jaj</marquee>
+    </div>
     <div id="footer">
 </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js"
