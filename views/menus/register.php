@@ -2,7 +2,7 @@
 
 <head>
     <link rel="shortcut icon" href="../../img/icono.png" />
-    <title>¡Bienvenido a SpoilerAltert!</title>
+    <title>Únete a la comunidad</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -18,6 +18,8 @@
     <div class="form">
         <h2>¡Únete hoy a SpoilerAltert!</h2>
         <img id="load" src="../../img/load.jpg" alt="Login for a cool animation"> 
+        <div id="alert" role="alert" class="alert sa_alert">
+        </div>
         <form id="formulario" novalidate>
             <div class="form-group">
                 <label for="">Nombre de usuario: </label>
@@ -32,7 +34,7 @@
             <div class="form-group">
                 <label for="">Correo electrónico: </label>
                 <br>
-                <input type="text" name="username" id="email"
+                <input type="text" name="email" id="email"
                     placeholder="Escriba su nombre de correo" class="form-control"
                     required onkeyup="checkEmail()">
                 <div class="invalid-feedback">
@@ -45,7 +47,7 @@
                 <label for="">Contraseña: </label>
                 <br>
                 <input name="password" type="password" placeholder="Escriba su contraseña" class="form-control"
-                    required minlength="4" id="pass">
+                    required minlength="4" id="pass" onkeyup="checkPassword()">
                 <div class="invalid-feedback">
                     La contraseña debe tener mínimo 4 caracteres
                 </div>
@@ -62,7 +64,7 @@
                 <span id="passwordError"></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-warning quote">"This is where the fun begins."</button>
+                <button type="submit" class="btn btn-warning quote" title="Registrarse">"This is where the fun begins."</button>
             </div>
         </form>
         <p>¿Ya tienes una cuenta?

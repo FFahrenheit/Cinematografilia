@@ -1,5 +1,7 @@
 body
 {
+    align-content: center;
+    text-align: center;
     background-color: #000000;
     font-family: 'Overpass';
     margin-left: 10px;
@@ -53,7 +55,8 @@ body
 .form 
 {
     padding-top: 10px;
-    background: rgb(29, 29, 29);
+    /*background: rgb(29, 29, 29);*/
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(55,55,55,1) 100%);
     text-align: center;
     color:#F6C519;
     align-content: center;
@@ -101,5 +104,21 @@ body
 .quote
 {
     font-style: oblique;
+}
+
+.bigQuote 
+{
+    font-style: oblique;
     text-shadow: 3px 3px 3px #000000;
+}
+
+.sa_alert
+{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.sa_alert a
+{
+    text-decoration: none;
 }

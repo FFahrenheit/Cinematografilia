@@ -59,6 +59,43 @@ form.addEventListener('submit',(e)=>
         setTimeout(()=>
         {
             img.src = '../../img/load.jpg';
+            var data = new FormData(form);
+            fetch('../../php/register.php',
+            {
+                method: 'POST',
+                body: data
+            }).then((response)=>
+            {
+                console.log(response);
+                return response.json();
+            }).then((resp)=>
+            {
+                console.log(resp);
+                alert = document.getElementById('alert');
+                switch(resp)
+                {
+                    case '1':
+                    case '"1"':
+                        alert.classList.add('alert-danger');
+                        alert.innerHTML = 'Error interno del servidor';
+                        break;
+                    case '2':
+                    case '"2"':
+                        alert.classList.add('alert-warning');
+                        alert.innerHTML = 'Usuario y/o correo ya registrado';
+                        break;
+                    case '3':
+                    case '"3"':
+                        alert.classList.add('alert-success');
+                        alert.innerHTML = '¡Éxito! Inicia sesión <a href="login.php">aquí</a>';
+                        break;
+                    default:
+                        alert.classList.add('alert-danger');
+                        alert.innerHTML = 'Error desconocido. Intente de nuevo';
+                        break;
+                }
+                console.log('End');
+            })
         }, 500);
     }
 });

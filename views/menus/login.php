@@ -2,7 +2,7 @@
 
 <head>
     <link rel="shortcut icon" href="../../img/icono.png" />
-    <title>¡Bienvenido a SpoilerAltert!</title>
+    <title>Iniciar sesión</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-warning quote">"Let the games begin."</button>
+                <button type="submit" class="btn btn-warning quote" title="Iniciar sesión">"Let the games begin."</button>
             </div>
         </form>
         <p>¿No tienes una cuenta?

@@ -26,7 +26,8 @@ form.addEventListener('submit',(e)=>
         setTimeout(()=>
         {
             img.src = '../../img/load.jpg';
-            
+            var body = new FormData(form);
+            //fetch('../../php/login.php');
         }, 500);
     }
 });

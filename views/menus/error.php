@@ -18,7 +18,7 @@
         <img src="../../img/logo.png" alt="Ooops">
         <h1 class="quote">"Ooops, my bad."</h1>
         <h2>No pudimos encontrar la página que buscabas...</h2>
-        <a href="index.php" alt="Volver" class="btn btn-warning">Regresar a inicio</a>
+        <a href="index.php" alt="Volver" class="btn btn-warning quote" title="Regresar a inicio">"Forrest, I wanna go home."</a>
     </div>
     <div id="footer">
     </div>
