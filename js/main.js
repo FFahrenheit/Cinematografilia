@@ -27,3 +27,9 @@ $(document).ready(()=>
   +'</footer>')
     console.log("Page succesfully loaded");
 });
+
+function logout()
+{
+  fetch('../../php/logout.php');
+  window.location.reload(true);
+}

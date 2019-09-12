@@ -75,17 +75,15 @@ form.addEventListener('submit',(e)=>
                 switch(resp)
                 {
                     case '1':
-                    case '"1"':
                         alert.classList.add('alert-danger');
-                        alert.innerHTML = 'Error interno del servidor';
+                        alert.innerHTML = 'Error interno del servidor. Intente de nuevo';
                         break;
                     case '2':
-                    case '"2"':
                         alert.classList.add('alert-warning');
                         alert.innerHTML = 'Usuario y/o correo ya registrado';
+                        form.reset();
                         break;
                     case '3':
-                    case '"3"':
                         alert.classList.add('alert-success');
                         alert.innerHTML = '¡Éxito! Inicia sesión <a href="login.php">aquí</a>';
                         break;

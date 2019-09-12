@@ -11,5 +11,5 @@
 
     mysqli_query($connection,$sql) or die('"2"');
 
-    echo json_encode('"3"');
+    echo json_encode("3");
 ?>

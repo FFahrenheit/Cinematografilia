@@ -18,6 +18,8 @@
     <div class="form">
         <h2>¡Inicia sesión para mantener el seguimiento de tus películas!</h2>
         <img id="load" src="../../img/load.jpg" alt="Login for a cool animation"> 
+        <div id="alert" role="alert" class="alert sa_alert">
+        </div>
         <form id="formulario" novalidate>
             <div class="form-group">
                 <label for="">Nombre de usuario: </label>
