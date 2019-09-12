@@ -1,2 +1,2 @@
 # Cinematografilia
- Social network for movie fans using IMDB API :) 
+ Social network for movie fans using OMDB API :) 
