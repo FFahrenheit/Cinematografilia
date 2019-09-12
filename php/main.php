@@ -1,6 +1,7 @@
 <?php 
     session_start();
     include 'Connection.php';
+    $APIKey = "b27f9641";
     //echo $_SESSION['username'];
     function getNavBar()
     {
@@ -43,10 +44,10 @@
                 </ul>
                 <ul class="navbar-nav ml-auto nav-flex-icons">
                     <li class="nav-item">
-                        <form class="form-inline">
+                        <form class="form-inline" action="search.php" method="GET">
                             <div class="md-form my-0">
                                 <input class="form-control mr-sm-2" type="text" placeholder="Busca películas"
-                                    aria-label="Search">
+                                    aria-label="Search" name="title">
                             </div>
                         </form>
                     </li>';
