@@ -23,7 +23,7 @@ $(document).ready(()=>
       +'</div>'
     +'</div>'
     +'<div class="footer-copyright text-center py-3">© 2019 Copyright. '
-    +'Página creada usando la API de IMDB. Para más información haz '
+    +'Esta página usa la API de OMDB. Para más información haz '
     +'click <a style="text-decoration:underline" class="text-light" href="http://www.omdbapi.com/">aquí.<a>'
     +'</div>'
   +'</footer>')

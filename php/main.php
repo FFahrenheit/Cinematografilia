@@ -72,9 +72,9 @@
         else 
         {
             $nav .= '<li class="nav-item sa_link">
-            <a href="login.php">Inicia sesión</a>&nbsp;&nbsp;
+            <a class="nav-link" href="login.php">Inicia sesión</a>&nbsp;&nbsp;
             </li> <li class="nav-item sa_link">
-            <a href="register.php">Regístrate</a>
+            <a class="nav-link" href="register.php">Regístrate</a>
             </li>' ;   
         }
         $nav .= '</ul>

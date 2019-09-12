@@ -12,26 +12,31 @@
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
-          include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Movie.php'); 
-        $title = $_GET['title']?>
+        include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Movie.php'); 
+        $title = $_GET['title'];
+        $page = isset($_GET['page'])? $_GET['page'] : 1 ;?>
 </head>
 
 <body>
     <?php getNavBar() ?>
     <div class="sa_search">
         <h2>Resultados para la búsqueda de "<?php echo $title ?>" </h2>
+        <span> </span>
         <?php 
             $arg = str_replace(" ","+",$_GET['title']);
-            $url = "http://www.omdbapi.com/?apikey=$APIKey&s=$arg&type=movie";
+            $url = "http://www.omdbapi.com/?apikey=$APIKey&s=$arg&type=movie&page=$page";
             $content = file_get_contents($url);
             $json = json_decode($content,true);
             $cards = new Movie();
             if($json['Response'] == "True")
             {
+                echo '<span class="text-light">Se han encontrado '.$json['totalResults'].' resultados';
                 foreach($json['Search'] as $movie)
                 {
                     echo $cards->getCard($movie);
                 }
+                echo $cards->getNavigator($page, $json['totalResults'],$title);
+
             }
             else if($json['Response']=="False")
             {
