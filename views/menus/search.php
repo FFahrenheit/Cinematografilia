@@ -14,7 +14,9 @@
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
         include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Movie.php'); 
         $title = $_GET['title'];
-        $page = isset($_GET['page'])? $_GET['page'] : 1 ;?>
+        $page = isset($_GET['page'])? $_GET['page'] : 1 ;
+        $add = (isset($_GET['year']) && $_GET['year']!="")? "&y=".$_GET['year'] : ""; 
+        $add2 = (isset($_GET['year']) && $_GET['year']!="")? "&year=".$_GET['year'] : "" ?>
 </head>
 
 <body>
@@ -24,23 +26,43 @@
         <span> </span>
         <?php 
             $arg = str_replace(" ","+",$_GET['title']);
-            $url = "http://www.omdbapi.com/?apikey=$APIKey&s=$arg&type=movie&page=$page";
+            $url = "http://www.omdbapi.com/?apikey=$APIKey&s=$arg&type=movie&page=$page$add";
             $content = file_get_contents($url);
             $json = json_decode($content,true);
             $cards = new Movie();
             if($json['Response'] == "True")
             {
-                echo '<span class="text-light">Se han encontrado '.$json['totalResults'].' resultados';
+                echo '<span class="text-light">Se han encontrado '.$json['totalResults'].' resultado(s).</span>
+                <br><p> Nueva búsqueda:</p>';
+                echo $cards->getSearcher($title);
                 foreach($json['Search'] as $movie)
                 {
                     echo $cards->getCard($movie);
                 }
-                echo $cards->getNavigator($page, $json['totalResults'],$title);
+                echo $cards->getNavigator($page, $json['totalResults'],$title.$add2);
 
             }
             else if($json['Response']=="False")
             {
-                echo $json['Error'];
+                if($json['Error'] == "Too many results.")
+                {
+                    echo '<p class="text-light">La búsqueda ha arrojado muchos resultados, por favor sea más específico o filtre su búsqueda por año</p>';
+                    echo $cards->getSearcher($title);
+
+                }
+                else if($json['Error']=="Movie not found!")
+                {
+                    echo '<span class="text-light">No se han encontrado resultados con la búsqueda, intente de nuevo.</span>';
+                    echo $cards->getSearcher($title);
+                }
+                else 
+                {
+                    echo '<span class="text-light"> Error de API: '.$json['Error']."</span>";
+                }
+            }
+            else 
+            {
+                echo "Error desconocido...";
             }
         ?>
     </div>
@@ -53,6 +75,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js"
         crossorigin="anonymous"></script>
     <script src ="../../js/main.js"></script>
+    <script>
+        (function() {
+    'use strict';
+  
+    window.addEventListener('load', function() {
+      var form = document.getElementById('formulario');
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    }, false);
+  })();
+        </script>
 </body>
 
 </html>

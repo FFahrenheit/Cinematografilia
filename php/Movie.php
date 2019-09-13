@@ -1,11 +1,16 @@
 <?php 
     class Movie
     {
+        public $APIKey;
         public function __construct(){
+            $this->APIKey = "b27f9641";
         }
      
         public function getCard($movie)
         {
+            $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=".$movie['imdbID'];
+            $content = file_get_contents($url);
+            $json = json_decode($content,true);
             $title = $movie['Title']."(".$movie['Year'].")";
             $str = '<div class="card mb-3" style="max-width: 70%;">
             <div class="row no-gutters bg-dark">
@@ -16,6 +21,9 @@
                 <div class="card-body">
                   <h5 class="card-title text-warning">'.$movie['Title'].'</h5>
                   <p class="card-text text-warning">Año: '.$movie['Year'].'</p>
+                  <p class="card-text text-warning">Género(s): '.$json['Genre'].'</p>
+                  <p hidden class="card-text text-warning">'.$json['Plot'].'</p>
+
                 </div>
               </div>
               <a class="btn btn-warning sa_button" href="movie.php?id='.$movie['imdbID'].'">Conocer más</a>
@@ -27,7 +35,38 @@
         public function getNavigator($page, $total,$movie)
         {
             $url = "search.php?title=$movie&page=";
-            if($page == 1)
+            if($total<=10)
+            {
+                return "";
+            }
+            else if($total>10 && $total<=20)
+            {
+                $nav = "";
+                $nav .= '<div class="sa_dark"><nav aria-label="Paginas" >
+                <ul class="pagination justify-content-center">';
+                for($i=0; $i<($total/10); $i++)
+                {
+                    if($page != ($i+1))
+                    {
+                        $nav .= '<li class="page-item active">
+                        <a class="page-link bg-warning text-dark" href="'.$url.($i+1).'">'.($i+1).'</a>
+                        </li>';
+                    }
+                    else 
+                    {
+                        $nav.='<li class="page-item active bg-warning text-dark">
+                        <span class="page-link bg-secondary text-dark">
+                        '.($i+1).'
+                            <span class="sr-only">(current)</span>
+                      </span>
+                        </li>';
+                    }
+                }
+                $nav .=  '</ul>
+                </nav></div>';
+                return $nav; 
+            }
+            else if($page == 1)
             {
                 return '<div class="sa_dark"><nav aria-label="Paginas" >
                 <ul class="pagination justify-content-center">
@@ -79,7 +118,7 @@
             }
             else 
             {
-                return '<nav aria-label="Paginas" >
+                return '<nav aria-label="Paginas">
                 <ul class="pagination justify-content-center">
               <li class="page-item bg-warning text-dark">
               <a class="page-link bg-warning text-dark" href="'.$url.($page-1).'">Anterior</a>
@@ -99,5 +138,35 @@
           </nav>';
             }
         }
+
+        public function getSearcher($title)
+        {
+            return '<form id="formulario" novalidate>
+            <div class="form-row align-items-center">
+            <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Título o palabra clave</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Titulo</div>
+              </div>
+              <input required name="title" type="text" class="form-control" value="'.$title.'" id="inlineFormInputGroup" placeholder="Palabras clave">
+            </div>
+          </div>
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Año</div>
+                  </div>
+                  <input name="year" type="number" class="form-control" id="inlineFormInputGroup" placeholder="Ingrese el año">
+                </div>
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-warning mb-2">Buscar</button>
+              </div>
+            </div>
+          </form>';
+        }
+
     }
 ?>
