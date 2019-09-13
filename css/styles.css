@@ -20,3 +20,42 @@
 {
     border-color: black;
 }
+
+.sa_movie
+{
+    padding-top: 10px;
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(55,55,55,1) 100%);
+    color:#F6C519;
+    padding-bottom: 15px;
+    align-content: center;
+    text-align: center;
+}
+
+.sa_movie h1 
+{
+    text-shadow: 3px 3px 3px #3f3f3f;
+}
+
+.sa_movie img 
+{
+    max-width: 90%;
+}
+
+.sa_movie a 
+{
+    color: #F6C519;
+    text-decoration: none;
+}
+
+.ficha 
+{
+    padding-top: 10px;
+    padding-bottom: 15px;
+    text-align: justify;
+    padding-left: 15px;
+}
+
+.ficha i
+{
+    padding-right: 5px;
+}

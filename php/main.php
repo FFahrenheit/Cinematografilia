@@ -36,9 +36,9 @@
                             aria-haspopup="true" aria-expanded="false">Stats
                         </a>
                         <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                            <a class="dropdown-item" href="#">Mejores Películas</a>
-                            <a class="dropdown-item" href="#">Últimas reseñas</a>
-                            <a class="dropdown-item" href="#">Más contenido jaaj</a>
+                            <a class="dropdown-item bg-light" href="#">Mejores Películas</a>
+                            <a class="dropdown-item bg-light" href="#">Últimas reseñas</a>
+                            <a class="dropdown-item bg-light" href="#">Más contenido jaaj</a>
                         </div>
                     </li>
                 </ul>
