@@ -104,14 +104,15 @@
     align-content: center;
 }
 
-.sa_center_img a
+.sa_center_img h6
 {
     text-align: center;
 }
 
-.sa_center_img a:hover 
+.sa_center_img h6:hover 
 {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .sa_configure p 

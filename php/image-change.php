@@ -24,6 +24,7 @@
     else 
     {
         echo '"2"';
+        die();
     }
 
     $query = "UPDATE usuario SET imagen = '../$location' WHERE username = '$user'";

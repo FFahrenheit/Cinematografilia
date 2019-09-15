@@ -33,5 +33,8 @@ $(document).ready(()=>
 function logout()
 {
   fetch('../../php/logout.php');
-  window.location.reload(true);
+  setInterval(()=>
+  {
+    window.location.href="index.php"
+  },1000)
 }

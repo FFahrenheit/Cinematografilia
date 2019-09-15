@@ -59,7 +59,7 @@ imgForm.addEventListener('submit', e => {
               alerta.innerHTML = 'Error con la sesión';
               setInterval(() => {
                 window.location.reload(true);
-              }, 1500);
+              }, 3500);
 
             case '3':
               alerta.innerHTML = 'Error al subir imagen';
@@ -123,3 +123,23 @@ passForm.addEventListener('submit',e=>
         })
   }
 });
+
+function deleteImage()
+{
+  fetch('../../php/delete-image.php').then(res=>
+    {
+      return res.json();
+    }).then(r=>
+      {
+        console.log(r);
+        switch(r)
+        {
+          case '0':
+            alert("Error al actualizar");
+            break;
+          case '1':
+            alert("Éxito");
+            window.location.reload(true);
+        }
+      })
+}

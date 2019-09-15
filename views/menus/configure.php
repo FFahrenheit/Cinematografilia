@@ -47,7 +47,7 @@
                         <div class="sa_center_img">
                             <img class="sa_img" src=<?php echo '"' . $image . '"'; ?>>
                             <br>
-                            <a href="btn btn-warning">Eliminar imagen</a>
+                            <h6 onclick="deleteImage()">Eliminar imagen</h6>
                         </div>
                     </div>
                     <div class="col-md-8 sa_upload">
