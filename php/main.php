@@ -62,7 +62,7 @@
                 aria-labelledby="navbarDropdownMenuLink-333">
                 <a class="dropdown-item bg-white" href="#"><span class="font-weight-bold">
                 '.$_SESSION['username'].'</span><br>Perfil</br></a>
-                <a class="dropdown-item bg-light" href="#">Administrar cuenta</a>
+                <a class="dropdown-item bg-light" href="configure.php">Administrar cuenta</a>
                 <a class="dropdown-item bg-light" href="#">Mis listas</a>
                 <a class="dropdown-item bg-light" href="#">Mis eventos</a>
                 <a class="dropdown-item bg-light" href="#" onclick="logout()"><span class="font-weight-bold">Cerrar sesión</span></a>

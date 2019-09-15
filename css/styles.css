@@ -59,3 +59,62 @@
 {
     padding-right: 5px;
 }
+
+.sa_configure
+{
+    padding-top: 10px;
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(55,55,55,1) 100%);
+    color:#F6C519;
+    padding-bottom: 15px;
+    align-content: left;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.sa_configure a 
+{
+    color: #F6C519;
+    text-decoration: none;
+}
+
+.sa_configure img 
+{
+    padding-top: 10px;
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.sa_configure h3 
+{
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.sa_center_img 
+{
+    text-align: center;
+    align-content: center;
+}
+
+.sa_center_img img 
+{
+    text-align: center;
+    align-content: center;
+}
+
+.sa_center_img a
+{
+    text-align: center;
+}
+
+.sa_center_img a:hover 
+{
+    text-decoration: underline;
+}
+
+.sa_configure p 
+{
+    color: rgb(180, 180, 180);
+}

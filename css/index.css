@@ -122,3 +122,30 @@ body
 {
     text-decoration: none;
 }
+
+.form-left
+{
+    padding-top: 10px;
+    text-align: left;
+    color:rgb(190, 190, 190);
+    align-content: left;
+    padding-bottom: 15px;
+    padding-left: 10px;
+}
+
+.form-left img 
+{
+    width: 10%;
+}
+
+.form-left input
+{
+    display: inline-block;
+    width: 50%;
+}
+
+.form-left a 
+{
+    color: #F6C519;
+    text-decoration: underline;
+}
