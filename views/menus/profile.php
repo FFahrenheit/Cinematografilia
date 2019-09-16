@@ -11,7 +11,7 @@
     }
     ?>
     <link rel="shortcut icon" href="../../img/icono.png" />
-    <title><?php echo "Perfil de ".$username . " en SpoilerAlert!" ?></title>
+    <title><?php echo "Perfil de " . $username . " en SpoilerAlert!" ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -49,24 +49,26 @@
 
                 </div>
             </nav>
-            <div class="tab-content" id="nav-tabContent">
+        </div>
+        <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     .
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    ..
+                    <h2><i title="Favorita" class="fas fa-star"></i> Películas favoritas </h2>
+                    <?php echo $profile->getFavorites(); ?>
                 </div>
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     ...
                 </div>
                 <div class="tab-pane fade" id="nav-watchlist" role="tabpanel" aria-labelledby="nav-watchlist">
-                    ....
+                    <h2><i title="Por ver" class="far fa-clock"></i> Películas por ver</h2> 
+                    <?php echo $profile->getWatchlist(); ?>
                 </div>
                 <div class="tab-pane fade" id="nav-lists" role="tabpanel" aria-labelledby="nav-lists">
                     .....
                 </div>
             </div>
-        </div>
     </div>
     <div id="footer">
     </div>

@@ -49,10 +49,10 @@
                                 Agregar a ...
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item bg-light" href="#" onclick="addToFavorite('<?php echo $id; ?>')"><i class="fas fa-star"></i>Favoritas</a>
-                                <a class="dropdown-item bg-light" href="#"><i class="far fa-clock"></i>Por ver</a>
-                                <a class="dropdown-item bg-light" href="#"><i class="far fa-eye"></i>Vistas</a>
-                                <a class="dropdown-item bg-light" href="#"><i class="fas fa-list"></i>Mi lista</a>
+                                <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id; ?>')"><i class="fas fa-star"></i>Favoritas</a>
+                                <a class="dropdown-item bg-light" onclick="addToWatchlist('<?php echo $id; ?>')"><i class="far fa-clock"></i>Por ver</a>
+                                <a class="dropdown-item bg-light"><i class="far fa-eye"></i>Vistas</a>
+                                <a class="dropdown-item bg-light"><i class="fas fa-list"></i>Mi lista</a>
                             </div>
                         </div>
                         <?php } ?> 
