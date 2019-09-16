@@ -47,7 +47,8 @@
                             <i class="fas fa-users"></i>Cast: <span class="text-light"><?php echo $movie['Actors']?></span><br>
                             <i class="fas fa-book"></i>Trama: <span class="text-light"><?php echo $movie['Plot']?></span><br>
                             <i class="fas fa-flag-usa"></i>País(es): <span class="text-light"><?php echo $movie['Country']?></span><br>
-                            <i class="fas fa-globe-europe"></i>Idioma: <span class="text-light"><?php echo $movie['Language']?></span><br>
+                            <i class="fas fa-globe-europe"></i>Idioma(s): <span class="text-light"><?php echo $movie['Language']?></span><br>
+                            <i class="fas fa-star"></i>Productora: <span class="text-light"><?php echo $movie['Production']?></span><br>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">

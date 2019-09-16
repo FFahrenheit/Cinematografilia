@@ -19,11 +19,13 @@
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title text-warning">'.$movie['Title'].'</h5>
+                <a style="text-decoration: none;"href="movie.php?id='.$movie['imdbID'].'">
+                <h5 class="card-title text-warning">'.$movie['Title'].'</h5>
+                </a>
                   <p class="card-text text-warning">Año: '.$movie['Year'].'</p>
                   <p class="card-text text-warning">Género(s): '.$json['Genre'].'</p>
                   <p hidden class="card-text text-warning">'.$json['Plot'].'</p>
-
+                </a>
                 </div>
               </div>
               <a class="btn btn-warning sa_button" href="movie.php?id='.$movie['imdbID'].'">Conocer más</a>

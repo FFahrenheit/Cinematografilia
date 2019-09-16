@@ -11,7 +11,7 @@
             <div class="sa_nav">
                 <a class="navbar-brand" href="index.php">
                     <img  id="sa_nav" src="../../img/logo.png" alt="¡Bienvenido a SA!">
-                    <span>SpoilerAltert!</span>
+                    <span>SpoilerAlert!</span>
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
@@ -60,7 +60,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-default"
                 aria-labelledby="navbarDropdownMenuLink-333">
-                <a class="dropdown-item bg-white" href="#"><span class="font-weight-bold">
+                <a class="dropdown-item bg-white" href="../../php/my-profile.php"><span class="font-weight-bold">
                 '.$_SESSION['username'].'</span><br>Perfil</br></a>
                 <a class="dropdown-item bg-light" href="configure.php">Administrar cuenta</a>
                 <a class="dropdown-item bg-light" href="#">Mis listas</a>

@@ -6,7 +6,7 @@ $(document).ready(()=>
       +'<div class="row">'
         +'<div class="col-md-6 mt-md-0 mt-3">'
           +'<h5 class="text-uppercase font-weight-bold">Políticas</h5>'
-          +'<p>SpoilerAltert! mantiene segura toda tu información personal y no '
+          +'<p>SpoilerAlert! mantiene segura toda tu información personal y no '
               +'la provee a terceros ni hace uso de esta para otros fines. \n'
               +'SpoilerAlert! requiere que su comunidad tenga un nivel de inglés básico para'
               +' su correcto uso.'
@@ -15,7 +15,7 @@ $(document).ready(()=>
         +'<hr class="clearfix w-100 d-md-none pb-3">'
         +'<div class="col-md-6 mb-md-0 mb-3">'
           +'<h5 class="text-uppercase font-weight-bold">Nosotros</h5>'
-          +'<p>SpoilerAltert! es una red social para los amantes del cine '
+          +'<p>SpoilerAlert! es una red social para los amantes del cine '
               +'que desean compartir sus gustos, así como llevar el récord '
               +'de las películas que ven y compartirlo con la comunidad.'
           +'</p>'
@@ -24,7 +24,7 @@ $(document).ready(()=>
     +'</div>'
     +'<div class="footer-copyright text-center py-3">© 2019 Copyright. '
     +'Esta página usa la API de OMDB. Para más información haz '
-    +'click <a style="text-decoration:underline" class="text-light" href="http://www.omdbapi.com/">aquí.<a>'
+    +'click <a style="text-decoration:underline" class="text-light" target="_blank" href="http://www.omdbapi.com/">aquí.<a>'
     +'</div>'
   +'</footer>')
     console.log("Page succesfully loaded");

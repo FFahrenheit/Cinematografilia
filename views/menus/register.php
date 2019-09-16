@@ -16,7 +16,7 @@
 <body>
     <?php getNavBar() ?>
     <div class="form">
-        <h2>¡Únete hoy a SpoilerAltert!</h2>
+        <h2>¡Únete hoy a SpoilerAlert!</h2>
         <img id="load" src="../../img/load.jpg" alt="Login for a cool animation"> 
         <div id="alert" role="alert" class="alert sa_alert">
         </div>

@@ -73,7 +73,7 @@
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <h3>Cambiar contraseña</h3>
                 <form id="password-change" class="form-left" novalidate>
-                <div class="form-group">
+                    <div class="form-group">
                         <label for="">Contraseña actual: </label>
                         <br>
                         <input name="old_password" type="password" placeholder="Escriba su contraseña" class="form-control" required minlength="4">
@@ -100,7 +100,7 @@
                         <span id="passwordError"></span>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-warning quote" title="Cambiar contraseña">"I've made for you, Shrek."</button>
+                        <button type="submit" class="btn btn-warning quote" title="Cambiar contraseña">"I've made changes for you, Shrek."</button>
                     </div>
                 </form>
             </div>
