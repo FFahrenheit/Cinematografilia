@@ -77,3 +77,7 @@
 .profile-nav h3 {
     padding-left: 10px;
 }
+
+.profile-nav a:hover {
+    background: rgb(29, 29, 29);
+}

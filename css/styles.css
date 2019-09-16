@@ -1,84 +1,72 @@
-.sa_search 
-{
+.sa_search {
     padding-left: 15px;
     padding-top: 10px;
     /*background: rgb(29, 29, 29);*/
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(55,55,55,1) 100%);
-    color:#F6C519;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(55, 55, 55, 1) 100%);
+    color: #F6C519;
     align-content: center;
     padding-bottom: 15px;
 }
 
-.sa_button
-{
+.sa_button {
     position: absolute;
     bottom: 10px;
     right: 10px;
 }
 
-.sa_dark
-{
+.sa_dark {
     border-color: black;
 }
 
-.sa_movie
-{
+.sa_movie {
     padding-top: 10px;
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(55,55,55,1) 100%);
-    color:#F6C519;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(55, 55, 55, 1) 100%);
+    color: #F6C519;
     padding-bottom: 15px;
     align-content: center;
     text-align: center;
 }
 
-.sa_movie h1 
-{
+.sa_movie h1 {
     text-shadow: 3px 3px 3px #3f3f3f;
 }
 
-.sa_movie img 
-{
+.sa_movie img {
     max-width: 90%;
 }
 
-.sa_movie a 
-{
+.sa_movie a {
     color: #F6C519;
     text-decoration: none;
 }
 
-.ficha 
-{
+.ficha {
     padding-top: 10px;
     padding-bottom: 15px;
     text-align: justify;
     padding-left: 15px;
 }
 
-.ficha i
-{
+.ficha i {
     padding-right: 5px;
 }
 
-.sa_configure
-{
+.sa_configure {
     padding-top: 10px;
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(55,55,55,1) 100%);
-    color:#F6C519;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(55, 55, 55, 1) 100%);
+    color: #F6C519;
     padding-bottom: 15px;
     align-content: left;
     text-align: left;
     padding-left: 10px;
 }
 
-.sa_configure a 
-{
+.sa_configure a {
     color: #F6C519;
     text-decoration: none;
 }
 
-.sa_configure img 
-{
+.sa_configure img {
     padding-top: 10px;
     object-fit: cover;
     width: 200px;
@@ -86,36 +74,47 @@
     border-radius: 50%;
 }
 
-.sa_configure h3 
-{
+.sa_configure h3 {
     padding-top: 10px;
     padding-left: 10px;
 }
 
-.sa_center_img 
-{
+.sa_center_img {
     text-align: center;
     align-content: center;
 }
 
-.sa_center_img img 
-{
+.sa_center_img img {
     text-align: center;
     align-content: center;
 }
 
-.sa_center_img h6
-{
+.sa_center_img h6 {
     text-align: center;
 }
 
-.sa_center_img h6:hover 
-{
+.sa_center_img h6:hover {
     text-decoration: underline;
     cursor: pointer;
 }
 
-.sa_configure p 
-{
+.sa_configure p {
     color: rgb(180, 180, 180);
+}
+
+.sa_add_to {
+    display: inline-block;
+}
+
+.sa_add_to i {
+    padding-right: 10px;
+}
+
+.sa_add_to a {
+    color: black;
+}
+
+.sa_add_to button {
+    border-radius: 15px 15px 0px 0px;
+    padding-bottom: 10px;
 }

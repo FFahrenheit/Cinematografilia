@@ -3,7 +3,9 @@
 <head>
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
+    include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Movie.php');
     $url = "http://www.omdbapi.com/?apikey=$APIKey&plot=full&i=" . $_GET['id'];
+    $id = $_GET['id'];
     $content = file_get_contents($url);
     $movie = json_decode($content, true);
     $title = $movie['Title'] . " (" . $movie['Year'] . ")";
@@ -27,28 +29,49 @@
                 <img src="<?php echo $movie['Poster']; ?>" alt="<?php echo $title; ?>">
             </div>
             <div class="col-md-8">
-                <h1> <?php echo $title ?></h1>
+                <h1> <?php
+                        $m = new Movie();
+                        echo $m->getIcons($_GET['id']);
+                        echo $title ?></h1>
+                <div class="alert alert-dismissible" id="alert">
+                    <span id="alert-message"></span>
+                    <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
+                </div>
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ficha</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Reseñas</a>
                         <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Estadísticas</a>
+                        <?php if(isset($_SESSION['username']))
+                        {?>
+                        <div class="dropdown sa_add_to">
+                            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Agregar a ...
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item bg-light" href="#" onclick="addToFavorite('<?php echo $id; ?>')"><i class="fas fa-star"></i>Favoritas</a>
+                                <a class="dropdown-item bg-light" href="#"><i class="far fa-clock"></i>Por ver</a>
+                                <a class="dropdown-item bg-light" href="#"><i class="far fa-eye"></i>Vistas</a>
+                                <a class="dropdown-item bg-light" href="#"><i class="fas fa-list"></i>Mi lista</a>
+                            </div>
+                        </div>
+                        <?php } ?> 
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="ficha">
-                            <i class="far fa-calendar-alt"></i>Fecha de lanzamiento: <span class="text-light"><?php echo $movie['Released']?></span><br>
-                            <i class="fas fa-exclamation-triangle"></i>Clasificación: <span class="text-light"><?php echo $movie['Rated']?></span><br>
-                            <i class="far fa-clock"></i>Duración: <span class="text-light"><?php echo $movie['Runtime']?></span><br>
-                            <i class="fas fa-couch"></i>Género(s): <span class="text-light"><?php echo $movie['Genre']?></span><br>
-                            <i class="fas fa-video"></i>Director: <span class="text-light"><?php echo $movie['Director']?></span><br>
-                            <i class="fas fa-pen"></i>Escritor: <span class="text-light"><?php echo $movie['Writer']?></span><br>
-                            <i class="fas fa-users"></i>Cast: <span class="text-light"><?php echo $movie['Actors']?></span><br>
-                            <i class="fas fa-book"></i>Trama: <span class="text-light"><?php echo $movie['Plot']?></span><br>
-                            <i class="fas fa-flag-usa"></i>País(es): <span class="text-light"><?php echo $movie['Country']?></span><br>
-                            <i class="fas fa-globe-europe"></i>Idioma(s): <span class="text-light"><?php echo $movie['Language']?></span><br>
-                            <i class="fas fa-star"></i>Productora: <span class="text-light"><?php echo $movie['Production']?></span><br>
+                            <i class="far fa-calendar-alt"></i>Fecha de lanzamiento: <span class="text-light"><?php echo $movie['Released'] ?></span><br>
+                            <i class="fas fa-exclamation-triangle"></i>Clasificación: <span class="text-light"><?php echo $movie['Rated'] ?></span><br>
+                            <i class="far fa-clock"></i>Duración: <span class="text-light"><?php echo $movie['Runtime'] ?></span><br>
+                            <i class="fas fa-couch"></i>Género(s): <span class="text-light"><?php echo $movie['Genre'] ?></span><br>
+                            <i class="fas fa-video"></i>Director: <span class="text-light"><?php echo $movie['Director'] ?></span><br>
+                            <i class="fas fa-pen"></i>Escritor: <span class="text-light"><?php echo $movie['Writer'] ?></span><br>
+                            <i class="fas fa-users"></i>Cast: <span class="text-light"><?php echo $movie['Actors'] ?></span><br>
+                            <i class="fas fa-book"></i>Trama: <span class="text-light"><?php echo $movie['Plot'] ?></span><br>
+                            <i class="fas fa-flag-usa"></i>País(es): <span class="text-light"><?php echo $movie['Country'] ?></span><br>
+                            <i class="fas fa-globe-europe"></i>Idioma(s): <span class="text-light"><?php echo $movie['Language'] ?></span><br>
+                            <i class="fas fa-star"></i>Productora: <span class="text-light"><?php echo $movie['Production'] ?></span><br>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -66,6 +89,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
+    <script src="../../js/alert.js"></script>
+    <script src="../../js/movie.js"></script>
     <script src="../../js/main.js"></script>
 </body>
 

@@ -1,9 +1,44 @@
-<?php 
+<?php
+    require_once('Connection.php');
     class Movie
     {
         public $APIKey;
         public function __construct(){
             $this->APIKey = "b27f9641";
+        }
+
+        public function getIcons($movie)
+        {
+          $c = new Connection();
+          $conn = $c->getConnection();
+          if(isset($_SESSION['username']))
+          {
+            $user = $_SESSION['username'];
+          }
+          else 
+          {
+            return "";
+          }
+          $icons = "";
+          $sql = "SELECT * FROM favoritas WHERE usuario = '$user' AND pelicula = '$movie'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $result->num_rows > 0)
+          {
+            $icons .= ' <i title="Favorita" class="fas fa-star"></i> ';
+          }
+          $sql = "SELECT * FROM watchlist WHERE usuario = '$user' AND pelicula = '$movie'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $result->num_rows > 0)
+          {
+            $icons .= ' <i title="Por ver" class="far fa-clock"></i> ';
+          }          
+          $sql = "SELECT * FROM vistas WHERE usuario = '$user' AND pelicula = '$movie'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $result->num_rows > 0)
+          {
+            $icons .= ' <i title="Vista" class="fas fa-list"></i> ';
+          }
+          return $icons;           
         }
      
         public function getCard($movie)

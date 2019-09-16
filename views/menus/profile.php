@@ -1,8 +1,17 @@
 <html lang="es">
 
 <head>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Profile.php'); ?>
+    <?php
+    $username = $_GET['user'];
+    $profile = new Profile($username);
+    if (!$profile->isReal()) {
+        header("Location: error.php");
+    }
+    ?>
     <link rel="shortcut icon" href="../../img/icono.png" />
-    <title>¡Bienvenido a SpoilerAlert!</title>
+    <title><?php echo "Perfil de ".$username . " en SpoilerAlert!" ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -11,18 +20,9 @@
     <link href="../../css/styles.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php'); ?>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Profile.php'); ?>
 </head>
 
 <body>
-    <?php
-    $username = $_GET['user'];
-    $profile = new Profile($username);
-    if (!$profile->isReal()) {
-        header("Location: error.php");
-    }
-    ?>
     <?php getNavBar() ?>
     <div class="profile">
         <div class="profile-cover">
