@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-09-2019 a las 04:56:51
+-- Tiempo de generación: 17-09-2019 a las 01:18:34
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -29,11 +29,19 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `favoritas` (
-  `clave` int(11) NOT NULL,
-  `pelicula` varchar(8) NOT NULL,
+  `pelicula` varchar(10) NOT NULL,
   `usuario` varchar(30) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `favoritas`
+--
+
+INSERT INTO `favoritas` (`pelicula`, `usuario`, `fecha`) VALUES
+('tt0389790', 'ivan', '2019-09-16 21:37:23'),
+('tt0485947', 'ivan', '2019-09-16 22:46:53'),
+('tt0848228', 'ivan', '2019-09-16 23:10:55');
 
 -- --------------------------------------------------------
 
@@ -70,8 +78,7 @@ INSERT INTO `usuario` (`username`, `password`, `email`, `imagen`, `origen`) VALU
 --
 
 CREATE TABLE `vistas` (
-  `clave` int(11) NOT NULL,
-  `pelicula` varchar(8) NOT NULL,
+  `pelicula` varchar(10) NOT NULL,
   `usuario` varchar(30) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -83,11 +90,18 @@ CREATE TABLE `vistas` (
 --
 
 CREATE TABLE `watchlist` (
-  `clave` int(11) NOT NULL,
-  `pelicula` varchar(8) NOT NULL,
+  `pelicula` varchar(10) NOT NULL,
   `usuario` varchar(30) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `watchlist`
+--
+
+INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
+('tt0485947', 'ivan', '2019-09-16 23:06:56'),
+('tt0848228', 'ivan', '2019-09-16 23:08:31');
 
 --
 -- Índices para tablas volcadas
@@ -97,7 +111,7 @@ CREATE TABLE `watchlist` (
 -- Indices de la tabla `favoritas`
 --
 ALTER TABLE `favoritas`
-  ADD PRIMARY KEY (`clave`),
+  ADD PRIMARY KEY (`usuario`,`pelicula`),
   ADD KEY `usuario` (`usuario`);
 
 --
@@ -111,37 +125,15 @@ ALTER TABLE `usuario`
 -- Indices de la tabla `vistas`
 --
 ALTER TABLE `vistas`
-  ADD PRIMARY KEY (`clave`),
+  ADD PRIMARY KEY (`usuario`,`pelicula`),
   ADD KEY `usuario` (`usuario`);
 
 --
 -- Indices de la tabla `watchlist`
 --
 ALTER TABLE `watchlist`
-  ADD PRIMARY KEY (`clave`),
+  ADD PRIMARY KEY (`usuario`,`pelicula`),
   ADD KEY `usuario` (`usuario`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `favoritas`
---
-ALTER TABLE `favoritas`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `vistas`
---
-ALTER TABLE `vistas`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `watchlist`
---
-ALTER TABLE `watchlist`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

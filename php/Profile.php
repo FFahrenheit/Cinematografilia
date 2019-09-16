@@ -72,6 +72,7 @@
                     if($_SESSION['username'] == $this->username)
                     {
                         $out.= '<td><a title="Marcar como vista" onclick="addWatched('.$data['pelicula'].')"><i class="fas fa-check-square"></i></a></td>';
+                        $out.= '<td><a title="Quitar de la lista"><i class="fas fa-trash"></i></a></td>';
                     }
                     $out .= '<td><a class="btn btn-warning" href="movie.php?id='.$data['pelicula'].'">Ver película</a></td>';
                     $out .= '</tr>';
@@ -99,6 +100,10 @@
                     $out .= '<tr>';
                     $out .= $this->getMovieRow($data['pelicula']);
                     $out .= "<td>".$data['fecha']."</td>";
+                    if($_SESSION['username'] == $this->username)
+                    {
+                        $out.= '<td><a title="Quitar de la lista"><i class="fas fa-trash"></i></a></td>';
+                    }
                     $out .= '<td><a class="btn btn-warning" href="movie.php?id='.$data['pelicula'].'">Ver película</a></td>';
                     $out .= '</tr>';
                 }
