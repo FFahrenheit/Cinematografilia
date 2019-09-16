@@ -38,6 +38,20 @@
     background-color: white;
 }
 
+.profile-head a {
+    text-decoration: none;
+}
+
+.profile-head i {
+    font-size: 80%;
+    width: 10%;
+    color: rgb(206, 206, 206);
+}
+
+.profile-head i:hover {
+    color: rgb(158, 158, 158);
+}
+
 .profile-nav {
     padding-top: 10px;
     color: #F6C519;

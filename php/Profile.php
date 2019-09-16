@@ -6,6 +6,7 @@
         public $username;
         public $image;
         public $date;
+        public $exists = true;
 
         public function __construct($id)
         {
@@ -14,9 +15,16 @@
             $this->username = $id;
             $sql = "SELECT imagen, date(origen) as date FROM usuario WHERE username = '$id'";
             $result = mysqli_query($this->conn,$sql);
-            $data = mysqli_fetch_array($result);
-            $this->image = $data['imagen'];
-            $this->date = $data['date'];
+            if($result->num_rows>0)
+            {
+                $data = mysqli_fetch_array($result);
+                $this->image = $data['imagen'];
+                $this->date = $data['date'];
+            }
+            else 
+            {
+                $this->exists = false;
+            }
         }
 
         public function getImage()
@@ -27,6 +35,11 @@
         public function getDate()
         {
             return $this->date;
+        }
+
+        public function isReal()
+        {
+            return $this->exists;
         }
     }
 ?>

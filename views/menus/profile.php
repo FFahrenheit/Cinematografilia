@@ -16,18 +16,28 @@
 </head>
 
 <body>
-    <?php getNavBar() ?>
     <?php
     $username = $_GET['user'];
     $profile = new Profile($username);
+    if (!$profile->isReal()) {
+        header("Location: error.php");
+    }
     ?>
+    <?php getNavBar() ?>
     <div class="profile">
         <div class="profile-cover">
             <img src="../../img/cover.jpg">
         </div>
         <div class="profile-head">
             <img src=<?php echo '"' . $profile->getImage() . '"'; ?>>
-            <h2><?php echo $username ?></h2>
+            <h2>
+                <?php
+                echo $username;
+                if ($username == $_SESSION['username']) {
+                    echo '<a href="configure.php" title="Configurar">                <i class="fas fa-cog"></i>
+                    </a>';
+                }
+                ?></h2>
             <p>Miembro desde <?php echo $profile->getDate(); ?></p>
             <nav class="profile-nav">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
