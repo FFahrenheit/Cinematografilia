@@ -8,9 +8,11 @@
         public $date;
         public $APIKey; 
         public $exists = true;
+        public $user;
 
         public function __construct($id)
         {
+            $this->user = (isset($_SESSION['username']))? $_SESSION['username'] : "";
             $temp = new Connection();
             $this->APIKey = "b27f9641";
             $this->conn = $temp->getConnection();
@@ -49,8 +51,8 @@
             $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=".$id;
             $content = file_get_contents($url);
             $json = json_decode($content,true);
-            $data = "<td height='40' width='40'><div><img src='".$json['Poster']."'></div></td>";
-            $data .= "<td>".$json['Title']."</td>";
+            $data = "<td height='40' width='40'><div><a style='color: white;' href='movie.php?id$id'><img src='".$json['Poster']."'></a></td>";
+            $data .= "<td><a style='color: white;' href='movie.php?id$id'>".$json['Title']."</a></td>";
             $data .= "<td>".$json['Year']."</td>";
             return $data; 
         }
@@ -69,7 +71,7 @@
                     $out .= '<tr>';
                     $out .= $this->getMovieRow($data['pelicula']);
                     $out .= "<td>".$data['fecha']."</td>";
-                    if($_SESSION['username'] == $this->username)
+                    if($this->user == $this->username)
                     {
                         $out.= '<td><a title="Marcar como vista" onclick="addWatched('.$data['pelicula'].')"><i class="fas fa-check-square"></i></a></td>';
                         $out.= '<td><a title="Quitar de la lista"><i class="fas fa-trash"></i></a></td>';
@@ -100,7 +102,7 @@
                     $out .= '<tr>';
                     $out .= $this->getMovieRow($data['pelicula']);
                     $out .= "<td>".$data['fecha']."</td>";
-                    if($_SESSION['username'] == $this->username)
+                    if($this->user == $this->username)
                     {
                         $out.= '<td><a title="Quitar de la lista"><i class="fas fa-trash"></i></a></td>';
                     }

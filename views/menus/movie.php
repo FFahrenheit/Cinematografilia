@@ -8,6 +8,10 @@
     $id = $_GET['id'];
     $content = file_get_contents($url);
     $movie = json_decode($content, true);
+    if($movie['Response']=='False')
+    {
+        header("Location: error.php");
+    }
     $title = $movie['Title'] . " (" . $movie['Year'] . ")";
     ?>
     <link rel="shortcut icon" href="../../img/icono.png" />

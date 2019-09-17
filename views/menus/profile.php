@@ -5,6 +5,7 @@
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Profile.php'); ?>
     <?php
     $username = $_GET['user'];
+    $user = (isset($_SESSION['username']))? $_SESSION['username'] : "";
     $profile = new Profile($username);
     if (!$profile->isReal()) {
         header("Location: error.php");
@@ -33,7 +34,7 @@
             <h2>
                 <?php
                 echo $username;
-                if ($username == $_SESSION['username']) {
+                if ($username == $user) {
                     echo '<a href="configure.php" title="Configurar">                <i class="fas fa-cog"></i>
                     </a>';
                 }
