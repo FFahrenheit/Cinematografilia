@@ -5,7 +5,7 @@
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Profile.php'); ?>
     <?php
     $username = $_GET['user'];
-    $user = (isset($_SESSION['username']))? $_SESSION['username'] : "";
+    $user = (isset($_SESSION['username'])) ? $_SESSION['username'] : "";
     $profile = new Profile($username);
     if (!$profile->isReal()) {
         header("Location: error.php");
@@ -52,24 +52,43 @@
             </nav>
         </div>
         <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    .
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                .
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <h2><i title="Favorita" class="fas fa-star"></i> Películas favoritas </h2>
+                <?php echo $profile->getFavorites(); ?>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                ...
+            </div>
+            <div class="tab-pane fade" id="nav-watchlist" role="tabpanel" aria-labelledby="nav-watchlist">
+                <h2><i title="Por ver" class="far fa-clock"></i> Películas por ver</h2>
+                <?php echo $profile->getWatchlist(); ?>
+            </div>
+            <div class="tab-pane fade" id="nav-lists" role="tabpanel" aria-labelledby="nav-lists">
+                .....
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <h2><i title="Favorita" class="fas fa-star"></i> Películas favoritas </h2>
-                    <?php echo $profile->getFavorites(); ?>
+                <div class="modal-body bg-dark">
+                    <p id="modal-body"></p>
                 </div>
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    ...
-                </div>
-                <div class="tab-pane fade" id="nav-watchlist" role="tabpanel" aria-labelledby="nav-watchlist">
-                    <h2><i title="Por ver" class="far fa-clock"></i> Películas por ver</h2> 
-                    <?php echo $profile->getWatchlist(); ?>
-                </div>
-                <div class="tab-pane fade" id="nav-lists" role="tabpanel" aria-labelledby="nav-lists">
-                    .....
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning">Confirmar</button>
                 </div>
             </div>
+        </div>
     </div>
     <div id="footer">
     </div>
@@ -77,6 +96,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
     <script src="../../js/main.js"></script>
+    <script src="../../js/profile.js"></script>
 </body>
 
 </html>

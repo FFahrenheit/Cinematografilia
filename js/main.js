@@ -36,9 +36,9 @@ function logout() {
     }, 1000)
 }
 
-$("tr").click((e) => {
+/*$("tr").click((e) => {
     var id = $(this).attr('id');
     console.log($(this).data('href'));
     console.log(e.target.id)
     console.log(id);
-})
+})*/

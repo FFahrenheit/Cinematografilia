@@ -73,8 +73,8 @@
                     $out .= "<td>".$data['fecha']."</td>";
                     if($this->user == $this->username)
                     {
-                        $out.= '<td><a title="Marcar como vista" onclick="addWatched('.$data['pelicula'].')"><i class="fas fa-check-square"></i></a></td>';
-                        $out.= '<td><a title="Quitar de la lista"><i class="fas fa-trash"></i></a></td>';
+                        $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="watchMovie('."'".$data['pelicula']."'".')" title="Marcar como vista" onclick="addWatched('.$data['pelicula'].')"><i class="fas fa-check-square"></i></a></td>';
+                        $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="unwatch('."'".$data['pelicula']."'".')" title="Quitar de la lista"><i class="fas fa-eye-slash"></i></a></td>';
                     }
                     $out .= '<td><a class="btn btn-warning" href="movie.php?id='.$data['pelicula'].'">Ver película</a></td>';
                     $out .= '</tr>';
@@ -104,7 +104,7 @@
                     $out .= "<td>".$data['fecha']."</td>";
                     if($this->user == $this->username)
                     {
-                        $out.= '<td><a title="Quitar de la lista"><i class="fas fa-trash"></i></a></td>';
+                        $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="unfavorite("'."'".$data['pelicula']."'".')" title="Quitar de la lista"><i class="fas fa-heart-broken"></i></a></td>';
                     }
                     $out .= '<td><a class="btn btn-warning" href="movie.php?id='.$data['pelicula'].'">Ver película</a></td>';
                     $out .= '</tr>';
