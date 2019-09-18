@@ -104,7 +104,7 @@
                     $out .= "<td>".$data['fecha']."</td>";
                     if($this->user == $this->username)
                     {
-                        $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="unfavorite("'."'".$data['pelicula']."'".')" title="Quitar de la lista"><i class="fas fa-heart-broken"></i></a></td>';
+                        $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="unfavorite('."'".$data['pelicula']."'".')" title="Quitar de la lista"><i class="fas fa-heart-broken"></i></a></td>';
                     }
                     $out .= '<td><a class="btn btn-warning" href="movie.php?id='.$data['pelicula'].'">Ver película</a></td>';
                     $out .= '</tr>';

@@ -1,6 +1,5 @@
 $("#alert").hide();
 
-
 function alertar(message, type) {
     var cls = 'alert-' + type;
     var al = document.getElementById('alert');
