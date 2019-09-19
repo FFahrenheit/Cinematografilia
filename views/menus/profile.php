@@ -64,7 +64,8 @@
                 <?php echo $profile->getFavorites(); ?>
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                ...
+                <h2><i class="far fa-eye"></i> Películas vistas</h2>
+                <?php echo $profile->getWatched(); ?>
             </div>
             <div class="tab-pane fade" id="nav-watchlist" role="tabpanel" aria-labelledby="nav-watchlist">
                 <h2><i title="Por ver" class="far fa-clock"></i> Películas por ver</h2>

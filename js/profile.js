@@ -19,6 +19,14 @@ function unwatch(movie) {
     rText.innerHTML = '¿Seguro que desea quitar de la lista por ver?';
 }
 
+function unwatched(movie) {
+    console.log("No vi " + movie);
+    rType = '../../php/unwatched.php';
+    rMovie = movie;
+    rTitle.innerHTML = 'Quitar de películas vistas';
+    rText.innerHTML = '¿Seguro que desea quitar de la lista de películas vistas?';
+}
+
 function watchMovie(movie) {
     console.log("Ya vi " + movie);
     rType = '../../watchMovie.php';

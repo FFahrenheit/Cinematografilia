@@ -57,6 +57,36 @@
             return $data; 
         }
 
+        public function getWatched()
+        {
+            $temp = new Connection();
+            $this->conn = $temp->getConnection();
+            $sql = "SELECT *,DATE(fecha) as vista FROM vistas WHERE usuario = '$this->username' ORDER BY fecha DESC";
+            $result = mysqli_query($this->conn,$sql);
+            if($result && $result->num_rows > 0)
+            {
+                $out = '<table class ="table table-hover sa_table table-dark><tbody>"';
+                while($data = mysqli_fetch_array($result))
+                {
+                    $out .= '<tr>';
+                    $out .= $this->getMovieRow($data['pelicula']);
+                    $out .= "<td>".$data['vista']."</td>";
+                    if($this->user == $this->username)
+                    {
+                        $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="unwatched('."'".$data['pelicula']."'".')" title="Quitar de la lista"><i class="fas fa-eye-slash"></i></a></td>';
+                    }
+                    $out .= '<td><a class="btn btn-warning" href="movie.php?id='.$data['pelicula'].'">Ver película</a></td>';
+                    $out .= '</tr>';
+                }
+                $out .= '</tbody></table>';
+                return $out;
+            }
+            else 
+            {
+                return "<span>El usuario aún no ha agregado películas vistas.</span>";
+            }            
+        }
+
         public function getWatchlist()
         {
             $temp = new Connection();
