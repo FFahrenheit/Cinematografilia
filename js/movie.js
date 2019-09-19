@@ -1,3 +1,59 @@
+$(document).ready(() => {
+    var date = new Date();
+
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = year + "-" + month + "-" + day;
+    $("#date-watch").attr("value", today);
+});
+
+var formWatched = document.getElementById('form-watched');
+var aMovie;
+
+function addWatched(movie) {
+    aMovie = movie;
+    $('#watchedModal').modal('toggle');
+}
+
+function seeForm() {
+    var data = new FormData(formWatched);
+    data.append("movie", aMovie);
+    console.log(data.get("liked"));
+    console.log(data.get("fecha"));
+
+    fetch('../../php/add-watched.php', {
+        method: 'POST',
+        body: data
+    }).then(resp => {
+        return resp.json();
+    }).then(r => {
+        $('#watchedModal').modal('toggle');
+        console.log(r);
+        switch (r) {
+            case '0':
+                alertar("Error de conexión", "danger");
+                break;
+            case '1':
+                alertar("La película ya está marcada como vista", "warning");
+                break;
+            case '2':
+                alertar("Película agregada", "success");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 3000);
+                break;
+            default:
+                alertar("Error desconocido", "danger");
+        }
+    })
+
+}
+
 function addToFavorite(movie) {
     data = new FormData();
     console.log(movie);

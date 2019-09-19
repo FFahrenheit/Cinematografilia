@@ -8,8 +8,7 @@
     $id = $_GET['id'];
     $content = file_get_contents($url);
     $movie = json_decode($content, true);
-    if($movie['Response']=='False')
-    {
+    if ($movie['Response'] == 'False') {
         header("Location: error.php");
     }
     $title = $movie['Title'] . " (" . $movie['Year'] . ")";
@@ -21,6 +20,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="../../css/index.css" rel="stylesheet">
     <link href="../../css/styles.css" rel="stylesheet">
+    <link href="../../css/profile.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
 </head>
@@ -46,20 +46,19 @@
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ficha</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Reseñas</a>
                         <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Estadísticas</a>
-                        <?php if(isset($_SESSION['username']))
-                        {?>
-                        <div class="dropdown sa_add_to">
-                            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Agregar a ...
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id; ?>')"><i class="fas fa-star"></i>Favoritas</a>
-                                <a class="dropdown-item bg-light" onclick="addToWatchlist('<?php echo $id; ?>')"><i class="far fa-clock"></i>Por ver</a>
-                                <a class="dropdown-item bg-light"><i class="far fa-eye"></i>Vistas</a>
-                                <a class="dropdown-item bg-light"><i class="fas fa-list"></i>Mi lista</a>
+                        <?php if (isset($_SESSION['username'])) { ?>
+                            <div class="dropdown sa_add_to">
+                                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Agregar a ...
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id; ?>')"><i class="fas fa-star"></i>Favoritas</a>
+                                    <a class="dropdown-item bg-light" onclick="addToWatchlist('<?php echo $id; ?>')"><i class="far fa-clock"></i>Por ver</a>
+                                    <a class="dropdown-item bg-light" onclick = "addWatched('<?php echo $id; ?>')"><i class="far fa-eye"></i>Vistas</a>
+                                    <a class="dropdown-item bg-light"><i class="fas fa-list"></i>Mi lista</a>
+                                </div>
                             </div>
-                        </div>
-                        <?php } ?> 
+                        <?php } ?>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
@@ -84,6 +83,41 @@
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="watchedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark" id="exampleModalLabel">Marcar película como vista</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <form id="form-watched" novalidate>
+                        <h6>Complete los datos para agregar a la lista</h6>
+                        <div class="form-group">
+                            <label for="">Fecha en que se vió: </label>
+                            <br>
+                            <input id="date-watch" type="date" name="fecha" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Ingrese una fecha
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                La película me gustó.
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="seeForm()">Confirmar</button>
                 </div>
             </div>
         </div>

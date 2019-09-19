@@ -36,7 +36,7 @@
           $result = mysqli_query($conn,$sql);
           if($result && $result->num_rows > 0)
           {
-            $icons .= ' <i title="Vista" class="fas fa-list"></i> ';
+            $icons .= ' <i class="far fa-eye"></i> ';
           }
           return $icons;           
         }

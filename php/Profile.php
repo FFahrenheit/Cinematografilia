@@ -61,7 +61,7 @@
         {
             $temp = new Connection();
             $this->conn = $temp->getConnection();
-            $sql = "SELECT * FROM watchlist WHERE usuario = '$this->username' ORDER BY fecha DESC";
+            $sql = "SELECT *,DATE(fecha) as vista FROM watchlist WHERE usuario = '$this->username' ORDER BY fecha DESC";
             $result = mysqli_query($this->conn,$sql);
             if($result && $result->num_rows > 0)
             {
@@ -70,7 +70,7 @@
                 {
                     $out .= '<tr>';
                     $out .= $this->getMovieRow($data['pelicula']);
-                    $out .= "<td>".$data['fecha']."</td>";
+                    $out .= "<td>".$data['vista']."</td>";
                     if($this->user == $this->username)
                     {
                         $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="watchMovie('."'".$data['pelicula']."'".')" title="Marcar como vista" onclick="addWatched('.$data['pelicula'].')"><i class="fas fa-check-square"></i></a></td>';
@@ -92,7 +92,7 @@
         {
             $temp = new Connection();
             $this->conn = $temp->getConnection();
-            $sql = "SELECT * FROM favoritas WHERE usuario = '$this->username' ORDER BY fecha DESC";
+            $sql = "SELECT *, DATE(fecha) as vista FROM favoritas WHERE usuario = '$this->username' ORDER BY fecha DESC";
             $result = mysqli_query($this->conn,$sql);
             if($result && $result->num_rows > 0)
             {
@@ -101,7 +101,7 @@
                 {
                     $out .= '<tr>';
                     $out .= $this->getMovieRow($data['pelicula']);
-                    $out .= "<td>".$data['fecha']."</td>";
+                    $out .= "<td>".$data['vista']."</td>";
                     if($this->user == $this->username)
                     {
                         $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="unfavorite('."'".$data['pelicula']."'".')" title="Quitar de la lista"><i class="fas fa-heart-broken"></i></a></td>';
