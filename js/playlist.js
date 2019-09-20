@@ -16,8 +16,17 @@ var xform = document.getElementById('new-playlist');
 })();
 
 xform.addEventListener('submit', (e) => {
-    e.preventDefault();
     var ok = false;
+    setTimeout(() => {
+        if (!ok) {
+            alertar("Error desconocido", "danger");
+        }
+        setTimeout(() => {
+            window.location.reload(true);
+
+        }, 3000);
+    }, 2000);
+    e.preventDefault();
     var rData = new FormData(xform);
     var link = '../../php/create-playlist.php?name=' + rData.get("name") + '&description=' + rData.get("description");
     console.log(link);
@@ -39,13 +48,8 @@ xform.addEventListener('submit', (e) => {
                     setTimeout(() => {
                         window.location.href = "index.php";
                     }, 3000);
+                    break;
             }
         })
-    }
-    if (!ok) {
-        alertar("Error desconocido", "danger");
-        setTimeout(() => {
-            window.location.reload(true);
-        }, 3000);
     }
 });

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-09-2019 a las 01:18:34
+-- Tiempo de generación: 20-09-2019 a las 06:29:19
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -39,9 +39,33 @@ CREATE TABLE `favoritas` (
 --
 
 INSERT INTO `favoritas` (`pelicula`, `usuario`, `fecha`) VALUES
-('tt0389790', 'ivan', '2019-09-16 21:37:23'),
-('tt0485947', 'ivan', '2019-09-16 22:46:53'),
+('tt0289879', 'ivan', '2019-09-16 23:25:50'),
 ('tt0848228', 'ivan', '2019-09-16 23:10:55');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `peliculas_playlist`
+--
+
+CREATE TABLE `peliculas_playlist` (
+  `clave` int(11) NOT NULL,
+  `pelicula` varchar(10) NOT NULL,
+  `playlist` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `playlist`
+--
+
+CREATE TABLE `playlist` (
+  `clave` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` varchar(250) NOT NULL,
+  `creador` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -53,7 +77,7 @@ CREATE TABLE `usuario` (
   `username` varchar(30) NOT NULL,
   `password` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `imagen` varchar(100) DEFAULT '''../../img/default-profile.png''',
+  `imagen` varchar(100) DEFAULT '../../img/default-profile.png',
   `origen` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -63,10 +87,11 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`username`, `password`, `email`, `imagen`, `origen`) VALUES
 ('hola', 'V[sÎÆPgRÖùoJ ', 'hola@hola.co', '../../img/default-profile.png', '2019-09-16 02:14:04'),
-('ivan', '0Móè3ÒÂ\'Æà¡8c3‰', 'di@di.com', '../../img/profiles/ivan.jpg', '2019-09-16 02:14:04'),
+('ivan', '0Móè3ÒÂ\'Æà¡8c3‰', 'di@di.com', '../../img/profiles/ivan.gif', '2019-09-16 02:14:04'),
 ('ivxn', 'ÞÔpƒW–+2‹ïŽ‚A¬', 'cuenta@ejemplo.com', '../../img/default-profile.png', '2019-09-16 02:14:04'),
 ('ivxn1', 'á†™>Öz00qMÊ£', 'cuenta@ejemplo.co', '../../img/default-profile.png', '2019-09-16 02:14:04'),
 ('ivxn1k', 'á†™>Öz00qMÊ£', '1cuenta@ejemplo.co', '../../img/default-profile.png', '2019-09-16 02:14:04'),
+('iv_n', 'E¸e-ÍÀÏÝd1»ä', 'ivan@ivan.com', '../../img/default-profile.png', '2019-09-19 05:36:51'),
 ('jjjj', '†GV¦µ=@“ÿà :²', 'ja@ja.ja', '../../img/default-profile.png', '2019-09-16 02:14:04'),
 ('jkjj', '´†l\0©HÔ::£k$^ù}8', 'di@dia.com', '../../img/default-profile.png', '2019-09-16 02:14:04'),
 ('xxyo', 'ET¸q¯©xÓõé-•u;å', 'xx@xx.xx', '../../img/default-profile.png', '2019-09-16 02:14:04');
@@ -82,6 +107,13 @@ CREATE TABLE `vistas` (
   `usuario` varchar(30) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `vistas`
+--
+
+INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
+('tt0848228', 'ivan', '2019-09-18 05:00:00');
 
 -- --------------------------------------------------------
 
@@ -100,8 +132,8 @@ CREATE TABLE `watchlist` (
 --
 
 INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
-('tt0485947', 'ivan', '2019-09-16 23:06:56'),
-('tt0848228', 'ivan', '2019-09-16 23:08:31');
+('tt0458339', 'ivan', '2019-09-19 03:56:08'),
+('tt0485947', 'ivan', '2019-09-18 17:36:30');
 
 --
 -- Índices para tablas volcadas
@@ -113,6 +145,20 @@ INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
 ALTER TABLE `favoritas`
   ADD PRIMARY KEY (`usuario`,`pelicula`),
   ADD KEY `usuario` (`usuario`);
+
+--
+-- Indices de la tabla `peliculas_playlist`
+--
+ALTER TABLE `peliculas_playlist`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `playlist` (`playlist`);
+
+--
+-- Indices de la tabla `playlist`
+--
+ALTER TABLE `playlist`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `creador` (`creador`);
 
 --
 -- Indices de la tabla `usuario`
@@ -136,6 +182,22 @@ ALTER TABLE `watchlist`
   ADD KEY `usuario` (`usuario`);
 
 --
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `peliculas_playlist`
+--
+ALTER TABLE `peliculas_playlist`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `playlist`
+--
+ALTER TABLE `playlist`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -144,6 +206,18 @@ ALTER TABLE `watchlist`
 --
 ALTER TABLE `favoritas`
   ADD CONSTRAINT `favoritas_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `peliculas_playlist`
+--
+ALTER TABLE `peliculas_playlist`
+  ADD CONSTRAINT `peliculas_playlist_ibfk_1` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`clave`);
+
+--
+-- Filtros para la tabla `playlist`
+--
+ALTER TABLE `playlist`
+  ADD CONSTRAINT `playlist_ibfk_2` FOREIGN KEY (`creador`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `vistas`
