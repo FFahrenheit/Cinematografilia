@@ -24,7 +24,10 @@
 
         public function __destruct()
         {
-            mysqli_close($this->connection);
+            if($this->connection)
+            {
+                mysqli_close($this->connection);
+            }
         }
     }
 ?>

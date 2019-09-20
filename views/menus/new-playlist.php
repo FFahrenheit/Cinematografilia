@@ -16,12 +16,15 @@
     <?php getNavBar() ?>
     <div class="form">
         <h1>Crear nueva lista de reproducción</h1>
+        <div class="alert alert-dismissible" id="alert">
+            <span id="alert-message"></span>
+            <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
+        </div>
         <form id="new-playlist" novalidate>
             <div class="form-group">
                 <label for="">Nombre de la lista: </label>
                 <br>
-                <input name="name" type="text" placeholder="Escriba el nombre" class="form-control" 
-                required minlength="2">
+                <input name="name" type="text" placeholder="Escriba el nombre" class="form-control" required minlength="2">
                 <div class="invalid-feedback">
                     Ingrese un nombre válido para la lista
                 </div>
@@ -29,8 +32,7 @@
             <div class="form-group form-group-lg" align="center">
                 <label for="">Breve descripción</label>
                 <br>
-                <textarea style="max-width: 50%" class="form-control" rows="5" id="descrption"
-                name="description" maxlength="250" placeholder="Escriba una breve descripción" required></textarea>
+                <textarea style="max-width: 50%" class="form-control" rows="5" id="descrption" name="description" maxlength="250" placeholder="Escriba una breve descripción" required></textarea>
                 <!--input name="description" maxlength="250" type="text" minlength="0"
                 placeholder="Escriba una descripcíon para su lista. Máximo 250 caracteres" 
                 class="form-control input-lg" required-->
