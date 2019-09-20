@@ -70,7 +70,7 @@
             $result = mysqli_query($this->conn,$sql);
             if($result && $result->num_rows > 0)
             {
-                $out = '<table class ="table table-hover sa_table table-dark><tbody>"';
+                $out = '<table class ="table table-hover sa_table"><tbody>';
                 while($data = mysqli_fetch_array($result))
                 {
                     $out .= '<tr>';
@@ -92,6 +92,48 @@
             }            
         }
 
+        public function getPlaylists()
+        {
+            $temp = new Connection();
+            $this->conn = $temp->getConnection();
+            $sql = "SELECT *, DATE(fecha) AS creada FROM playlist WHERE creador = '$this->username'";
+            $result = mysqli_query($this->conn, $sql);
+            if($result && $result->num_rows>0)
+            {
+                $out = '<table class ="table table-hover sa_table"><tbody>';
+                while($data = mysqli_fetch_array($result))
+                {
+                    $out .= '<tr>';
+                    $clave = $data['clave'];
+                    $out .= "<td><a style='color: white;' href='playlist.php?id=$clave'>".$data['nombre']."</a>";
+                    $out .= '<td><h6>'.$data['descripcion'].'</span></h6>';
+                    $out .= '<td>'.$data['creada'].'</td>';
+                    $sql = "SELECT COUNT(playlist_likes.usuario) AS likes,
+                    COUNT(playlist_peliculas.pelicula) AS peliculas 
+                    FROM playlist_likes, playlist_peliculas
+                    WHERE playlist_likes.playlist = $clave AND 
+                    playlist_peliculas.playlist = $clave";
+                    $t = new Connection();
+                    $connect = $t->getConnection();
+                    $rs = mysqli_query($connect,$sql);
+                    if($rs)
+                    {
+                        $body = mysqli_fetch_array($rs);
+                        $out .= '<td><i class="fas fa-film"></i> '.$body['likes'].'</td>';
+                        $out .= '<td><i class="fas fa-thumbs-up"></i> '.$body['peliculas'].'</td>';
+                    }
+                    $out .= '<td><a class="btn btn-warning" href="playlist.php?id='.$clave.'">Ver lista</a></td>';
+                    $out .= '</tr>';
+                }
+                $out .='</tbody></table>';
+                return $out;
+            }
+            else 
+            {
+                return "<span>El usuario aún no ha creado listas de reproducción</span>";
+            }
+        }
+
         public function getWatchlist()
         {
             $temp = new Connection();
@@ -100,7 +142,7 @@
             $result = mysqli_query($this->conn,$sql);
             if($result && $result->num_rows > 0)
             {
-                $out = '<table class ="table table-hover sa_table table-dark><tbody>"';
+                $out = '<table class ="table table-hover sa_table"><tbody>';
                 while($data = mysqli_fetch_array($result))
                 {
                     $out .= '<tr>';
@@ -131,7 +173,7 @@
             $result = mysqli_query($this->conn,$sql);
             if($result && $result->num_rows > 0)
             {
-                $out = '<table class ="table table-hover sa_table table-dark><tbody>"';
+                $out = '<table class ="table table-hover sa_table"><tbody>';
                 while($data = mysqli_fetch_array($result))
                 {
                     $out .= '<tr>';

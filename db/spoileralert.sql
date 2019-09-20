@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-09-2019 a las 06:29:19
+-- Tiempo de generación: 20-09-2019 a las 18:46:38
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -45,18 +45,6 @@ INSERT INTO `favoritas` (`pelicula`, `usuario`, `fecha`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `peliculas_playlist`
---
-
-CREATE TABLE `peliculas_playlist` (
-  `clave` int(11) NOT NULL,
-  `pelicula` varchar(10) NOT NULL,
-  `playlist` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `playlist`
 --
 
@@ -64,7 +52,39 @@ CREATE TABLE `playlist` (
   `clave` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(250) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
   `creador` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `playlist`
+--
+
+INSERT INTO `playlist` (`clave`, `nombre`, `descripcion`, `fecha`, `creador`) VALUES
+(47, 'mi lista', 'Listilla bonita', '2019-09-20 16:08:36', 'ivan'),
+(48, 'Otra lista', 'Otra lista cool', '2019-09-20 16:08:54', 'ivan');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `playlist_likes`
+--
+
+CREATE TABLE `playlist_likes` (
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `playlist` int(11) NOT NULL,
+  `usuario` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `playlist_peliculas`
+--
+
+CREATE TABLE `playlist_peliculas` (
+  `pelicula` varchar(10) NOT NULL,
+  `playlist` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -147,18 +167,25 @@ ALTER TABLE `favoritas`
   ADD KEY `usuario` (`usuario`);
 
 --
--- Indices de la tabla `peliculas_playlist`
---
-ALTER TABLE `peliculas_playlist`
-  ADD PRIMARY KEY (`clave`),
-  ADD KEY `playlist` (`playlist`);
-
---
 -- Indices de la tabla `playlist`
 --
 ALTER TABLE `playlist`
   ADD PRIMARY KEY (`clave`),
   ADD KEY `creador` (`creador`);
+
+--
+-- Indices de la tabla `playlist_likes`
+--
+ALTER TABLE `playlist_likes`
+  ADD KEY `playlist` (`playlist`),
+  ADD KEY `usuario` (`usuario`);
+
+--
+-- Indices de la tabla `playlist_peliculas`
+--
+ALTER TABLE `playlist_peliculas`
+  ADD PRIMARY KEY (`pelicula`,`playlist`),
+  ADD KEY `playlist` (`playlist`);
 
 --
 -- Indices de la tabla `usuario`
@@ -186,16 +213,10 @@ ALTER TABLE `watchlist`
 --
 
 --
--- AUTO_INCREMENT de la tabla `peliculas_playlist`
---
-ALTER TABLE `peliculas_playlist`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Restricciones para tablas volcadas
@@ -208,16 +229,23 @@ ALTER TABLE `favoritas`
   ADD CONSTRAINT `favoritas_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `peliculas_playlist`
---
-ALTER TABLE `peliculas_playlist`
-  ADD CONSTRAINT `peliculas_playlist_ibfk_1` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`clave`);
-
---
 -- Filtros para la tabla `playlist`
 --
 ALTER TABLE `playlist`
   ADD CONSTRAINT `playlist_ibfk_2` FOREIGN KEY (`creador`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `playlist_likes`
+--
+ALTER TABLE `playlist_likes`
+  ADD CONSTRAINT `playlist_likes_ibfk_1` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `playlist_likes_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `playlist_peliculas`
+--
+ALTER TABLE `playlist_peliculas`
+  ADD CONSTRAINT `playlist_peliculas_ibfk_1` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`clave`);
 
 --
 -- Filtros para la tabla `vistas`

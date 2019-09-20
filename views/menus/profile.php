@@ -68,7 +68,8 @@
                 <?php echo $profile->getWatchlist(); ?>
             </div>
             <div class="tab-pane fade" id="nav-lists" role="tabpanel" aria-labelledby="nav-lists">
-                .....
+                <h2><i class="fas fa-list"></i> Listas de reproducción creadas</h2>
+                <?php echo $profile->getPlaylists(); ?>
             </div>
         </div>
     </div>

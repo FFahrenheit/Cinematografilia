@@ -127,6 +127,10 @@
         align-content: center;
     }
     
+    .sa_table h6 {
+        font-size: 60%;
+    }
+    
     .sa_table td {
         font-size: 20px;
         vertical-align: middle;
