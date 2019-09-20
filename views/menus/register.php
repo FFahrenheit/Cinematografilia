@@ -10,7 +10,8 @@
     <link href="../../css/index.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php'); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
+    getLogged(); ?>
 </head>
 
 <body>

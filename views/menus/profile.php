@@ -37,11 +37,7 @@
             <img src=<?php echo '"' . $profile->getImage() . '"'; ?>>
             <h2>
                 <?php
-                echo $username;
-                if ($username == $user) {
-                    echo '<a href="configure.php" title="Configurar">                <i class="fas fa-cog"></i>
-                    </a>';
-                }
+                echo $profile->getUser();
                 ?></h2>
             <p>Miembro desde <?php echo $profile->getDate(); ?></p>
             <nav class="profile-nav">
@@ -57,7 +53,7 @@
         </div>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                .
+                <h2><i class="fas fa-award"></i> Insignias obtenidas</h2>
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <h2><i title="Favorita" class="fas fa-star"></i> Películas favoritas </h2>

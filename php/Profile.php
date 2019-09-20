@@ -31,6 +31,11 @@
             }
         }
 
+        public function getUser()
+        {
+            return ($this->username != $this->user)? $this->username : $this->username.' <a href="configure.php" title="Configurar"><i class="fas fa-cog"></i></a>';
+        }
+
         public function getImage()
         {
             return $this->image;

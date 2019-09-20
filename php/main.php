@@ -3,6 +3,14 @@
     include 'Connection.php';
     $APIKey = "b27f9641";
     //echo $_SESSION['username'];
+
+    function getLogged()
+    {
+        if(isset($_SESSION['username']))
+            {
+                header("Location: index.php");
+            }
+    }
     function getNavBar()
     {
         $nav = "";
@@ -54,7 +62,18 @@
         if(isset($_SESSION['username']))
         {
             $nav .= '<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+            <a title="Nuevo" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-222" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-plus"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                aria-labelledby="navbarDropdownMenuLink-222">
+                <a class="dropdown-item bg-light" href="new-playlist.php">Lista de reproducción</a>
+                <a class="dropdown-item bg-light" href="new-event.php">Evento</a>
+            </div>
+            </li>  ';
+            $nav .= '<li class="nav-item dropdown">
+            <a title="Perfil" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user"></i>
             </a>

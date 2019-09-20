@@ -1,151 +1,130 @@
-body
-{
+body {
     background-color: #000000;
     font-family: 'Overpass';
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.sa_footer
-{
+.sa_footer {
     color: rgb(218, 218, 218);
 }
 
-.sa_load img
-{
+.sa_load img {
     width: 50px;
 }
 
-.sa_nav
-{
+.sa_nav {
     background-color: #000000;
     text-align: center;
 }
 
-.sa_nav a:hover 
-{
+.sa_nav a:hover {
     opacity: 0.7;
 }
 
-.sa_nav img
-{
+.sa_nav img {
     width: 50px;
 }
 
-
-.sa_nav span
-{
+.sa_nav span {
     color: white;
     align-content: center;
 }
 
-.sa_link a 
-{
+.sa_link a {
     text-decoration: none;
     color: antiquewhite;
 }
 
-.sa_link a:hover 
-{
+.sa_link a:hover {
     text-decoration: underline;
 }
 
-.form 
-{
+.form {
     padding-top: 10px;
     /*background: rgb(29, 29, 29);*/
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(55,55,55,1) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(55, 55, 55, 1) 100%);
     text-align: center;
-    color:#F6C519;
+    color: #F6C519;
     align-content: center;
     padding-bottom: 15px;
 }
 
-.form img 
-{
+.form textarea {
+    align-content: center;
+}
+
+.form img {
     width: 10%;
 }
 
-.form input
-{
+.form input {
     display: inline-block;
     width: 50%;
 }
 
-.form a 
-{
+.form a {
     color: #F6C519;
     text-decoration: underline;
 }
 
-.basic img 
-{
+.basic img {
     width: 15%;
 }
 
-.basic h1 
-{
+.basic h1 {
     font-style: oblique;
     padding-top: 10px;
 }
 
-.basic
-{
+.basic {
     padding-top: 10px;
     background: rgb(29, 29, 29);
     text-align: center;
-    color:#F6C519;
+    color: #F6C519;
     align-content: center;
     padding-bottom: 15px;
 }
 
-.quote
-{
+.quote {
     font-style: oblique;
 }
 
-.bigQuote 
-{
+.bigQuote {
     font-style: oblique;
     text-shadow: 3px 3px 3px #000000;
 }
 
-.sa_alert
-{
+.sa_alert {
     text-align: center;
     align-content: center;
     margin-left: 20%;
     margin-right: 20%;
 }
 
-.sa_alert a
-{
+.sa_alert a {
     text-decoration: none;
 }
 
-.form-left
-{
+.form-left {
     padding-top: 10px;
     text-align: left;
-    color:rgb(190, 190, 190);
+    color: rgb(190, 190, 190);
     align-content: left;
     padding-bottom: 15px;
     padding-left: 10px;
 }
 
-.form-left img 
-{
+.form-left img {
     width: 10%;
 }
 
-.form-left input
-{
+.form-left input {
     display: inline-block;
     width: 50%;
 }
 
-.form-left a 
-{
+.form-left a {
     color: #F6C519;
     text-decoration: underline;
 }

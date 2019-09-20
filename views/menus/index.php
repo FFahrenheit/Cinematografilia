@@ -16,7 +16,7 @@
 <body>
     <?php getNavBar() ?>
     <div class="form">
-        <marquee>Jaj</marquee>
+        <marquee>Aquí aún no hay contenido</marquee>
     </div>
     <div id="footer">
 </div>
