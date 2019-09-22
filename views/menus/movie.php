@@ -4,6 +4,7 @@
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
     include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Movie.php');
+    include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Profile.php');
     $url = "http://www.omdbapi.com/?apikey=$APIKey&plot=full&i=" . $_GET['id'];
     $id = $_GET['id'];
     $content = file_get_contents($url);
@@ -27,6 +28,9 @@
 
 <body>
     <?php getNavBar() ?>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <div class="sa_movie">
         <div class="row container">
             <div class="col-md-4">
@@ -46,17 +50,29 @@
                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ficha</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Reseñas</a>
                         <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Estadísticas</a>
-                        <?php if (isset($_SESSION['username'])) { ?>
+                        <?php if (isset($_SESSION['username'])) {
+                            $profile = new Profile($_SESSION['username']); ?>
                             <div class="dropdown sa_add_to">
-                                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Agregar a ...
+                                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Agregar a...
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id; ?>')"><i class="fas fa-star"></i>Favoritas</a>
-                                    <a class="dropdown-item bg-light" onclick="addToWatchlist('<?php echo $id; ?>')"><i class="far fa-clock"></i>Por ver</a>
-                                    <a class="dropdown-item bg-light" onclick = "addWatched('<?php echo $id; ?>')"><i class="far fa-eye"></i>Vistas</a>
-                                    <a class="dropdown-item bg-light"><i class="fas fa-list"></i>Mi lista</a>
-                                </div>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                    <li>
+                                        <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id; ?>')"><i class="fas fa-star"></i>Favoritas</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item bg-light" onclick="addToWatchlist('<?php echo $id; ?>')"><i class="far fa-clock"></i>Por ver</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item bg-light" onclick="addWatched('<?php echo $id; ?>')"><i class="far fa-eye"></i>Vistas</a>
+                                    </li>
+                                    <li class="dropdown-submenu dropdown-item bg-light sa_sub dropdown-toggle">
+                                        <i class="fas fa-list"></i> Lista 
+                                        <ul class="dropdown-menu">
+                                            <?php echo $profile->getPlaylist($id);?>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
                         <?php } ?>
                     </div>

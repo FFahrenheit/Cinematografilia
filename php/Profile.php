@@ -119,8 +119,8 @@
                     if($rs)
                     {
                         $body = mysqli_fetch_array($rs);
-                        $out .= '<td><i class="fas fa-film"></i> '.$body['likes'].'</td>';
-                        $out .= '<td><i class="fas fa-thumbs-up"></i> '.$body['peliculas'].'</td>';
+                        $out .= '<td><i title="Me gustas" class="fas fa-film"></i> '.$body['likes'].'</td>';
+                        $out .= '<td><i title="Peliculas en esta lista" class="fas fa-thumbs-up"></i> '.$body['peliculas'].'</td>';
                     }
                     $out .= '<td><a class="btn btn-warning" href="playlist.php?id='.$clave.'">Ver lista</a></td>';
                     $out .= '</tr>';
@@ -194,5 +194,23 @@
                 return "<span>El usuario aún no ha agregado películas favoritas.</span>";
             }
         }
+
+        public function getPlaylist($id)
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+            $sql = "SELECT * FROM playlist WHERE creador = '$this->username'";
+            $result = mysqli_query($conn, $sql);
+            $out = '<li><a class="dropdown-item bg-light" href="new-playlist.php"><i class="fas fa-plus-circle"></i>Nueva</a></li>' ;
+            if($result)
+            {
+                $out .= '<div class="dropdown-divider"></div>';
+                while($data = mysqli_fetch_array($result))
+                {
+                    $out .= '<li><a class="dropdown-item bg-light" onclick="addToPlaylist("'.$id.'","'.$data['clave'].'")">
+                    '.$data['nombre'].'</a></li>';
+                }
+            }
+            return $out;
+        }
     }
-?>
