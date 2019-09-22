@@ -207,7 +207,7 @@
                 $out .= '<div class="dropdown-divider"></div>';
                 while($data = mysqli_fetch_array($result))
                 {
-                    $out .= '<li><a class="dropdown-item bg-light" onclick="addToPlaylist("'.$id.'","'.$data['clave'].'")">
+                    $out .= '<li><a class="dropdown-item bg-light" onclick="addToPlaylist('."'".$id."','".$data['clave']."'".')">
                     '.$data['nombre'].'</a></li>';
                 }
             }

@@ -20,6 +20,35 @@ function addWatched(movie) {
     $('#watchedModal').modal('toggle');
 }
 
+function addToPlaylist(movie, playlist) {
+    var data = new FormData();
+    data.append("movie", movie);
+    data.append("playlist", playlist);
+    console.log(movie + ' ' + playlist);
+    fetch('../../php/add-to-playlist.php', {
+        method: 'POST',
+        body: data
+    }).then(resp => {
+        return resp.json();
+    }).then(r => {
+        console.log(r);
+        switch (r) {
+            case '0':
+                alertar("Error de sesión", "danger");
+                break;
+            case '1':
+                alertar("Error de conexión", "danger");
+                break;
+            case '2':
+                alertar("La película ya está en esta lista", "warning");
+                break;
+            case '3':
+                alertar("Película agregada a la lista", "success");
+                break;
+        }
+    });
+}
+
 function seeForm() {
     var data = new FormData(formWatched);
     data.append("movie", aMovie);
