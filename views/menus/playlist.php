@@ -34,17 +34,26 @@
                     <div><?php echo $playlist->getPoster(); ?>
                 </a>
                 <br>
-                <h2><?php echo $playlist->name; ?></h2>
+                <div id="title-form">
+                    <h2><?php echo $playlist->getName(); ?></h2>
+                </div>
+                <?php echo $playlist->doILikeIt(); ?>
                 <h3><?php echo $playlist->getOwner(); ?></h3>
-                <h4><i class="fas fa-thumbs-up"></i> <?php echo $playlist->likes; ?> &nbsp;<i class="fas fa-film"></i> <?php echo $playlist->movieCount; ?></h4>
+                <h4><i title="Me gustas" class="fas fa-thumbs-up"></i> <?php echo $playlist->likes; ?> &nbsp;<i title="Peliculas en la lista" class="fas fa-film"></i> <?php echo $playlist->movieCount; ?></h4>
                 <h6><i class="far fa-calendar-minus"></i><?php echo $playlist->date; ?></h6>
-                <h5><?php echo $playlist->description ?> </h5>
+                <div id="description-form">
+                    <h5><?php echo $playlist->description ?> </h5>
+                </div>
             </div>
 
         </div>
         <div class="col-md-8">
-            <h1>Peliculas en la lista</h1>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis lobortis massa. Integer tincidunt dictum tempor. Praesent eget placerat nulla. Sed maximus massa nec turpis hendrerit, et euismod nulla molestie. Praesent at tempor mauris, ac placerat dui. Sed vitae faucibus odio, a ultricies lacus. Vivamus efficitur mauris sit amet consectetur sagittis. Duis lacus dui, commodo sit amet est a, malesuada ultricies massa. Etiam in ex lorem. In dapibus ut ante vel venenatis. Donec eget quam nisl. Vestibulum lorem ipsum, auctor sit amet urna sit amet, imperdiet semper ligula. Nunc eu nunc felis.</h2>
+            <div class="alert alert-dismissible" id="alert">
+                <span id="alert-message"></span>
+                <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
+            </div>
+            <h3 style="text-align: left;">Peliculas en la lista</h3>
+            <?php echo $playlist->getMovies(); ?>
         </div>
     </div>
     </div>
@@ -56,6 +65,7 @@
     <script src="../../js/main.js"></script>
     <script src="../../js/alert.js"></script>
     <script src="../../js/profile.js"></script>
+    <script src="../../js/playlist.js"></script>
 </body>
 
 </html>

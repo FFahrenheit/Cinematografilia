@@ -26,9 +26,9 @@
 <body>
     <?php getNavBar() ?>
     <div class="alert alert-dismissible" id="alert">
-            <span id="alert-message"></span>
-            <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
-            </div>
+        <span id="alert-message"></span>
+        <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
+    </div>
     <div class="profile">
         <div class="profile-cover">
             <img src="../../img/cover.jpg">
