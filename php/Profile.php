@@ -108,19 +108,16 @@
                     $out .= "<td><a style='color: white;' href='playlist.php?id=$clave'>".$data['nombre']."</a>";
                     $out .= '<td><h6>'.$data['descripcion'].'</span></h6>';
                     $out .= '<td>'.$data['creada'].'</td>';
-                    $sql = "SELECT COUNT(playlist_likes.usuario) AS likes,
-                    COUNT(playlist_peliculas.pelicula) AS peliculas 
-                    FROM playlist_likes, playlist_peliculas
-                    WHERE playlist_likes.playlist = $clave AND 
-                    playlist_peliculas.playlist = $clave";
+                    $sql = "SELECT (SELECT COUNT(*) FROM playlist_likes WHERE playlist = $clave) AS likes, 
+                    (SELECT COUNT(*) FROM playlist_peliculas WHERE playlist = $clave) AS peliculas";
                     $t = new Connection();
                     $connect = $t->getConnection();
                     $rs = mysqli_query($connect,$sql);
                     if($rs)
                     {
                         $body = mysqli_fetch_array($rs);
-                        $out .= '<td><i title="Me gustas" class="fas fa-film"></i> '.$body['likes'].'</td>';
-                        $out .= '<td><i title="Peliculas en esta lista" class="fas fa-thumbs-up"></i> '.$body['peliculas'].'</td>';
+                        $out .= '<td><i title="Me gustas" class="fas fa-thumbs-up"></i> '.$body['likes'].'</td>';
+                        $out .= '<td><i title="Peliculas en esta lista" class="fas fa-film"></i> '.$body['peliculas'].'</td>';
                     }
                     $out .= '<td><a class="btn btn-warning" href="playlist.php?id='.$clave.'">Ver lista</a></td>';
                     $out .= '</tr>';

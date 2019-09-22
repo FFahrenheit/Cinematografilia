@@ -1,0 +1,60 @@
+.playlist {
+    padding-top: 10px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(55, 55, 55, 1) 100%);
+    color: #F6C519;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    align-content: center;
+    text-align: center;
+    padding-left: 10px;
+}
+
+.playlist a {
+    text-decoration: none;
+    color: #F6C519;
+}
+
+.playlist a:hover {
+    color: rgb(214, 168, 0);
+}
+
+.playlist h2 {
+    margin-top: 10px;
+    background-color: rgb(41, 41, 41);
+    border-radius: 10px;
+}
+
+.playlist i {
+    padding-right: 10px;
+    font-size: 20px;
+}
+
+.playlist a {
+    margin: 0 auto;
+}
+
+.mosaic {
+    position: block;
+    display: inline-block;
+    margin-left: 10%;
+    align-self: center;
+    width: 100%;
+    height: 100%;
+}
+
+.mosaic img {
+    object-position: 0 10%;
+    object-fit: cover;
+    width: 100%;
+    height: 150px;
+}
+
+.mosaic>img {
+    float: left;
+    width: 40%;
+}
+
+.no-mosaic img {
+    width: 100%;
+    object-fit: cover;
+}
