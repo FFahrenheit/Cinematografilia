@@ -43,7 +43,7 @@ function addToPlaylist(movie, playlist) {
                 alertar("La película ya está en esta lista", "warning");
                 break;
             case '3':
-                alertar("Película agregada a la lista", "success");
+                alertar("Película agregada a la lista. <a class='text-success' href='playlist.php?id=" + playlist + "'>Ver lista</a>", "success");
                 break;
         }
     });

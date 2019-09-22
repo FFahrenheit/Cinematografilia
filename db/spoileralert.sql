@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-09-2019 a las 18:46:38
+-- Tiempo de generación: 23-09-2019 a las 00:14:05
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -61,7 +61,7 @@ CREATE TABLE `playlist` (
 --
 
 INSERT INTO `playlist` (`clave`, `nombre`, `descripcion`, `fecha`, `creador`) VALUES
-(47, 'mi lista', 'Listilla bonita', '2019-09-20 16:08:36', 'ivan'),
+(47, 'Timetravel movies', 'Peliculas para romperse la mente', '2019-09-20 16:08:36', 'ivan'),
 (48, 'Otra lista', 'Otra lista cool', '2019-09-20 16:08:54', 'ivan');
 
 -- --------------------------------------------------------
@@ -76,6 +76,13 @@ CREATE TABLE `playlist_likes` (
   `usuario` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `playlist_likes`
+--
+
+INSERT INTO `playlist_likes` (`fecha`, `playlist`, `usuario`) VALUES
+('2019-09-22 22:12:45', 47, 'ivan');
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +93,18 @@ CREATE TABLE `playlist_peliculas` (
   `pelicula` varchar(10) NOT NULL,
   `playlist` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `playlist_peliculas`
+--
+
+INSERT INTO `playlist_peliculas` (`pelicula`, `playlist`) VALUES
+('tt0114746', 47),
+('tt0480669', 47),
+('tt0480669', 48),
+('tt2194499', 47),
+('tt2397535', 47),
+('tt2669336', 47);
 
 -- --------------------------------------------------------
 
@@ -177,6 +196,7 @@ ALTER TABLE `playlist`
 -- Indices de la tabla `playlist_likes`
 --
 ALTER TABLE `playlist_likes`
+  ADD PRIMARY KEY (`usuario`,`playlist`),
   ADD KEY `playlist` (`playlist`),
   ADD KEY `usuario` (`usuario`);
 

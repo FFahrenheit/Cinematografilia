@@ -30,9 +30,7 @@
     <div class="playlist">
         <div class="row container-fluid">
             <div class="col-md-4">
-                <a href="#">
                     <div><?php echo $playlist->getPoster(); ?>
-                </a>
                 <br>
                 <div id="title-form">
                     <h2><?php echo $playlist->getName(); ?></h2>
@@ -57,6 +55,27 @@
         </div>
     </div>
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <p id="modal-body"></p>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" onclick="cancelAction()" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" id="okButton">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div id="footer">
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
@@ -64,7 +83,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
     <script src="../../js/main.js"></script>
     <script src="../../js/alert.js"></script>
-    <script src="../../js/profile.js"></script>
+    <script src="../../js/modal.js"></script>
+    <!--script src="../../js/profile.js"></script-->
     <script src="../../js/playlist.js"></script>
 </body>
 

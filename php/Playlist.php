@@ -33,7 +33,7 @@
                 $this->date = $data['creado'];
                 $this->likes = $data['likes'];
                 $this->description = $data['descripcion'];
-                $sql = "SELECT pelicula FROM playlist_peliculas WHERE playlist = $this->clave";
+                $sql = "SELECT pelicula FROM playlist_peliculas WHERE playlist = $this->clave ORDER BY RAND()";
                 $result = mysqli_query($conn,$sql);
                 if($result && $result->num_rows > 0)
                 {
@@ -69,7 +69,7 @@
         private function getOMDBData()
         {
             $i = 0;
-            $this->mosaic = '<div class="mosaic">';
+            $this->mosaic = '<div class="mosaic" style="cursor: pointer;">';
             foreach($this->movies as $movie)
             {
                 $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=".$movie;
@@ -85,7 +85,7 @@
             {
                 for($j = $i; $j<4; $j++)
                 {
-                    $this->mosaic .= '<img src="../../img/logo.png" alt="Placeholder">';
+                    $this->mosaic .= '<img src="../../img/poster.jpg" alt="Placeholder">';
                 }
             }
             $this->mosaic .= "</div>";
@@ -121,7 +121,7 @@
                     $content = file_get_contents($url);
                     $data = json_decode($content,true);
                     $out .= '<tr>';
-                    $out .= "<td height='40' width='40'><div><a style='color: white;' href='movie.php?id$movie'><img src='".$data['Poster']."'></a></td>";
+                    $out .= "<td height='40' width='40'><div><a style='color: white;' href='movie.php?id=$movie'><img src='".$data['Poster']."'></a></td>";
                     $out .= "<td><a style='color: white;' href='movie.php?id=$movie'>".$data['Title']." (".$data['Year'].")</a></td>";
                     if($this->owner == $this->user)
                     {
@@ -140,7 +140,7 @@
         {
             return $this->liked ? 
             '<a class="btn btn-warning text-dark" onclick="unlike('."'".$this->clave."'".')"><i class="fas fa-thumbs-down"></i> Ya no me gusta</a>'
-            :'<a class="btn btn-warning text-dark" onclick="like('."'".$this->clave."'".')"><i class="fas fa-thumbs-up"></i> Me gusta</a>';
+            :'<a class="btn btn-warning text-dark" onclick="like('."'".$this->clave."'".')"><i class="fas fa-thumbs-up"></i> Me gusta esta lista</a>';
         }
     }
 ?>

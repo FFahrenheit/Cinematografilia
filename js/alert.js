@@ -1,6 +1,7 @@
 $("#alert").hide();
 
 function alertar(message, type) {
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
     var cls = 'alert-' + type;
     var al = document.getElementById('alert');
     var alT = document.getElementById('alert-message');

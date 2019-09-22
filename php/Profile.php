@@ -56,7 +56,7 @@
             $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=".$id;
             $content = file_get_contents($url);
             $json = json_decode($content,true);
-            $data = "<td height='40' width='40'><div><a style='color: white;' href='movie.php?id$id'><img src='".$json['Poster']."'></a></td>";
+            $data = "<td height='40' width='40'><div><a style='color: white;' href='movie.php?id=$id'><img src='".$json['Poster']."'></a></td>";
             $data .= "<td><a style='color: white;' href='movie.php?id=$id'>".$json['Title']."</a></td>";
             $data .= "<td>".$json['Year']."</td>";
             return $data; 
