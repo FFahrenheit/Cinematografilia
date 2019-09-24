@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-09-2019 a las 00:14:05
+-- Tiempo de generación: 24-09-2019 a las 07:04:29
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -25,6 +25,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `amistad`
+--
+
+CREATE TABLE `amistad` (
+  `usuario` varchar(30) NOT NULL,
+  `amigo` varchar(30) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bloqueo`
+--
+
+CREATE TABLE `bloqueo` (
+  `usuario` varchar(30) NOT NULL,
+  `bloqueado` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `favoritas`
 --
 
@@ -40,6 +63,7 @@ CREATE TABLE `favoritas` (
 
 INSERT INTO `favoritas` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0289879', 'ivan', '2019-09-16 23:25:50'),
+('tt0290673', 'ivan', '2019-09-24 02:44:25'),
 ('tt0848228', 'ivan', '2019-09-16 23:10:55');
 
 -- --------------------------------------------------------
@@ -109,6 +133,26 @@ INSERT INTO `playlist_peliculas` (`pelicula`, `playlist`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `solicitud`
+--
+
+CREATE TABLE `solicitud` (
+  `emisor` varchar(30) NOT NULL,
+  `receptor` varchar(30) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `estado` enum('aceptada','pendiente','') NOT NULL DEFAULT 'pendiente'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `solicitud`
+--
+
+INSERT INTO `solicitud` (`emisor`, `receptor`, `fecha`, `estado`) VALUES
+('ivxn', 'ivan', '2019-09-24 04:57:36', 'pendiente');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -152,6 +196,10 @@ CREATE TABLE `vistas` (
 --
 
 INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
+('tt0164063', 'ivan', '2019-09-23 05:00:00'),
+('tt0290673', 'ivan', '2019-09-13 05:00:00'),
+('tt0425123', 'ivan', '2019-09-23 05:00:00'),
+('tt0458339', 'ivan', '2019-12-23 06:00:00'),
 ('tt0848228', 'ivan', '2019-09-18 05:00:00');
 
 -- --------------------------------------------------------
@@ -171,12 +219,31 @@ CREATE TABLE `watchlist` (
 --
 
 INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
+('tt0164063', 'ivan', '2019-09-24 02:48:38'),
+('tt0290673', 'ivan', '2019-09-24 02:44:22'),
+('tt0425123', 'ivan', '2019-09-24 02:47:21'),
 ('tt0458339', 'ivan', '2019-09-19 03:56:08'),
 ('tt0485947', 'ivan', '2019-09-18 17:36:30');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `amistad`
+--
+ALTER TABLE `amistad`
+  ADD PRIMARY KEY (`usuario`,`amigo`),
+  ADD KEY `usuario` (`usuario`),
+  ADD KEY `amigo` (`amigo`);
+
+--
+-- Indices de la tabla `bloqueo`
+--
+ALTER TABLE `bloqueo`
+  ADD PRIMARY KEY (`usuario`,`bloqueado`),
+  ADD KEY `usuario` (`usuario`),
+  ADD KEY `bloqueado` (`bloqueado`);
 
 --
 -- Indices de la tabla `favoritas`
@@ -206,6 +273,14 @@ ALTER TABLE `playlist_likes`
 ALTER TABLE `playlist_peliculas`
   ADD PRIMARY KEY (`pelicula`,`playlist`),
   ADD KEY `playlist` (`playlist`);
+
+--
+-- Indices de la tabla `solicitud`
+--
+ALTER TABLE `solicitud`
+  ADD PRIMARY KEY (`emisor`,`receptor`),
+  ADD KEY `emisor` (`emisor`),
+  ADD KEY `receptor` (`receptor`);
 
 --
 -- Indices de la tabla `usuario`
@@ -243,6 +318,20 @@ ALTER TABLE `playlist`
 --
 
 --
+-- Filtros para la tabla `amistad`
+--
+ALTER TABLE `amistad`
+  ADD CONSTRAINT `amistad_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`),
+  ADD CONSTRAINT `amistad_ibfk_2` FOREIGN KEY (`amigo`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `bloqueo`
+--
+ALTER TABLE `bloqueo`
+  ADD CONSTRAINT `bloqueo_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`),
+  ADD CONSTRAINT `bloqueo_ibfk_2` FOREIGN KEY (`bloqueado`) REFERENCES `usuario` (`username`);
+
+--
 -- Filtros para la tabla `favoritas`
 --
 ALTER TABLE `favoritas`
@@ -266,6 +355,13 @@ ALTER TABLE `playlist_likes`
 --
 ALTER TABLE `playlist_peliculas`
   ADD CONSTRAINT `playlist_peliculas_ibfk_1` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`clave`);
+
+--
+-- Filtros para la tabla `solicitud`
+--
+ALTER TABLE `solicitud`
+  ADD CONSTRAINT `solicitud_ibfk_1` FOREIGN KEY (`emisor`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `solicitud_ibfk_2` FOREIGN KEY (`receptor`) REFERENCES `usuario` (`username`);
 
 --
 -- Filtros para la tabla `vistas`

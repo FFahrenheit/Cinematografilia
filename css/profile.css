@@ -7,6 +7,16 @@
     padding-bottom: 15px;
 }
 
+.profile span {
+    font-size: 65%;
+    margin-bottom: 10px;
+}
+
+.profile i,
+a {
+    cursor: pointer;
+}
+
 .profile p {
     padding-top: -10px;
     margin-top: -10px;

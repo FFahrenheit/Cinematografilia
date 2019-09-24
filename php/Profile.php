@@ -3,12 +3,12 @@
     class Profile
     {
         public $conn;
-        public $username;
+        public $username; //Del perfil
         public $image;
         public $date;
         public $APIKey; 
         public $exists = true;
-        public $user;
+        public $user; //Quien solicita
 
         public function __construct($id)
         {
@@ -31,9 +31,66 @@
             }
         }
 
+        private function is($request)
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+            switch($request)
+            {
+                case "blocked": //Fue bloqueado
+                    $query = "SELECT * FROM bloqueo WHERE bloqueado = '$this->user' AND usuario = '$this->username'";
+                    break;
+                case "block": //El lo bloqueo
+                    $query = "SELECT * FROM bloqueo WHERE bloqueado = '$this->username' AND usuario = '$this->user'";
+                    break;
+                case "friend":
+                    $query = "SELECT * FROM amistad WHERE (usuario = '$this->username' AND amigo = '$this->user')
+                    OR (amigo = '$this->username' AND usuario = '$this->user')";
+                    break;
+                case "pending":
+                    $query = "SELECT * FROM solicitud WHERE emisor = '$this->username' AND receptor = '$this->user' AND estado = 'pendiente'";
+                    break;
+                case "sent":
+                    $query = "SELECT * FROM solicitud WHERE emisor = '$this->user' AND receptor = '$this->username' AND estado = 'pendiente'";
+                    break;
+                default:
+                    return false;
+            }
+            $result = mysqli_query($conn,$query);
+            return $result && $result->num_rows > 0;
+        }
+
         public function getUser()
         {
-            return ($this->username != $this->user)? $this->username : $this->username.' <a href="configure.php" title="Configurar"><i class="fas fa-cog"></i></a>';
+            $arg = "'".$this->username."'";
+            if($this->username == $this->user)
+            {
+                return $this->username.' <a href="configure.php" title="Configurar"><i class="fas fa-cog"></i></a>';
+            }
+            else if($this->is("blocked"))
+            {
+                return $this->username.' <span class="badge badge-pill badge-danger">Este usuario te ha bloqueado.</span>';
+            }
+            else if($this->is("block"))
+            {
+                return $this->username.' <span class="badge badge-pill badge-warning">Bloqueaste a este usuario.</span><a onclick="unblock('.$arg.')"> <span style="text-decoration:underline;">Desbloquear</span></a>';
+            }
+            else if($this->is("friend"))
+            {
+                return $this->username.' <a href="chat.php?user='.$this->username.'" title="Enviar mensaje"><i class="fas fa-envelope"></i></a>';
+            }
+            else if($this->is("pending"))
+            {
+                return $this->username.' <button onclick="accept('.$arg.')" class="btn btn-warning">Aceptar</button> <button onclick="reject('.$arg.')" class="btn btn-secondary">Rechazar</button>';
+            }
+            else if($this->is("sent"))
+            {
+                return $this->username.' <i title="Solicitud pendiente" class="fas fa-user-clock"></i><a style="text-decoration:underline;" onclick="cancel('.$arg.')"><span>Cancelar solicitud</span></a>';
+            }
+            else 
+            {
+                return $this->username.' <a onclick="add('.$arg.')" title="Agregar como amigo"><i class="fas fa-user-plus"></i></a>';
+            }
         }
 
         public function getImage()
@@ -88,7 +145,7 @@
             }
             else 
             {
-                return "<span>El usuario aún no ha agregado películas vistas.</span>";
+                return "<p>El usuario aún no ha agregado películas vistas.</p>";
             }            
         }
 
@@ -127,7 +184,7 @@
             }
             else 
             {
-                return "<span>El usuario aún no ha creado listas de reproducción</span>";
+                return "<p>El usuario aún no ha creado listas de reproducción</p>";
             }
         }
 
@@ -158,7 +215,7 @@
             }
             else 
             {
-                return "<span>El usuario aún no ha agregado películas por ver.</span>";
+                return "<p>El usuario aún no ha agregado películas por ver.</p>";
             }
         }
 
@@ -188,7 +245,7 @@
             }
             else 
             {
-                return "<span>El usuario aún no ha agregado películas favoritas.</span>";
+                return "<p>El usuario aún no ha agregado películas favoritas.</p>";
             }
         }
 
