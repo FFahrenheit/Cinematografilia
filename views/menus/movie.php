@@ -67,9 +67,9 @@
                                         <a class="dropdown-item bg-light" onclick="addWatched('<?php echo $id; ?>')"><i class="far fa-eye"></i>Vistas</a>
                                     </li>
                                     <li class="dropdown-submenu dropdown-item bg-light sa_sub dropdown-toggle">
-                                        <i class="fas fa-list"></i> Lista 
+                                        <i class="fas fa-list"></i> Lista
                                         <ul class="dropdown-menu">
-                                            <?php echo $profile->getPlaylist($id);?>
+                                            <?php echo $profile->getPlaylist($id); ?>
                                         </ul>
                                     </li>
                                 </ul>
@@ -94,10 +94,15 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-
+                        ...
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-
+                        <div class="ficha">
+                            <?php echo $m->getLikes($_GET['id']); ?>
+                            <?php echo $m->getFavorites($_GET['id']); ?>
+                            <?php echo $m->getWatched($_GET['id']); ?>
+                            <?php echo $m->getWatchlist($_GET['id']); ?>  
+                        </div>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,62 @@
             $this->APIKey = "b27f9641";
         }
 
+        public function getLikes($movie)
+        {
+          $temp = new Connection();
+          $conn = $temp->getConnection();
+
+          return '<h3><i class="fas fa-thumbs-up"></i>Me gustas: <span class="text-light"></span></h3>';
+        }
+
+        public function getFavorites($movie)
+        {
+          $temp = new Connection();
+          $conn = $temp->getConnection();
+          $sql = "SELECT COUNT(*) as likes FROM favoritas WHERE pelicula = '$movie'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $data = mysqli_fetch_assoc($result))
+          {
+            return '<h3><i class="fas fa-star"></i>En favoritos: <span class="text-light">'.$data['likes'].'</span></h3>';
+          }
+          else 
+          {
+            return '<h3><i class="fas fa-star"></i>En favoritos: <span class="text-light">0</span></h3>';
+          }
+        }
+
+        public function getWatched($movie)
+        {
+          $temp = new Connection();
+          $conn = $temp->getConnection();
+          $sql = "SELECT COUNT(*) as likes FROM vistas WHERE pelicula = '$movie'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $data = mysqli_fetch_assoc($result))
+          {
+            return '<h3><i class="fas fa-eye"></i>Vistas: <span class="text-light">'.$data['likes'].'</span></h3>';
+          }
+          else 
+          {
+            return '<h3><i class="fas fa-eye"></i></i>Vistas: <span class="text-light">0</span></h3>';
+          }  
+        }
+
+        public function getWatchlist($movie)
+        {
+          $temp = new Connection();
+          $conn = $temp->getConnection();
+          $sql = "SELECT COUNT(*) as likes FROM watchlist WHERE pelicula = '$movie'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $data = mysqli_fetch_assoc($result))
+          {
+            return '<h3><i class="fas fa-user-clock"></i>Quieren verla: <span class="text-light">'.$data['likes'].'</span></h3>';
+          }
+          else 
+          {
+            return '<h3><i class="fas fa-user-clock"></i></i>Quieren verla: <span class="text-light">0</span></h3>';
+          }  
+        }
+
         public function getIcons($movie)
         {
           $c = new Connection();
@@ -36,7 +92,7 @@
           $result = mysqli_query($conn,$sql);
           if($result && $result->num_rows > 0)
           {
-            $icons .= ' <i class="far fa-eye"></i> ';
+            $icons .= ' <i title="Vista" class="far fa-eye"></i> ';
           }
           return $icons;           
         }
@@ -206,4 +262,3 @@
         }
 
     }
-?>
