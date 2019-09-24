@@ -12,4 +12,10 @@
 
     mysqli_query($conn,$sql) or die('"1"');
     echo json_encode("2");
+
+    if(isset($_POST['foo']))
+    {
+        $sql = "DELETE FROM watchlist WHERE pelicula = '$movie' AND usuario = '$user'";
+        mysqli_query($conn, $sql);
+    }
 ?>

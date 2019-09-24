@@ -92,6 +92,41 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="watchedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark" id="exampleModalLabel">Marcar película como vista</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <form id="form-watched" novalidate>
+                        <h6>Complete los datos para agregar a la lista</h6>
+                        <div class="form-group">
+                            <label for="">Fecha en que se vió: </label>
+                            <br>
+                            <input id="date-watch" type="date" name="fecha" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Ingrese una fecha
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                La película me gustó.
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="seeForma(true)">!Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="footer">
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
@@ -99,6 +134,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
     <script src="../../js/main.js"></script>
     <script src="../../js/alert.js"></script>
+    <script src="../../js/movie.js"></script>
     <script src="../../js/profile.js"></script>
 </body>
 

@@ -27,7 +27,7 @@
             FROM playlist,playlist_likes WHERE clave = $this->clave AND playlist.clave = playlist_likes.playlist";
             if($result = mysqli_query($conn,$sql))
             {
-                $data = mysqli_fetch_array($result);
+                $data = mysqli_fetch_assoc($result);
                 $this->owner = $data['creador'];
                 $this->name = $data['nombre'];
                 $this->date = $data['creado'];
@@ -41,7 +41,7 @@
                     $this->movies = array();
                     for($i = 0; $i<$result->num_rows; $i++)
                     {
-                        $data = mysqli_fetch_array($result);
+                        $data = mysqli_fetch_assoc($result);
                         $this->movies[$i] = $data['pelicula'];
                     }
                     $this->getOMDBData();

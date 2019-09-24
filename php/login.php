@@ -13,7 +13,7 @@
     if($result->num_rows>0)
     {
         session_start();
-        $row = mysqli_fetch_array($result);
+        $row = mysqli_fetch_assoc($result);
         $_SESSION['email'] = $row['email'];
         $_SESSION['username'] = $user;
         echo json_encode("4");

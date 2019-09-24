@@ -21,7 +21,7 @@
             $result = mysqli_query($this->conn,$sql);
             if($result->num_rows>0)
             {
-                $data = mysqli_fetch_array($result);
+                $data = mysqli_fetch_assoc($result);
                 $this->image = $data['imagen'];
                 $this->date = $data['date'];
             }
@@ -71,7 +71,7 @@
             if($result && $result->num_rows > 0)
             {
                 $out = '<table class ="table table-hover sa_table"><tbody>';
-                while($data = mysqli_fetch_array($result))
+                while($data = mysqli_fetch_assoc($result))
                 {
                     $out .= '<tr>';
                     $out .= $this->getMovieRow($data['pelicula']);
@@ -101,7 +101,7 @@
             if($result && $result->num_rows>0)
             {
                 $out = '<table class ="table table-hover sa_table"><tbody>';
-                while($data = mysqli_fetch_array($result))
+                while($data = mysqli_fetch_assoc($result))
                 {
                     $out .= '<tr>';
                     $clave = $data['clave'];
@@ -115,7 +115,7 @@
                     $rs = mysqli_query($connect,$sql);
                     if($rs)
                     {
-                        $body = mysqli_fetch_array($rs);
+                        $body = mysqli_fetch_assoc($rs);
                         $out .= '<td><i title="Me gustas" class="fas fa-thumbs-up"></i> '.$body['likes'].'</td>';
                         $out .= '<td><i title="Peliculas en esta lista" class="fas fa-film"></i> '.$body['peliculas'].'</td>';
                     }
@@ -140,14 +140,14 @@
             if($result && $result->num_rows > 0)
             {
                 $out = '<table class ="table table-hover sa_table"><tbody>';
-                while($data = mysqli_fetch_array($result))
+                while($data = mysqli_fetch_assoc($result))
                 {
                     $out .= '<tr>';
                     $out .= $this->getMovieRow($data['pelicula']);
                     $out .= "<td>".$data['vista']."</td>";
                     if($this->user == $this->username)
                     {
-                        $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="watchMovie('."'".$data['pelicula']."'".')" title="Marcar como vista" onclick="addWatched('.$data['pelicula'].')"><i class="fas fa-check-square"></i></a></td>';
+                        $out.= '<td><a onclick="addWatched('."'".$data['pelicula']."'".')" title="Marcar como vista"><i class="fas fa-check-square"></i></a></td>';
                         $out.= '<td><a data-toggle="modal" data-target="#exampleModal" onclick="unwatch('."'".$data['pelicula']."'".')" title="Quitar de la lista"><i class="fas fa-eye-slash"></i></a></td>';
                     }
                     $out .= '<td><a class="btn btn-warning" href="movie.php?id='.$data['pelicula'].'">Ver película</a></td>';
@@ -171,7 +171,7 @@
             if($result && $result->num_rows > 0)
             {
                 $out = '<table class ="table table-hover sa_table"><tbody>';
-                while($data = mysqli_fetch_array($result))
+                while($data = mysqli_fetch_assoc($result))
                 {
                     $out .= '<tr>';
                     $out .= $this->getMovieRow($data['pelicula']);
@@ -202,7 +202,7 @@
             if($result)
             {
                 $out .= '<div class="dropdown-divider"></div>';
-                while($data = mysqli_fetch_array($result))
+                while($data = mysqli_fetch_assoc($result))
                 {
                     $out .= '<li><a class="dropdown-item bg-light" onclick="addToPlaylist('."'".$id."','".$data['clave']."'".')">
                     '.$data['nombre'].'</a></li>';

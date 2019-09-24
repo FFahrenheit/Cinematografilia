@@ -25,7 +25,7 @@
     $query = "SELECT imagen FROM usuario WHERE username = '$username'";
     $result = mysqli_query($connection, $query);
     if ($result) {
-        $information = mysqli_fetch_array($result);
+        $information = mysqli_fetch_assoc($result);
         $image = $information['imagen'];
     }
     ?>
