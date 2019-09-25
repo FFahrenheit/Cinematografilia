@@ -9,6 +9,7 @@
         public $APIKey; 
         public $exists = true;
         public $user; //Quien solicita
+        public $status;
 
         public function __construct($id)
         {
@@ -60,35 +61,60 @@
             return $result && $result->num_rows > 0;
         }
 
+        public function username()
+        {
+            if($this->status!="me")
+            {
+                return $this->username.
+            '<div class="btn-group">
+                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item bg-light" href="#">Bloquear</a>
+                    <a class="dropdown-item bg-light" href="#">Reportar?</a>
+                    <a class="dropdown-item bg-light" href="#">Más</a>                
+                </div>
+              </div>';
+            }
+        }
+
         public function getUser()
         {
             $arg = "'".$this->username."'";
             if($this->username == $this->user)
             {
-                return $this->username.' <a href="configure.php" title="Configurar"><i class="fas fa-cog"></i></a>';
+                $this->status="me";
+                return $this->username().' <a href="configure.php" title="Configurar"><i class="fas fa-cog"></i></a>';
             }
             else if($this->is("blocked"))
             {
-                return $this->username.' <span class="badge badge-pill badge-danger">Este usuario te ha bloqueado.</span>';
+                $this->status="blocked";
+                return $this->username().' <span class="badge badge-pill badge-danger">Este usuario te ha bloqueado.</span>';
             }
             else if($this->is("block"))
             {
-                return $this->username.' <span class="badge badge-pill badge-warning">Bloqueaste a este usuario.</span><a onclick="unblock('.$arg.')"> <span style="text-decoration:underline;">Desbloquear</span></a>';
+                $this->status="block";
+                return $this->username().' <span class="badge badge-pill badge-warning">Bloqueaste a este usuario.</span><a onclick="unblock('.$arg.')"> <span style="text-decoration:underline;">Desbloquear</span></a>';
             }
             else if($this->is("friend"))
             {
-                return $this->username.' <a href="chat.php?user='.$this->username.'" title="Enviar mensaje"><i class="fas fa-envelope"></i></a>';
+                $this->status="friend";
+                return $this->username().' <a href="chat.php?user='.$this->username.'" title="Enviar mensaje"><i class="fas fa-envelope"></i></a>';
             }
             else if($this->is("pending"))
             {
-                return $this->username.' <button onclick="accept('.$arg.')" class="btn btn-warning">Aceptar</button> <button onclick="reject('.$arg.')" class="btn btn-secondary">Rechazar</button>';
+                $this->status="pending";
+                return $this->username().' <button onclick="accept('.$arg.')" class="btn btn-warning">Aceptar</button> <button onclick="reject('.$arg.')" class="btn btn-secondary">Rechazar</button>';
             }
             else if($this->is("sent"))
             {
-                return $this->username.' <i title="Solicitud pendiente" class="fas fa-user-clock"></i><a style="text-decoration:underline;" onclick="cancel('.$arg.')"><span>Cancelar solicitud</span></a>';
+                $this->status="sent"();
+                return $this->username.' <i title="Solicitud pendiente" class="fas fa-user-clock"></i><a style="text-decoration:underline; font-size:25px;" onclick="cancel('.$arg.')"><span>Cancelar solicitud</span></a>';
             }
             else 
             {
+                $this->status="nothing"();
                 return $this->username.' <a onclick="add('.$arg.')" title="Agregar como amigo"><i class="fas fa-user-plus"></i></a>';
             }
         }

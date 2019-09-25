@@ -12,8 +12,7 @@
     margin-bottom: 10px;
 }
 
-.profile i,
-a {
+.profile a {
     cursor: pointer;
 }
 
@@ -53,8 +52,9 @@ a {
 }
 
 .profile-head i {
+    padding-left: 10px;
+    padding-right: 10px;
     font-size: 80%;
-    width: 10%;
     color: rgb(206, 206, 206);
 }
 

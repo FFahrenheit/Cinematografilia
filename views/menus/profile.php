@@ -35,10 +35,7 @@
         </div>
         <div class="profile-head">
             <img src=<?php echo '"' . $profile->getImage() . '"'; ?>>
-            <h2>
-                <?php
-                echo $profile->getUser();
-                ?></h2>
+            <h1><?php echo $profile->getUser();?></h1>
             <p>Miembro desde <?php echo $profile->getDate(); ?></p>
             <nav class="profile-nav">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
