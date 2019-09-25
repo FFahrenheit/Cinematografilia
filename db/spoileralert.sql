@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-09-2019 a las 07:04:29
+-- Tiempo de generación: 25-09-2019 a las 04:29:53
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -33,6 +33,14 @@ CREATE TABLE `amistad` (
   `amigo` varchar(30) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `amistad`
+--
+
+INSERT INTO `amistad` (`usuario`, `amigo`, `fecha`) VALUES
+('ivan', 'ivxn', '2019-09-25 02:20:08'),
+('ivxn', 'ivan', '2019-09-25 02:20:08');
 
 -- --------------------------------------------------------
 
@@ -105,7 +113,8 @@ CREATE TABLE `playlist_likes` (
 --
 
 INSERT INTO `playlist_likes` (`fecha`, `playlist`, `usuario`) VALUES
-('2019-09-22 22:12:45', 47, 'ivan');
+('2019-09-22 22:12:45', 47, 'ivan'),
+('2019-09-25 02:12:24', 47, 'ivxn');
 
 -- --------------------------------------------------------
 
@@ -148,7 +157,21 @@ CREATE TABLE `solicitud` (
 --
 
 INSERT INTO `solicitud` (`emisor`, `receptor`, `fecha`, `estado`) VALUES
-('ivxn', 'ivan', '2019-09-24 04:57:36', 'pendiente');
+('ivan', 'ivxn', '2019-09-25 01:59:34', 'aceptada');
+
+--
+-- Disparadores `solicitud`
+--
+DELIMITER $$
+CREATE TRIGGER `aceptarAmistad` AFTER UPDATE ON `solicitud` FOR EACH ROW BEGIN
+IF(NEW.estado = 'aceptada')
+THEN 
+	INSERT INTO amistad(usuario,amigo) VALUES (OLD.emisor, OLD.receptor);
+	INSERT INTO amistad(amigo,usuario) VALUES (OLD.emisor, OLD.receptor);
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 

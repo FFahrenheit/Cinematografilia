@@ -63,20 +63,22 @@
 
         public function username()
         {
-            if($this->status!="me")
+            if($this->status!="me" && $this->status != "blocked" && $this->status != "block")
             {
+                $arg = "'".$this->username."'";
                 return $this->username.
             '<div class="btn-group">
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item bg-light" href="#">Bloquear</a>
+                    <a class="dropdown-item bg-light" onclick="block('.$arg.')">Bloquear</a>
                     <a class="dropdown-item bg-light" href="#">Reportar?</a>
                     <a class="dropdown-item bg-light" href="#">Más</a>                
                 </div>
               </div>';
             }
+            return $this->username;
         }
 
         public function getUser()
@@ -95,7 +97,7 @@
             else if($this->is("block"))
             {
                 $this->status="block";
-                return $this->username().' <span class="badge badge-pill badge-warning">Bloqueaste a este usuario.</span><a onclick="unblock('.$arg.')"> <span style="text-decoration:underline;">Desbloquear</span></a>';
+                return $this->username().' <span class="badge badge-pill badge-warning">Bloqueaste a este usuario.</span><a onclick="unblock('.$arg.')"> <span a style="text-decoration:underline; font-size:25px;">Desbloquear</span></a>';
             }
             else if($this->is("friend"))
             {

@@ -5,6 +5,16 @@ var rTitle = document.getElementById('exampleModalLabel');
 var rUser;
 var isUser = false;
 
+function block(user) {
+    rType = '../../php/block-user.php';
+    isUser = true;
+    rUser = user;
+    $("#exampleModal").modal("toggle");
+    rTitle.innerHTML = 'Bloquear usuario';
+    rText.innerHTML = '¿Seguro que quiere bloquear a ' + user + '?';
+    $("#exampleModal").modal("toggle");
+}
+
 function accept(user) {
     rType = '../../php/accept-friend.php';
     isUser = true;
