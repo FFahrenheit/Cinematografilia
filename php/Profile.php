@@ -63,6 +63,21 @@
 
         public function username()
         {
+            if($this->status == "friend")
+            {
+                $arg = "'".$this->username."'";
+                return $this->username.
+            '<div class="btn-group">
+                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item bg-light" onclick="block('.$arg.')">Bloquear</a>
+                    <a class="dropdown-item bg-light" onclick="unfriend('.$arg.')">Borrar amigo</a>
+                    <a class="dropdown-item bg-light" href="#">Más</a>                
+                </div>
+              </div>';   
+            }
             if($this->status!="me" && $this->status != "blocked" && $this->status != "block")
             {
                 $arg = "'".$this->username."'";
@@ -116,7 +131,7 @@
             }
             else 
             {
-                $this->status="nothing"();
+                $this->status="nothing";
                 return $this->username.' <a onclick="add('.$arg.')" title="Agregar como amigo"><i class="fas fa-user-plus"></i></a>';
             }
         }

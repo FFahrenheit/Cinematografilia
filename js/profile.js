@@ -9,9 +9,26 @@ function block(user) {
     rType = '../../php/block-user.php';
     isUser = true;
     rUser = user;
-    $("#exampleModal").modal("toggle");
     rTitle.innerHTML = 'Bloquear usuario';
     rText.innerHTML = '¿Seguro que quiere bloquear a ' + user + '?';
+    $("#exampleModal").modal("toggle");
+}
+
+function unfriend(user) {
+    rType = '../../php/unfriend.php';
+    isUser = true;
+    rUser = user;
+    rTitle.innerHTML = 'Borrar amigo';
+    rText.innerHTML = '¿Seguro que quiere eliminar la amistad con ' + user + '?';
+    $("#exampleModal").modal("toggle");
+}
+
+function unblock(user) {
+    rType = '../../php/unblock-user.php';
+    isUser = true;
+    rUser = user;
+    rTitle.innerHTML = 'Desbloquear usuario';
+    rText.innerHTML = '¿Seguro que quiere desbloquear a ' + user + '?';
     $("#exampleModal").modal("toggle");
 }
 
