@@ -12,8 +12,14 @@
         {
           $temp = new Connection();
           $conn = $temp->getConnection();
-
-          return '<h3><i class="fas fa-thumbs-up"></i>Me gustas: <span class="text-light"></span></h3>';
+          $sql = "SELECT COUNT(*) as cont FROM likes WHERE pelicula = '$movie'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $result->num_rows>0)
+          {
+            $body = mysqli_fetch_assoc($result);
+            return '<h3><i class="fas fa-thumbs-up"></i>Me gustas: <span class="text-light">'.$body['cont'].' </span><span class="text-light"></span></h3>';
+          }
+          return '<h3><i class="fas fa-thumbs-up"></i>Me gustas: <span class="text-light">0</span><span class="text-light"></span></h3>';
         }
 
         public function getFavorites($movie)

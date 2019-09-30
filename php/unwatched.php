@@ -5,6 +5,10 @@
     $conn = $c->getConnection() or die('"connection"');
     $movie = $_POST['movie'];
     $user = $_SESSION['username'];
+    $sql = "DELETE FROM likes WHERE pelicula = '$movie' AND usuario = '$user'";
+    mysqli_query($conn,$sql) or die('"query"');
+    $sql = "DELETE FROM favoritas WHERE pelicula = '$movie' AND usuario = '$user'";
+    mysqli_query($conn,$sql) or die('"query"');
     $sql = "DELETE FROM vistas WHERE pelicula = '$movie' AND usuario = '$user'";
     mysqli_query($conn,$sql) or die('"query"');
     echo json_encode("ok");
