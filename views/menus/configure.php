@@ -54,7 +54,10 @@
                         <form id="image-change" novalidate>
                             <div class="form-group">
                                 <label for="">Imagen</label>
-                                <input style="width: 70%" type="file" accept="image/*" name="image" id="image" class="form-control" placeholder="Imagen" required>
+                                <div class="custom-file">
+                                    <input class="custom-file-input" style="width: 70%" type="file" accept="image/*" name="image" id="image" class="form-control" placeholder="Imagen" required>
+                                    <label class="custom-file-label" for="customFile">Elegir imagen</label>
+                                </div>
                                 <div class="invalid-feedback">
                                     Seleccione una imagen válida
                                 </div>

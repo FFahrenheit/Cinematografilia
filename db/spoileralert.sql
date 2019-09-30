@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2019 a las 04:29:53
+-- Tiempo de generación: 30-09-2019 a las 19:16:20
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -34,14 +34,6 @@ CREATE TABLE `amistad` (
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `amistad`
---
-
-INSERT INTO `amistad` (`usuario`, `amigo`, `fecha`) VALUES
-('ivan', 'ivxn', '2019-09-25 02:20:08'),
-('ivxn', 'ivan', '2019-09-25 02:20:08');
-
 -- --------------------------------------------------------
 
 --
@@ -70,9 +62,23 @@ CREATE TABLE `favoritas` (
 --
 
 INSERT INTO `favoritas` (`pelicula`, `usuario`, `fecha`) VALUES
+('tt0156922', 'ivan', '2019-09-30 16:37:40'),
 ('tt0289879', 'ivan', '2019-09-16 23:25:50'),
 ('tt0290673', 'ivan', '2019-09-24 02:44:25'),
+('tt0363771', 'ivan', '2019-09-30 15:55:37'),
 ('tt0848228', 'ivan', '2019-09-16 23:10:55');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `likes`
+--
+
+CREATE TABLE `likes` (
+  `pelicula` varchar(10) NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -219,11 +225,18 @@ CREATE TABLE `vistas` (
 --
 
 INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
+('tt0062622', 'ivan', '2019-09-30 05:00:00'),
+('tt0156922', 'ivan', '2019-09-30 05:00:00'),
+('tt0156923', 'ivan', '2019-09-30 05:00:00'),
+('tt0156934', 'ivan', '2019-09-30 05:00:00'),
 ('tt0164063', 'ivan', '2019-09-23 05:00:00'),
 ('tt0290673', 'ivan', '2019-09-13 05:00:00'),
+('tt0425121', 'ivan', '2019-09-30 05:00:00'),
 ('tt0425123', 'ivan', '2019-09-23 05:00:00'),
+('tt0425124', 'ivan', '2019-09-30 05:00:00'),
 ('tt0458339', 'ivan', '2019-12-23 06:00:00'),
-('tt0848228', 'ivan', '2019-09-18 05:00:00');
+('tt0848228', 'ivan', '2019-09-18 05:00:00'),
+('tt1920984', 'ivan', '2019-09-30 05:00:00');
 
 -- --------------------------------------------------------
 
@@ -244,6 +257,7 @@ CREATE TABLE `watchlist` (
 INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0164063', 'ivan', '2019-09-24 02:48:38'),
 ('tt0290673', 'ivan', '2019-09-24 02:44:22'),
+('tt0363771', 'ivan', '2019-09-30 16:09:50'),
 ('tt0425123', 'ivan', '2019-09-24 02:47:21'),
 ('tt0458339', 'ivan', '2019-09-19 03:56:08'),
 ('tt0485947', 'ivan', '2019-09-18 17:36:30');
@@ -273,6 +287,13 @@ ALTER TABLE `bloqueo`
 --
 ALTER TABLE `favoritas`
   ADD PRIMARY KEY (`usuario`,`pelicula`),
+  ADD KEY `usuario` (`usuario`);
+
+--
+-- Indices de la tabla `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`pelicula`,`usuario`),
   ADD KEY `usuario` (`usuario`);
 
 --
@@ -359,6 +380,12 @@ ALTER TABLE `bloqueo`
 --
 ALTER TABLE `favoritas`
   ADD CONSTRAINT `favoritas_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
 
 --
 -- Filtros para la tabla `playlist`

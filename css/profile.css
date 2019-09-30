@@ -96,3 +96,16 @@
     background-color: gray;
     color: #F6C519;
 }
+
+.review {
+    padding-top: 10px;
+    text-align: left;
+}
+
+.review select {
+    width: 40%;
+    align-content: right;
+    text-align-last: right;
+    float: right;
+    align-self: right;
+}

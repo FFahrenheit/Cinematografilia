@@ -59,10 +59,10 @@
                                 </button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                                     <li>
-                                        <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id.$bool; ?>')"><i class="fas fa-star"></i>Favoritas</a>
+                                        <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id . $bool; ?>')"><i class="fas fa-star"></i>Favoritas</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item bg-light" onclick="addToLikes('<?php echo $id.$bool; ?>')"><i class="fas fa-thumbs-up"></i>Me gustan</a>
+                                        <a class="dropdown-item bg-light" onclick="addToLikes('<?php echo $id . $bool; ?>')"><i class="fas fa-thumbs-up"></i>Me gustan</a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item bg-light" onclick="addToWatchlist('<?php echo $id; ?>')"><i class="far fa-clock"></i>Por ver</a>
@@ -98,14 +98,22 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        ...
+                        <div class="review">
+                            <h3>Reseñas de la película <select class="custom-select">
+                                    <option selected>Seleccione orden</option>
+                                    <option value="1">Con más me gusta</option>
+                                    <option value="2">Más reciente</option>
+                                </select></h3>
+                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore, veritatis magni? Debitis, ipsa error quia minima sed recusandae, ad ratione, ex temporibus provident eum voluptate eius harum architecto vitae molestias.</p>
+                        </div>
+                        <br>
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                         <div class="ficha">
                             <?php echo $m->getLikes($_GET['id']); ?>
                             <?php echo $m->getFavorites($_GET['id']); ?>
                             <?php echo $m->getWatched($_GET['id']); ?>
-                            <?php echo $m->getWatchlist($_GET['id']); ?>  
+                            <?php echo $m->getWatchlist($_GET['id']); ?>
                         </div>
                     </div>
                 </div>
