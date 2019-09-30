@@ -41,9 +41,11 @@
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Insignias</a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Favoritas</a>
+                    <a class="nav-item nav-link" id="nav-likes-tab" data-toggle="tab" href="#nav-likes" role="tab" aria-controls="nav-watchlist" aria-selected="false">Me gustaron</a>
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Vistas</a>
                     <a class="nav-item nav-link" id="nav-watchlist-tab" data-toggle="tab" href="#nav-watchlist" role="tab" aria-controls="nav-watchlist" aria-selected="false">Por ver</a>
                     <a class="nav-item nav-link" id="nav-lists-tab" data-toggle="tab" href="#nav-lists" role="tab" aria-controls="nav-lists" aria-selected="false">Listas</a>
+                    <a class="nav-item nav-link" id="nav-marathons-tab" data-toggle="tab" href="#nav-marathons" role="tab" aria-controls="nav-lists" aria-selected="false">Maratones</a>
 
                 </div>
             </nav>
@@ -54,6 +56,10 @@
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <h2><i title="Favorita" class="fas fa-star"></i> Películas favoritas </h2>
+                <?php echo $profile->getFavorites(); ?>
+            </div>
+            <div class="tab-pane fade" id="nav-likes" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <h2><i class="fas fa-thumbs-up"></i> Películas que me gustaron </h2>
                 <?php echo $profile->getFavorites(); ?>
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
@@ -67,6 +73,10 @@
             <div class="tab-pane fade" id="nav-lists" role="tabpanel" aria-labelledby="nav-lists">
                 <h2><i class="fas fa-list"></i> Listas de reproducción creadas</h2>
                 <?php echo $profile->getPlaylists(); ?>
+            </div>
+            <div class="tab-pane fade" id="nav-marathons" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <h2><i class="fas fa-medal"></i> Maratones </h2>
+                <?php echo $profile->getFavorites(); ?>
             </div>
         </div>
     </div>
@@ -109,12 +119,12 @@
                                 Ingrese una fecha
                             </div>
                         </div>
-                        <div class="form-check">
+                        <!--div class="form-check">
                             <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
                             <label class="form-check-label" for="defaultCheck1">
                                 La película me gustó.
                             </label>
-                        </div>
+                        </div-->
                     </form>
                 </div>
                 <div class="modal-footer bg-dark">

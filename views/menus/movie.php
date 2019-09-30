@@ -61,6 +61,9 @@
                                         <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id; ?>')"><i class="fas fa-star"></i>Favoritas</a>
                                     </li>
                                     <li>
+                                        <a class="dropdown-item bg-light" onclick="addToLikes('<?php echo $id; ?>')"><i class="fas fa-thumbs-up"></i>Me gustan</a>
+                                    </li>
+                                    <li>
                                         <a class="dropdown-item bg-light" onclick="addToWatchlist('<?php echo $id; ?>')"><i class="far fa-clock"></i>Por ver</a>
                                     </li>
                                     <li>
@@ -128,12 +131,12 @@
                                 Ingrese una fecha
                             </div>
                         </div>
-                        <div class="form-check">
+                        <!--div class="form-check">
                             <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
                             <label class="form-check-label" for="defaultCheck1">
                                 La película me gustó.
                             </label>
-                        </div>
+                        </div-->
                     </form>
                 </div>
                 <div class="modal-footer bg-dark">

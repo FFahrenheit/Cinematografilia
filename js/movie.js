@@ -14,6 +14,8 @@ $(document).ready(() => {
 
 });
 
+var addTo;
+
 var formWatched = document.getElementById('form-watched');
 var aMovie;
 
@@ -51,8 +53,40 @@ function addToPlaylist(movie, playlist) {
     });
 }
 
+function fun_addLike(movie) {
+    var data = new FormData();
+    data.append("movie", movie);
+    console.log("Marcar a like");
+    fetch('../../php/add-liked.php', {
+        method: 'POST',
+        body: data
+    }).then(r => {
+        return r.json();
+    }).then(resp => {
+        console.log(resp);
+        switch (resp) {
+            case '0':
+                alertar("Error de sesión", "danger")
+                break;
+            case '1':
+                alertar("Error de conexión", "danger");
+                break;
+            case '2':
+                alertar("La película ya está en me gusta", "warning");
+                break;
+            case '3':
+                alertar("Película agregada. <a class='text-success' href='../../php/my-profile.php'>Ver mi perfil </a>", "success");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 3000);
+                break;
+        }
+    });
+}
+
 function seeForma(bDelete) {
     if (bDelete) {
+        console.log("what");
         var data = new FormData(formWatched);
         console.log(bDelete);
         data.append("movie", aMovie);
@@ -77,9 +111,22 @@ function seeForma(bDelete) {
                     break;
                 case '2':
                     alertar("Película agregada. <a class='text-success' href='../../php/my-profile.php'>Ver mi perfil </a>", "success");
-                    setTimeout(() => {
-                        window.location.reload(true);
-                    }, 3000);
+                    console.log(addTo);
+                    console.log("JAJAJ");
+                    switch (addTo) {
+                        case 'favorite':
+                            fun_addToFavorite(aMovie);
+                            fun_addLike(aMovie);
+                            break;
+                        case 'like':
+                            fun_addLike(aMovie);
+                            break;
+                        default:
+                            setTimeout(() => {
+                                window.location.reload(true);
+                            }, 3000);
+                    }
+
                     break;
                 default:
                     alertar("Error desconocido", "danger");
@@ -113,9 +160,21 @@ function seeForm() {
                 break;
             case '2':
                 alertar("Película agregada. <a class='text-success' href='../../php/my-profile.php'>Ver mi perfil </a>", "success");
-                setTimeout(() => {
-                    window.location.reload(true);
-                }, 3000);
+                console.log(addTo);
+                console.log("JAJAJ");
+                switch (addTo) {
+                    case 'favorite':
+                        fun_addToFavorite(aMovie);
+                        fun_addLike(aMovie);
+                        break;
+                    case 'like':
+                        fun_addLike(aMovie);
+                        break;
+                    default:
+                        setTimeout(() => {
+                            window.location.reload(true);
+                        }, 3000);
+                }
                 break;
             default:
                 alertar("Error desconocido", "danger");
@@ -125,6 +184,12 @@ function seeForm() {
 }
 
 function addToFavorite(movie) {
+    aMovie = movie;
+    $('#watchedModal').modal('toggle');
+    addTo = 'favorite';
+}
+
+function fun_addToFavorite(movie) {
     data = new FormData();
     console.log(movie);
     data.append("movie", movie);
@@ -150,6 +215,13 @@ function addToFavorite(movie) {
                 break;
         }
     });
+}
+
+
+function addToLikes(movie) {
+    aMovie = movie;
+    $('#watchedModal').modal('toggle');
+    addTo = 'like';
 }
 
 function addToWatchlist(movie) {

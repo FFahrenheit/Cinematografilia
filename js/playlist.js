@@ -16,41 +16,44 @@ var xform = document.getElementById('new-playlist');
 })();
 
 xform.addEventListener('submit', (e) => {
-    var ok = false;
-    setTimeout(() => {
-        if (!ok) {
-            alertar("Error desconocido", "danger");
-        }
-        setTimeout(() => {
-            window.location.reload(true);
-
-        }, 3000);
-    }, 2000);
-    e.preventDefault();
-    var rData = new FormData(xform);
-    var link = '../../php/create-playlist.php?name=' + rData.get("name") + '&description=' + rData.get("description");
-    console.log(link);
     if (xform.checkValidity()) {
-        fetch(link).then((resp) => {
-            return resp.json();
-        }).then((r) => {
-            ok = true;
-            console.log(r);
-            switch (r) {
-                case '0':
-                    alertar("Error de conexión", "danger");
-                    break;
-                case '1':
-                    alertar("No se pudo crear la lista", "danger");
-                    break;
-                case '2':
-                    alertar("Lista creada. Regresando a inicio...", "success");
-                    setTimeout(() => {
-                        window.location.href = "index.php";
-                    }, 3000);
-                    break;
+
+        var ok = false;
+        setTimeout(() => {
+            if (!ok) {
+                alertar("Error desconocido", "danger");
             }
-        })
+            setTimeout(() => {
+                window.location.reload(true);
+
+            }, 3000);
+        }, 2000);
+        e.preventDefault();
+        var rData = new FormData(xform);
+        var link = '../../php/create-playlist.php?name=' + rData.get("name") + '&description=' + rData.get("description");
+        console.log(link);
+        if (xform.checkValidity()) {
+            fetch(link).then((resp) => {
+                return resp.json();
+            }).then((r) => {
+                ok = true;
+                console.log(r);
+                switch (r) {
+                    case '0':
+                        alertar("Error de conexión", "danger");
+                        break;
+                    case '1':
+                        alertar("No se pudo crear la lista", "danger");
+                        break;
+                    case '2':
+                        alertar("Lista creada. Regresando a inicio...", "success");
+                        setTimeout(() => {
+                            window.location.href = "index.php";
+                        }, 3000);
+                        break;
+                }
+            })
+        }
     }
 });
 
