@@ -11,7 +11,6 @@ $(document).ready(() => {
     var today = year + "-" + month + "-" + day;
     $("#date-watch").attr("value", today);
     $("#date-watch").attr("max", today);
-
 });
 
 var addTo;
@@ -126,7 +125,6 @@ function seeForma(bDelete) {
                                 window.location.reload(true);
                             }, 3000);
                     }
-
                     break;
                 default:
                     alertar("Error desconocido", "danger");
@@ -183,10 +181,15 @@ function seeForm() {
 
 }
 
-function addToFavorite(movie) {
-    aMovie = movie;
-    $('#watchedModal').modal('toggle');
-    addTo = 'favorite';
+function addToFavorite(movie, st) {
+    if (st == 1) {
+        fun_addLike(movie);
+        fun_addToFavorite(movie);
+    } else {
+        aMovie = movie;
+        $('#watchedModal').modal('toggle');
+        addTo = 'favorite';
+    }
 }
 
 function fun_addToFavorite(movie) {
@@ -213,15 +216,22 @@ function fun_addToFavorite(movie) {
             case '3':
                 alertar("Película agregada. <a class='text-success' href='../../php/my-profile.php'>Ver mi perfil </a>", "success");
                 break;
+            case '4':
+                alertar("Lista de favoritos llena, libere espacio en <a href='../../php/my-profile.php'>su perfil</a>", "danger");
+                break;
         }
     });
 }
 
 
-function addToLikes(movie) {
-    aMovie = movie;
-    $('#watchedModal').modal('toggle');
-    addTo = 'like';
+function addToLikes(movie, st) {
+    if (st == 1) {
+        fun_addLike(movie);
+    } else {
+        aMovie = movie;
+        $('#watchedModal').modal('toggle');
+        addTo = 'like';
+    }
 }
 
 function addToWatchlist(movie) {

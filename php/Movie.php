@@ -3,6 +3,7 @@
     class Movie
     {
         public $APIKey;
+        public $vista = false;
         public function __construct(){
             $this->APIKey = "b27f9641";
         }
@@ -63,6 +64,11 @@
           }  
         }
 
+        public function getWatch()
+        {
+          return "','$this->vista";
+        }
+
         public function getIcons($movie)
         {
           $c = new Connection();
@@ -92,7 +98,14 @@
           $result = mysqli_query($conn,$sql);
           if($result && $result->num_rows > 0)
           {
+            $this->vista = true;
             $icons .= ' <i title="Vista" class="far fa-eye"></i> ';
+          }
+          $sql = "SELECT * FROM likes WHERE usuario = '$user' AND pelicula = '$movie'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $result->num_rows > 0)
+          {
+            $icons .= ' <i title="Me gusta" class="fas fa-thumbs-up"></i> ';
           }
           return $icons;           
         }

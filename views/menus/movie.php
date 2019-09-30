@@ -40,6 +40,7 @@
                 <h1> <?php
                         $m = new Movie();
                         echo $m->getIcons($_GET['id']);
+                        $bool = $m->getWatch();
                         echo $title ?></h1>
                 <div class="alert alert-dismissible" id="alert">
                     <span id="alert-message"></span>
@@ -58,10 +59,10 @@
                                 </button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                                     <li>
-                                        <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id; ?>')"><i class="fas fa-star"></i>Favoritas</a>
+                                        <a class="dropdown-item bg-light" onclick="addToFavorite('<?php echo $id.$bool; ?>')"><i class="fas fa-star"></i>Favoritas</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item bg-light" onclick="addToLikes('<?php echo $id; ?>')"><i class="fas fa-thumbs-up"></i>Me gustan</a>
+                                        <a class="dropdown-item bg-light" onclick="addToLikes('<?php echo $id.$bool; ?>')"><i class="fas fa-thumbs-up"></i>Me gustan</a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item bg-light" onclick="addToWatchlist('<?php echo $id; ?>')"><i class="far fa-clock"></i>Por ver</a>

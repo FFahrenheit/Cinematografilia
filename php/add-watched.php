@@ -8,6 +8,9 @@
     $user = $_SESSION['username'];
     $date = $_POST['fecha'];
 
+    $sql ="DELETE FROM watchlist WHERE usuario = '$user' AND pelicula = '$movie'";
+    mysqli_query($conn,$sql);
+
     $sql = "INSERT INTO vistas(usuario, pelicula, fecha) VALUES ('$user','$movie' , (SELECT CONVERT('$date',DATETIME)))";
 
     mysqli_query($conn,$sql) or die('"1"');

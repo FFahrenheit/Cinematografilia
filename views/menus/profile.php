@@ -60,7 +60,7 @@
             </div>
             <div class="tab-pane fade" id="nav-likes" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <h2><i class="fas fa-thumbs-up"></i> Películas que me gustaron </h2>
-                <?php echo $profile->getFavorites(); ?>
+                <?php echo $profile-> getLikes(); ?>
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <h2><i class="far fa-eye"></i> Películas vistas</h2>

@@ -14,6 +14,15 @@ function block(user) {
     $("#exampleModal").modal("toggle");
 }
 
+function unlike(movie) {
+    isUser = false;
+    console.log("Quitar de me gusta " + movie);
+    rType = '../../php/unlike.php';
+    rMovie = movie;
+    rTitle.innerHTML = 'Quitar de me gusta';
+    rText.innerHTML = '¿Seguro que desea quitar de la lista de me gusta? Esto también la eliminará de favoritos';
+}
+
 function unfriend(user) {
     rType = '../../php/unfriend.php';
     isUser = true;
@@ -87,7 +96,7 @@ function unwatch(movie) {
     rType = '../../php/unwatch.php';
     rMovie = movie;
     rTitle.innerHTML = 'Quitar de lista por ver';
-    rText.innerHTML = '¿Seguro que desea quitar de la lista por ver?';
+    rText.innerHTML = '¿Seguro que desea quitar de la lista por ver? Esto también la eliminará de favoritos y de me gusta';
 }
 
 function unwatched(movie) {
