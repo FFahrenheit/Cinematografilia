@@ -37,7 +37,53 @@
             return '<h3><i class="fas fa-star"></i>En favoritos: <span class="text-light">0</span></h3>';
           }
         }
+      
+        public function getRatings($movie)
+        {
+          $temp = new Connection();
+          $conn = $temp->getConnection();
+          $cont = 0;
+          $acum = 0;
+          $sql = "SELECT valor FROM calificacion WHERE pelicula = '$movie'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $result->num_rows>0)
+          {
+            while($data = mysqli_fetch_assoc($result))
+            {
+              $cont++;
+              $acum+=$data['valor'];
+            }
+            return '<h3><i class="fas fa-globe-americas"></i>Calificación global: <span class="text-light"> '.round(($acum/$cont),2).'/5</span></h3>';
+          }
+          else 
+          {
+            return '<h3><i class="fas fa-globe-americas"></i>Calificación global: <span class="text-light"> N/A </span></h3>';
+          }
+        }
 
+        public function getMyRating($movie)
+        {
+          $temp = new Connection();
+          $conn = $temp->getConnection();
+          if(isset($_SESSION['username']))
+          {
+            $user = $_SESSION['username'];
+          }
+          else 
+          {
+            return "";
+          }
+          $sql = "SELECT valor as likes FROM calificacion WHERE pelicula = '$movie' AND usuario = '$user'";
+          $result = mysqli_query($conn,$sql);
+          if($result && $data = mysqli_fetch_assoc($result))
+          {
+            return '<h3><i class="fas fa-user-check"></i>Mi calificación: <span class="text-light">'.$data['likes'].' <i class="fas fa-star"></i></span></h3>';
+          }
+          else 
+          {
+            return '<h3><i class="fas fa-user-check"></i>Mi calificación: <span class="text-light"> Aún no calificada</span></h3>';
+          }  
+        }
         public function getWatched($movie)
         {
           $temp = new Connection();

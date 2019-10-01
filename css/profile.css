@@ -103,9 +103,18 @@
 }
 
 .review select {
-    width: 40%;
+    width: auto;
     align-content: right;
     text-align-last: right;
     float: right;
     align-self: right;
+}
+
+.botonera {
+    text-align: center;
+}
+
+.botonera i {
+    font-size: 150%;
+    cursor: pointer;
 }

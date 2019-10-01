@@ -99,12 +99,20 @@
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="review">
-                            <h3>Reseñas de la película <select class="custom-select">
+                            <h3>Reseñas de la película
+                                <select class="custom-select" id="review-list">
                                     <option selected>Seleccione orden</option>
                                     <option value="1">Con más me gusta</option>
                                     <option value="2">Más reciente</option>
-                                </select></h3>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore, veritatis magni? Debitis, ipsa error quia minima sed recusandae, ad ratione, ex temporibus provident eum voluptate eius harum architecto vitae molestias.</p>
+                                </select>
+                            </h3>
+                            <div class="botonera">
+                                <button class="btn btn-warning" onclick="seeReviewForm()">Escriba una reseña</button>
+                                <span>&nbsp;ó&nbsp;</span>
+                                <button class="btn btn-warning" onclick="seeCalificationForm()">Califique la película</button>
+                            </div>
+                            <div id="reviews">
+                            </div>
                         </div>
                         <br>
                     </div>
@@ -114,6 +122,8 @@
                             <?php echo $m->getFavorites($_GET['id']); ?>
                             <?php echo $m->getWatched($_GET['id']); ?>
                             <?php echo $m->getWatchlist($_GET['id']); ?>
+                            <?php echo $m->getMyRating($_GET['id']); ?>
+                            <?php echo $m->getRatings($_GET['id']); ?>
                         </div>
                     </div>
                 </div>
@@ -140,17 +150,79 @@
                                 Ingrese una fecha
                             </div>
                         </div>
-                        <!--div class="form-check">
-                            <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                                La película me gustó.
-                            </label>
-                        </div-->
                     </form>
                 </div>
                 <div class="modal-footer bg-dark">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-warning" onclick="seeForm()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark" id="exampleModalLabel">Reseñar película</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <form id="form-review" novalidate>
+                        <div class="form-group">
+                            <label for="">Reseña</label><br>
+                            <textarea style="max-width: 50%" class="form-control" rows="5" id="descrption" name="description" maxlength="250" placeholder="Escriba una breve descripción" required></textarea>
+                            <div class="invalid-feedback">
+                                Ingrese una fecha
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                La reseña contiene spoilers.
+                            </label>
+                        </div>
+                        <br>
+                        <div class="form-check">
+                            <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Recomiendo la película
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <input type="hidden" name="movie" value="<?php echo $id; ?>">
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="sendReview('<?php echo $id; ?>')">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="calificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark" id="exampleModalLabel">Calificar película</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <div class="botonera">
+                        <h2>Otorgue una calificación</h2>
+                        <i id="calification1" title="Mala"class="fas fa-star" onclick="calification('calification',1);"></i>
+                        <i id="calification2" title="Regular" class="far fa-star" onclick="calification('calification',2);"></i>
+                        <i id="calification3" title="Buena" class="far fa-star" onclick="calification('calification',3);"></i>
+                        <i id="calification4" title="Muy buena "class="far fa-star" onclick="calification('calification',4);"></i>
+                        <i id="calification5" title="Perfecta" class="far fa-star" onclick="calification('calification',5);"></i>
+                    </div>
+                </div>
+                <input type="hidden" name="movie" value="<?php echo $id; ?>">
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="sendCalification('<?php echo $id;?>')">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -162,6 +234,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
     <script src="../../js/alert.js"></script>
     <script src="../../js/movie.js"></script>
+    <script src="../../js/review.js"></script>
     <script src="../../js/main.js"></script>
 </body>
 
