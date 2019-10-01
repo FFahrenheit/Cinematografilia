@@ -172,23 +172,21 @@
                     <form id="form-review" novalidate>
                         <div class="form-group">
                             <label for="">Reseña</label><br>
-                            <textarea style="max-width: 50%" class="form-control" rows="5" id="descrption" name="description" maxlength="250" placeholder="Escriba una breve descripción" required></textarea>
-                            <div class="invalid-feedback">
-                                Ingrese una fecha
-                            </div>
+                            <textarea style="max-width: 100%" class="form-control" rows="6" id="review" name="review" maxlength="2000" placeholder="Escriba su reseña" required></textarea>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                                La reseña contiene spoilers.
-                            </label>
+                        <span>Calificación</span><br>
+                        <i id="review1" title="Mala" class="fas fa-star" onclick="calification('review',1);"></i>
+                        <i id="review2" title="Regular" class="far fa-star" onclick="calification('review',2);"></i>
+                        <i id="review3" title="Buena" class="far fa-star" onclick="calification('review',3);"></i>
+                        <i id="review4" title="Muy buena " class="far fa-star" onclick="calification('review',4);"></i>
+                        <i id="review5" title="Perfecta" class="far fa-star" onclick="calification('review',5);"></i><br><br>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" name="spoilers" id="spoilers">
+                            <label class="form-check-label" for="spoilers">La reseña contiene spoilers</label>
                         </div>
-                        <br>
-                        <div class="form-check">
-                            <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                                Recomiendo la película
-                            </label>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="recomended" name="recomended">
+                            <label class="form-check-label" for="recomended">¿Recomienda la película?</label>
                         </div>
                     </form>
                 </div>
@@ -212,17 +210,17 @@
                 <div class="modal-body bg-dark">
                     <div class="botonera">
                         <h2>Otorgue una calificación</h2>
-                        <i id="calification1" title="Mala"class="fas fa-star" onclick="calification('calification',1);"></i>
+                        <i id="calification1" title="Mala" class="fas fa-star" onclick="calification('calification',1);"></i>
                         <i id="calification2" title="Regular" class="far fa-star" onclick="calification('calification',2);"></i>
                         <i id="calification3" title="Buena" class="far fa-star" onclick="calification('calification',3);"></i>
-                        <i id="calification4" title="Muy buena "class="far fa-star" onclick="calification('calification',4);"></i>
+                        <i id="calification4" title="Muy buena " class="far fa-star" onclick="calification('calification',4);"></i>
                         <i id="calification5" title="Perfecta" class="far fa-star" onclick="calification('calification',5);"></i>
                     </div>
                 </div>
                 <input type="hidden" name="movie" value="<?php echo $id; ?>">
                 <div class="modal-footer bg-dark">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-warning" onclick="sendCalification('<?php echo $id;?>')">Confirmar</button>
+                    <button type="button" class="btn btn-warning" onclick="sendCalification('<?php echo $id; ?>')">Confirmar</button>
                 </div>
             </div>
         </div>

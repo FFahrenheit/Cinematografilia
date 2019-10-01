@@ -64,3 +64,46 @@ function seeReviewForm() {
 function seeCalificationForm() {
     $("#calificationModal").modal("toggle");
 }
+
+function sendReview(movie) {
+    var data = new FormData(document.getElementById('form-review'));
+    console.log(data.get("review"));
+    console.log(data.get("recomended"));
+    console.log(data.get("spoilers"));
+    data.append("movie", movie);
+    data.append("calification", cal);
+    console.log(data.get("calification"));
+
+    if (data.get("review").length <= 0) {
+        alert("Escriba una reseña");
+    } else {
+        $("#reviewModal").modal("toggle");
+        fetch('../../php/add-review.php', {
+            method: 'POST',
+            body: data
+        }).then(resp => {
+            return resp.json();
+        }).then(r => {
+            console.log(r);
+            switch (r) {
+                case '0':
+                    alertar("Error de conexión", "warning");
+                    break;
+                case '1':
+                    alertar("No se pudo guardar la reseña", "danger");
+                    break;
+                case '2':
+                    alertar("Reseña guardada", "success");
+                    setTimeout(() => {
+                        window.location.reload(true);
+                    }, 3000);
+                    break;
+                default:
+                    alertar("Error desconocido", "danger");
+                    setTimeout(() => {
+                        window.location.reload(true);
+                    }, 3000);
+            }
+        })
+    }
+}
