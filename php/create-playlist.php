@@ -7,8 +7,8 @@
 
     $user = $_SESSION['username'];
 
-    $nombre = $_GET['name'];
-    $descr = $_GET['description'];
+    $nombre = addslashes($_GET['name']);
+    $descr = addslashes($_GET['description']);
 
 
     $sql = "INSERT INTO playlist (nombre, descripcion, creador) VALUES 

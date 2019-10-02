@@ -1,8 +1,19 @@
 var cal = 1;
+var movie;
+
+function setMovie(m) {
+    console.log(m);
+    movie = m;
+}
 
 $("#review-list").on('change', () => {
     var optionText = $("#review-list option:selected").text();
     console.log(optionText);
+    if (optionText == 'Más reciente') {
+        getReviews("recent");
+    } else {
+        getReviews("likes");
+    }
 })
 
 function calification(type, stars) {
@@ -106,4 +117,22 @@ function sendReview(movie) {
             }
         })
     }
+}
+
+function getReviews(order) {
+    $.ajax({
+            url: '/spoileralert/php/get-reviews.php',
+            type: 'POST',
+            datatype: 'html',
+            data: { movie: movie, order: order }
+        })
+        .done((r) => {
+            console.log(r);
+            $("#review-section").html(r);
+        })
+}
+
+function loadReviews(_movie) {
+    movie = _movie;
+    getReviews("recent");
 }

@@ -100,7 +100,7 @@
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="review">
                             <h3>Reseñas de la película
-                                <select class="custom-select" id="review-list">
+                                <select onclick="setMovie('<?php echo $id; ?>')"class="custom-select" id="review-list">
                                     <option selected>Seleccione orden</option>
                                     <option value="1">Con más me gusta</option>
                                     <option value="2">Más reciente</option>
@@ -111,7 +111,20 @@
                                 <span>&nbsp;ó&nbsp;</span>
                                 <button class="btn btn-warning" onclick="seeCalificationForm()">Califique la película</button>
                             </div>
-                            <div id="reviews">
+                            <div class="row bootstrap snippets reviews">
+                                <div class="comment-wrapper">
+                                    <div class="panel panel-info">
+                                        <div class="panel-body">
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                            <div id="reviews rounded">
+                                                <ul class="media-list" id="review-section">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -234,6 +247,12 @@
     <script src="../../js/movie.js"></script>
     <script src="../../js/review.js"></script>
     <script src="../../js/main.js"></script>
+    <script>
+        $( document ).ready(()=> {
+            console.log("Cargando reviews");
+            loadReviews('<?php echo $id; ?>');
+        });
+    </script>
 </body>
 
 </html>

@@ -108,6 +108,7 @@
     text-align-last: right;
     float: right;
     align-self: right;
+    background-color: rgb(231, 231, 231);
 }
 
 .botonera {
@@ -117,4 +118,52 @@
 .botonera i {
     font-size: 150%;
     cursor: pointer;
+}
+
+.comment-wrapper .panel-body {
+    max-height: 650px;
+}
+
+.comment-wrapper .media-list .media img {
+    width: 64px;
+    height: 64px;
+    /* border: 2px solid #e5e7e8; */
+}
+
+.comment-wrapper .media-list .media {
+    border-bottom: 1px dashed #efefef;
+    margin-bottom: 25px;
+}
+
+.rounded img {
+    border-radius: 50%;
+}
+
+.reviews {
+    color: #F6C519;
+}
+
+.rounded p {
+    color: rgb(219, 219, 219);
+}
+
+.rounded p,
+span {
+    padding-left: 10px;
+}
+
+.rounded i {
+    padding-left: 10px;
+    float: right;
+    cursor: pointer;
+}
+
+.rounded {
+    padding-left: 10px;
+    font-size: 120%;
+    min-width: 10px;
+}
+
+.rounded p {
+    text-align: justify;
 }

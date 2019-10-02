@@ -3,9 +3,9 @@
     $obj = new Connection();
     $connection = $obj->getConnection() or die('"1"');
 
-    $user = $_POST['username'];
-    $pass = $_POST['password'];
-    $email = $_POST['email'];
+    $user = addslashes($_POST['username']);
+    $pass = addslashes($_POST['password']);
+    $email = addslashes($_POST['email']);
 
     $sql = "INSERT INTO usuario(username,password,email) VALUES ('$user',AES_ENCRYPT('$pass','5p01l3r'),'$email')";
 
