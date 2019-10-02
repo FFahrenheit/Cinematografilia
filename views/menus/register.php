@@ -25,12 +25,13 @@
             <div class="form-group">
                 <label for="">Nombre de usuario: </label>
                 <br>
-                <input type="text" name="username"
+                <input type="text" name="username" id="username"
                     placeholder="Escriba su nombre de usuario" class="form-control"
-                    required minlength="4">
+                    required minlength="4" onkeyup="checkUser()">
                 <div class="invalid-feedback">
                     El nombre de usuario debe tener mínimo 4 caracteres
-                </div>
+                </div><br>
+                <span id="userError"></span>
             </div>
             <div class="form-group">
                 <label for="">Correo electrónico: </label>

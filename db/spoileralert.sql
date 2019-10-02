@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-09-2019 a las 19:16:20
+-- Tiempo de generación: 02-10-2019 a las 07:46:44
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -44,6 +44,27 @@ CREATE TABLE `bloqueo` (
   `usuario` varchar(30) NOT NULL,
   `bloqueado` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calificacion`
+--
+
+CREATE TABLE `calificacion` (
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `valor` tinyint(4) DEFAULT 1,
+  `usuario` varchar(30) NOT NULL,
+  `pelicula` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `calificacion`
+--
+
+INSERT INTO `calificacion` (`fecha`, `valor`, `usuario`, `pelicula`) VALUES
+('2019-10-01 05:34:32', 1, 'ivan', ''),
+('2019-10-01 04:38:06', 1, 'ivan', 'tt0363771');
 
 -- --------------------------------------------------------
 
@@ -148,6 +169,32 @@ INSERT INTO `playlist_peliculas` (`pelicula`, `playlist`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `review`
+--
+
+CREATE TABLE `review` (
+  `clave` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `texto` varchar(2000) NOT NULL,
+  `spoilers` tinyint(1) NOT NULL,
+  `recomendada` tinyint(1) NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `pelicula` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `review`
+--
+
+INSERT INTO `review` (`clave`, `fecha`, `texto`, `spoilers`, `recomendada`, `usuario`, `pelicula`) VALUES
+(1, '2019-10-01 05:36:39', 'adj', 0, 0, 'ivan', 'tt0363771'),
+(2, '2019-10-02 05:30:47', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 1, 1, 'ivan', 'tt0363771'),
+(3, '2019-10-02 05:31:51', 'JWDNEWFOJCKLENCJE VKLVNERV VKJV KC  CD CDJC VF VKJDNF C', 1, 0, 'ivan', 'tt0363771'),
+(4, '2019-10-02 05:39:16', 'ho\'y', 1, 0, 'ivan', 'tt0363771');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `solicitud`
 --
 
@@ -235,6 +282,7 @@ INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0425123', 'ivan', '2019-09-23 05:00:00'),
 ('tt0425124', 'ivan', '2019-09-30 05:00:00'),
 ('tt0458339', 'ivan', '2019-12-23 06:00:00'),
+('tt0485947', 'ivan', '2019-10-01 05:00:00'),
 ('tt0848228', 'ivan', '2019-09-18 05:00:00'),
 ('tt1920984', 'ivan', '2019-09-30 05:00:00');
 
@@ -259,8 +307,7 @@ INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0290673', 'ivan', '2019-09-24 02:44:22'),
 ('tt0363771', 'ivan', '2019-09-30 16:09:50'),
 ('tt0425123', 'ivan', '2019-09-24 02:47:21'),
-('tt0458339', 'ivan', '2019-09-19 03:56:08'),
-('tt0485947', 'ivan', '2019-09-18 17:36:30');
+('tt0458339', 'ivan', '2019-09-19 03:56:08');
 
 --
 -- Índices para tablas volcadas
@@ -281,6 +328,15 @@ ALTER TABLE `bloqueo`
   ADD PRIMARY KEY (`usuario`,`bloqueado`),
   ADD KEY `usuario` (`usuario`),
   ADD KEY `bloqueado` (`bloqueado`);
+
+--
+-- Indices de la tabla `calificacion`
+--
+ALTER TABLE `calificacion`
+  ADD PRIMARY KEY (`pelicula`,`usuario`),
+  ADD KEY `usuario` (`usuario`),
+  ADD KEY `usuario_2` (`usuario`),
+  ADD KEY `pelicula` (`pelicula`);
 
 --
 -- Indices de la tabla `favoritas`
@@ -317,6 +373,14 @@ ALTER TABLE `playlist_likes`
 ALTER TABLE `playlist_peliculas`
   ADD PRIMARY KEY (`pelicula`,`playlist`),
   ADD KEY `playlist` (`playlist`);
+
+--
+-- Indices de la tabla `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `usuario` (`usuario`),
+  ADD KEY `pelicula` (`pelicula`);
 
 --
 -- Indices de la tabla `solicitud`
@@ -358,6 +422,12 @@ ALTER TABLE `playlist`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
+-- AUTO_INCREMENT de la tabla `review`
+--
+ALTER TABLE `review`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -374,6 +444,12 @@ ALTER TABLE `amistad`
 ALTER TABLE `bloqueo`
   ADD CONSTRAINT `bloqueo_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`),
   ADD CONSTRAINT `bloqueo_ibfk_2` FOREIGN KEY (`bloqueado`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `calificacion`
+--
+ALTER TABLE `calificacion`
+  ADD CONSTRAINT `calificacion_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
 
 --
 -- Filtros para la tabla `favoritas`
@@ -405,6 +481,12 @@ ALTER TABLE `playlist_likes`
 --
 ALTER TABLE `playlist_peliculas`
   ADD CONSTRAINT `playlist_peliculas_ibfk_1` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`clave`);
+
+--
+-- Filtros para la tabla `review`
+--
+ALTER TABLE `review`
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
 
 --
 -- Filtros para la tabla `solicitud`
