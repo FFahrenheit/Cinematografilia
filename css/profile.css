@@ -120,9 +120,10 @@
     cursor: pointer;
 }
 
-.comment-wrapper .panel-body {
+
+/* .comment-wrapper .panel-body {
     max-height: 650px;
-}
+} */
 
 .comment-wrapper .media-list .media img {
     width: 64px;
@@ -148,14 +149,10 @@
 }
 
 .rounded p,
-span {
+span,
+small {
     padding-left: 10px;
-}
-
-.rounded i {
-    padding-left: 10px;
-    float: right;
-    cursor: pointer;
+    padding-right: 10px;
 }
 
 .rounded {
@@ -166,4 +163,18 @@ span {
 
 .rounded p {
     text-align: justify;
+}
+
+.p-r {
+    float: right;
+}
+
+.p-r i {
+    padding-left: 10px;
+    cursor: pointer;
+    font-size: 120%;
+}
+
+.p-r i:hover {
+    color: rgb(216, 169, 0);
 }

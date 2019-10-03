@@ -127,7 +127,6 @@ function getReviews(order) {
             data: { movie: movie, order: order }
         })
         .done((r) => {
-            console.log(r);
             $("#review-section").html(r);
         })
 }
@@ -135,4 +134,127 @@ function getReviews(order) {
 function loadReviews(_movie) {
     movie = _movie;
     getReviews("recent");
+}
+
+function likeReview(review, icon) {
+    console.log(icon);
+    var data = new FormData();
+    data.append("review", review);
+    fetch('../../php/like-review.php', {
+        method: 'POST',
+        body: data
+    }).then(resp => {
+        return resp.json();
+    }).then(r => {
+        console.log(r);
+        switch (r) {
+            case '0':
+                alertar("Error de conexión", "warning");
+                break;
+            case '1':
+                alertar("No se ha podido marcar reseña como me gusta", "danger");
+                break;
+            case '2':
+                $(icon).removeClass("far fa-thumbs-up");
+                $(icon).addClass("fas fa-thumbs-up");
+                setTimeout(() => {
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+                    alertar("Te gusta esta reseña", "success");
+                }, 2000);
+                break;
+            default:
+                alertar("Error desconocido", "danger");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 3000);
+        }
+        setTimeout(() => {
+            window.location.reload(true);
+        }, 3000);
+    })
+}
+
+function unlikeReview(review, icon) {
+    console.log(icon);
+    var data = new FormData();
+    data.append("review", review);
+    fetch('../../php/unlike-review.php', {
+        method: 'POST',
+        body: data
+    }).then(resp => {
+        return resp.json();
+    }).then(r => {
+        console.log(r);
+        switch (r) {
+            case '0':
+                alertar("Error de conexión", "warning");
+                break;
+            case '1':
+                alertar("No se ha podido guardar el cambio", "danger");
+                break;
+            case '2':
+                $(icon).removeClass("fas fa-thumbs-up");
+                $(icon).addClass("far fa-thumbs-up");
+                setTimeout(() => {
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+                    alertar("Ya no te gusta esta reseña", "success");
+                }, 2000);
+                break;
+            default:
+                alertar("Error desconocido", "danger");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 3000);
+        }
+        setTimeout(() => {
+            window.location.reload(true);
+        }, 3000);
+    })
+}
+
+var url;
+var arg;
+
+function deleteReview(clave) {
+    console.log("jaja");
+    $("#alertModalLabel").html("Eliminar reseña");
+    $("#alertModalText").html("¿Seguro que desea borrar su reseña?");
+    $("#alertModal").modal("toggle");
+    url = '../../php/delete-review.php';
+    arg = clave;
+}
+
+function confirm() {
+    console.log(url + '\n' + arg);
+    var args = new FormData();
+    args.append("arg", arg);
+    fetch(url, {
+        method: 'POST',
+        body: args
+    }).then(resp => {
+        return resp.json();
+    }).then(r => {
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+        console.log(r);
+        $("#alertModal").modal("toggle");
+        switch (r) {
+            case '0':
+                alertar("Error de conexión", "warning");
+                break;
+            case '1':
+                alertar("No se ha podido guardar el cambio", "danger");
+                break;
+            case '2':
+                alertar("Accion realizada correctamente", "success");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 3000);
+                break;
+            default:
+                alertar("Error desconocido", "danger");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 3000);
+        }
+    })
 }
