@@ -214,9 +214,9 @@ function unlikeReview(review, icon) {
 
 var url;
 var arg;
+var report;
 
 function deleteReview(clave) {
-    console.log("jaja");
     $("#alertModalLabel").html("Eliminar reseña");
     $("#alertModalText").html("¿Seguro que desea borrar su reseña?");
     $("#alertModal").modal("toggle");
@@ -224,10 +224,26 @@ function deleteReview(clave) {
     arg = clave;
 }
 
+function report(rev) {
+    console.log("Reportar");
+    $("#alertModalLabel").html("Reportar reseña");
+    $("#alertModalText").html("<p>Seleccione el motivo</p>" +
+        "<select class='custom-select' id = 'report-list'><option selected>Es ofensivo</option>" +
+        '<option>Es spam</option><option>No tiene relación</option><option>Contiene spoilers o contenido que arruina la experiencia</option>' +
+        '<option>Otro</option><select>');
+    $("#alertModal").modal("toggle");
+
+    url = '../../php/report-review.php';
+    arg = rev;
+}
+
 function confirm() {
     console.log(url + '\n' + arg);
     var args = new FormData();
     args.append("arg", arg);
+    if (report) {
+        args.append("reason", $("#report-list option:selected").text())
+    }
     fetch(url, {
         method: 'POST',
         body: args
