@@ -59,7 +59,8 @@
                     $out .= "<td>$hr<img src='".$data['img']."'></a></td>";
                     $out .= "<td>$hr".$data['user']."</a></td>";
                     $out .= '<td><button class="btn btn-success" onclick="accept('.$arg.')">Aceptar</a></td>';
-                    $out .= '<td><button class="btn btn-danger" onclick="reject('.$arg.')">Rechazar</a></td>';
+                    $out .= '<td><button class="btn btn-danger" onclick="reject('.$arg.')">Eliminar solicitud</a></td>';
+                    $out .= '<td><button class="btn btn-secondary" onclick="block('.$arg.')">Bloquear</a></td>';
                     $out .= '<td>'.$data['time'].'</td>';
                     $out .= '</tr>';
                 }

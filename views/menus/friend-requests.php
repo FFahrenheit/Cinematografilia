@@ -76,13 +76,13 @@
                     </button>
                 </div>
                 <div class="modal-body bg-dark">
-                    <form id="new-playlist" novalidate>
+                    <form id="new-req" novalidate>
                         <div class="form-group">
                             <p>Escriba el nombre de usuario a agregar</p>
 
                             <label for="">Nombre de usuario: </label>
                             <br>
-                            <input name="name" type="text" placeholder="Escriba el nombre de usuario" class="form-control" required minlength="2">
+                            <input name="friend" type="text" placeholder="Escriba el nombre de usuario" class="form-control" required minlength="2">
                             <div class="invalid-feedback">
                                 Ingrese un nombre válido para la lista
                             </div>
