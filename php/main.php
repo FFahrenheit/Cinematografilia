@@ -1,12 +1,13 @@
 <?php 
     session_start();
+    include 'Notification.php';
     include 'Connection.php';
     $APIKey = "b27f9641";
     //echo $_SESSION['username'];
 
     function getLogged()
     {
-        if(isset($_SESSION['username']))
+        if(!isset($_SESSION['username']))
             {
                 header("Location: index.php");
             }
@@ -61,6 +62,8 @@
                     </li>';
         if(isset($_SESSION['username']))
         {
+            $notifications = new Notification($_SESSION['username']);
+            $nav .= $notifications->getNav();
             $nav .= '<li class="nav-item dropdown">
             <a title="Nuevo" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-222" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -69,7 +72,7 @@
             <div class="dropdown-menu dropdown-menu-right dropdown-default"
                 aria-labelledby="navbarDropdownMenuLink-222">
                 <a class="dropdown-item bg-light" href="new-playlist.php">Lista de reproducción</a>
-                <a class="dropdown-item bg-light" href="new-event.php">Evento</a>
+                <a class="dropdown-item bg-light" href="new-marathon.php">Maraton</a>
             </div>
             </li>  ';
             $nav .= '<li class="nav-item dropdown">
@@ -82,8 +85,6 @@
                 <a class="dropdown-item bg-white" href="../../php/my-profile.php"><span class="font-weight-bold">
                 '.$_SESSION['username'].'</span><br>Perfil</br></a>
                 <a class="dropdown-item bg-light" href="configure.php">Administrar cuenta</a>
-                <a class="dropdown-item bg-light" href="#">Mis listas</a>
-                <a class="dropdown-item bg-light" href="#">Mis eventos</a>
                 <a class="dropdown-item bg-light" href="#" onclick="logout()"><span class="font-weight-bold">Cerrar sesión</span></a>
             </div>
             </li>';

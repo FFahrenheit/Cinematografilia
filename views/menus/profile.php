@@ -119,12 +119,6 @@
                                 Ingrese una fecha
                             </div>
                         </div>
-                        <!--div class="form-check">
-                            <input class="form-check-input" name="liked" type="checkbox" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                                La película me gustó.
-                            </label>
-                        </div-->
                     </form>
                 </div>
                 <div class="modal-footer bg-dark">

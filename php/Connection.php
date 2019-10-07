@@ -29,5 +29,19 @@
                 mysqli_close($this->connection);
             }
         }
+
+        public function getCount($_con, $_query)
+        {
+            $result = mysqli_query($_con,$_query);
+            if($result)
+            {
+                $data = mysqli_fetch_array($result);
+                return $data[0];
+            }
+            else 
+            {
+                return -1;
+            }
+        }
     }
 ?>
