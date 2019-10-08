@@ -32,6 +32,15 @@
             }
         }
 
+        public function isChat()
+        {
+            $this->getUser();
+            if($this->status!="friend")
+            {
+                header("Location: ../menus/error.php");
+            }
+        }
+
         private function is($request)
         {
             $temp = new Connection();
@@ -126,7 +135,7 @@
             }
             else if($this->is("sent"))
             {
-                $this->status="sent"();
+                $this->status="sent";
                 return $this->username.' <i title="Solicitud pendiente" class="fas fa-user-clock"></i><a style="text-decoration:underline; font-size:25px;" onclick="cancel('.$arg.')"><span>Cancelar solicitud</span></a>';
             }
             else 

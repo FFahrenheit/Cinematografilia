@@ -21,7 +21,7 @@
         public function getNav()
         {
             $nav = '<li class="nav-item dropdown">
-                <a title="Nuevo" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-111" data-toggle="dropdown"
+                <a title="Notificaciones" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-111" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">';
             $nav.= $this->counter == 0 ? '<i class="far fa-bell bright"></i>' :
             '<i title="Hay pendientes" class="fas fa-bell brigth"></i>';
@@ -30,7 +30,7 @@
                 aria-labelledby="navbarDropdownMenuLink-111">';
             $nav .= $this->req == 0? 
             '<a class="dropdown-item bg-light" href="friend-requests.php">Solicitudes</a>': 
-            '<a class="dropdown-item bg-light" title="Solicitudes pendientes" href="friend-requests.php" <span class="font-weight-bold">Solicitudes</span></a> ';
+            '<a class="dropdown-item bg-light" title="Solicitudes pendientes" href="friend-requests.php"> <span class="font-weight-bold">Solicitudes</span></a> ';
             $nav .= '<a class="dropdown-item bg-light" href="friend-requests.php">Reconendaciones</a>
                 <a class="dropdown-item bg-light" href="#">Mensajes</a>
             </div>
