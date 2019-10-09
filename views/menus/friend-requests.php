@@ -12,8 +12,7 @@
     <link href="../../css/profile.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
-    getLogged(); ?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');?>
 </head>
 
 <body>

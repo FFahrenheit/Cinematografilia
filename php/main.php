@@ -7,7 +7,7 @@
 
     function getLogged()
     {
-        if(!isset($_SESSION['username']))
+        if(isset($_SESSION['username']))
             {
                 header("Location: index.php");
             }

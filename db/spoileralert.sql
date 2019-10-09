@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2019 a las 07:46:44
+-- Tiempo de generación: 09-10-2019 a las 06:35:06
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -33,6 +33,14 @@ CREATE TABLE `amistad` (
   `amigo` varchar(30) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `amistad`
+--
+
+INSERT INTO `amistad` (`usuario`, `amigo`, `fecha`) VALUES
+('ivan', 'xxyo', '2019-10-07 03:13:23'),
+('xxyo', 'ivan', '2019-10-07 03:13:23');
 
 -- --------------------------------------------------------
 
@@ -69,6 +77,40 @@ INSERT INTO `calificacion` (`fecha`, `valor`, `usuario`, `pelicula`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `chat`
+--
+
+CREATE TABLE `chat` (
+  `clave` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `mensaje` text NOT NULL,
+  `visto` tinyint(1) NOT NULL DEFAULT 0,
+  `emisor` varchar(30) NOT NULL,
+  `receptor` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `chat`
+--
+
+INSERT INTO `chat` (`clave`, `fecha`, `mensaje`, `visto`, `emisor`, `receptor`) VALUES
+(1, '2019-10-09 03:30:13', 'Hola!', 1, 'xxyo', 'ivan'),
+(2, '2019-10-09 03:30:29', 'Hello there', 0, 'ivan', 'xxyo'),
+(3, '2019-10-09 03:48:34', 'n', 0, 'ivan', 'xxyo'),
+(4, '2019-10-09 03:48:37', 'n', 0, 'ivan', 'xxyo'),
+(5, '2019-10-09 03:48:40', 'hola', 0, 'ivan', 'xxyo'),
+(6, '2019-10-09 03:49:16', 'Hola, me gustarÃ­a invitarte un chat', 0, 'ivan', 'xxyo'),
+(7, '2019-10-09 04:19:34', 'hola', 0, 'ivan', 'xxyo'),
+(8, '2019-10-09 04:19:37', 'holaa', 0, 'ivan', 'xxyo'),
+(9, '2019-10-09 04:19:52', 'mmm', 0, 'ivan', 'xxyo'),
+(10, '2019-10-09 04:19:57', 'mmmm', 0, 'ivan', 'xxyo'),
+(11, '2019-10-09 04:20:06', 'hdhd', 0, 'ivan', 'xxyo'),
+(12, '2019-10-09 04:20:15', 'hdh', 0, 'ivan', 'xxyo'),
+(13, '2019-10-09 04:20:32', 'jejej', 0, 'ivan', 'xxyo');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `favoritas`
 --
 
@@ -100,6 +142,13 @@ CREATE TABLE `likes` (
   `usuario` varchar(30) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `likes`
+--
+
+INSERT INTO `likes` (`pelicula`, `usuario`, `fecha`) VALUES
+('tt0363771', 'ivan', '2019-10-08 21:43:10');
 
 -- --------------------------------------------------------
 
@@ -187,10 +236,51 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`clave`, `fecha`, `texto`, `spoilers`, `recomendada`, `usuario`, `pelicula`) VALUES
-(1, '2019-10-01 05:36:39', 'adj', 0, 0, 'ivan', 'tt0363771'),
 (2, '2019-10-02 05:30:47', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 1, 1, 'ivan', 'tt0363771'),
 (3, '2019-10-02 05:31:51', 'JWDNEWFOJCKLENCJE VKLVNERV VKJV KC  CD CDJC VF VKJDNF C', 1, 0, 'ivan', 'tt0363771'),
 (4, '2019-10-02 05:39:16', 'ho\'y', 1, 0, 'ivan', 'tt0363771');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `review_like`
+--
+
+CREATE TABLE `review_like` (
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `review` int(11) NOT NULL,
+  `usuario` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `review_like`
+--
+
+INSERT INTO `review_like` (`fecha`, `review`, `usuario`) VALUES
+('2019-10-04 15:40:30', 3, 'ivan'),
+('2019-10-03 04:00:42', 3, 'ivxn1'),
+('2019-10-03 03:35:35', 4, 'ivan');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `review_reporte`
+--
+
+CREATE TABLE `review_reporte` (
+  `clave` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `razon` varchar(100) NOT NULL,
+  `review` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `review_reporte`
+--
+
+INSERT INTO `review_reporte` (`clave`, `fecha`, `razon`, `review`) VALUES
+(1, '2019-10-04 13:54:41', 'Otro', 4),
+(2, '2019-10-04 13:54:59', 'Contiene spoilers o contenido que arruina la experiencia', 2);
 
 -- --------------------------------------------------------
 
@@ -210,7 +300,9 @@ CREATE TABLE `solicitud` (
 --
 
 INSERT INTO `solicitud` (`emisor`, `receptor`, `fecha`, `estado`) VALUES
-('ivan', 'ivxn', '2019-09-25 01:59:34', 'aceptada');
+('ivan', 'ivxn', '2019-10-07 03:41:01', 'pendiente'),
+('iv_n', 'ivan', '2019-10-07 02:50:30', 'pendiente'),
+('xxyo', 'ivan', '2019-10-07 03:06:12', 'aceptada');
 
 --
 -- Disparadores `solicitud`
@@ -278,6 +370,7 @@ INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0156934', 'ivan', '2019-09-30 05:00:00'),
 ('tt0164063', 'ivan', '2019-09-23 05:00:00'),
 ('tt0290673', 'ivan', '2019-09-13 05:00:00'),
+('tt0363771', 'ivan', '2019-10-08 05:00:00'),
 ('tt0425121', 'ivan', '2019-09-30 05:00:00'),
 ('tt0425123', 'ivan', '2019-09-23 05:00:00'),
 ('tt0425124', 'ivan', '2019-09-30 05:00:00'),
@@ -305,7 +398,6 @@ CREATE TABLE `watchlist` (
 INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0164063', 'ivan', '2019-09-24 02:48:38'),
 ('tt0290673', 'ivan', '2019-09-24 02:44:22'),
-('tt0363771', 'ivan', '2019-09-30 16:09:50'),
 ('tt0425123', 'ivan', '2019-09-24 02:47:21'),
 ('tt0458339', 'ivan', '2019-09-19 03:56:08');
 
@@ -337,6 +429,14 @@ ALTER TABLE `calificacion`
   ADD KEY `usuario` (`usuario`),
   ADD KEY `usuario_2` (`usuario`),
   ADD KEY `pelicula` (`pelicula`);
+
+--
+-- Indices de la tabla `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `emisor` (`emisor`),
+  ADD KEY `receptor` (`receptor`);
 
 --
 -- Indices de la tabla `favoritas`
@@ -383,6 +483,22 @@ ALTER TABLE `review`
   ADD KEY `pelicula` (`pelicula`);
 
 --
+-- Indices de la tabla `review_like`
+--
+ALTER TABLE `review_like`
+  ADD PRIMARY KEY (`review`,`usuario`),
+  ADD KEY `review` (`review`),
+  ADD KEY `review_2` (`review`),
+  ADD KEY `usuario` (`usuario`);
+
+--
+-- Indices de la tabla `review_reporte`
+--
+ALTER TABLE `review_reporte`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `review` (`review`);
+
+--
 -- Indices de la tabla `solicitud`
 --
 ALTER TABLE `solicitud`
@@ -416,6 +532,12 @@ ALTER TABLE `watchlist`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
@@ -426,6 +548,12 @@ ALTER TABLE `playlist`
 --
 ALTER TABLE `review`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `review_reporte`
+--
+ALTER TABLE `review_reporte`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -450,6 +578,13 @@ ALTER TABLE `bloqueo`
 --
 ALTER TABLE `calificacion`
   ADD CONSTRAINT `calificacion_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `chat`
+--
+ALTER TABLE `chat`
+  ADD CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`emisor`) REFERENCES `usuario` (`username`),
+  ADD CONSTRAINT `chat_ibfk_2` FOREIGN KEY (`receptor`) REFERENCES `usuario` (`username`);
 
 --
 -- Filtros para la tabla `favoritas`
@@ -487,6 +622,19 @@ ALTER TABLE `playlist_peliculas`
 --
 ALTER TABLE `review`
   ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `review_like`
+--
+ALTER TABLE `review_like`
+  ADD CONSTRAINT `review_like_ibfk_1` FOREIGN KEY (`review`) REFERENCES `review` (`clave`),
+  ADD CONSTRAINT `review_like_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `review_reporte`
+--
+ALTER TABLE `review_reporte`
+  ADD CONSTRAINT `review_reporte_ibfk_1` FOREIGN KEY (`review`) REFERENCES `review` (`clave`);
 
 --
 -- Filtros para la tabla `solicitud`

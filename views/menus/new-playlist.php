@@ -20,7 +20,7 @@
             <span id="alert-message"></span>
             <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
         </div>
-        <form id="new-playlist" novalidate>
+        <form id="new-playlist" novalidate autocomplete="off">
             <div class="form-group">
                 <label for="">Nombre de la lista: </label>
                 <br>
