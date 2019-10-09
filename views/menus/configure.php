@@ -53,9 +53,9 @@
                     <div class="col-md-8 sa_upload">
                         <form id="image-change" novalidate>
                             <div class="form-group">
-                                <label for="">Imagen</label>
-                                <div class="custom-file">
-                                    <input class="custom-file-input" style="width: 70%" type="file" accept="image/*" name="image" id="image" class="form-control" placeholder="Imagen" required>
+                                <label for="">Imagen</label><br>
+                                <div class="custom-file" style="width: 60%">
+                                    <input class="custom-file-input" type="file" accept="image/*" name="image" id="image" class="form-control" placeholder="Imagen" required>
                                     <label class="custom-file-label" for="customFile">Elegir imagen</label>
                                 </div>
                                 <div class="invalid-feedback">

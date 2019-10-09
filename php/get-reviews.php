@@ -7,7 +7,8 @@
     $movie = $_POST['movie'];
     $order = $_POST['order']=="likes"? "counter" : "fecha";
 
-    $sql = "SELECT review.*, (SELECT COUNT(*) FROM review_like WHERE review = review.clave) as counter FROM review 
+    $sql = "SELECT review.*, (SELECT COUNT(*) FROM review_like WHERE review = review.clave) as counter FROM review
+    WHERE review.pelicula = '$movie' 
     GROUP BY review.clave ORDER BY $order DESC;";
     $result = mysqli_query($conn,$sql);
     if($result && $result->num_rows>0)

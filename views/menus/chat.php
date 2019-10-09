@@ -126,10 +126,10 @@
                         </div>
                     </div>
                     <div class="w-100 card-footer p-0 bg-dark border border-bottom-0 border-left-0 border-right-0">
-                        <form class="m-0 p-0" action="" method="POST" autocomplete="off">
+                        <form class="m-0 p-0" action="" method="POST" autocomplete="off" id="send">
                             <div class="row m-0 p-0">
                                 <div class="col-9 m-0 p-1">
-                                    <input id="text" class="mw-100 border rounded form-control" type="text" name="text" title="Type a message..." placeholder="Type a message..." required>
+                                    <input id="text" class="mw-100 border rounded form-control" type="text" name="text" title="Type a message..." placeholder="Escribe un mensaje" required>
                                 </div>
                                 <div class="col-3 m-0 p-1">
                                     <button class="btn btn-outline-secondary rounded border w-100" title="Gönder!" style="padding-right: 16px;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
@@ -137,17 +137,18 @@
                             </div>
                         </form>
                     </div>
+                    <div class="bg-dark text-center text-warning">
+                        SpoilerAlert! mantiene tus datos seguros.
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
+<script src="../../js/chat.js"></script>
 <script>
-    $(document).ready(() => {
-        var objDiv = document.getElementById("sohbet");
-        objDiv.scrollTop = objDiv.scrollHeight;
-    })
+    setFriend('<?php echo $friend;?>');
 </script>
