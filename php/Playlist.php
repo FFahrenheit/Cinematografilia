@@ -77,7 +77,7 @@
                 $body = json_decode($content,true);
                 if($i<4)
                 {
-                    $this->mosaic .= '<img src="'.$body['Poster'].'">';
+                    $this->mosaic .= ($body['Poster'] != "N/A")? '<img src="'.$body['Poster'].'">' : '<img src="../../img/poster.jpg">';
                     $i++;
                 }
             }

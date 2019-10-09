@@ -26,6 +26,10 @@
         <span> </span>
         <?php 
             $arg = str_replace(" ","+",$_GET['title']);
+            if(substr($arg, -1)=="+")
+            {
+                $arg = substr($arg, 0, -1);
+            }
             $url = "http://www.omdbapi.com/?apikey=$APIKey&s=$arg&type=movie&page=$page$add";
             $content = file_get_contents($url);
             $json = json_decode($content,true);

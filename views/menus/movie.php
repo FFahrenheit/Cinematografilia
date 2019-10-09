@@ -34,7 +34,9 @@
     <div class="sa_movie">
         <div class="row container">
             <div class="col-md-4">
-                <img src="<?php echo $movie['Poster']; ?>" alt="<?php echo $title; ?>">
+                <img src="<?php 
+                echo $movie['Poster'] == "N/A" ? "../../img/poster.jpg": $movie['Poster']; ?>" 
+                alt="<?php echo $title; ?>">
             </div>
             <div class="col-md-8">
                 <h1> <?php

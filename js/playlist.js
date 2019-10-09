@@ -179,6 +179,15 @@ function like(playl) {
                     window.location.reload(true);
                 }, 3000);
                 break;
+            case '404':
+                alertar("Error con la lista", "danger");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 3000);
+                break;
+            case '405':
+                alertar("No puedes marcar como me gusta tu propia lista", "warning");
+                break;
             default:
                 alertar("Error desconocido", "danger");
         }
