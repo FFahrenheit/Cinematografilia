@@ -20,16 +20,16 @@
             if($data['emisor'] == $user)
             {
                 $out .= '<div class="balon1 p-2 m-0 position-relative" data-is="Usted - '.$data['fecha'].'">';
-                $out .= '<a class="float-right">';
-                $out .= addslashes($data['mensaje']);
-                $out .= '</a></div>';
+                $out .= '<h6 class="float-right">';
+                $out .= ($data['mensaje']);
+                $out .= '</h6></div>';
             }
             else 
             {
                 $out .= '<div class="balon2 p-2 m-0 position-relative" data-is="'.$data['emisor'].' - '.$data['fecha'].'">';
-                $out .= '<a class="float-left sohbet2">';
-                $out .= addslashes($data['mensaje']);
-                $out .= '</a></div>';
+                $out .= '<h6 class="float-left sohbet2">';
+                $out .= ($data['mensaje']);
+                $out .= '</h6></div>';
                 if($data['visto'] == 0)
                 {
                     $tmp = new Connection();

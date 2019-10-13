@@ -17,8 +17,8 @@
     background: black;
 }
 
-.recomend a {
-    text-decoration: none;
-    color: red;
-    font-size: 10000px;
+.recomend {
+    text-decoration: underline;
+    cursor: pointer;
+    opacity: 0.8;
 }

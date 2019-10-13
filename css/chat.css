@@ -3,7 +3,7 @@ body {
     border-color: black !important;
 }
 
-a {
+h6 {
     text-decoration: none !important;
 }
 
@@ -71,7 +71,7 @@ input[type="color"]:focus,
 
 /* Mensajes que envío yo */
 
-.balon1 a {
+.balon1 h6 {
     background: #F6C519;
     color: rgb(54, 54, 54) !important;
     border-radius: 20px 20px 3px 20px;
@@ -93,7 +93,7 @@ input[type="color"]:focus,
 
 /* Mensajes que envía el otro */
 
-.balon2 a {
+.balon2 h6 {
     background: #1a1a1a;
     color: #F6C519 !important;
     border-radius: 20px 20px 20px 3px;

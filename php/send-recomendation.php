@@ -28,9 +28,9 @@
             $body = json_decode($content, true);
             if($body['Response']=='True')
             {
-                $msg = "<div class='recomend'>¡Hola! Te recomiendo ".$body['Title']." de ".$body['Director'].". Visita su ficha haciendo 
-                click <a href='movie.php?id=$movie'>aquí</a>. O velo desde tus recomendaciones 
-                <a href='recomendations.php'>aquí</a>.</div>";
+                $msg = "¡Hola! Te recomiendo ".$body['Title']." de ".$body['Director'].". Visita su ficha haciendo 
+                click <span class='recomend' onclick='window.location.href=".'"movie.php?id='.$movie.'"'."'>aquí</span>. O velo desde tus recomendaciones 
+                <span class='recomend' onclick='window.location.href=".'"recomendations.php"'."'>aquí</span>.";
                 $msg = addslashes($msg);
                         
                 $sql = "INSERT INTO chat(emisor,receptor,mensaje) VALUES 
