@@ -28,6 +28,8 @@
     if(mysqli_query($conn,$sql))
     {
         echo json_encode("4");
+        $sql = "DELETE FROM recomendacion WHERE pelicula = '$movie' AND receptor = '$user'";
+        mysqli_query($conn,$sql);
     }
     else 
     {

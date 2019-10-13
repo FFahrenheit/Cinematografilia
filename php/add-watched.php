@@ -14,6 +14,10 @@
     $sql = "INSERT INTO vistas(usuario, pelicula, fecha) VALUES ('$user','$movie' , (SELECT CONVERT('$date',DATETIME)))";
 
     mysqli_query($conn,$sql) or die('"1"');
+
+    $sql = "DELETE FROM recomendacion WHERE pelicula = '$movie' AND receptor = '$user'";
+    mysqli_query($conn,$sql);
+
     echo json_encode("2");
 
     if(isset($_POST['foo']))

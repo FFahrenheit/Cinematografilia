@@ -1,7 +1,7 @@
 <?php 
-
     class Notification
     {
+        public $APIKey = "b27f9641";
         public $counter=0; 
         public $req = 0;
         public $rec = 0;
@@ -18,6 +18,8 @@
             $this->counter += $this->req;
             $this->msg = $temp->getCount($conn, "SELECT COUNT(*) FROM chat WHERE receptor = '$this->user' AND visto = 0");
             $this->counter += $this->msg;
+            $this->rec = $temp->getCount($conn, "SELECT COUNT(*) FROM recomendacion WHERE receptor = '$this->user' AND visto = 0");
+            $this->counter += $this->rec;
 
         }
 
@@ -38,9 +40,13 @@
             <span class="badge badge-warning">'.$this->req.'</span>
             </a> ';
             
-            $nav .= '<a class="dropdown-item bg-light" href="friend-requests.php">Recomendaciones</a>';
+            $nav .= $this->rec == 0 ?
+            '<a class="dropdown-item bg-light" href="recomendations.php">Recomendaciones</a>': 
+            '<a class="dropdown-item bg-light" title="Recomendaciones sin ver" href="recomendations.php"> <span class="font-weight-bold">Recomendaciones</span>
+            <span class="badge badge-warning">'.$this->rec.'</span>
+            </a> ';
             
-            $nav .= ($this->msg==0)?
+            $nav .= $this->msg==0?
                 '<a class="dropdown-item bg-light" href="chats.php">Mensajes</a>':
                 '<a class="dropdown-item bg-light" title="Mensajes sin leer" href="chats.php"> <span class="font-weight-bold">Mensajes</span>
                 <span class="badge badge-warning">'.$this->msg.'</span>
@@ -48,6 +54,53 @@
             $nav .= '</div>
             </li>';
             return $nav;
+        }
+
+        public function getRecomendations()
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+
+            $sql = "SELECT usuario.imagen as img, usuario.username as user, recomendacion.pelicula as movie, 
+            recomendacion.visto as visto 
+            FROM usuario,recomendacion WHERE receptor = '$this->user' AND recomendacion.emisor = usuario.username 
+            ORDER BY visto ASC, fecha ASC";
+            $result = mysqli_query($conn,$sql);
+            if($result && $result->num_rows>0)
+            {
+                $out = '<table class ="table table-hover sa_table"><tbody>';
+                while($data = mysqli_fetch_assoc($result))
+                {
+                    $out .= '<tr>';
+                    $user = $data['user'];
+                    $arg = "'".$data['movie']."'";
+                    $hr = "<a style='color: white;' href = 'profile.php?user=$user'>";
+
+                    $out .= "<td>$hr<img src='".$data['img']."'></a></td>";
+                    $out .= "<td>$hr".$data['user']."</a></td>";
+
+                    $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=" . $data['movie'];
+                    $content = file_get_contents($url);
+                    $body = json_decode($content, true);
+
+                    $hr = "<a style='color: white;' href = 'movie.php?id=".$data['movie']."'>";
+                    $out .= "<td>$hr<img src='".$body['Poster']."'></a></td>";
+                    $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
+                    
+                    $out .= '<td><button class="btn btn-success" onclick="addWatched('.$arg.')">Agregar a vistas</a></td>';
+                    $out .= '<td><button class="btn btn-danger" onclick="addToWatchlist('.$arg.')">Agregar a por ver</a></td>';
+                    $out .= '<td><button class="btn btn-secondary" onclick="block('.$arg.')">Bloquear película</a></td>';
+                    $out .= '</tr>';
+                }
+                $sql = "UPDATE recomendacion SET visto = 1 WHERE receptor = '$this->user'";
+                mysqli_query($conn,$sql);
+                $out .= '</tbody></table>';
+                return $out;
+            }        
+            else 
+            {
+                return "<p>No tienes recomendaciones, ¡Explora películas y comienza a recomendarlas!</p>";
+            }
         }
 
         public function getFriendRequests()
