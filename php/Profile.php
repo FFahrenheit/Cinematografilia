@@ -70,6 +70,28 @@
             return $result && $result->num_rows > 0;
         }
 
+        public function getFriendSelect()
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+            
+            $sql = "SELECT amigo FROM amistad WHERE usuario = '$this->user'";
+            $rs = mysqli_query($conn,$sql);
+            if($rs && $rs->num_rows>0)
+            {
+                $out = '<option disabled selected value="0">Seleccione el amigo al que recomendar la película</option>';
+                while($fetch = mysqli_fetch_assoc($rs))
+                {
+                    $out .= '<option value="'.$fetch['amigo'].'">'.$fetch['amigo'].'</option>';
+                }
+                return $out;
+            }
+            else 
+            {
+                return "<option selected value='0'>Actualmente no cuenta con amigos para recomendar</option>";
+            }
+        }
+
         public function username()
         {
             if($this->status == "friend")

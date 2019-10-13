@@ -18,6 +18,50 @@ var addTo;
 var formWatched = document.getElementById('form-watched');
 var aMovie;
 
+function recomend(movie) {
+    $("#recomendModal").modal("toggle");
+    aMovie = movie;
+}
+
+function sendRecommendation() {
+    console.log($("#recomend-list").val());
+    $("#recomendModal").modal("toggle");
+    if ($("#recomend-list").val() == '0') {
+        alertar("Agregue amigos para poder enviarles recomendaciones", "warning");
+    } else if (!$("#recomend-list").val()) {
+        alertar("Seleccione un amigo para recomendarle la película", "danger");
+    } else {
+        var data = new FormData();
+        data.append("movie", aMovie);
+        data.append("user", $("#recomend-list").val());
+        fetch('../../php/send-recomendation.php', {
+            method: 'POST',
+            body: data
+        }).then(resp => {
+            return resp.json();
+        }).then(r => {
+            console.log(r);
+            switch (r) {
+                case '0':
+                case '1':
+                case '3':
+                case '5':
+                    alertar("Error de servidor", "danger");
+                    break;
+                case '2':
+                    alertar("No se le puede recomendar esta película al usuario, ya que ya la tiene en una lista", "warning");
+                    break;
+                case '4':
+                    alertar("Error con la API, se ha logrado la recomendación", "secondary");
+                    break;
+                case '6':
+                    alertar("Recomendación enviada", "success");
+                    break;
+            }
+        })
+    }
+}
+
 function addWatched(movie) {
     aMovie = movie;
     $('#watchedModal').modal('toggle');

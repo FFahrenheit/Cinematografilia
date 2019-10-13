@@ -34,9 +34,8 @@
     <div class="sa_movie">
         <div class="row container">
             <div class="col-md-4">
-                <img src="<?php 
-                echo $movie['Poster'] == "N/A" ? "../../img/poster.jpg": $movie['Poster']; ?>" 
-                alt="<?php echo $title; ?>">
+                <img src="<?php
+                            echo $movie['Poster'] == "N/A" ? "../../img/poster.jpg" : $movie['Poster']; ?>" alt="<?php echo $title; ?>">
             </div>
             <div class="col-md-8">
                 <h1> <?php
@@ -55,6 +54,10 @@
                         <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Estadísticas</a>
                         <?php if (isset($_SESSION['username'])) {
                             $profile = new Profile($_SESSION['username']); ?>
+                            <div class="sa_add_to">
+                                <button onclick="recomend('<?php echo $id; ?>')" class="sa_add_to btn btn-warning text-dark" aria-selected="false">Recomendar</button>
+                            </div>
+
                             <div class="dropdown sa_add_to">
                                 <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Agregar a...
@@ -102,7 +105,7 @@
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="review">
                             <h3>Reseñas de la película
-                                <select onclick="setMovie('<?php echo $id; ?>')"class="custom-select" id="review-list">
+                                <select onclick="setMovie('<?php echo $id; ?>')" class="custom-select" id="review-list">
                                     <option selected>Seleccione orden</option>
                                     <option value="1">Con más me gusta</option>
                                     <option value="2">Más reciente</option>
@@ -213,6 +216,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="calificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog sa_modal bg-dark" role="document">
             <div class="modal-content bg-dark">
@@ -236,6 +240,32 @@
                 <div class="modal-footer bg-dark">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-warning" onclick="sendCalification('<?php echo $id; ?>')">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="recomendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark" id="exampleModalLabel">Recomendar película</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-dark">
+                    Seleccione el amigo al cual quiere recomendar la película
+                    <select class="custom-select" id="recomend-list">
+                        <?php 
+                            echo $profile->getFriendSelect();
+                        ?>
+                    </select>
+                </div>
+                <input type="hidden" name="movie" value="<?php echo $id; ?>">
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="sendRecommendation()">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -272,7 +302,7 @@
     <script src="../../js/review.js"></script>
     <script src="../../js/main.js"></script>
     <script>
-        $( document ).ready(()=> {
+        $(document).ready(() => {
             console.log("Cargando reviews");
             loadReviews('<?php echo $id; ?>');
         });

@@ -104,6 +104,7 @@
     
     .sa_add_to {
         display: inline-block;
+        border-color: #3f3f3f;
     }
     
     .sa_add_to i {

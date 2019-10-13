@@ -153,7 +153,7 @@
                         {
                             if($body['visto']==0)
                             {
-                                $out .= '<td class="text-warning">'.$body['mensaje'].'</td>';
+                                $out .= '<td title="Mensaje sin leer" style="font-weight: bold;" class="text-warning">'.$body['mensaje'].'</td>';
                             }
                             else 
                             {
@@ -164,11 +164,11 @@
                         {
                             if($body['visto']==1)
                             {
-                                $out .= '<td><i title="Mensaje leído por el usuario"style="font-size: 20px;" class="fas fa-check-double mini-i"></i>'.$body['mensaje'].'</td>';
+                                $out .= '<td><i title="Mensaje leído por el usuario"style="font-size: 20px;" class="fas fa-check-double mini-i"></i>  '.$body['mensaje'].'</td>';
                             }
                             else 
                             {
-                                $out .= '<td><i title="Mensaje enviado"style="font-size: 20px;" class="fas fa-check"></i>'.$body['mensaje'].'</td>';
+                                $out .= '<td><i title="Mensaje enviado"style="font-size: 20px;" class="fas fa-check"></i>  '.$body['mensaje'].'</td>';
                             }
                         }
                         $out .= '<td>'.$body['fecha'].'</td>';
