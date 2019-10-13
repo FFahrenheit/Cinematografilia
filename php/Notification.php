@@ -86,10 +86,11 @@
                     $hr = "<a style='color: white;' href = 'movie.php?id=".$data['movie']."'>";
                     $out .= "<td>$hr<img src='".$body['Poster']."'></a></td>";
                     $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
-                    
-                    $out .= '<td><button class="btn btn-success" onclick="addWatched('.$arg.')">Agregar a vistas</a></td>';
-                    $out .= '<td><button class="btn btn-danger" onclick="addToWatchlist('.$arg.')">Agregar a por ver</a></td>';
-                    $out .= '<td><button class="btn btn-secondary" onclick="block('.$arg.')">Bloquear película</a></td>';
+
+                    $out .= '<td><a title="Agregar a vistas" onclick="addWatched('.$arg.')"><i class="fas fa-eye"></i></a></td>';
+                    $out .= '<td><a title="Agregar a lista por ver" onclick="addWatchlist('.$arg.')"><i class="fas fa-clock"></i></a></td>';
+                    $out .= '<td><a title="Eliminar recomendaciones de esta película" onclick="deleteR('.$arg.')"><i class="fas fa-trash"></i></a></td>';
+                    $out .= '<td><a title="Bloquear y eliminar recomendacion" onclick="block('.$arg.')"><i class="fas fa-ban"></i></a></td>';
                     $out .= '</tr>';
                 }
                 $sql = "UPDATE recomendacion SET visto = 1 WHERE receptor = '$this->user'";
@@ -100,6 +101,86 @@
             else 
             {
                 return "<p>No tienes recomendaciones, ¡Explora películas y comienza a recomendarlas!</p>";
+            }
+        }
+
+        public function getSentRecomendations()
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+
+            $sql = "SELECT usuario.imagen as img, usuario.username as user, recomendacion.pelicula as movie, 
+            recomendacion.visto as visto 
+            FROM usuario,recomendacion WHERE emisor = '$this->user' AND recomendacion.receptor = usuario.username 
+            ORDER BY visto ASC, fecha ASC";
+
+            $result = mysqli_query($conn,$sql);
+            if($result && $result->num_rows>0)
+            {
+                $out = '<table class ="table table-hover sa_table"><tbody>';
+                while($data = mysqli_fetch_assoc($result))
+                {
+                    $out .= '<tr>';
+                    $user = $data['user'];
+                    $arg = "'".$data['movie']."'";
+                    $hr = "<a style='color: white;' href = 'profile.php?user=$user'>";
+
+                    $out .= "<td>$hr<img src='".$data['img']."'></a></td>";
+                    $out .= "<td>$hr".$data['user']."</a></td>";
+
+                    $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=" . $data['movie'];
+                    $content = file_get_contents($url);
+                    $body = json_decode($content, true);
+
+                    $hr = "<a style='color: white;' href = 'movie.php?id=".$data['movie']."'>";
+                    $out .= "<td>$hr<img src='".$body['Poster']."'></a></td>";
+                    $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
+                    
+                    $out .= '</tr>';
+                }
+                $out .= '</tbody></table>';
+                return $out;
+            }        
+            else 
+            {
+                return "<p>No has enviado recomendaciones. ¡Explora películas y comienza a recomendarlas!</p>";
+            }
+        }
+
+        public function getBlockedRecomendations()
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+
+            $sql = "SELECT pelicula as movie FROM recomendacion_bloqueo WHERE usuario = '$this->user'";
+
+            $result = mysqli_query($conn,$sql);
+            if($result && $result->num_rows>0)
+            {
+                $out = '<table class ="table table-hover sa_table"><tbody>';
+                while($data = mysqli_fetch_assoc($result))
+                {
+                    $out .= '<tr>';
+                    $arg = "'".$data['movie']."'";
+
+                    $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=" . $data['movie'];
+                    $content = file_get_contents($url);
+                    $body = json_decode($content, true);
+
+                    $hr = "<a style='color: white;' href = 'movie.php?id=".$data['movie']."'>";
+                    $out .= "<td>$hr<img src='".$body['Poster']."'></a></td>";
+                    $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
+                    
+                    $out .= '<td><a title="Desbloquear recomendación" onclick="unblockMovie('.$arg.')"><i class="fas fa-unlock"></i></a></td>';
+
+                    $out .= '</tr>';
+                }
+                $out .= '</tbody></table>';
+                return $out;
+            }        
+            else 
+            {
+                return "<p>No has bloqueado ninguna recomendación</p>";
             }
         }
 

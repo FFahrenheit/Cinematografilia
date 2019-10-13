@@ -12,7 +12,7 @@
     <link href="../../css/profile.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
-    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');?>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php'); ?>
 </head>
 
 <body>
@@ -29,6 +29,7 @@
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-received" role="tab" aria-controls="nav-received" aria-selected="true">Recomendadas</a>
                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-sent" role="tab" aria-controls="nav-sent" aria-selected="false">Recomendaciones enviadas</a>
+                <a class="nav-item nav-link" id="nav-block-tab" data-toggle="tab" href="#nav-block" role="tab" aria-controls="nav-sent" aria-selected="false">Bloqueadas</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -39,7 +40,12 @@
                 ?>
             </div>
             <div class="tab-pane fade" id="nav-sent" role="tabpanel" aria-labelledby="nav-home-tab">
-                <?php //echo $not->getSentRecomendations(); ?>
+                <?php echo $not->getSentRecomendations(); 
+                ?>
+            </div>
+            <div class="tab-pane fade" id="nav-block" role="tabpanel" aria-labelledby="nav-home-tab">
+                <?php echo $not->getBlockedRecomendations(); 
+                ?>
             </div>
         </div>
     </div>
@@ -90,6 +96,26 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark" id="confirmationModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <p id="confirmationModalBody"></p>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="confirmation()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="footer">
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>

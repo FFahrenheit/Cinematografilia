@@ -49,7 +49,7 @@ function sendRecommendation() {
                     alertar("Error de servidor", "danger");
                     break;
                 case '2':
-                    alertar("No se le puede recomendar esta película al usuario, ya que ya la tiene en una lista", "warning");
+                    alertar("No se le puede recomendar esta película al usuario, ya que ya la tiene en una lista o la ha bloqueado", "warning");
                     break;
                 case '4':
                     alertar("Error con la API, se ha logrado la recomendación", "secondary");
@@ -307,4 +307,104 @@ function addToWatchlist(movie) {
                 break;
         }
     });
+}
+
+var action;
+var args;
+var moov;
+
+function confirmation() {
+    switch (action) {
+        case 'watchlist':
+            addToWatchlist(moov);
+            break;
+        case 'block':
+            generalRequest('../../php/block-recomendation.php');
+            break;
+        case 'unblock':
+            generalRequest('../../php/unblock-recomendation.php');
+            break;
+        case 'delete':
+            generalRequest('../../php/delete-recomendation.php');
+            break;
+    }
+}
+
+function generalRequest(url) {
+    $("#confirmationModal").modal("toggle");
+    fetch(url, {
+        method: 'POST',
+        body: args
+    }).then(resp => {
+        return resp.json();
+    }).then(r => {
+        console.log(r)
+        switch (r) {
+            case '0':
+            case 0:
+                alertar("Error de conexión", "warning");
+                break;
+            case '1':
+            case 1:
+                alertar("No se ha podido guardar el cambio", "danger");
+                break;
+            case '2':
+            case 2:
+                alertar("Accion realizada correctamente", "success");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 3000);
+                break;
+            case '3':
+            case 3:
+                alertar("Accion previamente realizada", "warning");
+                break;
+            default:
+                alertar("Error desconocido", "danger");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 3000);
+        }
+    })
+}
+
+function addWatchlist(movie) {
+    console.log(movie);
+    moov = movie;
+    $("#confirmationModalLabel").html("Agregar a peliculas por ver");
+    $("#confirmationModalBody").html("¿Desea agregar la película a la lista por ver?");
+    args = new FormData();
+    args.append("movie", movie);
+    action = 'watchlist';
+    $("#confirmationModal").modal("toggle");
+}
+
+function block(movie) {
+    console.log(movie);
+    $("#confirmationModalLabel").html("Bloquear recomendación");
+    $("#confirmationModalBody").html("¿Seguro que desea no volver a recibir esta recomendación?");
+    args = new FormData();
+    args.append("movie", movie);
+    action = 'block';
+    $("#confirmationModal").modal("toggle");
+}
+
+function unblockMovie(movie) {
+    console.log(movie);
+    $("#confirmationModalLabel").html("Desbloquear recomendación");
+    $("#confirmationModalBody").html("¿Seguro que desea desbloquear esta recomendación? Le podrán volver a recomendar esta película");
+    args = new FormData();
+    args.append("movie", movie);
+    action = 'unblock';
+    $("#confirmationModal").modal("toggle");
+}
+
+function deleteR(movie) {
+    console.log(movie);
+    $("#confirmationModalLabel").html("Borrar recomendaciones");
+    $("#confirmationModalBody").html("¿Seguro que desea borrar las recomendaciones de esta pelicula?");
+    args = new FormData();
+    args.append("movie", movie);
+    action = 'delete';
+    $("#confirmationModal").modal("toggle");
 }

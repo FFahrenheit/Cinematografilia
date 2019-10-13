@@ -7,12 +7,14 @@
 
     $c = new Connection();
     $conn = $c->getConnection() or die('"0"');
-    $sql = "SELECT vistas.pelicula FROM vistas, watchlist, favoritas, likes 
+    $sql = "SELECT vistas.pelicula FROM vistas, watchlist, favoritas, likes,
+    recomendacion_bloqueo 
     WHERE
     (vistas.pelicula  = '$movie' AND vistas.usuario = '$user') OR 
-    (watchlist.pelicula = '$movie' AND vistas.usuario = '$user')OR 
-    (favoritas.pelicula = '$movie' AND vistas.usuario = '$user') OR
-    (likes.pelicula = '$movie' AND vistas.usuario = '$user');";
+    (watchlist.pelicula = '$movie' AND watchlist.usuario = '$user')OR 
+    (favoritas.pelicula = '$movie' AND favoritas.usuario = '$user') OR
+    (likes.pelicula = '$movie' AND likes.usuario = '$user') OR 
+    (recomendacion_bloqueo.pelicula = '$movie' AND recomendacion_bloqueo.usuario = '$user')";
     ob_clean();
 
     $rs = mysqli_query($conn,$sql) or die('"1"');
