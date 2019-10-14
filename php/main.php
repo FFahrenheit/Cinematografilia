@@ -14,9 +14,7 @@
     }
     function getNavBar()
     {
-        $nav = "";
-        $nav = 
-        '<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color" id="navbar">
+        $nav = '<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color" id="navbar">
             <div class="sa_nav">
                 <a class="navbar-brand" href="index.php">
                     <img  id="sa_nav" src="../../img/logo.png" alt="¡Bienvenido a SA!">
@@ -28,30 +26,45 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto">';
+        if(isset($_SESSION['username']) && $_SESSION['username']=="admin")
+        {
+            $nav .= '<li class="nav-item">
+                        <a class="nav-link" href="#">Reportes
+                            <!---span class="sr-only">(current)</span-->
+                        </a>
+                    </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#">Revisar maratones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Preguntas semanales</a>
+                    </li>
+                </ul>';
+        }
+        else
+        {
+            $nav .= '<li class="nav-item">
                         <a class="nav-link" href="#">Listas
                             <!---span class="sr-only">(current)</span-->
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Eventos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Peliculas</a>
+                        <a class="nav-link" href="#">Maratones</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Stats
+                            aria-haspopup="true" aria-expanded="false">
+                            Tops
                         </a>
                         <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                            <a class="dropdown-item bg-light" href="#">Mejores Películas</a>
-                            <a class="dropdown-item bg-light" href="#">Últimas reseñas</a>
-                            <a class="dropdown-item bg-light" href="#">Más contenido jaaj</a>
+                            <a class="dropdown-item bg-light" href="#">Semanales</a>
+                            <a class="dropdown-item bg-light" href="#">Globales</a>
                         </div>
                     </li>
-                </ul>
-                <ul class="navbar-nav ml-auto nav-flex-icons">
+                </ul>';
+        }
+            $nav .= '<ul class="navbar-nav ml-auto nav-flex-icons">
                     <li class="nav-item">
                         <form class="form-inline" action="search.php" method="GET">
                             <div class="md-form my-0">

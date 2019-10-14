@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2019 a las 06:35:06
+-- Tiempo de generación: 14-10-2019 a las 16:56:03
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -39,7 +39,9 @@ CREATE TABLE `amistad` (
 --
 
 INSERT INTO `amistad` (`usuario`, `amigo`, `fecha`) VALUES
+('ivan', 'iv_n', '2019-10-11 15:04:18'),
 ('ivan', 'xxyo', '2019-10-07 03:13:23'),
+('iv_n', 'ivan', '2019-10-11 15:04:18'),
 ('xxyo', 'ivan', '2019-10-07 03:13:23');
 
 -- --------------------------------------------------------
@@ -72,7 +74,8 @@ CREATE TABLE `calificacion` (
 
 INSERT INTO `calificacion` (`fecha`, `valor`, `usuario`, `pelicula`) VALUES
 ('2019-10-01 05:34:32', 1, 'ivan', ''),
-('2019-10-01 04:38:06', 1, 'ivan', 'tt0363771');
+('2019-10-01 04:38:06', 1, 'ivan', 'tt0363771'),
+('2019-10-13 03:33:33', 1, 'ivan', 'tt4154796');
 
 -- --------------------------------------------------------
 
@@ -95,18 +98,29 @@ CREATE TABLE `chat` (
 
 INSERT INTO `chat` (`clave`, `fecha`, `mensaje`, `visto`, `emisor`, `receptor`) VALUES
 (1, '2019-10-09 03:30:13', 'Hola!', 1, 'xxyo', 'ivan'),
-(2, '2019-10-09 03:30:29', 'Hello there', 0, 'ivan', 'xxyo'),
-(3, '2019-10-09 03:48:34', 'n', 0, 'ivan', 'xxyo'),
-(4, '2019-10-09 03:48:37', 'n', 0, 'ivan', 'xxyo'),
-(5, '2019-10-09 03:48:40', 'hola', 0, 'ivan', 'xxyo'),
-(6, '2019-10-09 03:49:16', 'Hola, me gustarÃ­a invitarte un chat', 0, 'ivan', 'xxyo'),
-(7, '2019-10-09 04:19:34', 'hola', 0, 'ivan', 'xxyo'),
-(8, '2019-10-09 04:19:37', 'holaa', 0, 'ivan', 'xxyo'),
-(9, '2019-10-09 04:19:52', 'mmm', 0, 'ivan', 'xxyo'),
-(10, '2019-10-09 04:19:57', 'mmmm', 0, 'ivan', 'xxyo'),
-(11, '2019-10-09 04:20:06', 'hdhd', 0, 'ivan', 'xxyo'),
-(12, '2019-10-09 04:20:15', 'hdh', 0, 'ivan', 'xxyo'),
-(13, '2019-10-09 04:20:32', 'jejej', 0, 'ivan', 'xxyo');
+(2, '2019-10-09 03:30:29', 'Hello there', 1, 'ivan', 'xxyo'),
+(3, '2019-10-09 03:48:34', 'n', 1, 'ivan', 'xxyo'),
+(4, '2019-10-09 03:48:37', 'n', 1, 'ivan', 'xxyo'),
+(5, '2019-10-09 03:48:40', 'hola', 1, 'ivan', 'xxyo'),
+(6, '2019-10-09 03:49:16', 'Hola, me gustarÃ­a invitarte un chat', 1, 'ivan', 'xxyo'),
+(7, '2019-10-09 04:19:34', 'hola', 1, 'ivan', 'xxyo'),
+(8, '2019-10-09 04:19:37', 'holaa', 1, 'ivan', 'xxyo'),
+(9, '2019-10-09 04:19:52', 'mmm', 1, 'ivan', 'xxyo'),
+(10, '2019-10-09 04:19:57', 'mmmm', 1, 'ivan', 'xxyo'),
+(11, '2019-10-09 04:20:06', 'hdhd', 1, 'ivan', 'xxyo'),
+(12, '2019-10-09 04:20:15', 'hdh', 1, 'ivan', 'xxyo'),
+(13, '2019-10-09 04:20:32', 'jejej', 1, 'ivan', 'xxyo'),
+(14, '2019-10-11 15:04:36', 'Hola!', 0, 'ivan', 'iv_n'),
+(15, '2019-10-11 15:04:58', 'Hey!', 1, 'iv_n', 'ivan'),
+(27, '2019-10-13 04:43:01', 'Hola! <span class=\"recomend(jaja)\"> click aquí jaja</span>', 0, 'ivan', 'iv_n'),
+(28, '2019-10-13 04:53:13', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span href=\'movie.php?id=tt0848228\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span href=\'recomendations.php\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
+(29, '2019-10-13 04:56:07', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend onclick=\'window.location.href=\"movie.php?id=tt0848228\">aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
+(30, '2019-10-13 04:57:43', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\">aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
+(31, '2019-10-13 04:59:49', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
+(32, '2019-10-13 05:06:20', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
+(33, '2019-10-13 05:21:07', 'Â¡Hola! Te recomiendo After Porn Ends de Bryce Wagoner. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt1291547\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'xxyo', 'ivan'),
+(34, '2019-10-13 20:45:25', 'Â¡Hola! Te recomiendo Clown de Jon Watts. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt1780798\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
+(35, '2019-10-13 20:56:36', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'xxyo');
 
 -- --------------------------------------------------------
 
@@ -170,7 +184,8 @@ CREATE TABLE `playlist` (
 
 INSERT INTO `playlist` (`clave`, `nombre`, `descripcion`, `fecha`, `creador`) VALUES
 (47, 'Timetravel movies', 'Peliculas para romperse la mente', '2019-09-20 16:08:36', 'ivan'),
-(48, 'Otra lista', 'Otra lista cool', '2019-09-20 16:08:54', 'ivan');
+(48, 'Otra lista', 'Otra lista cool', '2019-09-20 16:08:54', 'ivan'),
+(49, 'Mi lista', 'Una lista interesante', '2019-10-09 17:05:16', 'Johann');
 
 -- --------------------------------------------------------
 
@@ -209,11 +224,58 @@ CREATE TABLE `playlist_peliculas` (
 
 INSERT INTO `playlist_peliculas` (`pelicula`, `playlist`) VALUES
 ('tt0114746', 47),
+('tt0468569', 49),
 ('tt0480669', 47),
 ('tt0480669', 48),
 ('tt2194499', 47),
 ('tt2397535', 47),
 ('tt2669336', 47);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recomendacion`
+--
+
+CREATE TABLE `recomendacion` (
+  `clave` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `pelicula` varchar(10) NOT NULL,
+  `visto` tinyint(1) NOT NULL DEFAULT 0,
+  `emisor` varchar(30) NOT NULL,
+  `receptor` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `recomendacion`
+--
+
+INSERT INTO `recomendacion` (`clave`, `fecha`, `pelicula`, `visto`, `emisor`, `receptor`) VALUES
+(1, '2019-10-13 04:12:07', 'tt4154796', 0, 'ivan', 'iv_n'),
+(2, '2019-10-13 04:12:34', 'tt4154796', 0, 'ivan', 'iv_n'),
+(3, '2019-10-13 04:14:10', 'tt4154796', 0, 'ivan', 'iv_n'),
+(4, '2019-10-13 04:14:14', 'tt4154796', 0, 'ivan', 'iv_n'),
+(6, '2019-10-13 04:27:02', 'tt0458339', 0, 'ivan', 'iv_n'),
+(7, '2019-10-13 04:29:02', 'tt0458339', 0, 'ivan', 'iv_n'),
+(10, '2019-10-13 04:38:36', 'tt0848228', 0, 'ivan', 'iv_n'),
+(11, '2019-10-13 04:53:13', 'tt0848228', 0, 'ivan', 'iv_n'),
+(12, '2019-10-13 04:56:06', 'tt0848228', 0, 'ivan', 'iv_n'),
+(13, '2019-10-13 04:57:43', 'tt0848228', 0, 'ivan', 'iv_n'),
+(14, '2019-10-13 04:59:49', 'tt0848228', 0, 'ivan', 'iv_n'),
+(15, '2019-10-13 05:06:19', 'tt0848228', 0, 'ivan', 'iv_n'),
+(17, '2019-10-13 20:45:24', 'tt1780798', 0, 'ivan', 'iv_n'),
+(18, '2019-10-13 20:56:35', 'tt0848228', 1, 'ivan', 'xxyo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recomendacion_bloqueo`
+--
+
+CREATE TABLE `recomendacion_bloqueo` (
+  `usuario` varchar(30) NOT NULL,
+  `pelicula` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -301,7 +363,7 @@ CREATE TABLE `solicitud` (
 
 INSERT INTO `solicitud` (`emisor`, `receptor`, `fecha`, `estado`) VALUES
 ('ivan', 'ivxn', '2019-10-07 03:41:01', 'pendiente'),
-('iv_n', 'ivan', '2019-10-07 02:50:30', 'pendiente'),
+('iv_n', 'ivan', '2019-10-07 02:50:30', 'aceptada'),
 ('xxyo', 'ivan', '2019-10-07 03:06:12', 'aceptada');
 
 --
@@ -337,6 +399,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`username`, `password`, `email`, `imagen`, `origen`) VALUES
+('admin', 'â—Š“I¥áéQÆÔÊc[ø', ' ', '../../img/default-profile.png', '2019-10-14 14:52:08'),
 ('hola', 'V[sÎÆPgRÖùoJ ', 'hola@hola.co', '../../img/default-profile.png', '2019-09-16 02:14:04'),
 ('ivan', '0Móè3ÒÂ\'Æà¡8c3‰', 'di@di.com', '../../img/profiles/ivan.gif', '2019-09-16 02:14:04'),
 ('ivxn', 'ÞÔpƒW–+2‹ïŽ‚A¬', 'cuenta@ejemplo.com', '../../img/default-profile.png', '2019-09-16 02:14:04'),
@@ -345,6 +408,7 @@ INSERT INTO `usuario` (`username`, `password`, `email`, `imagen`, `origen`) VALU
 ('iv_n', 'E¸e-ÍÀÏÝd1»ä', 'ivan@ivan.com', '../../img/default-profile.png', '2019-09-19 05:36:51'),
 ('jjjj', '†GV¦µ=@“ÿà :²', 'ja@ja.ja', '../../img/default-profile.png', '2019-09-16 02:14:04'),
 ('jkjj', '´†l\0©HÔ::£k$^ù}8', 'di@dia.com', '../../img/default-profile.png', '2019-09-16 02:14:04'),
+('Johann', 'ÞÔpƒW–+2‹ïŽ‚A¬', 'dii@dii.com', '../../img/default-profile.png', '2019-10-09 17:04:46'),
 ('xxyo', 'ET¸q¯©xÓõé-•u;å', 'xx@xx.xx', '../../img/default-profile.png', '2019-09-16 02:14:04');
 
 -- --------------------------------------------------------
@@ -377,7 +441,8 @@ INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0458339', 'ivan', '2019-12-23 06:00:00'),
 ('tt0485947', 'ivan', '2019-10-01 05:00:00'),
 ('tt0848228', 'ivan', '2019-09-18 05:00:00'),
-('tt1920984', 'ivan', '2019-09-30 05:00:00');
+('tt1920984', 'ivan', '2019-09-30 05:00:00'),
+('tt0468569', 'Johann', '2019-10-09 05:00:00');
 
 -- --------------------------------------------------------
 
@@ -399,7 +464,8 @@ INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0164063', 'ivan', '2019-09-24 02:48:38'),
 ('tt0290673', 'ivan', '2019-09-24 02:44:22'),
 ('tt0425123', 'ivan', '2019-09-24 02:47:21'),
-('tt0458339', 'ivan', '2019-09-19 03:56:08');
+('tt0458339', 'ivan', '2019-09-19 03:56:08'),
+('tt1291547', 'ivan', '2019-10-13 20:31:57');
 
 --
 -- Índices para tablas volcadas
@@ -475,6 +541,21 @@ ALTER TABLE `playlist_peliculas`
   ADD KEY `playlist` (`playlist`);
 
 --
+-- Indices de la tabla `recomendacion`
+--
+ALTER TABLE `recomendacion`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `emisor` (`emisor`),
+  ADD KEY `receptor` (`receptor`);
+
+--
+-- Indices de la tabla `recomendacion_bloqueo`
+--
+ALTER TABLE `recomendacion_bloqueo`
+  ADD PRIMARY KEY (`usuario`,`pelicula`),
+  ADD KEY `usuario` (`usuario`);
+
+--
 -- Indices de la tabla `review`
 --
 ALTER TABLE `review`
@@ -535,13 +616,19 @@ ALTER TABLE `watchlist`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT de la tabla `recomendacion`
+--
+ALTER TABLE `recomendacion`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `review`
@@ -616,6 +703,19 @@ ALTER TABLE `playlist_likes`
 --
 ALTER TABLE `playlist_peliculas`
   ADD CONSTRAINT `playlist_peliculas_ibfk_1` FOREIGN KEY (`playlist`) REFERENCES `playlist` (`clave`);
+
+--
+-- Filtros para la tabla `recomendacion`
+--
+ALTER TABLE `recomendacion`
+  ADD CONSTRAINT `recomendacion_ibfk_1` FOREIGN KEY (`emisor`) REFERENCES `usuario` (`username`),
+  ADD CONSTRAINT `recomendacion_ibfk_2` FOREIGN KEY (`receptor`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `recomendacion_bloqueo`
+--
+ALTER TABLE `recomendacion_bloqueo`
+  ADD CONSTRAINT `recomendacion_bloqueo_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
 
 --
 -- Filtros para la tabla `review`
