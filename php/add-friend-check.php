@@ -3,7 +3,7 @@
     session_start();
     $user = $_SESSION['username'];
     $friend = $_POST['friend'];
-    if($user == $friend)
+    if(strtolower($user) == strtolower($friend))
     {
         echo json_encode("4");
         return;
@@ -19,7 +19,8 @@
         $result = mysqli_query($conn,$sql);
         if($result && $result->num_rows==0)
         {
-            $sql = "SELECT * FROM solicitud WHERE receptor = '$user' AND emisor = '$friend'";
+            $sql = "SELECT * FROM solicitud WHERE receptor = '$user' AND emisor = '$friend'
+            OR receptor = '$friend' AND emisor = '$user'";
             $result = mysqli_query($conn,$sql);
             if($result && $result->num_rows>0)
             {

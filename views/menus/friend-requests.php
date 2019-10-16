@@ -23,7 +23,7 @@
     </div>
     <div class="friend-requests">
         <h2>
-            Solicitudes de amistad
+        <i class="fas fa-user-friends"></i> Solicitudes de amistad
             <a title="Nueva" onclick="newFriendRequest()" class="p-r">
                 <i class="fas fa-plus"></i>
             </a>

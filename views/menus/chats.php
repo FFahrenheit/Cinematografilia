@@ -26,7 +26,7 @@
     </div>
     <div class="friend-requests">
         <h2>
-            Mensajes
+            <i class="fas fa-envelope"></i>Mensajes
             <!-- <a title="Nueva" data-toggle="tab" href="#nav-sent" role="tab" aria-controls="nav-sent" aria-selected="false" class="p-r">
                 <i class="fas fa-plus"></i>
             </a> -->

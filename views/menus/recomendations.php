@@ -23,7 +23,7 @@
     </div>
     <div class="friend-requests">
         <h2>
-            Recomendaciones
+        <i class="far fa-star"></i> Recomendaciones
         </h2>
         <nav class="profile-nav">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
