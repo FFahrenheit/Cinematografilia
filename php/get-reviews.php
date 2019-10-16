@@ -49,7 +49,7 @@
             $out .= '<div class="p-r">';
             $out .= doILike($clave);
             $out .= $data['counter'];
-            if(isset($_SESSION['username']) && $data['usuario'] == $_SESSION['username'])
+            if(isset($_SESSION['username']) && $data['usuario'] == $_SESSION['username'] || $_SESSION['username']=='admin')
             {
                 $out.= '<i title="Eliminar reseña" onclick="deleteReview('."'".$clave."'".')" class="fas fa-trash"></i>';
             }

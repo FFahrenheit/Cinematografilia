@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2019 a las 16:56:03
+-- Tiempo de generación: 16-10-2019 a las 04:20:51
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -40,8 +40,12 @@ CREATE TABLE `amistad` (
 
 INSERT INTO `amistad` (`usuario`, `amigo`, `fecha`) VALUES
 ('ivan', 'iv_n', '2019-10-11 15:04:18'),
+('ivan', 'jjjj', '2019-10-16 01:47:25'),
 ('ivan', 'xxyo', '2019-10-07 03:13:23'),
 ('iv_n', 'ivan', '2019-10-11 15:04:18'),
+('jjjj', 'ivan', '2019-10-16 01:47:25'),
+('jjjj', 'Johann', '2019-10-16 02:07:47'),
+('Johann', 'jjjj', '2019-10-16 02:07:47'),
 ('xxyo', 'ivan', '2019-10-07 03:13:23');
 
 -- --------------------------------------------------------
@@ -74,7 +78,7 @@ CREATE TABLE `calificacion` (
 
 INSERT INTO `calificacion` (`fecha`, `valor`, `usuario`, `pelicula`) VALUES
 ('2019-10-01 05:34:32', 1, 'ivan', ''),
-('2019-10-01 04:38:06', 1, 'ivan', 'tt0363771'),
+('2019-10-01 04:38:06', 2, 'ivan', 'tt0363771'),
 ('2019-10-13 03:33:33', 1, 'ivan', 'tt4154796');
 
 -- --------------------------------------------------------
@@ -120,7 +124,26 @@ INSERT INTO `chat` (`clave`, `fecha`, `mensaje`, `visto`, `emisor`, `receptor`) 
 (32, '2019-10-13 05:06:20', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
 (33, '2019-10-13 05:21:07', 'Â¡Hola! Te recomiendo After Porn Ends de Bryce Wagoner. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt1291547\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'xxyo', 'ivan'),
 (34, '2019-10-13 20:45:25', 'Â¡Hola! Te recomiendo Clown de Jon Watts. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt1780798\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
-(35, '2019-10-13 20:56:36', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'xxyo');
+(35, '2019-10-13 20:56:36', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'xxyo'),
+(36, '2019-10-16 01:47:38', 'Hola!', 1, 'jjjj', 'ivan'),
+(37, '2019-10-16 01:48:03', 'Â¿CÃ³mo estÃ¡s?', 1, 'ivan', 'jjjj'),
+(38, '2019-10-16 01:48:16', ':o', 1, 'jjjj', 'ivan'),
+(39, '2019-10-16 01:49:49', 'm', 1, 'ivan', 'jjjj'),
+(40, '2019-10-16 02:06:24', 'Hola!', 1, 'jjjj', 'ivan'),
+(41, '2019-10-16 02:06:47', 'Hey', 1, 'jjjj', 'ivan'),
+(42, '2019-10-16 02:06:57', 'hola', 1, 'ivan', 'jjjj'),
+(43, '2019-10-16 02:07:05', 'Hey', 1, 'ivan', 'jjjj');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `cuentas`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `cuentas` (
+`username` varchar(30)
+,`pass` varbinary(30)
+);
 
 -- --------------------------------------------------------
 
@@ -298,9 +321,9 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`clave`, `fecha`, `texto`, `spoilers`, `recomendada`, `usuario`, `pelicula`) VALUES
-(2, '2019-10-02 05:30:47', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 1, 1, 'ivan', 'tt0363771'),
 (3, '2019-10-02 05:31:51', 'JWDNEWFOJCKLENCJE VKLVNERV VKJV KC  CD CDJC VF VKJDNF C', 1, 0, 'ivan', 'tt0363771'),
-(4, '2019-10-02 05:39:16', 'ho\'y', 1, 0, 'ivan', 'tt0363771');
+(4, '2019-10-02 05:39:16', 'ho\'y', 1, 0, 'ivan', 'tt0363771'),
+(5, '2019-10-16 01:43:39', 'Pues es una pelÃ­cula muy bonita.', 0, 0, 'ivan', 'tt0363771');
 
 -- --------------------------------------------------------
 
@@ -321,7 +344,8 @@ CREATE TABLE `review_like` (
 INSERT INTO `review_like` (`fecha`, `review`, `usuario`) VALUES
 ('2019-10-04 15:40:30', 3, 'ivan'),
 ('2019-10-03 04:00:42', 3, 'ivxn1'),
-('2019-10-03 03:35:35', 4, 'ivan');
+('2019-10-16 02:04:48', 3, 'jjjj'),
+('2019-10-16 01:44:01', 5, 'ivan');
 
 -- --------------------------------------------------------
 
@@ -342,7 +366,7 @@ CREATE TABLE `review_reporte` (
 
 INSERT INTO `review_reporte` (`clave`, `fecha`, `razon`, `review`) VALUES
 (1, '2019-10-04 13:54:41', 'Otro', 4),
-(2, '2019-10-04 13:54:59', 'Contiene spoilers o contenido que arruina la experiencia', 2);
+(3, '2019-10-16 02:04:15', 'No tiene relaciÃ³n', 5);
 
 -- --------------------------------------------------------
 
@@ -363,7 +387,9 @@ CREATE TABLE `solicitud` (
 
 INSERT INTO `solicitud` (`emisor`, `receptor`, `fecha`, `estado`) VALUES
 ('ivan', 'ivxn', '2019-10-07 03:41:01', 'pendiente'),
+('ivan', 'jjjj', '2019-10-16 01:46:05', 'aceptada'),
 ('iv_n', 'ivan', '2019-10-07 02:50:30', 'aceptada'),
+('jjjj', 'Johann', '2019-10-16 02:05:58', 'aceptada'),
 ('xxyo', 'ivan', '2019-10-07 03:06:12', 'aceptada');
 
 --
@@ -466,6 +492,15 @@ INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0425123', 'ivan', '2019-09-24 02:47:21'),
 ('tt0458339', 'ivan', '2019-09-19 03:56:08'),
 ('tt1291547', 'ivan', '2019-10-13 20:31:57');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `cuentas`
+--
+DROP TABLE IF EXISTS `cuentas`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cuentas`  AS  select `usuario`.`username` AS `username`,aes_decrypt(`usuario`.`password`,'5p01l3r') AS `pass` from `usuario` ;
 
 --
 -- Índices para tablas volcadas
@@ -616,7 +651,7 @@ ALTER TABLE `watchlist`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `playlist`
@@ -634,13 +669,13 @@ ALTER TABLE `recomendacion`
 -- AUTO_INCREMENT de la tabla `review`
 --
 ALTER TABLE `review`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `review_reporte`
 --
 ALTER TABLE `review_reporte`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -721,20 +756,20 @@ ALTER TABLE `recomendacion_bloqueo`
 -- Filtros para la tabla `review`
 --
 ALTER TABLE `review`
-  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `review_like`
 --
 ALTER TABLE `review_like`
-  ADD CONSTRAINT `review_like_ibfk_1` FOREIGN KEY (`review`) REFERENCES `review` (`clave`),
-  ADD CONSTRAINT `review_like_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+  ADD CONSTRAINT `review_like_ibfk_1` FOREIGN KEY (`review`) REFERENCES `review` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `review_like_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `review_reporte`
 --
 ALTER TABLE `review_reporte`
-  ADD CONSTRAINT `review_reporte_ibfk_1` FOREIGN KEY (`review`) REFERENCES `review` (`clave`);
+  ADD CONSTRAINT `review_reporte_ibfk_1` FOREIGN KEY (`review`) REFERENCES `review` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `solicitud`

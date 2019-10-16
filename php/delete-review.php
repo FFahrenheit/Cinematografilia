@@ -3,7 +3,6 @@
     session_start();
     $c = new Connection();
     $conn = $c->getConnection() or die('"0"');
-    $user = $_SESSION['username'];
     $arg = $_POST['arg'];
 
     $sql = "DELETE FROM review WHERE clave = $arg";

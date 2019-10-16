@@ -3,7 +3,22 @@ var friend;
 $(document).ready(() => {
     var objDiv = document.getElementById("sohbet");
     objDiv.scrollTop = objDiv.scrollHeight;
-    window.setInterval(getMessages(), 1500);
+    const msg = setInterval(() => {
+        console.log("Obteniendo mensajes");
+        $.ajax({
+                url: '/spoileralert/php/get-chat.php',
+                type: 'POST',
+                datatype: 'html',
+                data: { friend: friend }
+            })
+            .done((r) => {
+                $("#sohbet").html(r);
+                setTimeout(() => {
+                    var objDiv = document.getElementById("sohbet");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+                }, 100);
+            })
+    }, 1500);
 })
 
 function setFriend(f) {

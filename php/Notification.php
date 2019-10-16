@@ -249,7 +249,7 @@
             else 
             {
                 return "<p>No has enviado solicitudes, haz click en el signo de + en la esquina
-                superior izquierda para empezar a agregar amigos</p>";
+                superior derecha para empezar a agregar amigos</p>";
             }
         }
 

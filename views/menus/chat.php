@@ -14,14 +14,14 @@
     <link href="../../css/communication.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
-          include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Profile.php'); ?>
+    include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Profile.php'); ?>
 </head>
 
 <body>
-   <?php
+    <?php
     $myfr = new Profile($friend);
     $myfr->isChat();
-   ?> 
+    ?>
     <div class="jumbotron m-0 p-0 bg-transparent">
         <div class="row m-0 p-0 position-relative">
             <div class="col-12 p-0 m-0 position-absolute" style="right: 0px;">
@@ -35,9 +35,9 @@
                                 <img class="rounded float-left chat-s" style="width: 50px; height: 50px;" src="https://png.pngtree.com/svg/20170222/white_back_1152661.png" />
                             </a>
                         </div>
-                        <img class="rounded float-left" style="width: 50px; height: 50px;" src="<?php echo $myfr->getImage();?>" />
+                        <img class="rounded float-left" style="width: 50px; height: 50px;" src="<?php echo $myfr->getImage(); ?>" />
                         <h4 class="float-left" style="margin: 0px; margin-left: 10px;">
-                            <?php echo $friend ?></br><small> <?php echo "Usuario desde ".$myfr->getDate(); ?> </small>
+                            <?php echo $friend ?></br><small> <?php echo "Usuario desde " . $myfr->getDate(); ?> </small>
                         </h4>
                         <div class="dropdown show">
                             <a id="dropdownMenuLink" data-toggle="dropdown" class="btn btn-sm float-right text-secondary" role="button">
@@ -46,7 +46,7 @@
                             <div class="dropdown-menu dropdown-menu-right border p-0" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item p-2 text-secondary" href="#"> <i class="fa fa-user m-1" aria-hidden="true"></i> Visitar perfil </a>
                                 <hr class="my-1">
-                                <a class="dropdown-item p-2 text-secondary" href="#"> <i class="fas fa-user-lock"></i> Bloquear usuario  </a>
+                                <a class="dropdown-item p-2 text-secondary" href="#"> <i class="fas fa-user-lock"></i> Bloquear usuario </a>
                             </div>
                         </div>
                     </div>
@@ -147,9 +147,10 @@
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
 <script src="../../js/chat.js"></script>
+<script src="../../js/main.js"></script>
 <script>
-    setFriend('<?php echo $friend;?>');
+    setFriend('<?php echo $friend; ?>');
 </script>

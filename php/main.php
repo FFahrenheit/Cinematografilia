@@ -30,7 +30,7 @@
         if(isset($_SESSION['username']) && $_SESSION['username']=="admin")
         {
             $nav .= '<li class="nav-item">
-                        <a class="nav-link" href="#">Reportes
+                        <a class="nav-link" href="reports.php">Reportes
                             <!---span class="sr-only">(current)</span-->
                         </a>
                     </li>
