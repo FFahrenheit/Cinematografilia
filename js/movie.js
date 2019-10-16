@@ -327,6 +327,12 @@ function confirmation() {
         case 'delete':
             generalRequest('../../php/delete-recomendation.php');
             break;
+        case 'aDelete':
+            generalRequest('../../php/delete-review-admin.php');
+            break;
+        case 'aDiscard':
+            generalRequest('../../php/discard-report-admin.php');
+            break;
     }
 }
 

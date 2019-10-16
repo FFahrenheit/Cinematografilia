@@ -6,7 +6,7 @@
 
     $clave = $_POST['clave'];
 
-    $sql = "DELETE FROM review WHERE clave = '$clave'";
+    $sql = "DELETE FROM review_reporte WHERE clave = '$clave'";
     // echo json_encode($sql);die();
     $result = mysqli_query($conn,$sql) or die("1");
     if($result && mysqli_affected_rows($conn)>0)

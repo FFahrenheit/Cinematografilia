@@ -17,7 +17,7 @@
             $conn = $temp->getConnection();
 
             $sql = "SELECT usuario.imagen as img, review.texto as texto, review.usuario as user, review.pelicula as movie, 
-            review_reporte.razon as razon, review.clave as clave 
+            review_reporte.razon as razon, review.clave as clave1, review_reporte.clave as clave2  
             FROM review, review_reporte,usuario WHERE review_reporte.review = review.clave AND 
             review.usuario = usuario.username";
 
@@ -49,8 +49,8 @@
                     $out .= "<td>$hr<img src='".$body['Poster']."'></a></td>";
                     $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
 
-                    $out .= '<td><a title="Borrar reseña" onclick="addWatched('.$arg.')"><i class="fas fa-ban"></i></a></td>';
-                    $out .= '<td><a title="Descartar reporte" onclick="addWatchlist('.$arg.')"><i class="fas fa-trash-restore-alt"></i></a></td>';
+                    $out .= '<td><a title="Borrar reseña" onclick="deleteRev('."'".$data['clave1']."'".')"><i class="fas fa-ban"></i></a></td>';
+                    $out .= '<td><a title="Descartar reporte" onclick="discardRev('."'".$data['clave2']."'".')"><i class="fas fa-trash-restore-alt"></i></a></td>';
                     $out .= '</tr>';
                 }
                 $out .= '</tbody></table>';

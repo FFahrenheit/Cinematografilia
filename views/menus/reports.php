@@ -67,6 +67,25 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark" id="confirmationModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <p id="confirmationModalBody"></p>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="confirmation()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="footer">
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
@@ -76,6 +95,9 @@
     <script src="../../js/profile.js"></script>
     <script src="../../js/alert.js"></script>
     <script src="../../js/communication.js"></script>
+    <script src="../../js/movie.js"></script>
+    <script src="../../js/admin.js"></script>
+
 </body>
 
 </html>

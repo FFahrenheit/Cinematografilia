@@ -30,7 +30,11 @@ xform.addEventListener('submit', (e) => {
         }, 2000);
         e.preventDefault();
         var rData = new FormData(xform);
+        console.log(rData.get("movie"));
         var link = '../../php/create-playlist.php?name=' + rData.get("name") + '&description=' + rData.get("description");
+        if (rData.get("movie") != null) {
+            link += '&id=' + rData.get("movie");
+        }
         console.log(link);
         if (xform.checkValidity()) {
             fetch(link).then((resp) => {

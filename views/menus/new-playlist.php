@@ -29,6 +29,13 @@
                     Ingrese un nombre válido para la lista
                 </div>
             </div>
+            <?php 
+                if(isset($_GET['movie']))
+                {
+                    $id = $_GET['movie'];
+                    echo "<input type='hidden' value='$id' name='movie'>";
+                }
+            ?>
             <div class="form-group form-group-lg" align="center">
                 <label for="">Breve descripción</label>
                 <br>

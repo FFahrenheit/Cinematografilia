@@ -359,7 +359,7 @@
             $conn = $temp->getConnection();
             $sql = "SELECT * FROM playlist WHERE creador = '$this->username'";
             $result = mysqli_query($conn, $sql);
-            $out = '<li><a class="dropdown-item bg-light" href="new-playlist.php"><i class="fas fa-plus-circle"></i>Nueva</a></li>' ;
+            $out = '<li><a class="dropdown-item bg-light" href="new-playlist.php?movie='.$id.'"><i class="fas fa-plus-circle"></i>Nueva</a></li>' ;
             if($result)
             {
                 $out .= '<div class="dropdown-divider"></div>';
