@@ -16,7 +16,8 @@
     mysqli_query($conn,$sql) or die('"1"');
 
     $sql = "INSERT INTO review(pelicula, usuario, texto,spoilers,recomendada) 
-    VALUES ('$movie','$user','$review',$spoilers, $recomended)";
+    VALUES ('$movie','$user','$review',$spoilers, $recomended) ON DUPLICATE KEY UPDATE 
+    texto = '$review', spoilers = $spoilers, recomendada = $recomended";
 
     mysqli_query($conn,$sql) or die('"1"');
 

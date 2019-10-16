@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2019 a las 04:20:51
+-- Tiempo de generación: 16-10-2019 a las 17:18:53
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -39,9 +39,15 @@ CREATE TABLE `amistad` (
 --
 
 INSERT INTO `amistad` (`usuario`, `amigo`, `fecha`) VALUES
+('ivan', 'ivxn', '2019-10-16 03:21:50'),
+('ivan', 'ivxn1', '2019-10-16 02:54:02'),
+('ivan', 'ivxn1k', '2019-10-16 02:58:25'),
 ('ivan', 'iv_n', '2019-10-11 15:04:18'),
 ('ivan', 'jjjj', '2019-10-16 01:47:25'),
 ('ivan', 'xxyo', '2019-10-07 03:13:23'),
+('ivxn', 'ivan', '2019-10-16 03:21:50'),
+('ivxn1', 'ivan', '2019-10-16 02:54:02'),
+('ivxn1k', 'ivan', '2019-10-16 02:58:25'),
 ('iv_n', 'ivan', '2019-10-11 15:04:18'),
 ('jjjj', 'ivan', '2019-10-16 01:47:25'),
 ('jjjj', 'Johann', '2019-10-16 02:07:47'),
@@ -78,7 +84,7 @@ CREATE TABLE `calificacion` (
 
 INSERT INTO `calificacion` (`fecha`, `valor`, `usuario`, `pelicula`) VALUES
 ('2019-10-01 05:34:32', 1, 'ivan', ''),
-('2019-10-01 04:38:06', 2, 'ivan', 'tt0363771'),
+('2019-10-01 04:38:06', 1, 'ivan', 'tt0363771'),
 ('2019-10-13 03:33:33', 1, 'ivan', 'tt4154796');
 
 -- --------------------------------------------------------
@@ -132,7 +138,17 @@ INSERT INTO `chat` (`clave`, `fecha`, `mensaje`, `visto`, `emisor`, `receptor`) 
 (40, '2019-10-16 02:06:24', 'Hola!', 1, 'jjjj', 'ivan'),
 (41, '2019-10-16 02:06:47', 'Hey', 1, 'jjjj', 'ivan'),
 (42, '2019-10-16 02:06:57', 'hola', 1, 'ivan', 'jjjj'),
-(43, '2019-10-16 02:07:05', 'Hey', 1, 'ivan', 'jjjj');
+(43, '2019-10-16 02:07:05', 'Hey', 1, 'ivan', 'jjjj'),
+(44, '2019-10-16 02:54:18', 'hey', 1, 'ivan', 'ivxn1'),
+(45, '2019-10-16 02:54:38', 'hola', 1, 'ivan', 'ivxn1'),
+(46, '2019-10-16 02:54:42', 'ola', 1, 'ivxn1', 'ivan'),
+(47, '2019-10-16 02:54:52', 'uwu', 1, 'ivan', 'ivxn1'),
+(48, '2019-10-16 02:58:43', 'hola', 1, 'ivan', 'ivxn1k'),
+(49, '2019-10-16 02:59:03', 'Como estÃ¡s', 1, 'ivan', 'ivxn1k'),
+(50, '2019-10-16 02:59:07', 'uwu', 1, 'ivan', 'ivxn1k'),
+(51, '2019-10-16 03:10:20', 'UWU', 0, 'ivan', 'ivxn1'),
+(52, '2019-10-16 03:22:06', 'Â¡Hola! Te recomiendo Captain America: The First Avenger de Joe Johnston. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0458339\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivxn', 'ivan'),
+(53, '2019-10-16 04:37:24', 'hola', 0, 'ivan', 'jjjj');
 
 -- --------------------------------------------------------
 
@@ -208,7 +224,12 @@ CREATE TABLE `playlist` (
 INSERT INTO `playlist` (`clave`, `nombre`, `descripcion`, `fecha`, `creador`) VALUES
 (47, 'Timetravel movies', 'Peliculas para romperse la mente', '2019-09-20 16:08:36', 'ivan'),
 (48, 'Otra lista', 'Otra lista cool', '2019-09-20 16:08:54', 'ivan'),
-(49, 'Mi lista', 'Una lista interesante', '2019-10-09 17:05:16', 'Johann');
+(49, 'Mi lista', 'Una lista interesante', '2019-10-09 17:05:16', 'Johann'),
+(50, 'Hola', 'jola', '2019-10-16 03:43:55', 'ivxn'),
+(51, 'NSN', 'nd', '2019-10-16 03:46:05', 'ivxn'),
+(52, 'snsn', 'xnsn', '2019-10-16 03:48:22', 'ivxn'),
+(53, 'jcsjc', 'qjjwdcjs', '2019-10-16 03:48:27', 'ivxn'),
+(54, 'jaja', 'JAJA', '2019-10-16 03:49:16', 'ivxn');
 
 -- --------------------------------------------------------
 
@@ -250,9 +271,23 @@ INSERT INTO `playlist_peliculas` (`pelicula`, `playlist`) VALUES
 ('tt0468569', 49),
 ('tt0480669', 47),
 ('tt0480669', 48),
+('tt1000774', 54),
 ('tt2194499', 47),
 ('tt2397535', 47),
 ('tt2669336', 47);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `preguntas`
+--
+
+CREATE TABLE `preguntas` (
+  `clave` int(11) NOT NULL,
+  `pregunta` text NOT NULL,
+  `estado` enum('activa','inactiva','cola','') NOT NULL DEFAULT 'cola',
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -287,7 +322,8 @@ INSERT INTO `recomendacion` (`clave`, `fecha`, `pelicula`, `visto`, `emisor`, `r
 (14, '2019-10-13 04:59:49', 'tt0848228', 0, 'ivan', 'iv_n'),
 (15, '2019-10-13 05:06:19', 'tt0848228', 0, 'ivan', 'iv_n'),
 (17, '2019-10-13 20:45:24', 'tt1780798', 0, 'ivan', 'iv_n'),
-(18, '2019-10-13 20:56:35', 'tt0848228', 1, 'ivan', 'xxyo');
+(18, '2019-10-13 20:56:35', 'tt0848228', 1, 'ivan', 'xxyo'),
+(19, '2019-10-16 03:22:05', 'tt0458339', 1, 'ivxn', 'ivan');
 
 -- --------------------------------------------------------
 
@@ -298,6 +334,19 @@ INSERT INTO `recomendacion` (`clave`, `fecha`, `pelicula`, `visto`, `emisor`, `r
 CREATE TABLE `recomendacion_bloqueo` (
   `usuario` varchar(30) NOT NULL,
   `pelicula` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respuestas`
+--
+
+CREATE TABLE `respuestas` (
+  `usuario` varchar(30) NOT NULL,
+  `pregunta` int(11) NOT NULL,
+  `pelicula` varchar(10) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -321,9 +370,7 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`clave`, `fecha`, `texto`, `spoilers`, `recomendada`, `usuario`, `pelicula`) VALUES
-(3, '2019-10-02 05:31:51', 'JWDNEWFOJCKLENCJE VKLVNERV VKJV KC  CD CDJC VF VKJDNF C', 1, 0, 'ivan', 'tt0363771'),
-(4, '2019-10-02 05:39:16', 'ho\'y', 1, 0, 'ivan', 'tt0363771'),
-(5, '2019-10-16 01:43:39', 'Pues es una pelÃ­cula muy bonita.', 0, 0, 'ivan', 'tt0363771');
+(3, '2019-10-16 14:59:17', 'Mala', 0, 0, 'ivan', 'tt0363771');
 
 -- --------------------------------------------------------
 
@@ -344,8 +391,7 @@ CREATE TABLE `review_like` (
 INSERT INTO `review_like` (`fecha`, `review`, `usuario`) VALUES
 ('2019-10-04 15:40:30', 3, 'ivan'),
 ('2019-10-03 04:00:42', 3, 'ivxn1'),
-('2019-10-16 02:04:48', 3, 'jjjj'),
-('2019-10-16 01:44:01', 5, 'ivan');
+('2019-10-16 02:04:48', 3, 'jjjj');
 
 -- --------------------------------------------------------
 
@@ -359,14 +405,6 @@ CREATE TABLE `review_reporte` (
   `razon` varchar(100) NOT NULL,
   `review` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `review_reporte`
---
-
-INSERT INTO `review_reporte` (`clave`, `fecha`, `razon`, `review`) VALUES
-(1, '2019-10-04 13:54:41', 'Otro', 4),
-(3, '2019-10-16 02:04:15', 'No tiene relaciÃ³n', 5);
 
 -- --------------------------------------------------------
 
@@ -386,8 +424,11 @@ CREATE TABLE `solicitud` (
 --
 
 INSERT INTO `solicitud` (`emisor`, `receptor`, `fecha`, `estado`) VALUES
-('ivan', 'ivxn', '2019-10-07 03:41:01', 'pendiente'),
+('ivan', 'hola', '2019-10-16 03:01:53', 'pendiente'),
 ('ivan', 'jjjj', '2019-10-16 01:46:05', 'aceptada'),
+('ivxn', 'ivan', '2019-10-16 03:21:35', 'aceptada'),
+('ivxn1', 'ivan', '2019-10-16 02:52:58', 'aceptada'),
+('ivxn1k', 'ivan', '2019-10-16 02:58:00', 'aceptada'),
 ('iv_n', 'ivan', '2019-10-07 02:50:30', 'aceptada'),
 ('jjjj', 'Johann', '2019-10-16 02:05:58', 'aceptada'),
 ('xxyo', 'ivan', '2019-10-07 03:06:12', 'aceptada');
@@ -576,6 +617,12 @@ ALTER TABLE `playlist_peliculas`
   ADD KEY `playlist` (`playlist`);
 
 --
+-- Indices de la tabla `preguntas`
+--
+ALTER TABLE `preguntas`
+  ADD PRIMARY KEY (`clave`);
+
+--
 -- Indices de la tabla `recomendacion`
 --
 ALTER TABLE `recomendacion`
@@ -591,10 +638,19 @@ ALTER TABLE `recomendacion_bloqueo`
   ADD KEY `usuario` (`usuario`);
 
 --
+-- Indices de la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  ADD PRIMARY KEY (`usuario`,`pregunta`),
+  ADD KEY `usuario` (`usuario`),
+  ADD KEY `pregunta` (`pregunta`);
+
+--
 -- Indices de la tabla `review`
 --
 ALTER TABLE `review`
   ADD PRIMARY KEY (`clave`),
+  ADD UNIQUE KEY `uniqueReview` (`usuario`,`pelicula`),
   ADD KEY `usuario` (`usuario`),
   ADD KEY `pelicula` (`pelicula`);
 
@@ -651,25 +707,31 @@ ALTER TABLE `watchlist`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT de la tabla `preguntas`
+--
+ALTER TABLE `preguntas`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `recomendacion`
 --
 ALTER TABLE `recomendacion`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `review`
 --
 ALTER TABLE `review`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `review_reporte`
@@ -751,6 +813,13 @@ ALTER TABLE `recomendacion`
 --
 ALTER TABLE `recomendacion_bloqueo`
   ADD CONSTRAINT `recomendacion_bloqueo_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  ADD CONSTRAINT `respuestas_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `respuestas_ibfk_2` FOREIGN KEY (`pregunta`) REFERENCES `preguntas` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `review`

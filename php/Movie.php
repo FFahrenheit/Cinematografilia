@@ -328,4 +328,18 @@
           </form>';
         }
 
+        public function haveReview($m,$u)
+        {
+          $temp = new Connection();
+          $conn = $temp->getConnection();
+          if($temp->getCount($conn,"SELECT COUNT(*) FROM review WHERE pelicula = '$m' AND usuario = '$u'")==0)
+          {
+            return "Escriba una reseña";
+          }
+          else 
+          {
+            return "Edite su reseña";
+          }
+        }
+
     }

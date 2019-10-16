@@ -111,11 +111,16 @@
                                     <option value="2">Más reciente</option>
                                 </select>
                             </h3>
-                            <div class="botonera">
-                                <button class="btn btn-warning" onclick="seeReviewForm()">Escriba una reseña</button>
-                                <span>&nbsp;ó&nbsp;</span>
-                                <button class="btn btn-warning" onclick="seeCalificationForm()">Califique la película</button>
-                            </div>
+                            <?php
+                            if (isset($_SESSION['username'])) { ?>
+                                <div class="botonera">
+                                    <button class="btn btn-warning" onclick="seeReviewForm()">
+                                        <?php echo $m->haveReview($id,$_SESSION['username']); ?>
+                                    </button>
+                                    <span>&nbsp;ó&nbsp;</span>
+                                    <button class="btn btn-warning" onclick="seeCalificationForm()">Califique la película</button>
+                                </div>
+                            <?php } ?>
                             <div class="row bootstrap snippets reviews">
                                 <div class="comment-wrapper">
                                     <div class="panel panel-info">
@@ -257,8 +262,10 @@
                 <div class="modal-body bg-dark">
                     Seleccione el amigo al cual quiere recomendar la película
                     <select class="custom-select" id="recomend-list">
-                        <?php 
+                        <?php
+                        if (isset($_SESSION['username'])) {
                             echo $profile->getFriendSelect();
+                        }
                         ?>
                     </select>
                 </div>

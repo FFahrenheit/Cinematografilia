@@ -258,13 +258,16 @@
             $temp = new Connection();
             $conn = $temp->getConnection();
 
-            $sql = "SELECT usuario.imagen AS 'img', usuario.username as 'user' 
-            FROM amistad, usuario WHERE amistad.amigo = usuario.username AND amistad.usuario = '$this->user'";
+            $sql = "SELECT usuario.imagen AS 'img', usuario.username as 'user', 
+            (SELECT chat.fecha FROM chat WHERE (chat.emisor = '$this->user' AND chat.receptor = usuario.username)
+             OR (chat.emisor = usuario.username AND chat.receptor = '$this->user') ORDER BY chat.fecha DESC LIMIT 1)
+              as sorted FROM amistad, usuario WHERE amistad.amigo = usuario.username AND amistad.usuario = '$this->user'
+              ORDER BY sorted DESC";
 
             $result = mysqli_query($conn,$sql);
             if($result && $result->num_rows>0)
             {
-                $out = '<table class ="table table-hover sa_table"><tbody>';
+                $out = '<table id="chat-table" class ="table table-hover sa_table"><tbody>';
                 while($data = mysqli_fetch_assoc($result))
                 {
                     $friend = $data['user'];

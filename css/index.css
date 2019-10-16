@@ -132,3 +132,8 @@ body {
 .brigth {
     color: rgb(240, 240, 240);
 }
+
+.weekly {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
