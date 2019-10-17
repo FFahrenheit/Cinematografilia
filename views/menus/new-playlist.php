@@ -40,9 +40,6 @@
                 <label for="">Breve descripción</label>
                 <br>
                 <textarea style="max-width: 50%" class="form-control" rows="5" id="descrption" name="description" maxlength="250" placeholder="Escriba una breve descripción" required></textarea>
-                <!--input name="description" maxlength="250" type="text" minlength="0"
-                placeholder="Escriba una descripcíon para su lista. Máximo 250 caracteres" 
-                class="form-control input-lg" required-->
                 <div class="invalid-feedback">
                     Ingrese una descripción
                 </div>

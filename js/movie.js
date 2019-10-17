@@ -333,6 +333,9 @@ function confirmation() {
         case 'aDiscard':
             generalRequest('../../php/discard-report-admin.php');
             break;
+        case 'dQuestion':
+            generalRequest('../../php/delete-question.php');
+            break;
     }
 }
 

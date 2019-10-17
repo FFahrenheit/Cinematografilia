@@ -30,15 +30,13 @@
         if(isset($_SESSION['username']) && $_SESSION['username']=="admin")
         {
             $nav .= '<li class="nav-item">
-                        <a class="nav-link" href="reports.php">Reportes
-                            <!---span class="sr-only">(current)</span-->
-                        </a>
+                        <a class="nav-link" href="reports.php">Reportes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Revisar maratones</a>
+                        <a class="nav-link" href="review-marathons.php">Revisar maratones</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Preguntas semanales</a>
+                        <a class="nav-link" href="review-questions.php">Preguntas semanales</a>
                     </li>
                 </ul>';
         }
