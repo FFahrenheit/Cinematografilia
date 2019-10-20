@@ -1,0 +1,23 @@
+RECOMENDADO: Nuevo correo, se tiene que dar acceso a 
+aplicaciones poco seguras
+https://myaccount.google.com/lesssecureapps
+
+En xampp/sendmail/sendmail.ini
+
+stmp_server = servidor smtp (smtp.gmail.com)
+stmp_port = 465
+stmp_ssl = ssl
+auth_username = correo
+auth_password = contrase+
+ña
+
+En xampp/php/php.ini
+Buscar [mail function]
+
+Comentar (con punto y coma)
+STMP=localhost
+sendmail_port
+
+Descomentar y editar
+sendmail_from = correo
+sendmail_path  = "C:\xampp\sendmail\sendmail.exe -t"

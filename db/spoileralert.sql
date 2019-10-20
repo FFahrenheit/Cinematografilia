@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2019 a las 17:18:53
+-- Tiempo de generación: 20-10-2019 a las 23:25:22
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -458,25 +458,26 @@ CREATE TABLE `usuario` (
   `password` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `imagen` varchar(100) DEFAULT '../../img/default-profile.png',
-  `origen` timestamp NOT NULL DEFAULT current_timestamp()
+  `origen` timestamp NOT NULL DEFAULT current_timestamp(),
+  `temporal` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`username`, `password`, `email`, `imagen`, `origen`) VALUES
-('admin', 'â—Š“I¥áéQÆÔÊc[ø', ' ', '../../img/default-profile.png', '2019-10-14 14:52:08'),
-('hola', 'V[sÎÆPgRÖùoJ ', 'hola@hola.co', '../../img/default-profile.png', '2019-09-16 02:14:04'),
-('ivan', '0Móè3ÒÂ\'Æà¡8c3‰', 'di@di.com', '../../img/profiles/ivan.gif', '2019-09-16 02:14:04'),
-('ivxn', 'ÞÔpƒW–+2‹ïŽ‚A¬', 'cuenta@ejemplo.com', '../../img/default-profile.png', '2019-09-16 02:14:04'),
-('ivxn1', 'á†™>Öz00qMÊ£', 'cuenta@ejemplo.co', '../../img/default-profile.png', '2019-09-16 02:14:04'),
-('ivxn1k', 'á†™>Öz00qMÊ£', '1cuenta@ejemplo.co', '../../img/default-profile.png', '2019-09-16 02:14:04'),
-('iv_n', 'E¸e-ÍÀÏÝd1»ä', 'ivan@ivan.com', '../../img/default-profile.png', '2019-09-19 05:36:51'),
-('jjjj', '†GV¦µ=@“ÿà :²', 'ja@ja.ja', '../../img/default-profile.png', '2019-09-16 02:14:04'),
-('jkjj', '´†l\0©HÔ::£k$^ù}8', 'di@dia.com', '../../img/default-profile.png', '2019-09-16 02:14:04'),
-('Johann', 'ÞÔpƒW–+2‹ïŽ‚A¬', 'dii@dii.com', '../../img/default-profile.png', '2019-10-09 17:04:46'),
-('xxyo', 'ET¸q¯©xÓõé-•u;å', 'xx@xx.xx', '../../img/default-profile.png', '2019-09-16 02:14:04');
+INSERT INTO `usuario` (`username`, `password`, `email`, `imagen`, `origen`, `temporal`) VALUES
+('admin', 'â—Š“I¥áéQÆÔÊc[ø', ' ', '../../img/default-profile.png', '2019-10-14 14:52:08', NULL),
+('hola', 'V[sÎÆPgRÖùoJ ', 'hola@hola.co', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
+('ivan', '0Móè3ÒÂ\'Æà¡8c3‰', 'di@di.com', '../../img/profiles/ivan.gif', '2019-09-16 02:14:04', NULL),
+('ivxn', 'ÞÔpƒW–+2‹ïŽ‚A¬', 'cuenta@ejemplo.com', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
+('ivxn1', 'á†™>Öz00qMÊ£', 'cuenta@ejemplo.co', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
+('ivxn1k', 'á†™>Öz00qMÊ£', '1cuenta@ejemplo.co', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
+('iv_n', 'E¸e-ÍÀÏÝd1»ä', 'ivan@ivan.com', '../../img/default-profile.png', '2019-09-19 05:36:51', NULL),
+('jjjj', '†GV¦µ=@“ÿà :²', 'ja@ja.ja', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
+('jkjj', '´†l\0©HÔ::£k$^ù}8', 'di@dia.com', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
+('Johann', 'ÞÔpƒW–+2‹ïŽ‚A¬', 'dii@dii.com', '../../img/default-profile.png', '2019-10-09 17:04:46', NULL),
+('xxyo', 'ET¸q¯©xÓõé-•u;å', 'xx@xx.xx', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -719,7 +720,7 @@ ALTER TABLE `playlist`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `recomendacion`

@@ -17,6 +17,10 @@ function checkPassword() {
     var pass = document.getElementById('pass');
     var cPass = document.getElementById('cPass');
     var span = document.getElementById('passwordError');
+    if (cPass.lenght > 30) {
+        span.style.color = 'red';
+        span.innerHTML = 'La contraseña es muy larga';
+    }
     if (cPass.value == pass.value) {
         span.style.color = 'green';
         span.innerHTML = 'Ok';
