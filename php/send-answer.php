@@ -7,7 +7,8 @@
     $user = $_SESSION['username'];
 
     $sql = "INSERT INTO respuestas(usuario,pregunta,pelicula) VALUES 
-    ('$user',(SELECT clave FROM preguntas WHERE estado = 'activa' LIMIT 1),'$movie')";
+    ('$user',(SELECT clave FROM preguntas WHERE estado = 'activa' LIMIT 1),'$movie') 
+    ON DUPLICATE KEY UPDATE pelicula = '$movie'";
 
     mysqli_query($conn,$sql) or die('"1"');
 
