@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2019 a las 23:25:22
+-- Tiempo de generación: 23-10-2019 a las 06:00:33
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -289,6 +289,23 @@ CREATE TABLE `preguntas` (
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `preguntas`
+--
+
+INSERT INTO `preguntas` (`clave`, `pregunta`, `estado`, `fecha`) VALUES
+(2, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:39'),
+(3, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:40'),
+(4, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:41'),
+(5, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:42'),
+(6, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:43'),
+(7, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:44'),
+(8, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:45'),
+(9, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:46'),
+(10, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:47'),
+(11, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:48'),
+(12, 'Pelicula favrita recientemente', 'activa', '2019-10-23 02:51:48');
+
 -- --------------------------------------------------------
 
 --
@@ -348,6 +365,13 @@ CREATE TABLE `respuestas` (
   `pelicula` varchar(10) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `respuestas`
+--
+
+INSERT INTO `respuestas` (`usuario`, `pregunta`, `pelicula`, `fecha`) VALUES
+('ivan', 12, 'tt0848228', '2019-10-23 03:54:14');
 
 -- --------------------------------------------------------
 
@@ -720,7 +744,7 @@ ALTER TABLE `playlist`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `recomendacion`
@@ -859,6 +883,68 @@ ALTER TABLE `vistas`
 --
 ALTER TABLE `watchlist`
   ADD CONSTRAINT `watchlist_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `actualizar_pregunta` ON SCHEDULE EVERY 1 WEEK STARTS '2019-10-06 00:00:00' ON COMPLETION PRESERVE ENABLE DO begin
+UPDATE
+  preguntas
+SET
+  estado = 'inactiva',
+  fecha = NOW()
+WHERE
+  estado = 'activa';IF(
+    (
+      SELECT
+        COUNT(*)
+      FROM
+        preguntas
+      WHERE
+        estado = 'cola'
+    ) > 0
+  ) THEN
+UPDATE
+  preguntas
+SET
+  estado = 'activa'
+WHERE
+  clave = (
+    SELECT
+      clave
+    FROM
+      preguntas
+    WHERE
+      estado = 'cola'
+    ORDER BY
+      fecha ASC
+    LIMIT
+      1
+  );ELSE
+INSERT INTO
+  preguntas(pregunta)
+VALUES
+  ('Pelicula favorita vista recientemente');
+UPDATE
+  preguntas
+SET
+  estado = 'activa'
+WHERE
+  clave = (
+    SELECT
+      clave
+    FROM
+      preguntas
+    WHERE
+      estado = 'cola'
+    ORDER BY
+      fecha ASC
+    LIMIT
+      1
+  );END IF;END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -14,7 +14,7 @@
         $data = mysqli_fetch_assoc($result);
 
         $title="Recuperación de contraseña SpoilerAlert!";
-        $body = "<h5>Se ha solicitado la recuperación de la cuenta asociada a este correo</h5><br>
+        $body = "<h4>Se ha solicitado la recuperación de la cuenta asociada a este correo</h4><br>
         <p>Tu nueva contraseña es <strong>$pass</strong></p>. <p>Si no has solicitado la recuperación 
         de cuenta, ignora este mensaje</p>";
         $headers  = 'MIME-Version: 1.0' . "\r\n";

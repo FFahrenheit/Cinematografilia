@@ -22,3 +22,22 @@
     cursor: pointer;
     opacity: 0.8;
 }
+
+.questions {
+    padding-top: 10px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(55, 55, 55, 1) 100%);
+    text-align: center;
+    color: #F6C519;
+    align-content: center;
+    padding-bottom: 15px;
+}
+
+.questions input {
+    display: inline-block;
+    width: 50%;
+}
+
+.questions a {
+    color: #F6C519;
+    text-decoration: underline;
+}
