@@ -15,11 +15,11 @@
 
         $title="Recuperación de contraseña SpoilerAlert!";
         $body = "<h4>Se ha solicitado la recuperación de la cuenta asociada a este correo</h4><br>
-        <p>Tu nueva contraseña es <strong>$pass</strong></p>. <p>Si no has solicitado la recuperación 
+        <p>Tu nueva contraseña es <strong>$pass</strong></p> <p>Si no has solicitado la recuperación 
         de cuenta, ignora este mensaje</p>";
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-        $headers .= "From: diskman199@gmail.com";
+        $headers .= "From: spoileralertnoreply@gmail.com";
 
         if(mail($data['email'],$title,$body,$headers))
         {

@@ -39,9 +39,10 @@
             $row = mysqli_fetch_assoc($result);
             $_SESSION['email'] = $row['email'];
             $_SESSION['username'] = $user;
+            $_SESSION['temporal'] = 'lorem';
             echo json_encode("5");
         }
-        else 
+        else
         {
             echo json_encode("3");
         }

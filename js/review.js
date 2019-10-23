@@ -230,7 +230,7 @@ function report(rev) {
     $("#alertModalText").html("<p>Seleccione el motivo</p>" +
         "<select class='custom-select' id = 'report-list'><option selected>Es ofensivo</option>" +
         '<option>Es spam</option><option>No tiene relación</option><option>Contiene spoilers o contenido que arruina la experiencia</option>' +
-        '<option>Otro</option><select>');
+        '<select>');
     $("#alertModal").modal("toggle");
 
     url = '../../php/report-review.php';

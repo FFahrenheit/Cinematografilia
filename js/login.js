@@ -1,21 +1,71 @@
-(function() {
-    'use strict';
+if (form != null) {
+    (function() {
+        'use strict';
 
-    window.addEventListener('load', function() {
-        var form = document.getElementById('formulario');
-        form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
+        window.addEventListener('load', function() {
+            var form = document.getElementById('formulario');
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
         }, false);
-    }, false);
-})();
+    })();
+}
 
 var form = document.getElementById('formulario');
 var img = document.getElementById('load');
 var recover = document.getElementById('recover');
+var newPass = document.getElementById('new-pass');
+
+if (newPass != null) {
+    newPass.addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log("Nueva");
+        if (newPass.checkValidity()) {
+            fetch('../../php/new-password.php', {
+                method: 'POST',
+                body: new FormData(newPass)
+            }).then(resp => {
+                return resp.json();
+            }).then(r => {
+                con
+                console.log(r);
+                switch (r) {
+                    case 0:
+                    case "0":
+                        alertar("Error del servidor", "danger");
+                        break;
+                    case 1:
+                    case "1":
+                        alertar("Error de página", "warning");
+                        break;
+                    case 2:
+                    case "2":
+                        alertar("Contraseña cambiada", "success");
+                        setTimeout(() => {
+                            window.location.pathname = 'SpoilerAlert/views/menus/index.php';
+                        }, 2500);
+                        break;
+                    case "3":
+                    case 3:
+                        alertar("No tienes permiso para cambiar la contraseña desde aquí", "danger");
+                        setTimeout(() => {
+                            window.location.reload(true);
+                        }, 2000);
+                        break;
+                    default:
+                        alertar("Error con el servidor", "danger");
+                        setTimeout(() => {
+                            window.location.reload(true);
+                        }, 1500);
+                }
+            })
+        }
+    })
+}
 
 if (recover != null) {
     recover.addEventListener('submit', (e) => {
@@ -100,9 +150,9 @@ if (form != null) {
                             break;
                         case '5':
                             alert.classList.add('alert-success');
-                            alert.innerHTML = 'Cuenta recuperada, te recomendamos cambiar tu contraseña ya que esta exiró, redirigiendo...';
+                            alert.innerHTML = 'Cuenta recuperada, cambia tu contraseña ya que esta expiró, redirigiendo...';
                             setTimeout(() => {
-                                window.location.pathname = 'SpoilerAlert/views/menus/configure.php';
+                                window.location.pathname = 'SpoilerAlert/views/menus/new-password.php';
                             }, 2500);
                             break;
                         default:
