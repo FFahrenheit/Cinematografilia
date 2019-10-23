@@ -31,7 +31,6 @@ if (newPass != null) {
             }).then(resp => {
                 return resp.json();
             }).then(r => {
-                con
                 console.log(r);
                 switch (r) {
                     case 0:
@@ -40,7 +39,7 @@ if (newPass != null) {
                         break;
                     case 1:
                     case "1":
-                        alertar("Error de página", "warning");
+                        alertar("No puedes usar la contraseña anterior", "warning");
                         break;
                     case 2:
                     case "2":

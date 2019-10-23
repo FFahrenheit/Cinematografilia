@@ -3,6 +3,11 @@
     include 'Notification.php';
     include 'Connection.php';
     $APIKey = "b27f9641";
+    if(isset($_SESSION['temporal']) && $_SESSION['temporal']=='lorem' 
+    && $_SERVER['REQUEST_URI'] != '/SpoilerAlert/views/menus/new-password.php')
+    {
+        header("Location: new-password.php");
+    }
     //echo $_SESSION['username'];
 
     function getLogged()

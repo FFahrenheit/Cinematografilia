@@ -3,7 +3,7 @@
     include_once('Connection.php');
     if(!isset($_SESSION['temporal']))
     {
-        echo json_encode("ok");
+        echo json_encode("3");
         die();
     }
 
@@ -19,6 +19,7 @@
 
     if($result && mysqli_affected_rows($connection)>0)
     {
+        $_SESSION['temporal'] = "ipsum";
         echo json_encode("2");
     }
     else 

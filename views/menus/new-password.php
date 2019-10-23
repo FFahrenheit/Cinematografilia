@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-warning quote" title="Iniciar sesión">Recuperar contraseña</button>
+                <button type="submit" class="btn btn-warning quote" title="Iniciar sesión">Guardar</button>
             </div>
         </form>
     </div>
