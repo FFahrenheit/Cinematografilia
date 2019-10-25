@@ -101,6 +101,7 @@
                 <a class="dropdown-item bg-white" href="../../php/my-profile.php"><span class="font-weight-bold">
                 '.$_SESSION['username'].'</span><br>Perfil</br></a>
                 <a class="dropdown-item bg-light" href="configure.php">Administrar cuenta</a>
+                <a class="dropdown-item bg-light" href="my-stats.php">Mi recuento cinematográfico</a>
                 <a class="dropdown-item bg-light" href="#" onclick="logout()"><span class="font-weight-bold">Cerrar sesión</span></a>
             </div>
             </li>';

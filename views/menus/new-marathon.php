@@ -21,32 +21,65 @@
             <span id="alert-message"></span>
             <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
         </div>
-        <form id="new-playlist" novalidate autocomplete="off">
+        <form id="new-marathon" novalidate autocomplete="off">
             <div class="form-group">
-                <label for="">Nombre de la lista: </label>
+                <label for="">Nombre del maratón: </label>
                 <br>
                 <input name="name" type="text" placeholder="Escriba el nombre" class="form-control" required minlength="2">
                 <div class="invalid-feedback">
-                    Ingrese un nombre válido para la lista
+                    Ingrese un nombre
                 </div>
             </div>
-            <?php 
-                if(isset($_GET['movie']))
-                {
-                    $id = $_GET['movie'];
-                    echo "<input type='hidden' value='$id' name='movie'>";
-                }
-            ?>
             <div class="form-group form-group-lg" align="center">
-                <label for="">Breve descripción</label>
+                <label for="">Descripción del maratón</label>
                 <br>
-                <textarea style="max-width: 50%" class="form-control" rows="5" id="descrption" name="description" maxlength="250" placeholder="Escriba una breve descripción" required></textarea>
+                <textarea name="description" style="max-width: 50%" class="form-control" rows="5" id="descrption" maxlength="250" placeholder="Escriba una breve descripción" required></textarea>
                 <div class="invalid-feedback">
                     Ingrese una descripción
                 </div>
             </div>
+            <div class="form-group form-group-lg" align="center">
+                <label for="">¿Qué tipo de películas tiene el maratón?</label>
+                <br>
+                <textarea name="movies" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250" placeholder="Escriba su respuesta" required></textarea>
+                <div class="invalid-feedback">
+                    Ingrese su respuesta
+                </div>
+            </div>
+            <div class="form-group form-group-lg" align="center">
+                <label for="">¿A qué tipo de público va dirigido el maratón?</label>
+                <br>
+                <textarea name="public" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
+                <div class="invalid-feedback">
+                    Ingrese su respuesta
+                </div>
+            </div>
+            <div class="form-group form-group-lg" align="center">
+                <label for="">¿Qué género de películas abunda en el maratón?</label>
+                <br>
+                <textarea name="genrse" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
+                <div class="invalid-feedback">
+                    Ingrese su respuesta
+                </div>
+            </div>
+            <div class="form-group form-group-lg" align="center">
+                <label for="">¿Cuál es la intención del maratón?</label>
+                <br>
+                <textarea name="intention" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
+                <div class="invalid-feedback">
+                    Ingrese su respuesta
+                </div>
+            </div>
+            <div class="form-group form-group-lg" align="center">
+                <label for="">¿Por qué el nombre del maratón?</label>
+                <br>
+                <textarea name="reason" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
+                <div class="invalid-feedback">
+                    Ingrese su respuesta
+                </div>
+            </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-warning quote" title="Cambiar contraseña">Crear lista</button>
+                <button type="submit" class="btn btn-warning quote" title="Cambiar contraseña">Continuar con la selección de películas</button>
             </div>
         </form>
     </div>
