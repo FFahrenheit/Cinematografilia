@@ -84,7 +84,8 @@
                     $body = json_decode($content, true);
 
                     $hr = "<a style='color: white;' href = 'movie.php?id=".$data['movie']."'>";
-                    $out .= "<td>$hr<img src='".$body['Poster']."'></a></td>";
+                    $poster = ($body['Poster']=="N/A")? "../../img/poster.jpg" : $body['Poster'];
+                    $out .= "<td>$hr<img src='".$poster."'></a></td>";
                     $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
 
                     $out .= '<td><a title="Agregar a vistas" onclick="addWatched('.$arg.')"><i class="fas fa-eye"></i></a></td>';
@@ -133,7 +134,8 @@
                     $body = json_decode($content, true);
 
                     $hr = "<a style='color: white;' href = 'movie.php?id=".$data['movie']."'>";
-                    $out .= "<td>$hr<img src='".$body['Poster']."'></a></td>";
+                    $poster = ($body['Poster']=="N/A")? "../../img/poster.jpg" : $body['Poster'];
+                    $out .= "<td>$hr<img src='".$poster."'></a></td>";
                     $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
                     
                     $out .= '</tr>';
@@ -168,8 +170,8 @@
                     $body = json_decode($content, true);
 
                     $hr = "<a style='color: white;' href = 'movie.php?id=".$data['movie']."'>";
-                    $out .= "<td>$hr<img src='".$body['Poster']."'></a></td>";
-                    $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
+                    $poster = ($body['Poster']=="N/A")? "../../img/poster.jpg" : $body['Poster'];
+                    $out .= "<td>$hr<img src='".$poster."'></a></td>";                    $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
                     
                     $out .= '<td><a title="Desbloquear recomendación" onclick="unblockMovie('.$arg.')"><i class="fas fa-unlock"></i></a></td>';
 
