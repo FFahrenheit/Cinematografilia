@@ -120,7 +120,7 @@
             $conn = $temp->getConnection();
 
             $sql = "SELECT * , COUNT(pelicula) as cont FROM vistas 
-            WHERE WEEK(fecha) = WEEK(NOW()) AND YEAR(NOW()) = YEAR(fecha) 
+            WHERE WEEK(fecha) = WEEK(NOW())-1 AND YEAR(NOW()) = YEAR(fecha) 
             GROUP BY pelicula ORDER BY cont DESC,pelicula ASC LIMIT 10";
 
             $rs = mysqli_query($conn,$sql);
@@ -178,7 +178,7 @@
             $conn = $temp->getConnection();
 
             $sql = "SELECT * , COUNT(pelicula) as cont FROM likes 
-            WHERE WEEK(fecha) = WEEK(NOW()) AND YEAR(NOW()) = YEAR(fecha) 
+            WHERE WEEK(fecha) = WEEK(NOW())-1 AND YEAR(NOW()) = YEAR(fecha) 
             GROUP BY pelicula ORDER BY cont DESC,pelicula ASC LIMIT 10";
 
             $rs = mysqli_query($conn,$sql);
@@ -214,7 +214,7 @@
                     $out .= "<td>$hr<img src='".$poster."'></a></td>";
                     $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
                     
-                    $ad = $data['cont']==1 ? "me gusta." : "me gustas.";
+                    $ad = $data['cont']==1 ? "favorita." : "favoritas.";
 
                     $out .= "<td>".$data['cont']." $ad</td>";
 
@@ -328,12 +328,75 @@
                     $out .= "<td>$hr<img src='".$poster."'></a></td>";
                     $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
                     
-                    $ad = $data['cont']==1 ? "me gusta." : "me gustas.";
+                    $ad = $data['cont']==1 ? "favorita." : "favoritas.";
 
                     $out .= "<td>".$data['cont']." $ad</td>";
 
                     $out .= '</tr>';
                     $i++;
+                }
+                $out .= '</tbody></table>';
+                return $out;
+            }
+            else 
+            {
+                return "<p>No hay resultados reportados esta semana aún</p>";
+            }
+        }
+
+        public function getBest()
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+
+            $sql = "SELECT pelicula, AVG(valor) as avg FROM calificacion 
+            GROUP BY pelicula ORDER BY avg DESC LIMIT 10";
+
+            $rs = mysqli_query($conn,$sql);
+            if($rs && $rs->num_rows>0)
+            {
+                $leader = 0;
+                $out = '<table class ="table table-hover sa_table"><tbody>';
+                while($data = mysqli_fetch_assoc($rs))
+                {
+                    $out .= '<tr>';
+                    switch($leader)
+                    {
+                        case 0:
+                            $out .= '<td><i title="Primer lugar"class="fas fa-trophy"></i></td>';
+                            break;
+                        case 1:
+                            $out .= '<td><i title="Segundo lugar" class="fas fa-medal"></i></td>';
+                            break;
+                        case 2:
+                            $out .= '<td><i title="Tercer lugar"class="fas fa-award"></i></td>';
+                            break;
+                        default:
+                            $out .= "<td>&nbsp;</td>";
+                            break;
+                    }
+
+                    $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=" . $data['pelicula'];
+                    $content = file_get_contents($url);
+                    $body = json_decode($content, true);
+
+                    $hr = "<a style='color: white;' href = 'movie.php?id=".$data['pelicula']."'>";
+                    $poster = ($body['Poster']=="N/A")? "../../img/poster.jpg" : $body['Poster'];
+                    $out .= "<td>$hr<img src='".$poster."'></a></td>";
+                    $out .= "<td>$hr".$body['Title']." (".$body['Year'].") </a></td>";
+                    
+                    $avg = round($data['avg'],2);
+                    $out .= '<td>';
+                    $out .= "<font size='7'>".$avg.'</font><i title="Calificación global: '.$avg.'" class="fas fa-star"></i>';
+                    // for($i=0; $i<$avg;$i++)
+                    // {
+                    //     $out .= '<i style="cursor:none;"title="Calificación global: '.$avg.'" class="fas fa-star"></i>';
+                    // }
+
+                    $out.='</td>';
+
+                    $out .= '</tr>';
+                    $leader = $leader+1;
                 }
                 $out .= '</tbody></table>';
                 return $out;
