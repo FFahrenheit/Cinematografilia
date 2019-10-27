@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2019 a las 06:00:33
+-- Tiempo de generación: 28-10-2019 a las 00:20:44
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -83,9 +83,12 @@ CREATE TABLE `calificacion` (
 --
 
 INSERT INTO `calificacion` (`fecha`, `valor`, `usuario`, `pelicula`) VALUES
-('2019-10-01 05:34:32', 1, 'ivan', ''),
 ('2019-10-01 04:38:06', 1, 'ivan', 'tt0363771'),
-('2019-10-13 03:33:33', 1, 'ivan', 'tt4154796');
+('2019-10-27 21:33:42', 1, 'jjjj', 'tt0363771'),
+('2019-10-27 21:33:52', 4, 'Johann', 'tt0363771'),
+('2019-10-01 05:34:32', 1, 'ivan', 'tt0363772'),
+('2019-10-13 03:33:33', 1, 'ivan', 'tt4154796'),
+('2019-10-27 21:34:08', 5, 'ivxn1', 'tt4154796');
 
 -- --------------------------------------------------------
 
@@ -187,6 +190,34 @@ INSERT INTO `favoritas` (`pelicula`, `usuario`, `fecha`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `insignia`
+--
+
+CREATE TABLE `insignia` (
+  `clave` int(11) NOT NULL,
+  `titulo` varchar(50) NOT NULL,
+  `descripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `insignia`
+--
+
+INSERT INTO `insignia` (`clave`, `titulo`, `descripcion`) VALUES
+(1, 'Critico novato', 'Publica tu primera reseña'),
+(2, 'Charlie\'s first mixtape', 'Crea tu primera lista de reproducción'),
+(3, 'Yo soy el senado', 'Califica 10 películas'),
+(4, 'Liker', 'Indica que te gustaron 10 películas'),
+(5, 'Watchmen', 'Indica que has visto 20 películas'),
+(6, 'Critico experto', 'Ten una reseña con 5 \"me gusta\"'),
+(7, 'Maestria en critica', 'Ten una reseña con 10 \"me gusta\"'),
+(8, 'Dios de la critica', 'Ten una reseña con 15 \"me gusta\"'),
+(9, 'Maratonero', 'Acabar un maratón'),
+(10, 'This ain\'t my first rodeo', 'Acaba 5 maratones');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `likes`
 --
 
@@ -202,6 +233,19 @@ CREATE TABLE `likes` (
 
 INSERT INTO `likes` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0363771', 'ivan', '2019-10-08 21:43:10');
+
+--
+-- Disparadores `likes`
+--
+DELIMITER $$
+CREATE TRIGGER `insigniasLikes` AFTER INSERT ON `likes` FOR EACH ROW BEGIN
+IF((SELECT COUNT(*) FROM likes WHERE usuario = NEW.usuario)>=10)
+THEN 
+INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (4,NEW.usuario);
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -230,6 +274,19 @@ INSERT INTO `playlist` (`clave`, `nombre`, `descripcion`, `fecha`, `creador`) VA
 (52, 'snsn', 'xnsn', '2019-10-16 03:48:22', 'ivxn'),
 (53, 'jcsjc', 'qjjwdcjs', '2019-10-16 03:48:27', 'ivxn'),
 (54, 'jaja', 'JAJA', '2019-10-16 03:49:16', 'ivxn');
+
+--
+-- Disparadores `playlist`
+--
+DELIMITER $$
+CREATE TRIGGER `insigniasPlaylist` AFTER INSERT ON `playlist` FOR EACH ROW BEGIN
+IF((SELECT COUNT(*) FROM playlist WHERE creador = NEW.creador)>0)
+THEN
+INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (2,NEW.creador);
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -294,17 +351,14 @@ CREATE TABLE `preguntas` (
 --
 
 INSERT INTO `preguntas` (`clave`, `pregunta`, `estado`, `fecha`) VALUES
-(2, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:39'),
-(3, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:40'),
-(4, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:41'),
-(5, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:42'),
-(6, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:43'),
-(7, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:44'),
-(8, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:45'),
-(9, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:46'),
-(10, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:47'),
-(11, 'Pelicula favrita recientemente', 'inactiva', '2019-10-23 02:51:48'),
-(12, 'Pelicula favrita recientemente', 'activa', '2019-10-23 02:51:48');
+(15, 'Pregunta 1', 'inactiva', '2019-10-23 04:50:30'),
+(16, 'Pregunta 2', 'inactiva', '2019-10-23 04:50:40'),
+(17, 'Pregunta 3', 'inactiva', '2019-10-23 04:50:50'),
+(18, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:00'),
+(19, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:10'),
+(20, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:20'),
+(21, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:30'),
+(22, 'Pelicula favorita vista recientemente', 'activa', '2019-10-23 04:51:30');
 
 -- --------------------------------------------------------
 
@@ -371,7 +425,10 @@ CREATE TABLE `respuestas` (
 --
 
 INSERT INTO `respuestas` (`usuario`, `pregunta`, `pelicula`, `fecha`) VALUES
-('ivan', 12, 'tt0848228', '2019-10-23 03:54:14');
+('ivan', 21, 'tt0156922', '2019-10-25 03:50:38'),
+('ivxn', 21, 'tt0156922', '2019-10-25 03:50:38'),
+('ivxn1', 21, 'tt0848228', '2019-10-25 03:51:22'),
+('Johann', 21, 'tt1291547', '2019-10-25 03:51:22');
 
 -- --------------------------------------------------------
 
@@ -396,6 +453,19 @@ CREATE TABLE `review` (
 INSERT INTO `review` (`clave`, `fecha`, `texto`, `spoilers`, `recomendada`, `usuario`, `pelicula`) VALUES
 (3, '2019-10-16 14:59:17', 'Mala', 0, 0, 'ivan', 'tt0363771');
 
+--
+-- Disparadores `review`
+--
+DELIMITER $$
+CREATE TRIGGER `insigniasResenaII` AFTER INSERT ON `review` FOR EACH ROW BEGIN 
+IF((SELECT COUNT(*) FROM review WHERE usuario = NEW.usuario > 0))
+THEN 
+INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (1,NEW.usuario);
+END IF;
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -416,6 +486,25 @@ INSERT INTO `review_like` (`fecha`, `review`, `usuario`) VALUES
 ('2019-10-04 15:40:30', 3, 'ivan'),
 ('2019-10-03 04:00:42', 3, 'ivxn1'),
 ('2019-10-16 02:04:48', 3, 'jjjj');
+
+--
+-- Disparadores `review_like`
+--
+DELIMITER $$
+CREATE TRIGGER `insigniasResena` AFTER INSERT ON `review_like` FOR EACH ROW BEGIN
+IF((SELECT COUNT(*) FROM review_like WHERE review = NEW.review) >= 5)
+THEN
+INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (6,(SELECT usuario FROM review WHERE clave = NEW.review));
+ELSEIF ((SELECT COUNT(*) FROM review_like WHERE review = NEW.review) >= 10)
+THEN 
+INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (7,(SELECT usuario FROM review WHERE clave = NEW.review));
+ELSEIF((SELECT COUNT(*) FROM review_like WHERE review = NEW.review) >= 15)
+THEN 
+INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (8,(SELECT usuario FROM review WHERE clave = NEW.review));
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -493,7 +582,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`username`, `password`, `email`, `imagen`, `origen`, `temporal`) VALUES
 ('admin', 'â—Š“I¥áéQÆÔÊc[ø', ' ', '../../img/default-profile.png', '2019-10-14 14:52:08', NULL),
 ('hola', 'V[sÎÆPgRÖùoJ ', 'hola@hola.co', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
-('ivan', '0Móè3ÒÂ\'Æà¡8c3‰', 'di@di.com', '../../img/profiles/ivan.gif', '2019-09-16 02:14:04', NULL),
+('ivan', '>!WU#¿`j8@oºð”3', 'diskman199@gmail.com', '../../img/profiles/ivan.gif', '2019-09-16 02:14:04', NULL),
 ('ivxn', 'ÞÔpƒW–+2‹ïŽ‚A¬', 'cuenta@ejemplo.com', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
 ('ivxn1', 'á†™>Öz00qMÊ£', 'cuenta@ejemplo.co', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
 ('ivxn1k', 'á†™>Öz00qMÊ£', '1cuenta@ejemplo.co', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
@@ -502,6 +591,18 @@ INSERT INTO `usuario` (`username`, `password`, `email`, `imagen`, `origen`, `tem
 ('jkjj', '´†l\0©HÔ::£k$^ù}8', 'di@dia.com', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL),
 ('Johann', 'ÞÔpƒW–+2‹ïŽ‚A¬', 'dii@dii.com', '../../img/default-profile.png', '2019-10-09 17:04:46', NULL),
 ('xxyo', 'ET¸q¯©xÓõé-•u;å', 'xx@xx.xx', '../../img/default-profile.png', '2019-09-16 02:14:04', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_insignias`
+--
+
+CREATE TABLE `usuario_insignias` (
+  `insignia` int(11) NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `fecha` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -535,6 +636,19 @@ INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0848228', 'ivan', '2019-09-18 05:00:00'),
 ('tt1920984', 'ivan', '2019-09-30 05:00:00'),
 ('tt0468569', 'Johann', '2019-10-09 05:00:00');
+
+--
+-- Disparadores `vistas`
+--
+DELIMITER $$
+CREATE TRIGGER `insigniasVistas` AFTER INSERT ON `vistas` FOR EACH ROW BEGIN
+IF((SELECT COUNT(*) FROM vistas WHERE usuario = NEW.usuario)>=20)
+THEN 
+INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (5,NEW.usuario);
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -611,6 +725,12 @@ ALTER TABLE `chat`
 ALTER TABLE `favoritas`
   ADD PRIMARY KEY (`usuario`,`pelicula`),
   ADD KEY `usuario` (`usuario`);
+
+--
+-- Indices de la tabla `insignia`
+--
+ALTER TABLE `insignia`
+  ADD PRIMARY KEY (`clave`);
 
 --
 -- Indices de la tabla `likes`
@@ -711,6 +831,14 @@ ALTER TABLE `usuario`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indices de la tabla `usuario_insignias`
+--
+ALTER TABLE `usuario_insignias`
+  ADD PRIMARY KEY (`insignia`,`usuario`),
+  ADD KEY `insignia` (`insignia`),
+  ADD KEY `[usuario]` (`usuario`);
+
+--
 -- Indices de la tabla `vistas`
 --
 ALTER TABLE `vistas`
@@ -735,6 +863,12 @@ ALTER TABLE `chat`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
+-- AUTO_INCREMENT de la tabla `insignia`
+--
+ALTER TABLE `insignia`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
@@ -744,7 +878,7 @@ ALTER TABLE `playlist`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `recomendacion`

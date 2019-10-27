@@ -32,6 +32,62 @@
             }
         }
 
+        public function getInsignia()
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+            mysqli_set_charset($conn, "utf8");
+
+            $sql = "SELECT insignia.*, usuario_insignias.fecha as fecha 
+            FROM insignia, usuario_insignias WHERE insignia.clave = usuario_insignias.insignia 
+            AND usuario_insignias.usuario = '$this->username' ORDER BY fecha DESC";
+
+            $rs = mysqli_query($conn,$sql);
+            $i=0;
+            if($rs && $rs->num_rows>0)
+            {
+                $out = "";
+                $end = $rs->num_rows > 5 ? 5 : 10;
+                for($i=0; $i<$end; $i++)  //Máximas insignias
+                {
+                    if($i%5 == 0)
+                    {
+                        $out .= '<div class="card-group">';
+                    }
+                    if($i < $rs->num_rows)
+                    {
+                        $data = mysqli_fetch_assoc($rs);
+                        $src = $data['clave'];
+                        $title = $data['titulo'];
+                        $descr = str_replace("ñ","&ntilde;",$data['descripcion']);
+                        $date = $data['fecha'];
+                        $out .= 
+                        "<div class='card text-warning bg-dark'>
+                            <img class='card-img-top' src='../../img/insignia/$src.png' alt='$title'>
+                            <div class='card-body'>
+                                <h4 class='card-title'>$title</h4>
+                                <p class='card-text'>Obtenida el $date</p>
+                                <p class='card-text'>$descr</p>
+                            </div>
+                        </div>";
+                    }
+                    else 
+                    {
+                        $out .= '<div class="card text-warning bg-dark hidden" style="visibility: hidden"></div>';
+                    }
+                    if($i%5==4)
+                    {
+                        $out .= '</div>';
+                    }
+                }
+                return $out;
+            }
+            else 
+            {
+                return "<p style='text-align:left;'>Este usuario aún no consigue insgnias</p>";
+            }
+        }
+
         public function isChat()
         {
             $this->getUser();

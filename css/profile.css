@@ -178,3 +178,18 @@ small {
 .p-r i:hover {
     color: rgb(216, 169, 0);
 }
+
+.insignia {
+    text-align: center;
+}
+
+.insignia p {
+    size: 12px;
+    margin-top: 10px;
+}
+
+.insignia img {
+    object-fit: cover;
+    max-width: 300px;
+    height: 300px;
+}

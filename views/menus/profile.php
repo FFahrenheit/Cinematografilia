@@ -35,7 +35,7 @@
         </div>
         <div class="profile-head">
             <img src=<?php echo '"' . $profile->getImage() . '"'; ?>>
-            <h1><?php echo $profile->getUser();?></h1>
+            <h1><?php echo $profile->getUser(); ?></h1>
             <p>Miembro desde <?php echo $profile->getDate(); ?></p>
             <nav class="profile-nav">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -53,6 +53,9 @@
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <h2><i class="fas fa-award"></i> Insignias obtenidas</h2>
+                <div class="insignia">
+                    <?php echo $profile->getInsignia() ?>
+                </div>
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <h2><i title="Favorita" class="fas fa-star"></i> Películas favoritas </h2>
@@ -60,7 +63,7 @@
             </div>
             <div class="tab-pane fade" id="nav-likes" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <h2><i class="fas fa-thumbs-up"></i> Películas que me gustaron </h2>
-                <?php echo $profile-> getLikes(); ?>
+                <?php echo $profile->getLikes(); ?>
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <h2><i class="far fa-eye"></i> Películas vistas</h2>
