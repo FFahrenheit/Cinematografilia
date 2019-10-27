@@ -61,8 +61,8 @@
                             Tops
                         </a>
                         <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                            <a class="dropdown-item bg-light" href="#">Semanales</a>
-                            <a class="dropdown-item bg-light" href="#">Globales</a>
+                            <a class="dropdown-item bg-light" href="weekly-tops.php">Semanales</a>
+                            <a class="dropdown-item bg-light" href="global-tops.php">Globales</a>
                         </div>
                     </li>
                 </ul>';
