@@ -191,5 +191,9 @@ small {
 .insignia img {
     object-fit: cover;
     max-width: 300px;
-    height: 300px;
+    max-height: 300px;
+}
+
+.padd {
+    padding: 10px 10px 10px 10px;
 }

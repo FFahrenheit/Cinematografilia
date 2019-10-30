@@ -8,7 +8,7 @@
     {
         header("Location: new-password.php");
     }
-    //echo $_SESSION['username'];    
+    //echo $_SESSION['username'];
 
     function getLogged()
     {

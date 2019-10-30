@@ -62,7 +62,7 @@
                         $descr = str_replace("ñ","&ntilde;",$data['descripcion']);
                         $date = $data['fecha'];
                         $out .= 
-                        "<div class='card text-warning bg-dark'>
+                        "<div class='card text-warning bg-transparent padd'>
                             <img class='card-img-top' src='../../img/insignia/$src.png' alt='$title'>
                             <div class='card-body'>
                                 <h4 class='card-title'>$title</h4>
