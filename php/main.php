@@ -8,7 +8,7 @@
     {
         header("Location: new-password.php");
     }
-    //echo $_SESSION['username'];
+    //echo $_SESSION['username'];    
 
     function getLogged()
     {
@@ -88,7 +88,7 @@
             <div class="dropdown-menu dropdown-menu-right dropdown-default"
                 aria-labelledby="navbarDropdownMenuLink-222">
                 <a class="dropdown-item bg-light" href="new-playlist.php">Lista de reproducción</a>
-                <a class="dropdown-item bg-light" href="new-marathon.php">Maraton</a>
+                <a class="dropdown-item bg-light" href="new-marathon.php">Maratón</a>
             </div>
             </li>  ';
             $nav .= '<li class="nav-item dropdown">

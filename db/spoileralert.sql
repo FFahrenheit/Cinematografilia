@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2019 a las 00:20:44
+-- Tiempo de generación: 30-10-2019 a las 06:00:02
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -88,7 +88,8 @@ INSERT INTO `calificacion` (`fecha`, `valor`, `usuario`, `pelicula`) VALUES
 ('2019-10-27 21:33:52', 4, 'Johann', 'tt0363771'),
 ('2019-10-01 05:34:32', 1, 'ivan', 'tt0363772'),
 ('2019-10-13 03:33:33', 1, 'ivan', 'tt4154796'),
-('2019-10-27 21:34:08', 5, 'ivxn1', 'tt4154796');
+('2019-10-27 21:34:08', 5, 'ivxn1', 'tt4154796'),
+('2019-10-27 23:28:45', 1, 'ivan', 'tt5715968');
 
 -- --------------------------------------------------------
 
@@ -184,7 +185,6 @@ INSERT INTO `favoritas` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0156922', 'ivan', '2019-09-30 16:37:40'),
 ('tt0289879', 'ivan', '2019-09-16 23:25:50'),
 ('tt0290673', 'ivan', '2019-09-24 02:44:25'),
-('tt0363771', 'ivan', '2019-09-30 15:55:37'),
 ('tt0848228', 'ivan', '2019-09-16 23:10:55');
 
 -- --------------------------------------------------------
@@ -204,15 +204,15 @@ CREATE TABLE `insignia` (
 --
 
 INSERT INTO `insignia` (`clave`, `titulo`, `descripcion`) VALUES
-(1, 'Critico novato', 'Publica tu primera reseña'),
+(1, 'You talkin\' to me?', 'Publica tu primera reseña'),
 (2, 'Charlie\'s first mixtape', 'Crea tu primera lista de reproducción'),
 (3, 'Yo soy el senado', 'Califica 10 películas'),
-(4, 'Liker', 'Indica que te gustaron 10 películas'),
+(4, 'My precious', 'Indica que te gustaron 10 películas'),
 (5, 'Watchmen', 'Indica que has visto 20 películas'),
-(6, 'Critico experto', 'Ten una reseña con 5 \"me gusta\"'),
-(7, 'Maestria en critica', 'Ten una reseña con 10 \"me gusta\"'),
-(8, 'Dios de la critica', 'Ten una reseña con 15 \"me gusta\"'),
-(9, 'Maratonero', 'Acabar un maratón'),
+(6, 'Show me the money', 'Ten una reseña con 5 \"me gusta\"'),
+(7, 'Life is like a box of chocolates', 'Ten una reseña con 10 \"me gusta\"'),
+(8, 'We\'re going to need a bigger boat', 'Ten una reseña con 15 \"me gusta\"'),
+(9, 'Why so serious?', 'Acabar un maratón'),
 (10, 'This ain\'t my first rodeo', 'Acaba 5 maratones');
 
 -- --------------------------------------------------------
@@ -226,13 +226,6 @@ CREATE TABLE `likes` (
   `usuario` varchar(30) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `likes`
---
-
-INSERT INTO `likes` (`pelicula`, `usuario`, `fecha`) VALUES
-('tt0363771', 'ivan', '2019-10-08 21:43:10');
 
 --
 -- Disparadores `likes`
@@ -451,7 +444,8 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`clave`, `fecha`, `texto`, `spoilers`, `recomendada`, `usuario`, `pelicula`) VALUES
-(3, '2019-10-16 14:59:17', 'Mala', 0, 0, 'ivan', 'tt0363771');
+(3, '2019-10-16 14:59:17', 'Mala', 0, 0, 'ivan', 'tt0363771'),
+(13, '2019-10-27 23:28:45', 'This is shit', 1, 0, 'ivan', 'tt5715968');
 
 --
 -- Disparadores `review`
@@ -603,6 +597,13 @@ CREATE TABLE `usuario_insignias` (
   `usuario` varchar(30) NOT NULL,
   `fecha` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario_insignias`
+--
+
+INSERT INTO `usuario_insignias` (`insignia`, `usuario`, `fecha`) VALUES
+(1, 'ivan', '2019-10-27');
 
 -- --------------------------------------------------------
 
@@ -890,7 +891,7 @@ ALTER TABLE `recomendacion`
 -- AUTO_INCREMENT de la tabla `review`
 --
 ALTER TABLE `review`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `review_reporte`
@@ -1005,6 +1006,13 @@ ALTER TABLE `review_reporte`
 ALTER TABLE `solicitud`
   ADD CONSTRAINT `solicitud_ibfk_1` FOREIGN KEY (`emisor`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `solicitud_ibfk_2` FOREIGN KEY (`receptor`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `usuario_insignias`
+--
+ALTER TABLE `usuario_insignias`
+  ADD CONSTRAINT `usuario_insignias_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuario_insignias_ibfk_2` FOREIGN KEY (`insignia`) REFERENCES `insignia` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `vistas`
