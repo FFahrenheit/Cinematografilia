@@ -35,6 +35,9 @@
     <div class="questions">
         <h2>Mi recuento cinematográfico</h2>
         <br>
+		<span class="badge badge-warning">
+		El recuento cinematográfico comienza a contar desde el mes en que se creó la cuenta
+		</span>
         <div align="center">
             <div id="container" style="width:70%">
                 <canvas id="canvas"></canvas>

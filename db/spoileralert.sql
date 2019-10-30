@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2019 a las 06:00:02
+-- Tiempo de generación: 30-10-2019 a las 15:45:48
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -90,6 +90,19 @@ INSERT INTO `calificacion` (`fecha`, `valor`, `usuario`, `pelicula`) VALUES
 ('2019-10-13 03:33:33', 1, 'ivan', 'tt4154796'),
 ('2019-10-27 21:34:08', 5, 'ivxn1', 'tt4154796'),
 ('2019-10-27 23:28:45', 1, 'ivan', 'tt5715968');
+
+--
+-- Disparadores `calificacion`
+--
+DELIMITER $$
+CREATE TRIGGER `insigniasCalificacion` AFTER INSERT ON `calificacion` FOR EACH ROW BEGIN 
+IF((SELECT COUNT(*) FROM calificacion WHERE usuario = NEW.usuario)>=10)
+THEN 
+INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (3,NEW.usuario);
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -226,6 +239,22 @@ CREATE TABLE `likes` (
   `usuario` varchar(30) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `likes`
+--
+
+INSERT INTO `likes` (`pelicula`, `usuario`, `fecha`) VALUES
+('tt0114746', 'ivan', '2019-10-30 14:36:22'),
+('tt0290673', 'ivan', '2019-10-30 14:37:29'),
+('tt0363770', 'ivan', '2019-10-30 14:34:09'),
+('tt0363771', 'ivan', '2019-10-30 14:33:59'),
+('tt0363772', 'ivan', '2019-10-30 14:34:27'),
+('tt0480669', 'ivan', '2019-10-30 14:36:00'),
+('tt1291547', 'ivan', '2019-10-30 14:36:50'),
+('tt2397535', 'ivan', '2019-10-30 14:36:11'),
+('tt2669336', 'ivan', '2019-10-30 14:35:51'),
+('tt7286456', 'ivan', '2019-10-30 14:35:28');
 
 --
 -- Disparadores `likes`
@@ -603,7 +632,9 @@ CREATE TABLE `usuario_insignias` (
 --
 
 INSERT INTO `usuario_insignias` (`insignia`, `usuario`, `fecha`) VALUES
-(1, 'ivan', '2019-10-27');
+(1, 'ivan', '2019-10-27'),
+(4, 'ivan', '2019-10-30'),
+(5, 'ivan', '2019-10-30');
 
 -- --------------------------------------------------------
 
@@ -623,6 +654,7 @@ CREATE TABLE `vistas` (
 
 INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0062622', 'ivan', '2019-09-30 05:00:00'),
+('tt0114746', 'ivan', '2019-10-30 06:00:00'),
 ('tt0156922', 'ivan', '2019-09-30 05:00:00'),
 ('tt0156923', 'ivan', '2019-09-30 05:00:00'),
 ('tt0156934', 'ivan', '2019-09-30 05:00:00'),
@@ -633,9 +665,14 @@ INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0425123', 'ivan', '2019-09-23 05:00:00'),
 ('tt0425124', 'ivan', '2019-09-30 05:00:00'),
 ('tt0458339', 'ivan', '2019-12-23 06:00:00'),
+('tt0480669', 'ivan', '2019-10-30 06:00:00'),
 ('tt0485947', 'ivan', '2019-10-01 05:00:00'),
 ('tt0848228', 'ivan', '2019-09-18 05:00:00'),
+('tt1291547', 'ivan', '2019-10-30 06:00:00'),
 ('tt1920984', 'ivan', '2019-09-30 05:00:00'),
+('tt2397535', 'ivan', '2019-10-30 06:00:00'),
+('tt2669336', 'ivan', '2019-10-30 06:00:00'),
+('tt7286456', 'ivan', '2019-10-30 06:00:00'),
 ('tt0468569', 'Johann', '2019-10-09 05:00:00');
 
 --
@@ -669,10 +706,8 @@ CREATE TABLE `watchlist` (
 
 INSERT INTO `watchlist` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0164063', 'ivan', '2019-09-24 02:48:38'),
-('tt0290673', 'ivan', '2019-09-24 02:44:22'),
 ('tt0425123', 'ivan', '2019-09-24 02:47:21'),
-('tt0458339', 'ivan', '2019-09-19 03:56:08'),
-('tt1291547', 'ivan', '2019-10-13 20:31:57');
+('tt0458339', 'ivan', '2019-09-19 03:56:08');
 
 -- --------------------------------------------------------
 

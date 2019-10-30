@@ -22,7 +22,7 @@
                 $out .= "<td>$hr<img src='".$poster."'></a></td>";
                 $out .= "<td>$hr".$movie['Title']." (".$movie['Year'].") </a></td>";
                 
-                $out .= '<td><a title="Seleccionar respuesta" onclick="setAnswer('.$arg.','.$arg2.')"><i class="fas fa-check-square"></i></a></td>';
+                $out .= '<td><a title="Seleccionar respuesta" onclick="setAnswer('.$arg.','.$arg2.',this);"><i class="far fa-square"></i></a></td>';
 
                 $out .= '</tr>';
             }

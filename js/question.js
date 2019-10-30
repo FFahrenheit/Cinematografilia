@@ -1,6 +1,11 @@
 var timer;
 var answer = null;
 var form = document.getElementById('answer');
+var last;
+
+function searche() {
+    search();
+}
 
 if (form != null) {
     form.addEventListener('submit', e => {
@@ -37,6 +42,7 @@ if (form != null) {
 }
 
 function search() {
+    console.log("Hola");
     clearTimeout(timer);
     timer = setTimeout(() => {
         console.log("Buscar");
@@ -55,8 +61,36 @@ function search() {
     }, 1000);
 }
 
-function setAnswer(id, title) {
-    console.log(id + title);
-    answer = id;
-    $("#ans").html("<p>Respuesta actual: " + title + "</p>")
+function setAnswer(id, title, reference) {
+    if (last == reference && answer == id) {
+        console.log("Desmarcar");
+        last.innerHTML = '<i class="far fa-square"></i>';
+        answer = null;
+        $("#ans").html("<p>Seleccione una respuesta</p>");
+    } else {
+        console.log(id + title);
+        answer = id;
+        $("#ans").html("<p>Respuesta actual: " + title + "</p>");
+        console.log("A ver si jaló");
+        if (last != null) {
+            last.innerHTML = '<i class="far fa-square"></i>';
+        }
+        reference.innerHTML = '<i class="far fa-check-square"></i>';
+        last = reference;
+    }
 }
+
+// function reference(reference) {
+//     console.log("Referencia a i");
+//     reference.className = "";
+//     reference.classList.add("far");
+//     reference.classList.add("fa-check-square");
+// }
+
+// $("i").click(() => {
+//     console.log("Hola");
+// });
+
+// $("i").click(() => {
+//     console.log("Adios");
+// })
