@@ -22,51 +22,75 @@
 <body>
     <?php getNavBar() ?>
     <div class="sa_search">
-        <h2>Resultados para la búsqueda de "<?php echo $title ?>" </h2>
+        <h2>Resultados para la búsqueda de "<?php echo $title.'"';
+        if(isset($_GET['director']) && $_GET['director']!="")
+        {
+            echo " del director \"".$_GET['director'].'"';
+        }?> </h2>
         <span> </span>
         <?php 
-            $arg = str_replace(" ","+",$_GET['title']);
-            if(substr($arg, -1)=="+")
-            {
-                $arg = substr($arg, 0, -1);
-            }
-            $url = "http://www.omdbapi.com/?apikey=$APIKey&s=$arg&type=movie&page=$page$add";
-            $content = file_get_contents($url);
-            $json = json_decode($content,true);
             $cards = new Movie();
-            if($json['Response'] == "True")
+            if(isset($_GET['director']) && $_GET['director']!="")
             {
-                echo '<span class="text-light">Se han encontrado '.$json['totalResults'].' resultado(s).</span>
-                <br><p> Nueva búsqueda:</p>';
-                echo $cards->getSearcher($title);
-                foreach($json['Search'] as $movie)
+                if(isset($_GET['year']) && $_GET['year']!="")
                 {
-                    echo $cards->getCard($movie);
-                }
-                echo $cards->getNavigator($page, $json['totalResults'],$title.$add2);
-
-            }
-            else if($json['Response']=="False")
-            {
-                if($json['Error'] == "Too many results.")
-                {
-                    echo '<p class="text-light">La búsqueda ha arrojado muchos resultados, por favor sea más específico o filtre su búsqueda por año</p>';
-                    echo $cards->getSearcher($title);
-
-                }
-                else if($json['Error']=="Movie not found!")
-                {
-                    echo '<span class="text-light">No se han encontrado resultados con la búsqueda, intente de nuevo.</span>';
-                    echo $cards->getSearcher($title);
+                    echo $cards->advancedSearch(
+                        str_replace(" ","+",$_GET['title']),
+                        str_replace(" ","+",$_GET['director']),
+                        $_GET['year']);
                 }
                 else 
                 {
-                    echo '<span class="text-light"> Error de API: '.$json['Error']."</span>";
+                    echo $cards->advancedSearch(
+                        str_replace(" ","+",$_GET['title']),
+                        str_replace(" ","+",$_GET['director']));
                 }
             }
             else 
             {
-                echo "Error desconocido...";
+                $arg = str_replace(" ","+",$_GET['title']);
+                if(substr($arg, -1)=="+")
+                {
+                    $arg = substr($arg, 0, -1);
+                }
+                $url = "http://www.omdbapi.com/?apikey=$APIKey&s=$arg&type=movie&page=$page$add";
+                $content = file_get_contents($url);
+                $json = json_decode($content,true); 
+                if($json['Response'] == "True")
+                {
+                    echo '<span class="text-light">Se han encontrado '.$json['totalResults'].' resultado(s).</span>
+                    <br><p> Nueva búsqueda:</p>';
+                    echo $cards->getSearcher($title);
+                    foreach($json['Search'] as $movie)
+                    {
+                        echo $cards->getCard($movie);
+                    }
+                    echo $cards->getNavigator($page, $json['totalResults'],$title.$add2);
+
+                }
+                else if($json['Response']=="False")
+                {
+                    if($json['Error'] == "Too many results.")
+                    {
+                        echo '<p class="text-light">La búsqueda ha arrojado muchos resultados, por favor sea más específico o filtre su búsqueda por año</p>';
+                        echo $cards->getSearcher($title);
+
+                    }
+                    else if($json['Error']=="Movie not found!")
+                    {
+                        echo '<span class="text-light">No se han encontrado resultados con la búsqueda, intente de nuevo.</span>';
+                        echo $cards->getSearcher($title);
+                    }
+                    else 
+                    {
+                        echo '<span class="text-light"> Error de API: '.$json['Error']."</span>";
+                        echo $this->getSearcher("");
+                    }
+                }
+                else 
+                {
+                    echo "Error desconocido...";
+                }
             }
         ?>
     </div>

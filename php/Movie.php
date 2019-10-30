@@ -8,6 +8,93 @@
             $this->APIKey = "b27f9641";
         }
 
+        public function advancedSearch($title,$director,$year=-1)
+        {
+          $app = ($year!=-1)? "&y=".$_GET['year'] : "";
+          $url = "https://www.omdbapi.com/?apikey=$this->APIKey&s=$title&type=movie$app";
+          $content = file_get_contents($url);
+          $json = json_decode($content,true);      
+          if($json['Response']=='True')
+          {
+            /* Aquí empieza el gran algoritmo de nuestras vidas */
+            $out = "";
+            $results = $json['totalResults'];
+            $matched = 0;
+            for($i=0; $i<((int)($results/10))+1; $i++)
+            {
+              if($i!=0)
+              {
+                $alURL = $url."&page=".($i+1);
+                $alContent = file_get_contents($alURL);
+                $alResult = json_decode($alContent,true);  
+              }    
+              else 
+              {
+                $alResult = $json;
+              }
+              foreach($alResult['Search'] as $result)
+              {
+                $Purl = "https://www.omdbapi.com/?apikey=$this->APIKey&i=".$result['imdbID']."&plot=short";
+                $Pcontent = file_get_contents($Purl);
+                $Pjson = json_decode($Pcontent,true);
+                similar_text($Pjson['Director'],$director,$perc);
+                // echo $perc." ".$director." vs ".$Pjson['Director']."<br>";
+                if($perc>40)
+                {
+                  $matched++;
+                      $str = '<div class="card mb-3" style="max-width: 70%;">
+                      <div class="row no-gutters bg-dark">
+                        <div class="col-md-4" style="max-width: 100px">
+                          <img src="';
+                      $str .= ($Pjson['Poster']=="N/A")? "../../img/poster.jpg" : $Pjson['Poster'];
+                      $str.=    '" class="card-img" alt="'.$Pjson['Title'].'">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                          <a style="text-decoration: none;"href="movie.php?id='.$Pjson['imdbID'].'">
+                          <h5 class="card-title text-warning">'.$Pjson['Title'].'</h5>
+                          </a>
+                            <p class="card-text text-warning">Año: '.$Pjson['Year'].'</p>
+                            <p class="card-text text-warning">Género(s): '.$Pjson['Genre'].'</p>
+                            <p hidden class="card-text text-warning">'.$Pjson['Plot'].'</p>
+                          </a>
+                          </div>
+                        </div>
+                        <a class="btn btn-warning sa_button" href="movie.php?id='.$Pjson['imdbID'].'">Conocer más</a>
+                      </div>
+                    </div>';
+                    $out .= $str;
+                }
+              }
+            }
+            $out = '<span class="text-light">Se han encontrado '.$matched.' resultado(s).</span>
+            <br><p> Nueva búsqueda:</p>'.$this->getSearcher($title).$out;
+            return $out;
+          } 
+          else if($json['Response']=="False")
+          {
+              if($json['Error'] == "Too many results.")
+              {
+                  echo '<p class="text-light">La búsqueda ha arrojado muchos resultados, por favor sea más específico o filtre su búsqueda por año</p>';
+                  echo $this->getSearcher($title);
+
+              }
+              else if($json['Error']=="Movie not found!")
+              {
+                  echo '<span class="text-light">No se han encontrado resultados con la búsqueda, intente de nuevo.</span>';
+                  echo $this->getSearcher($title);
+              }
+              else 
+              {
+                  echo '<span class="text-light"> Error de API: '.$json['Error']."</span>";
+              }
+          }
+          else 
+          {
+              echo "Error desconocido...";
+          }
+        }
+
         public function getLikes($movie)
         {
           $temp = new Connection();
@@ -301,17 +388,18 @@
 
         public function getSearcher($title)
         {
-            return '<form id="formulario" novalidate>
-            <div class="form-row align-items-center">
-            <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Título o palabra clave</label>
-            <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">Titulo</div>
+            return 
+            '<form id="formulario" novalidate>
+              <div class="form-row align-items-center">
+                <div class="col-auto">
+                  <label class="sr-only" for="inlineFormInputGroup">Título o palabra clave</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Titulo</div>
+                    </div>
+                    <input required name="title" type="text" class="form-control" value="'.$title.'" id="inlineFormInputGroup" placeholder="Palabras clave">
+                </div>
               </div>
-              <input required name="title" type="text" class="form-control" value="'.$title.'" id="inlineFormInputGroup" placeholder="Palabras clave">
-            </div>
-          </div>
               <div class="col-auto">
                 <label class="sr-only" for="inlineFormInputGroup">Username</label>
                 <div class="input-group mb-2">
@@ -320,6 +408,15 @@
                   </div>
                   <input name="year" type="number" class="form-control" id="inlineFormInputGroup" placeholder="Ingrese el año">
                 </div>
+              </div>
+              <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Director</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Director</div>
+                </div>
+                <input name="director" type="text" class="form-control" id="inlineFormInputGroup" placeholder="Busque por director">
+              </div>
               </div>
               <div class="col-auto">
                 <button type="submit" class="btn btn-warning mb-2">Buscar</button>
