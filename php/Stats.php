@@ -42,6 +42,11 @@
             }
         }
 
+        public function echoUser()
+        {
+            return "<a href='profile.php?user=$this->user'>$this->user</a>";
+        }
+
         public function loadData()
         {
             $temp = new Connection();

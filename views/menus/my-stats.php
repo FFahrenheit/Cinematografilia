@@ -23,17 +23,25 @@
         }
     </style>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
-    include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Stats.php');
-    if (!isset($_SESSION['username'])) {
+	include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Stats.php');
+	if(isset($_POST['user']))
+	{
+		$stats = new Stats($_POST['user']);
+	}
+    else if (!isset($_SESSION['username'])) {
         header("Location: error.php");
-    }
-    $stats = new Stats($_SESSION['username']); ?>
+	}
+	else 
+	{
+		$stats = new Stats($_SESSION['username']);
+	}
+	?>
 </head>
 
 <body>
     <?php getNavBar() ?>
     <div class="questions">
-        <h2>Mi recuento cinematográfico</h2>
+        <h2>Recuento cinematográfico de <?php echo $stats->echoUser(); ?></h2>
         <br>
 		<span class="badge badge-warning">
 		El recuento cinematográfico comienza a contar desde el mes en que se creó la cuenta

@@ -39,9 +39,26 @@
                 </div>
             </div>
             <div class="form-group form-group-lg" align="center">
+                <label for="">Fecha de inicio del maraton</label>
+                <br>
+                <input type="begin" class="form-control" rows="3" required></textarea>
+                <div class="invalid-feedback">
+                    Ingrese su respuesta
+                </div>
+            </div>
+            <div class="form-group form-group-lg" align="center">
+                <label for="">Fecha de final del maratón</label>
+                <br>
+                <input type="date" name="end" class="form-control" rows="3" required></textarea>
+                <div class="invalid-feedback">
+                    Ingrese su respuesta
+                </div>
+            </div>
+            }
+            <div class="form-group form-group-lg" align="center">
                 <label for="">¿Qué tipo de películas tiene el maratón?</label>
                 <br>
-                <textarea name="movies" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250" placeholder="Escriba su respuesta" required></textarea>
+                <textarea name="movies" style="max-width: 50%" class="form-control" rows="3" maxlength="250" placeholder="Escriba su respuesta" required></textarea>
                 <div class="invalid-feedback">
                     Ingrese su respuesta
                 </div>
@@ -49,7 +66,7 @@
             <div class="form-group form-group-lg" align="center">
                 <label for="">¿A qué tipo de público va dirigido el maratón?</label>
                 <br>
-                <textarea name="public" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
+                <textarea name="public" style="max-width: 50%" class="form-control" rows="3" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
                 <div class="invalid-feedback">
                     Ingrese su respuesta
                 </div>
@@ -57,7 +74,7 @@
             <div class="form-group form-group-lg" align="center">
                 <label for="">¿Qué género de películas abunda en el maratón?</label>
                 <br>
-                <textarea name="genrse" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
+                <textarea name="genrse" style="max-width: 50%" class="form-control" rows="3" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
                 <div class="invalid-feedback">
                     Ingrese su respuesta
                 </div>
@@ -65,7 +82,7 @@
             <div class="form-group form-group-lg" align="center">
                 <label for="">¿Cuál es la intención del maratón?</label>
                 <br>
-                <textarea name="intention" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
+                <textarea name="intention" style="max-width: 50%" class="form-control" rows="3" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
                 <div class="invalid-feedback">
                     Ingrese su respuesta
                 </div>
@@ -73,7 +90,7 @@
             <div class="form-group form-group-lg" align="center">
                 <label for="">¿Por qué el nombre del maratón?</label>
                 <br>
-                <textarea name="reason" style="max-width: 50%" class="form-control" rows="3" id="descrption" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
+                <textarea name="reason" style="max-width: 50%" class="form-control" rows="3" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
                 <div class="invalid-feedback">
                     Ingrese su respuesta
                 </div>

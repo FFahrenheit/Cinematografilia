@@ -36,14 +36,14 @@
                 {
                     echo $cards->advancedSearch(
                         str_replace(" ","+",$_GET['title']),
-                        str_replace(" ","+",$_GET['director']),
+                        $_GET['director'],
                         $_GET['year']);
                 }
                 else 
                 {
                     echo $cards->advancedSearch(
                         str_replace(" ","+",$_GET['title']),
-                        str_replace(" ","+",$_GET['director']));
+                        $_GET['director']);
                 }
             }
             else 
