@@ -35,10 +35,13 @@
         </div>
         <div class="profile-head">
             <img src=<?php echo '"' . $profile->getImage() . '"'; ?>>
-            <h1><?php echo $profile->getUser(); ?></h1>
+            <h1><?php echo $profile->getUser(); ?>
+                <a title="Recuento cinematográfico" href="my-stats.php?user=<?php echo $username; ?>">
+                    <i style="color: #F6C519;"class="far fa-file-video"></i> 
+                </a>
+            </h1>
             <p>
                 Miembro desde <?php echo $profile->getDate(); ?>
-                <a href="my-stats.php?user=<?php echo $username; ?>"class="btn btn-warning">Ver recuento cinematográfico</a>
             </p>
             <nav class="profile-nav">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -52,7 +55,7 @@
 
                 </div>
             </nav>
-        </div> 
+        </div>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <h2><i class="fas fa-award"></i> Insignias obtenidas</h2>

@@ -14,7 +14,7 @@
 
 <body>
     <?php getNavBar() ?>
-    <div class="form">
+    <div id="top" class="form">
         <h1>Crear nuevo maraton</h1>
         <p>Por favor, complete este formulario antes de comenzar a elegir películas para el maratón</p>
         <div class="alert alert-dismissible" id="alert">
@@ -41,7 +41,7 @@
             <div class="form-group form-group-lg" align="center">
                 <label for="">Fecha de inicio del maraton</label>
                 <br>
-                <input type="begin" class="form-control" rows="3" required></textarea>
+                <input type="date" name="begin" id="begin" class="form-control" rows="3" required></textarea>
                 <div class="invalid-feedback">
                     Ingrese su respuesta
                 </div>
@@ -49,12 +49,11 @@
             <div class="form-group form-group-lg" align="center">
                 <label for="">Fecha de final del maratón</label>
                 <br>
-                <input type="date" name="end" class="form-control" rows="3" required></textarea>
+                <input type="date" name="end" id="end" class="form-control" rows="3" required></textarea>
                 <div class="invalid-feedback">
                     Ingrese su respuesta
                 </div>
             </div>
-            }
             <div class="form-group form-group-lg" align="center">
                 <label for="">¿Qué tipo de películas tiene el maratón?</label>
                 <br>

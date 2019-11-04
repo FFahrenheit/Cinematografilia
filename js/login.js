@@ -25,6 +25,11 @@ if (newPass != null) {
         e.preventDefault();
         console.log("Nueva");
         if (newPass.checkValidity()) {
+            var pass1 = document.getElementById('pass');
+            var pass2 = document.getElementById('pass2');
+            if (pass1.value != pass2.value) {
+                alertar("Las contraseñas no coinciden", "danger");
+            }
             fetch('../../php/new-password.php', {
                 method: 'POST',
                 body: new FormData(newPass)

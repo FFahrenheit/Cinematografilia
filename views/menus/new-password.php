@@ -29,7 +29,15 @@
             <div class="form-group">
                 <label for="">Nueva contraseña: </label>
                 <br>
-                <input type="password" name="pass" placeholder="Escriba su contraseña" class="form-control" required>
+                <input type="password" name="pass" id="pass" placeholder="Escriba su contraseña" class="form-control" required>
+                <div class="invalid-feedback">
+                    Ingresa la contraseña
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Confirme contraseña: </label>
+                <br>
+                <input type="password" name="pass2" id="pass2" placeholder="Escriba su contraseña" class="form-control" required>
                 <div class="invalid-feedback">
                     Ingresa la contraseña
                 </div>
