@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2019 a las 15:45:48
+-- Tiempo de generación: 04-11-2019 a las 04:32:13
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -268,6 +268,46 @@ END IF;
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `maraton`
+--
+
+CREATE TABLE `maraton` (
+  `clave` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `inicio` date NOT NULL,
+  `fin` date NOT NULL,
+  `descripcion` text NOT NULL,
+  `tipo` text NOT NULL,
+  `publico` text NOT NULL,
+  `genero` text NOT NULL,
+  `intencion` text NOT NULL,
+  `razon` text NOT NULL,
+  `estado` enum('pendiente','aceptado','rechazado','revision') NOT NULL,
+  `creador` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `maraton`
+--
+
+INSERT INTO `maraton` (`clave`, `nombre`, `inicio`, `fin`, `descripcion`, `tipo`, `publico`, `genero`, `intencion`, `razon`, `estado`, `creador`) VALUES
+(1, 'Mi maraton', '2019-11-06', '2019-11-19', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'pendiente', 'ivan');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `maraton_peliculas`
+--
+
+CREATE TABLE `maraton_peliculas` (
+  `orden` timestamp NOT NULL DEFAULT current_timestamp(),
+  `pelicula` varchar(10) NOT NULL,
+  `maraton` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -776,6 +816,22 @@ ALTER TABLE `likes`
   ADD KEY `usuario` (`usuario`);
 
 --
+-- Indices de la tabla `maraton`
+--
+ALTER TABLE `maraton`
+  ADD PRIMARY KEY (`clave`),
+  ADD KEY `creador` (`creador`),
+  ADD KEY `creador_2` (`creador`);
+
+--
+-- Indices de la tabla `maraton_peliculas`
+--
+ALTER TABLE `maraton_peliculas`
+  ADD PRIMARY KEY (`pelicula`,`maraton`),
+  ADD KEY `pelicula` (`pelicula`),
+  ADD KEY `maraton` (`maraton`);
+
+--
 -- Indices de la tabla `playlist`
 --
 ALTER TABLE `playlist`
@@ -905,6 +961,12 @@ ALTER TABLE `insignia`
   MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT de la tabla `maraton`
+--
+ALTER TABLE `maraton`
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `playlist`
 --
 ALTER TABLE `playlist`
@@ -976,6 +1038,18 @@ ALTER TABLE `favoritas`
 --
 ALTER TABLE `likes`
   ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`);
+
+--
+-- Filtros para la tabla `maraton`
+--
+ALTER TABLE `maraton`
+  ADD CONSTRAINT `maraton_ibfk_1` FOREIGN KEY (`creador`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `maraton_peliculas`
+--
+ALTER TABLE `maraton_peliculas`
+  ADD CONSTRAINT `maraton_peliculas_ibfk_1` FOREIGN KEY (`maraton`) REFERENCES `maraton` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `playlist`

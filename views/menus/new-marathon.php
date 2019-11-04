@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="">Nombre del maratón: </label>
                 <br>
-                <input name="name" type="text" placeholder="Escriba el nombre" class="form-control" required minlength="2">
+                <input name="name" type="text" placeholder="Escriba el nombre" class="form-control" required minlength="2" maxlength="50">
                 <div class="invalid-feedback">
                     Ingrese un nombre
                 </div>
@@ -73,7 +73,7 @@
             <div class="form-group form-group-lg" align="center">
                 <label for="">¿Qué género de películas abunda en el maratón?</label>
                 <br>
-                <textarea name="genrse" style="max-width: 50%" class="form-control" rows="3" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
+                <textarea name="genre" style="max-width: 50%" class="form-control" rows="3" maxlength="250"  placeholder="Escriba su respuesta" required></textarea>
                 <div class="invalid-feedback">
                     Ingrese su respuesta
                 </div>

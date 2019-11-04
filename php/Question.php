@@ -146,7 +146,7 @@
                             <br>
                             <input id="name" onkeyup="search()" name="name" type="text" placeholder="Busque la película para su respuesta" class="form-control" required minlength="2">
                             <a onclick="searche()" class="btn btn-warning text-dark" style="padding-left:10px;cursor:pointer;">Buscar</a>
-                            <button type="submit" class="btn btn-success">Enviar</buton>
+                            <button type="submit" class="btn btn-success">Enviar</button>
                             
                         </div>
                     </form>';
@@ -160,7 +160,7 @@
                             <label for="">Respuesta: </label>
                             <br>
                             <input id="name" onkeyup="search()" name="name" type="text" placeholder="Busque la película para su respuesta" class="form-control" required minlength="2">
-                            <button class="btn btn-warning">Enviar</buton>
+                            <button class="btn btn-warning">Enviar</button>
                         </div>
                     </form>';
                 }

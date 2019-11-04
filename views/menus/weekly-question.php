@@ -12,22 +12,22 @@
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
-          include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Question.php'); 
-          $quest = new Question(); ?>
+    include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Question.php');
+    $quest = new Question(); ?>
 </head>
 
 <body>
     <?php getNavBar() ?>
     <div class="alert alert-dismissible" id="alert">
-            <span id="alert-message"></span>
-            <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
-        </div>
+        <span id="alert-message"></span>
+        <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
+    </div>
     <div class="questions">
         <a href="weekly-question-result.php">
             <h4 class="bg-warning text-dark weekly">¡Ve los resultados de la semana pasada!</h4>
         </a>
         <br>
-        <h3><?php echo $quest->getQuestion();?></h3>
+        <h3><?php echo $quest->getQuestion(); ?></h3>
         <?php echo $quest->getSearchBar(); ?>
         <div id="ans">
         </div>
