@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-11-2019 a las 04:32:13
+-- Tiempo de generación: 04-11-2019 a las 23:12:41
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -295,7 +295,20 @@ CREATE TABLE `maraton` (
 --
 
 INSERT INTO `maraton` (`clave`, `nombre`, `inicio`, `fin`, `descripcion`, `tipo`, `publico`, `genero`, `intencion`, `razon`, `estado`, `creador`) VALUES
-(1, 'Mi maraton', '2019-11-06', '2019-11-19', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'pendiente', 'ivan');
+(1, 'Mi maraton', '2019-11-06', '2019-11-19', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'revision', 'ivan');
+
+--
+-- Disparadores `maraton`
+--
+DELIMITER $$
+CREATE TRIGGER `notificacion-maraton` AFTER UPDATE ON `maraton` FOR EACH ROW BEGIN 
+IF(NEW.estado = 'revision')
+THEN
+INSERT INTO chat(mensaje,emisor,receptor) VALUES ('admin','admin','Tiene nuevos  maratones que revisar');
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -308,6 +321,16 @@ CREATE TABLE `maraton_peliculas` (
   `pelicula` varchar(10) NOT NULL,
   `maraton` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `maraton_peliculas`
+--
+
+INSERT INTO `maraton_peliculas` (`orden`, `pelicula`, `maraton`) VALUES
+('2019-11-04 04:22:26', 'tt0060196', 1),
+('2019-11-04 03:50:43', 'tt0164063', 1),
+('2019-11-04 04:21:21', 'tt1710558', 1),
+('2019-11-04 03:44:23', 'tt4154756', 1);
 
 -- --------------------------------------------------------
 
@@ -420,7 +443,8 @@ INSERT INTO `preguntas` (`clave`, `pregunta`, `estado`, `fecha`) VALUES
 (19, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:10'),
 (20, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:20'),
 (21, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:30'),
-(22, 'Pelicula favorita vista recientemente', 'activa', '2019-10-23 04:51:30');
+(22, 'Pelicula favorita vista recientemente', 'activa', '2019-10-23 04:51:30'),
+(23, 'Pelicula de disney favorita', 'cola', '2019-11-04 22:06:05');
 
 -- --------------------------------------------------------
 
@@ -581,6 +605,16 @@ CREATE TABLE `review_reporte` (
   `razon` varchar(100) NOT NULL,
   `review` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `review_reporte`
+--
+DELIMITER $$
+CREATE TRIGGER `notificaction-reporte` AFTER INSERT ON `review_reporte` FOR EACH ROW BEGIN 
+INSERT INTO chat(mensaje,emisor,receptor) VALUES ('admin','admin','Tiene nuevos  reportes que atender');
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -976,7 +1010,7 @@ ALTER TABLE `playlist`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `recomendacion`

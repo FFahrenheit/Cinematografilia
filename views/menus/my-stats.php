@@ -24,9 +24,9 @@
     </style>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
 	include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Stats.php');
-	if(isset($_POST['user']))
+	if(isset($_GET['user']))
 	{
-		$stats = new Stats($_POST['user']);
+		$stats = new Stats($_GET['user']);
 	}
     else if (!isset($_SESSION['username'])) {
         header("Location: error.php");
