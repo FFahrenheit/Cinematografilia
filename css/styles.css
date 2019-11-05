@@ -209,3 +209,7 @@
     .sa_sub {
         cursor: pointer;
     }
+    
+    .list {
+        text-align: left;
+    }

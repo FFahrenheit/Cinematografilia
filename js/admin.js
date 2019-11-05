@@ -72,3 +72,40 @@ qForm.addEventListener('submit', e => {
         })
     }
 })
+
+var marathon = null;
+
+function setMarathonKey(key) {
+    marathon = key;
+}
+
+function send(key, status) {
+    var data = new FormData();
+    data.append("key", key);
+    data.append("status", status);
+    fetch('../../php/update-marathon.php', {
+        method: 'POST',
+        body: data
+    }).then(resp => { return resp.json() }).then(r => {
+        console.log(r);
+        switch (r) {
+            case '0':
+                alertar("Error de conexión", "danger");
+                break;
+            case '1':
+                alertar("No se ha podido realizar la acción, intente de nuevo", "warning");
+                break;
+            case '2':
+                alertar("El maratón ha sido " + status + " exitosamente", "success");
+                setTimeout(() => {
+                    window.location.href = "review-marathons.php";
+                }, 3000);
+                break;
+            default:
+                alertar("Error interno", "danger");
+                setTimeout(() => {
+                    window.location.reload(true);
+                }, 2500);
+        }
+    })
+}

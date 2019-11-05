@@ -198,5 +198,89 @@
             }
             return $array;
         }
+
+        public function getMarathonAnswers($key)
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+            
+            $sql = "SELECT * FROM maraton WHERE clave = $key";
+            $rs = mysqli_query($conn,$sql);
+            if($rs && $rs->num_rows>0)
+            {
+                $data = mysqli_fetch_assoc($rs);
+                $out = '<span class="text-warning">Nombre del maratón: </span>';
+                $out .= '<span class="text-light">'.$data['nombre'].'</span>';
+                $out .= '<br>';
+
+                $out .= '<span class="text-warning">Anfitrión: </span>';
+                $out .= '<span class="text-light"><a  class="text-light" href="profile.php?user='.$data['creador'].'">'.$data['creador'].'</a></span>';
+                $out .= '<br>';                
+
+                $out .= '<span class="text-warning">Fecha de inicio: </span>';
+                $out .= '<span class="text-light">'.$data['inicio'].'</span>';
+                $out .= '<br>';
+
+                $out .= '<span class="text-warning">Fecha de fin: </span>';
+                $out .= '<span class="text-light">'.$data['fin'].'</span>';
+                $out .= '<br>';
+
+                
+                $start_date = strtotime($data['inicio']); 
+                $end_date = strtotime($data['fin']); 
+                $out .= '<span class="text-warning">Duración: </span>';
+                $out .= '<span class="text-light">'.($end_date - $start_date)/60/60/24 .' días</span>';
+                $out .= '<br>';
+
+
+                $out .= '<span class="text-warning">Descripción: </span>';
+                $out .= '<span class="text-light">'.$data['descripcion'].'</span>';
+                $out .= '<br><br>';
+
+                $out .= '<span class="text-white">Información privada:</span><br>';
+
+                $out .= '<span class="text-warning">Tipo de películas en el maratón: </span>';
+                $out .= '<span class="text-light">'.$data['tipo'].'</span>';
+                $out .= '<br>';
+
+                $out .= '<span class="text-warning">Publico dirigido: </span>';
+                $out .= '<span class="text-light">'.$data['publico'].'</span>';
+                $out .= '<br>';
+
+                $out .= '<span class="text-warning">Género más abundante: </span>';
+                $out .= '<span class="text-light">'.$data['genero'].'</span>';
+                $out .= '<br>';
+
+                $out .= '<span class="text-warning">Intención del maratón: </span>';
+                $out .= '<span class="text-light">'.$data['intencion'].'</span>';
+                $out .= '<br>';
+
+                $out .= '<span class="text-warning">Razón del nombre del maratón: </span>';
+                $out .= '<span class="text-light">'.$data['razon'].'</span>';
+                $out .= '<br>';
+
+                return $out;
+            }
+            else 
+            {
+                return "<p>Error al obtener detalles</p>";
+            }
+        }
+
+        public function getMarathonButtons($key)
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+
+            if($temp->getCount($conn,"SELECT estado FROM maraton WHERE clave = $key") == 'revision')
+            {
+                return '<button class="btn btn-danger" onclick="send(\''.$key.'\',\'rechazado\')">Rechazar</button>
+                     <button class="btn btn-success" onclick="send(\''.$key.'\',\'aceptado\')">Aceptar</button>';
+            }
+            else 
+            {
+                return '<button class="btn btn-secondary" disabled>Opciones no disponibles</button>';
+            }
+        }
     }
 ?>

@@ -1,24 +1,11 @@
 <?php 
     include_once('Connection.php');
-    $movie = $_POST['movie'];
     $marathon = $_POST['marathon'];
     $APIKey = "b27f9641";
 
     
     $temp = new Connection();
     $conn = $temp->getConnection() or die ("connection");
-
-    if($movie == "0")
-    {
-        goto getMovies;
-    }
-    $sql = "INSERT INTO maraton_peliculas(pelicula,maraton) VALUES ('$movie',$marathon)";
-
-    mysqli_query($conn,$sql) or die("query");
-
-    if(mysqli_affected_rows($conn)>0)
-    {
-        getMovies:
         $sql = "SELECT pelicula FROM maraton_peliculas WHERE maraton = $marathon ORDER BY orden ASC";
         $rs = mysqli_query($conn,$sql);
         $out="";
@@ -40,15 +27,11 @@
                 $out .= "<td>$hr<img src='".$poster."'></a></td>";
                 $out .= "<td>$hr".$movie['Title']." (".$movie['Year'].") </a></td>";
                 
-                $out .= '<td><a title="Borrar del maratón" onclick="removeMovie('.$arg.','.$arg2.',this);"><i class="fas fa-trash"></i></a></td>';
+                $out .= '<td><a title="Más información" href="movie.php?id='.$movie['imdbID'].'" target="_blank"><i class="fas fa-info"></i></a></td>';
         
                 $out .= '</tr>';
             }
         }
+
         echo $out;
-    }
-    else 
-    {
-        echo "repeat";
-    }
 ?>

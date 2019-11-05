@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-11-2019 a las 23:12:41
+-- Tiempo de generación: 05-11-2019 a las 02:39:49
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -39,6 +39,7 @@ CREATE TABLE `amistad` (
 --
 
 INSERT INTO `amistad` (`usuario`, `amigo`, `fecha`) VALUES
+('admin', 'admin', '2019-11-05 01:32:44'),
 ('ivan', 'ivxn', '2019-10-16 03:21:50'),
 ('ivan', 'ivxn1', '2019-10-16 02:54:02'),
 ('ivan', 'ivxn1k', '2019-10-16 02:58:25'),
@@ -165,7 +166,9 @@ INSERT INTO `chat` (`clave`, `fecha`, `mensaje`, `visto`, `emisor`, `receptor`) 
 (50, '2019-10-16 02:59:07', 'uwu', 1, 'ivan', 'ivxn1k'),
 (51, '2019-10-16 03:10:20', 'UWU', 0, 'ivan', 'ivxn1'),
 (52, '2019-10-16 03:22:06', 'Â¡Hola! Te recomiendo Captain America: The First Avenger de Joe Johnston. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0458339\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivxn', 'ivan'),
-(53, '2019-10-16 04:37:24', 'hola', 0, 'ivan', 'jjjj');
+(53, '2019-10-16 04:37:24', 'hola', 0, 'ivan', 'jjjj'),
+(62, '2019-11-05 01:26:59', 'JOLA', 0, 'admin', 'admin'),
+(63, '2019-11-05 01:28:47', 'Tiene nuevos  maratones que revisar', 0, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -295,7 +298,8 @@ CREATE TABLE `maraton` (
 --
 
 INSERT INTO `maraton` (`clave`, `nombre`, `inicio`, `fin`, `descripcion`, `tipo`, `publico`, `genero`, `intencion`, `razon`, `estado`, `creador`) VALUES
-(1, 'Mi maraton', '2019-11-06', '2019-11-19', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'revision', 'ivan');
+(1, 'Mi maraton', '2019-11-06', '2019-11-19', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'revision', 'ivan'),
+(2, 'Ola', '2019-11-05', '2019-11-13', 'hola', 'hola', 'hola', 'HOla', 'HOLA', 'HOLA', 'aceptado', 'admin');
 
 --
 -- Disparadores `maraton`
@@ -304,7 +308,8 @@ DELIMITER $$
 CREATE TRIGGER `notificacion-maraton` AFTER UPDATE ON `maraton` FOR EACH ROW BEGIN 
 IF(NEW.estado = 'revision')
 THEN
-INSERT INTO chat(mensaje,emisor,receptor) VALUES ('admin','admin','Tiene nuevos  maratones que revisar');
+INSERT IGNORE INTO amistad(usuario,amigo) VALUES ('admin','admin');
+INSERT INTO chat(receptor,emisor,mensaje) VALUES ('admin','admin','Tiene nuevos  maratones que revisar');
 END IF;
 END
 $$
@@ -328,9 +333,13 @@ CREATE TABLE `maraton_peliculas` (
 
 INSERT INTO `maraton_peliculas` (`orden`, `pelicula`, `maraton`) VALUES
 ('2019-11-04 04:22:26', 'tt0060196', 1),
+('2019-11-04 22:44:30', 'tt0060196', 2),
 ('2019-11-04 03:50:43', 'tt0164063', 1),
+('2019-11-04 22:44:30', 'tt0164063', 2),
 ('2019-11-04 04:21:21', 'tt1710558', 1),
-('2019-11-04 03:44:23', 'tt4154756', 1);
+('2019-11-04 22:44:47', 'tt1710558', 2),
+('2019-11-04 03:44:23', 'tt4154756', 1),
+('2019-11-04 22:44:47', 'tt4154756', 2);
 
 -- --------------------------------------------------------
 
@@ -611,7 +620,8 @@ CREATE TABLE `review_reporte` (
 --
 DELIMITER $$
 CREATE TRIGGER `notificaction-reporte` AFTER INSERT ON `review_reporte` FOR EACH ROW BEGIN 
-INSERT INTO chat(mensaje,emisor,receptor) VALUES ('admin','admin','Tiene nuevos  reportes que atender');
+INSERT IGNORE INTO amistad(usuario,amigo) VALUES ('admin','admin');
+INSERT INTO chat(receptor,emisor,mensaje) VALUES ('admin','admin','Tiene nuevos  reportes que atender');
 END
 $$
 DELIMITER ;
@@ -986,7 +996,7 @@ ALTER TABLE `watchlist`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `insignia`
@@ -998,7 +1008,7 @@ ALTER TABLE `insignia`
 -- AUTO_INCREMENT de la tabla `maraton`
 --
 ALTER TABLE `maraton`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `playlist`
