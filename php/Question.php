@@ -146,8 +146,10 @@
                             <br>
                             <input id="name" onkeyup="search()" name="name" type="text" placeholder="Busque la película para su respuesta" class="form-control" required minlength="2">
                             <a onclick="searche()" class="btn btn-warning text-dark" style="padding-left:10px;cursor:pointer;">Buscar</a>
-                            <button type="submit" class="btn btn-success">Enviar</button>
-                            
+                            <br>
+                            <br>
+                            <div id="ans">
+                            </div>
                         </div>
                     </form>';
                 }
@@ -159,8 +161,12 @@
                         <div class="form-group">
                             <label for="">Respuesta: </label>
                             <br>
+                            <br>
                             <input id="name" onkeyup="search()" name="name" type="text" placeholder="Busque la película para su respuesta" class="form-control" required minlength="2">
-                            <button class="btn btn-warning">Enviar</button>
+                            <a onclick="searche()" class="btn btn-warning text-dark" style="padding-left:10px;cursor:pointer;">Buscar</a>
+                            <br>
+                            <div id="ans">
+                            </div>
                         </div>
                     </form>';
                 }

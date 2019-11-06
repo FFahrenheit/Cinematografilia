@@ -29,8 +29,6 @@
         <br>
         <h3><?php echo $quest->getQuestion(); ?></h3>
         <?php echo $quest->getSearchBar(); ?>
-        <div id="ans">
-        </div>
         <div id="answers">
         </div>
     </div>

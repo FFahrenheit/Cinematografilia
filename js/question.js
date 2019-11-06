@@ -70,8 +70,8 @@ function setAnswer(id, title, reference) {
     } else {
         console.log(id + title);
         answer = id;
-        $("#ans").html("<p>Respuesta actual: " + title + "</p>");
-        console.log("A ver si jaló");
+        $("#ans").html("<p>Respuesta actual: " + title + '   <button type="submit" class="btn btn-success">Enviar</button>' + "</p>");
+        // console.log("A ver si jaló");
         if (last != null) {
             last.innerHTML = '<i class="far fa-square"></i>';
         }
