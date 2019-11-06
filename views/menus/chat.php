@@ -58,10 +58,12 @@
                         <form class="m-0 p-0" action="" method="POST" autocomplete="off" id="send">
                             <div class="row m-0 p-0">
                                 <div class="col-9 m-0 p-1">
-                                    <input id="text" class="mw-100 border rounded form-control" type="text" name="text" title="Type a message..." placeholder="Escribe un mensaje" required>
+                                    <input <?php if($friend == 'admin'){echo "disabled";}?> id="text" 
+                                    class="mw-100 border rounded form-control" type="text" name="text" title="Escribe un mensaje..." 
+                                    placeholder="<?php echo $friend == 'admin'? 'No puede conestar a esta conversación': 'Escriba un mensaje';?>" required>
                                 </div>
                                 <div class="col-3 m-0 p-1">
-                                    <button class="btn btn-outline-secondary rounded border w-100" title="Gönder!" style="padding-right: 16px;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                    <button class="btn btn-outline-secondary rounded border w-100" title="Enviar" <?php if($friend == 'admin'){echo "disabled";}?> style="padding-right: 16px;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                                 </div>
                             </div>
                         </form>

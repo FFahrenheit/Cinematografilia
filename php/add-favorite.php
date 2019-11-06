@@ -15,9 +15,6 @@
     $c = new Connection;
     $conn = $c->getConnection() or die('"1"');
 
-    $sql ="DELETE FROM watchlist WHERE usuario = '$user' AND pelicula = '$movie'";
-    mysqli_query($conn,$sql);
-
     $sql = "SELECT COUNT(*) AS CONT FROM favoritas WHERE usuario = '$user'";
     $result = mysqli_query($conn,$sql);
     if($result)
@@ -29,6 +26,9 @@
             die();
         }
     }
+    
+    $sql ="DELETE FROM watchlist WHERE usuario = '$user' AND pelicula = '$movie'";
+    mysqli_query($conn,$sql);
     $sql = "INSERT INTO favoritas(pelicula,usuario) VALUES ('$movie','$user')";
 
     if(mysqli_query($conn,$sql))

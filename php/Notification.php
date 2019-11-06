@@ -337,14 +337,17 @@
                 $out = '<table class ="table table-hover sa_table"><tbody>';
                 while($data = mysqli_fetch_assoc($result))
                 {
-                    $out .= '<tr>';
-                    $user = $data['user'];
-                    $hr = "<a style='color: white;' href = 'profile.php?user=$user'>";
-                    $out .= "<td>$hr<img src='".$data['img']."'></a></td>";
-                    $out .= "<td>$hr".$data['user']."</a></td>";
-                    $out .= '<td><a class="btn btn-warning" href="chat.php?user='.$data['user'].'">Enviar mensaje</a></td>';
-                    $out .= '<td><a class="btn btn-warning" href="profile.php?user='.$data['user'].'">Visitar perfil</a></td>';
-                    $out .= '</tr>';
+                    if($data['user']!='admin')
+                    {
+                        $out .= '<tr>';
+                        $user = $data['user'];
+                        $hr = "<a style='color: white;' href = 'profile.php?user=$user'>";
+                        $out .= "<td>$hr<img src='".$data['img']."'></a></td>";
+                        $out .= "<td>$hr".$data['user']."</a></td>";
+                        $out .= '<td><a class="btn btn-warning" href="chat.php?user='.$data['user'].'">Enviar mensaje</a></td>';
+                        $out .= '<td><a class="btn btn-warning" href="profile.php?user='.$data['user'].'">Visitar perfil</a></td>';
+                        $out .= '</tr>';
+                    }
                 }
                 $out .= '</tbody></table>';
                 return $out;
