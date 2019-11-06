@@ -128,7 +128,6 @@
             FROM maraton WHERE estado = 'aceptado' AND DATE(NOW())> fin AND 
             clave IN (SELECT maraton FROM maraton_asistencia WHERE usuario = '$this->user')";
 
-            echo $sql;
             $rs = mysqli_query($conn,$sql);
 
             if($rs && $rs->num_rows>0)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2019 a las 02:39:49
+-- Tiempo de generación: 06-11-2019 a las 05:14:14
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -167,8 +167,8 @@ INSERT INTO `chat` (`clave`, `fecha`, `mensaje`, `visto`, `emisor`, `receptor`) 
 (51, '2019-10-16 03:10:20', 'UWU', 0, 'ivan', 'ivxn1'),
 (52, '2019-10-16 03:22:06', 'Â¡Hola! Te recomiendo Captain America: The First Avenger de Joe Johnston. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0458339\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivxn', 'ivan'),
 (53, '2019-10-16 04:37:24', 'hola', 0, 'ivan', 'jjjj'),
-(62, '2019-11-05 01:26:59', 'JOLA', 0, 'admin', 'admin'),
-(63, '2019-11-05 01:28:47', 'Tiene nuevos  maratones que revisar', 0, 'admin', 'admin');
+(62, '2019-11-05 01:26:59', 'JOLA', 1, 'admin', 'admin'),
+(63, '2019-11-05 01:28:47', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -298,7 +298,7 @@ CREATE TABLE `maraton` (
 --
 
 INSERT INTO `maraton` (`clave`, `nombre`, `inicio`, `fin`, `descripcion`, `tipo`, `publico`, `genero`, `intencion`, `razon`, `estado`, `creador`) VALUES
-(1, 'Mi maraton', '2019-11-06', '2019-11-19', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'revision', 'ivan'),
+(1, 'Mi maraton', '2019-11-06', '2019-11-19', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'aceptado', 'ivan'),
 (2, 'Ola', '2019-11-05', '2019-11-13', 'hola', 'hola', 'hola', 'HOla', 'HOLA', 'HOLA', 'aceptado', 'admin');
 
 --
@@ -314,6 +314,26 @@ END IF;
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `maraton_asistencia`
+--
+
+CREATE TABLE `maraton_asistencia` (
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `estado` enum('incompleto','completo','cancelado','') NOT NULL DEFAULT 'incompleto',
+  `usuario` varchar(30) NOT NULL,
+  `maraton` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `maraton_asistencia`
+--
+
+INSERT INTO `maraton_asistencia` (`fecha`, `estado`, `usuario`, `maraton`) VALUES
+('2019-11-06 04:02:54', 'incompleto', 'ivan', 1);
 
 -- --------------------------------------------------------
 
@@ -868,6 +888,14 @@ ALTER TABLE `maraton`
   ADD KEY `creador_2` (`creador`);
 
 --
+-- Indices de la tabla `maraton_asistencia`
+--
+ALTER TABLE `maraton_asistencia`
+  ADD PRIMARY KEY (`usuario`,`maraton`),
+  ADD KEY `usuario` (`usuario`),
+  ADD KEY `maraton` (`maraton`);
+
+--
 -- Indices de la tabla `maraton_peliculas`
 --
 ALTER TABLE `maraton_peliculas`
@@ -1088,6 +1116,13 @@ ALTER TABLE `likes`
 --
 ALTER TABLE `maraton`
   ADD CONSTRAINT `maraton_ibfk_1` FOREIGN KEY (`creador`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `maraton_asistencia`
+--
+ALTER TABLE `maraton_asistencia`
+  ADD CONSTRAINT `maraton_asistencia_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `maraton_asistencia_ibfk_2` FOREIGN KEY (`maraton`) REFERENCES `maraton` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `maraton_peliculas`
