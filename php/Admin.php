@@ -179,8 +179,7 @@
                 aria-labelledby="navbarDropdownMenuLink-222">'.$out.
                 '</div>'
                 : 
-                "&nbsp;";
-
+                '<i title="No hay advertencia de maratón repetido" class="fas fa-check"></i>';
         }
 
         private function getArray($result)
@@ -274,7 +273,7 @@
 
             if($temp->getCount($conn,"SELECT estado FROM maraton WHERE clave = $key") == 'revision')
             {
-                return '<button class="btn btn-danger" onclick="send(\''.$key.'\',\'rechazado\')">Rechazar</button>
+                return '<button class="btn btn-danger" onclick="send(\''.$key.'\',\'rechazo\')">Rechazar</button>
                      <button class="btn btn-success" onclick="send(\''.$key.'\',\'aceptado\')">Aceptar</button>';
             }
             else 

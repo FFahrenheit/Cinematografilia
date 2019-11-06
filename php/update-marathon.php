@@ -11,6 +11,13 @@
     $result = mysqli_query($conn,$sql) or die('"1"');
     if($result && mysqli_affected_rows($conn) > 0)
     {
+        // $msg = ($status == 'rechazado') ? 
+        // "El maratón ha sido rechazado por los siguientes motivos: ".$_POST['reason']
+        // :
+        // "Tu maratón ha sido aceptado";
+
+        // $sql = "INSERT INTO chat()";
+
         echo json_encode("2");
     }
     else 

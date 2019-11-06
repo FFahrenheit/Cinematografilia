@@ -53,6 +53,36 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog sa_modal bg-dark" role="document">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header bg-dark">
+                        <h5 class="modal-title bg-dark" id="confirmationModalLabel">Rechazar maratón</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-dark">
+                        <p id="confirmationModalBody">Por favor, indique las razones por las que el maratón fue rechazado</p>
+                        <form id="formulario" novalidate>
+                            <div class="form-group">
+                                <label for="">Razón: </label>
+                                <br>
+                                <textarea name="reason" style="max-width: 100%" class="form-control" rows="6" id="review" maxlength="500" placeholder="Escriba los motivos del rechazo" required></textarea>
+                                <br>
+                                <div class="invalid-feedback">
+                                    Escriba sus motivos
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer bg-dark">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-warning" onclick="rejectMarathon()">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="footer">
     </div>
@@ -63,22 +93,21 @@
     <script src="../../js/alert.js"></script>
     <script src="../../js/admin.js"></script>
     <script>
-        $(()=>
-        {
-            m = <?php echo $_GET['clave']; ?> ;
+        $(() => {
+            m = <?php echo $_GET['clave']; ?>;
             setMarathonKey(<?php echo $_GET['clave']; ?>);
             $.ajax({
-            url: '/spoileralert/php/get-movies-marathon.php',
-            type: 'POST',
-            datatype: 'html',
-            data: {
-                movie: '0',
-                marathon: m
-            }
-        })
-        .done((r) => {
-            $("#currentMovies").html(r);
-        })
+                    url: '/spoileralert/php/get-movies-marathon.php',
+                    type: 'POST',
+                    datatype: 'html',
+                    data: {
+                        movie: '0',
+                        marathon: m
+                    }
+                })
+                .done((r) => {
+                    $("#currentMovies").html(r);
+                })
         });
     </script>
 </body>

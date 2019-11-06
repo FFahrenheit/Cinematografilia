@@ -42,10 +42,10 @@
                     <?php echo $marathon->getMarathons(); ?>
                 </div>
                 <div class="tab-pane fade" id="nav-sent" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <?php echo $marathon->getActiveMarathons();?>
+                    <?php echo $marathon->getActiveMarathons(); ?>
                 </div>
                 <div class="tab-pane fade" id="nav-feedback" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <?php echo $marathon->getFeedback();?>
+                    <?php echo $marathon->getFeedback(); ?>
                 </div>
             </div>
         </div>

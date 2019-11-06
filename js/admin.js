@@ -28,84 +28,121 @@ function deleteQuestion(clave) {
     $("#confirmationModal").modal("toggle");
 }
 
-(function() {
-    'use strict';
+if (document.getElementById('new-question') != null) {
+    (function() {
+        'use strict';
 
-    window.addEventListener('load', function() {
-        var form = document.getElementById('new-question');
-        form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
+        window.addEventListener('load', function() {
+            var form = document.getElementById('new-question');
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
         }, false);
-    }, false);
-})();
+    })();
+}
+
+if (document.getElementById('formulario') != null) {
+    (function() {
+        'use strict';
+
+        window.addEventListener('formulario', function() {
+            var form = document.getElementById('formulario');
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        }, false);
+    })();
+}
 
 var qForm = document.getElementById('new-question');
 
-qForm.addEventListener('submit', e => {
-    e.preventDefault();
-    if (qForm.checkValidity()) {
-        fetch('../../php/add-question.php', {
-            method: 'POST',
-            body: new FormData(qForm)
-        }).then(resp => {
-            return resp.json();
-        }).then(r => {
-            console.log(r);
-            switch (r) {
-                case '0':
-                    alertar("Error interno", "danger");
-                    break;
-                case '1':
-                    alertar("No se ha podido agregar la pregunta", "danger");
-                    break;
-                case '2':
-                    alertar("Pregunta agregada", "success");
-                    setTimeout(() => {
-                        window.location.reload(true);
-                    }, 2500);
-                    break;
-            }
-        })
-    }
-})
+if (qForm != null) {
+    qForm.addEventListener('submit', e => {
+        e.preventDefault();
+        if (qForm.checkValidity()) {
+            fetch('../../php/add-question.php', {
+                method: 'POST',
+                body: new FormData(qForm)
+            }).then(resp => {
+                return resp.json();
+            }).then(r => {
+                console.log(r);
+                switch (r) {
+                    case '0':
+                        alertar("Error interno", "danger");
+                        break;
+                    case '1':
+                        alertar("No se ha podido agregar la pregunta", "danger");
+                        break;
+                    case '2':
+                        alertar("Pregunta agregada", "success");
+                        setTimeout(() => {
+                            window.location.reload(true);
+                        }, 2500);
+                        break;
+                }
+            })
+        }
+    })
+}
 
 var marathon = null;
+var rKey = null;
+
+function rejectMarathon() {
+    send(rKey, 'rechazado');
+    $("#confirmationModal").modal("toggle");
+}
+
+function reason() {
+    $("#confirmationModal").modal("toggle");
+}
 
 function setMarathonKey(key) {
     marathon = key;
 }
 
 function send(key, status) {
-    var data = new FormData();
+    console.log("ola " + status);
+    var data = new FormData(document.getElementById('formulario'));
     data.append("key", key);
     data.append("status", status);
-    fetch('../../php/update-marathon.php', {
-        method: 'POST',
-        body: data
-    }).then(resp => { return resp.json() }).then(r => {
-        console.log(r);
-        switch (r) {
-            case '0':
-                alertar("Error de conexión", "danger");
-                break;
-            case '1':
-                alertar("No se ha podido realizar la acción, intente de nuevo", "warning");
-                break;
-            case '2':
-                alertar("El maratón ha sido " + status + " exitosamente", "success");
-                setTimeout(() => {
-                    window.location.href = "review-marathons.php";
-                }, 3000);
-                break;
-            default:
-                alertar("Error interno", "danger");
-                setTimeout(() => {
-                    window.location.reload(true);
-                }, 2500);
-        }
-    })
+    if (status == 'rechazo') {
+        rKey = key;
+        reason();
+    } else {
+        fetch('../../php/update-marathon.php', {
+            method: 'POST',
+            body: data
+        }).then(resp => { return resp.json() }).then(r => {
+            console.log(r);
+            switch (r) {
+                case '0':
+                    alertar("Error de conexión", "danger");
+                    break;
+                case '1':
+                    alertar("No se ha podido realizar la acción, intente de nuevo", "warning");
+                    break;
+                case '2':
+                    alertar("El maratón ha sido " + status + " exitosamente", "success");
+                    setTimeout(() => {
+                        window.location.href = "review-marathons.php";
+                    }, 3000);
+                    break;
+                default:
+                    alertar("Error interno", "danger");
+                    setTimeout(() => {
+                        window.location.reload(true);
+                    }, 2500);
+            }
+        })
+    }
 }

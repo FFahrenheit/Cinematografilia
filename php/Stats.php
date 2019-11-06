@@ -173,7 +173,7 @@
             }
             else 
             {
-                return "<p>No hay resultados reportados esta semana aún</p>";
+                return "<p>No hay resultados reportados para la semana pasada</p>";
             }
         }
 
@@ -182,7 +182,7 @@
             $temp = new Connection();
             $conn = $temp->getConnection();
 
-            $sql = "SELECT * , COUNT(pelicula) as cont FROM likes 
+            $sql = "SELECT * , COUNT(pelicula) as cont FROM favoritas 
             WHERE WEEK(fecha) = WEEK(NOW())-1 AND YEAR(NOW()) = YEAR(fecha) 
             GROUP BY pelicula ORDER BY cont DESC,pelicula ASC LIMIT 10";
 
@@ -231,7 +231,7 @@
             }
             else 
             {
-                return "<p>No hay resultados reportados esta semana aún</p>";
+                return "<p>No hay resultados reportados para la semana pasada</p>";
             }
         }
 
