@@ -29,6 +29,7 @@ if (newPass != null) {
             var pass2 = document.getElementById('pass2');
             if (pass1.value != pass2.value) {
                 alertar("Las contraseñas no coinciden", "danger");
+                return;
             }
             fetch('../../php/new-password.php', {
                 method: 'POST',
