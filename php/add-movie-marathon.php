@@ -3,7 +3,6 @@
     $movie = $_POST['movie'];
     $marathon = $_POST['marathon'];
     $APIKey = "b27f9641";
-
     
     $temp = new Connection();
     $conn = $temp->getConnection() or die ("connection");

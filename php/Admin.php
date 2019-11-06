@@ -148,7 +148,7 @@
 
             $myMovies = $this->getArray($rs);
 
-            $sql = "SELECT clave FROM maraton WHERE estado = 'aceptado' AND DATE(NOW()) < fin AND clave != $key";
+            $sql = "SELECT clave FROM maraton WHERE estado = 'aceptado' AND DATE(NOW()) <= fin AND clave != $key";
             $rs = mysqli_query($conn,$sql);
 
             while($data = mysqli_fetch_assoc($rs))

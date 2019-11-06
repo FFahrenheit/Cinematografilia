@@ -17,14 +17,7 @@
         $out="";
         while($data = mysqli_fetch_assoc($result))
         {
-            if($data['emisor'] == $user)
-            {
-                $out .= '<div class="balon1 p-2 m-0 position-relative" data-is="Usted - '.$data['fecha'].'">';
-                $out .= '<h6 class="float-right">';
-                $out .= ($data['mensaje']);
-                $out .= '</h6></div>';
-            }
-            else 
+            if($data['receptor']==$user)
             {
                 $out .= '<div class="balon2 p-2 m-0 position-relative" data-is="'.$data['emisor'].' - '.$data['fecha'].'">';
                 $out .= '<h6 class="float-left sohbet2">';
@@ -38,6 +31,13 @@
                     $sql = "UPDATE chat SET visto = 1 WHERE clave = $key";
                     mysqli_query($con,$sql);
                 }
+            }
+            else
+            {
+                $out .= '<div class="balon1 p-2 m-0 position-relative" data-is="Usted - '.$data['fecha'].'">';
+                $out .= '<h6 class="float-right">';
+                $out .= ($data['mensaje']);
+                $out .= '</h6></div>';
             }
         }
         echo $out;

@@ -91,6 +91,10 @@
         public function isChat()
         {
             $this->getUser();
+            if( $this->status=="me" && $this->username=="admin")
+            {
+                return;
+            }
             if($this->status!="friend")
             {
                 header("Location: ../menus/error.php");
