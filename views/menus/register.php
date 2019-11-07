@@ -37,7 +37,7 @@
                 <label for="">Correo electrónico: </label>
                 <br>
                 <input type="text" name="email" id="email"
-                    placeholder="Escriba su nombre de correo" class="form-control"
+                    placeholder="Escriba su  correo electrónico" class="form-control"
                     required onkeyup="checkEmail()">
                 <div class="invalid-feedback">
                     Ingrese el correo

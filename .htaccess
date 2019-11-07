@@ -1,2 +1,6 @@
-Options +Indexes
+Options -Indexes
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+ErrorDocument 403 /SpoilerAlert/views/menus/error.php
 ErrorDocument 404 /SpoilerAlert/views/menus/error.php

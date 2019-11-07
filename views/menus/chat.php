@@ -44,9 +44,9 @@
                                 <h5><i class="fa fa-ellipsis-h" title="Ayarlar!" aria-hidden="true"></i>&nbsp;</h5>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right border p-0" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item p-2 text-secondary" href="#"> <i class="fa fa-user m-1" aria-hidden="true"></i> Visitar perfil </a>
+                                <a class="dropdown-item p-2 text-secondary" href="profile.php?<?php echo $friend?>"> <i class="fa fa-user m-1" aria-hidden="true"></i> Visitar perfil </a>
                                 <hr class="my-1">
-                                <a class="dropdown-item p-2 text-secondary" href="#"> <i class="fas fa-user-lock"></i> Bloquear usuario </a>
+                                <a class="dropdown-item p-2 text-secondary" onclick="<?php echo "'$friend'";?>"> <i class="fas fa-user-lock"></i> Bloquear usuario </a>
                             </div>
                         </div>
                     </div>
@@ -81,6 +81,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
 <script src="../../js/chat.js"></script>
 <script src="../../js/main.js"></script>
+<script src="../../js/profile.js"></script>
 <script>
     setFriend('<?php echo $friend; ?>');
 </script>
