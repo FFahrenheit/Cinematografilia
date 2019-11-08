@@ -1,5 +1,34 @@
 var path = null;
 var data = null;
+var feedback = document.getElementById('feedback');
+
+if (feedback != null) {
+    (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+            var form = document.getElementById('feedback');
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        }, false);
+    })();
+}
+
+function seeMovie(movie, marathon) {
+    console.log("Matcar");
+    data = new FormData();
+    data.append("marathon", marathon);
+    data.append("movie", movie);
+    $("#confirmationModalLabel").html("Marcar película como vista");
+    $("#confirmationModalBody").html("¿Marcar y continuar con el maratón?");
+    path = '../../php/next-movie-marathon.php';
+    $("#confirmationModal").modal("toggle");
+}
 
 function enter(marathon) {
     console.log("Entrar");

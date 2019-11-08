@@ -50,7 +50,7 @@
                 $this->maratonStatus = "waiting";
                 $this->estado = "Por empezar";
             }
-            else if($fin>0 && $fin <= 7)
+            else if($fin>0 && $fin <= 7) //Periodo de feedback
             {
                 $this->maratonStatus = "feedback";
                 $this->estado = "Finalizado";
@@ -194,9 +194,14 @@
             $conn = $temp->getConnection();
 
             $sql = ($this->userStatus=="in" && $this->maratonStatus!="waiting")?
-            "SELECT * FROM maraton_progreso WHERE maraton = $this->key AND usuario = '$this->user' ORDER BY fecha ASC"
+            "SELECT *,
+            (SELECT COUNT(*) FROM (SELECT * FROM maraton_progreso) as progreso 
+            WHERE progreso.maraton =maraton_progreso.maraton AND progreso.pelicula = maraton_progreso.pelicula ) as watchers 
+            FROM maraton_progreso WHERE maraton = $this->key AND usuario = '$this->user' ORDER BY fecha ASC"
             :
-            "SELECT pelicula FROM maraton_peliculas WHERE maraton = $this->key ORDER BY orden ASC";
+            "SELECT pelicula, 
+            (SELECT COUNT(*) FROM (SELECT * FROM maraton_progreso) as progreso 
+            WHERE progreso.maraton =maraton_peliculas.maraton AND progreso.pelicula = maraton_peliculas.pelicula ) as watchers  FROM maraton_peliculas WHERE maraton = $this->key ORDER BY orden ASC";
             
             $out =  ($this->userStatus=="in" && $this->maratonStatus!="waiting")?
             "<p>Progreso de películas</p>" : "<p>Películas del maratón</p>";
@@ -227,6 +232,12 @@
                         $poster = ($movie['Poster']=="N/A")? "../../img/poster.jpg" : $movie['Poster'];
                         $out .= "<td>$hr<img src='".$poster."'></a></td>";
                         $out .= "<td>$hr".$movie['Title']." (".$movie['Year'].") </a></td>";
+                        
+                        if($this->maratonStatus != "waiting")
+                        {
+                            $msg = $this->maratonStatus == "happening" ? " la han visto" : " la vieron";
+                            $out .= '<td>'.$data['watchers'].$msg.'</td>';
+                        }
                                         
                         $out .= '</tr>';
                     }
@@ -238,6 +249,95 @@
             else 
             {
                 return $out. "<p>No hay películas aún</p>";
+            }
+        }
+
+        public function getAction()
+        {
+            if($this->maratonStatus == "end")
+            {
+                //Obtener feedback
+            }
+            else if($this->userStatus == "in")
+            {
+                $temp = new Connection();
+                $conn = $temp->getConnection();
+                if($this->maratonStatus =="happening")
+                {
+
+                    $sql = "SELECT pelicula FROM maraton_peliculas 
+                    WHERE maraton = $this->key AND pelicula NOT IN 
+                    (SELECT pelicula FROM maraton_progreso WHERE usuario = '$this->user' AND maraton = $this->key) 
+                    ORDER BY orden ASC LIMIT 1";
+
+                    $rs = mysqli_query($conn,$sql);
+
+                    if($rs && $rs->num_rows>0)
+                    {
+                        $out = ' <p>Siguiente película:</p>';
+                        if($data = mysqli_fetch_assoc($rs))
+                        {
+                            $mov = $data['pelicula'];
+                            $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=$mov";
+                            $content = file_get_contents($url);
+                            $movie = json_decode($content,true);
+
+                            if($movie['Response']=='True')
+                            {                        
+                                $hr = "<a style='color: white;' href = 'movie.php?id=".$movie['imdbID']."'>";  //href
+                                $poster = ($movie['Poster']=="N/A")? "../../img/poster.jpg" : $movie['Poster']; //poster
+
+                                $out .= "$hr<p>".$movie['Title']." (".$movie['Year'].")</p></a>";
+                                $out .= "$hr<img src='".$poster."'></a><hr>";
+
+                                $out .= 
+                                '<button class="btn btn-warning" onclick="seeMovie(\''.$mov.'\','.$this->key.')">
+                                    Marcar como vista
+                                </button><hr>';                                              
+                            }
+                        }
+                        return $out;
+                    }
+                    else 
+                    {
+                        return 
+                        "<p>
+                            ¡Felicidades! Has acabado el maratón. Espera a que finalice para dar tu feedback en 
+                            los próximos 7 días.
+                        </p>
+                        <img src='../../img/logo.png'>
+                        <br><br>";
+                    }
+                }
+                else if($this->maratonStatus == "feedback")
+                {
+                    $sql = "SELECT COUNT(*) FROM maraton_feedback WHERE usuario = '$this->user' AND mararon = $this->key";
+                    
+                    return $temp->getCount($conn,$sql) != 0 ?  
+                    '<p>Dé su feedback acerca del maratón </p>
+                    <form id="feedback" novalidate>
+                            <div class="form-group">
+                                <label for="">Feedback: </label>
+                                <br>
+                                <textarea name="feedback" style="max-width: 100%" class="form-control" 
+                                rows="6" maxlength="500" placeholder="Escriba su opinión sobre el maratón" required></textarea>
+                                <br>
+                                <div class="invalid-feedback">
+                                    Escriba su feedback
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-warning"type="submit">
+                                    Enviar feedback
+                                </button>
+                            </div>
+                        </form>'
+                    :
+                    '<strong>
+                    ¡Gracias por su participación! Su feedback y el de los demás usuarios 
+                    estarán disponibles 7 días después de finalizado el maratón.
+                    </strong>';
+                }
             }
         }
     }

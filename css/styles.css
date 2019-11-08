@@ -213,3 +213,16 @@
     .list {
         text-align: left;
     }
+    
+    .sa_progress {
+        text-align: center;
+        /* overflow: hidden; */
+        font-size: 20px;
+        /* background: transparent; */
+        color: #F6C519;
+    }
+    
+    .sa_progress img {
+        max-width: 300px;
+        max-height: 300px;
+    }

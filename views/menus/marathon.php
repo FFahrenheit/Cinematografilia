@@ -30,7 +30,7 @@
         <span id="alert-message"></span>
         <a href="#" class="close" onclick="$('#alert').hide();">&times;</a>
     </div>
-    <div class="questions">
+    <div class="sa_movie">
         <div class="container">
             <div style="text-align:center;">
                 <h3><?php echo "Detalles del maratón"; ?></h3>
@@ -44,35 +44,49 @@
                         <?php echo $marathon->getButtons(); ?>
                     </div>
                 </div>
-                <div class="col-md-6" style="text-align:left;">
-                    <div id="details">
-                        <?php echo $marathon->getDetails(); ?>
-                    </div>
-                    <div id="progress">
-                    </div>
+                <div class="col-md-6">
+                    <?php
+                    if ($marathon->maratonStatus == "happening" && $marathon->userStatus == "in") {
+                        ?>
+                        <div class="sa_progress">
+                            <?php echo $marathon->getAction(); ?>
+                        </div>
+                        <div id="details" style="text-align:left;">
+                            <?php echo $marathon->getDetails(); ?>
+                        </div>
+                    <?php
+                    } else { ?>
+                        <div style="text-align:left;">
+                            <?php echo $marathon->getDetails(); ?>
+                        </div>
+                        <div class="sa_progress">
+                            <?php echo $marathon->getAction(); ?>
+                        </div>
+                    <?php
+                    } ?>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog sa_modal bg-dark" role="document">
-                <div class="modal-content bg-dark">
-                    <div class="modal-header bg-dark">
-                        <h5 class="modal-title bg-dark text-light" id="confirmationModalLabel"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body bg-dark">
-                        <p id="confirmationModalBody" class="text-light"></p>
-                    </div>
-                    <div class="modal-footer bg-dark">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-warning" onclick="proceed()">Confirmar</button>
-                    </div>
+        <div class="modal-dialog sa_modal bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title bg-dark text-light" id="confirmationModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <p id="confirmationModalBody" class="text-light"></p>
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="proceed()">Confirmar</button>
                 </div>
             </div>
         </div>
+    </div>
     <div id="footer">
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
