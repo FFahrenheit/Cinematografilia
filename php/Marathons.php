@@ -9,6 +9,7 @@
         public $valid;
         public $name;
         public $estado;
+        public $APIKey = "b27f9641";
 
         public function __construct($key)
         {
@@ -27,7 +28,7 @@
             {
                 $this->userStatus = "unlogged";
             }
-            else if($temp->getCount($conn,"SELECT COUNT(*) FROM maraton_asistencia WHERE maraton = $this->key AND usuario = $this->user") > 0)  //Si está dentro
+            else if($temp->getCount($conn,"SELECT COUNT(*) FROM maraton_asistencia WHERE maraton = $this->key AND usuario = '$this->user'") > 0)  //Si está dentro
             {
                 $this->userStatus = "in";
             }
@@ -86,9 +87,9 @@
             if($this->userStatus=="unlogged" && $this->maratonStatus = "waiting")
             {
                 return 
-                '<a href="login.php" class="btn btn-warning">
+                '<button onclick="window.location.href = \'login.php\'"class="btn btn-warning">
                     Inicie sesión para entrar
-                </a>';
+                </button>';
             }
             if($this->userStatus == "out" && $this->maratonStatus =="waiting")
             {
@@ -97,7 +98,7 @@
                     Entrar
                 </button>';
             }
-            if($this->userStatus == "in" && ($this->marathonStatus == "waiting" || $this->maratonStatus=="happening"))
+            if($this->userStatus == "in" && ($this->maratonStatus == "waiting" || $this->maratonStatus=="happening"))
             {
                 return 
                 '<button onclick="exit('.$this->key.')" class="btn btn-danger">
@@ -184,6 +185,59 @@
             else 
             {
                 return "<p>Error al obtener detalles</p>";
+            }
+        }
+
+        public function getMovieBar()
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+
+            $sql = ($this->userStatus=="in" && $this->maratonStatus!="waiting")?
+            "SELECT * FROM maraton_progreso WHERE maraton = $this->key AND usuario = '$this->user' ORDER BY fecha ASC"
+            :
+            "SELECT pelicula FROM maraton_peliculas WHERE maraton = $this->key ORDER BY orden ASC";
+            
+            $out =  ($this->userStatus=="in" && $this->maratonStatus!="waiting")?
+            "<p>Progreso de películas</p>" : "<p>Películas del maratón</p>";
+
+            $rs = mysqli_query($conn,$sql);
+
+            if($rs && $rs->num_rows>0)
+            {
+                $out .= 
+                '<table class="table table-hover sa_table">
+                    <tbody>';
+                while($rs && $data = mysqli_fetch_assoc($rs))
+                {
+                    $mov = $data['pelicula'];
+                    $url = "http://www.omdbapi.com/?apikey=$this->APIKey&i=$mov";
+                    $content = file_get_contents($url);
+                    $movie = json_decode($content,true);
+            
+                    if($movie['Response']=='True')
+                    {
+                        $out .= '<tr>';
+                
+                        $hr = "<a style='color: white;' href = 'movie.php?id=".$movie['imdbID']."'>";
+                        if($this->userStatus=="in" && $this->maratonStatus!="waiting")
+                        {
+                            $out .= '<td>'.$data['fecha'].'</td>';
+                        }
+                        $poster = ($movie['Poster']=="N/A")? "../../img/poster.jpg" : $movie['Poster'];
+                        $out .= "<td>$hr<img src='".$poster."'></a></td>";
+                        $out .= "<td>$hr".$movie['Title']." (".$movie['Year'].") </a></td>";
+                                        
+                        $out .= '</tr>';
+                    }
+                }
+                $out .= '</tbody>
+                </table>';
+                return $out;
+            }
+            else 
+            {
+                return $out. "<p>No hay películas aún</p>";
             }
         }
     }
