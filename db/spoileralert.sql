@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2019 a las 05:14:14
+-- Tiempo de generación: 08-11-2019 a las 21:41:05
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -40,6 +40,8 @@ CREATE TABLE `amistad` (
 
 INSERT INTO `amistad` (`usuario`, `amigo`, `fecha`) VALUES
 ('admin', 'admin', '2019-11-05 01:32:44'),
+('admin', 'ivan', '2019-11-06 15:12:50'),
+('ivan', 'admin', '2019-11-06 15:12:50'),
 ('ivan', 'ivxn', '2019-10-16 03:21:50'),
 ('ivan', 'ivxn1', '2019-10-16 02:54:02'),
 ('ivan', 'ivxn1k', '2019-10-16 02:58:25'),
@@ -168,7 +170,17 @@ INSERT INTO `chat` (`clave`, `fecha`, `mensaje`, `visto`, `emisor`, `receptor`) 
 (52, '2019-10-16 03:22:06', 'Â¡Hola! Te recomiendo Captain America: The First Avenger de Joe Johnston. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0458339\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivxn', 'ivan'),
 (53, '2019-10-16 04:37:24', 'hola', 0, 'ivan', 'jjjj'),
 (62, '2019-11-05 01:26:59', 'JOLA', 1, 'admin', 'admin'),
-(63, '2019-11-05 01:28:47', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin');
+(63, '2019-11-05 01:28:47', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin'),
+(64, '2019-11-06 05:38:03', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin'),
+(65, '2019-11-06 05:47:35', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin'),
+(66, '2019-11-06 15:12:26', 'Tiene nuevos  maratones que revisar', 0, 'admin', 'admin'),
+(67, '2019-11-06 15:12:50', '', 1, 'admin', 'ivan'),
+(68, '2019-11-06 15:14:10', 'Tiene nuevos  maratones que revisar', 0, 'admin', 'admin'),
+(69, '2019-11-06 15:14:22', 'El maratÃ³n ha sido rechazado por los siguientes motivos: Demasiadas coincidencias', 1, 'admin', 'ivan'),
+(70, '2019-11-06 15:16:03', '', 0, 'ivan', 'admin'),
+(71, '2019-11-06 15:16:03', '', 0, 'ivan', 'admin'),
+(72, '2019-11-06 15:16:03', '', 0, 'ivan', 'admin'),
+(73, '2019-11-06 15:16:05', '', 0, 'ivan', 'admin');
 
 -- --------------------------------------------------------
 
@@ -298,8 +310,8 @@ CREATE TABLE `maraton` (
 --
 
 INSERT INTO `maraton` (`clave`, `nombre`, `inicio`, `fin`, `descripcion`, `tipo`, `publico`, `genero`, `intencion`, `razon`, `estado`, `creador`) VALUES
-(1, 'Mi maraton', '2019-11-06', '2019-11-19', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'aceptado', 'ivan'),
-(2, 'Ola', '2019-11-05', '2019-11-13', 'hola', 'hola', 'hola', 'HOla', 'HOLA', 'HOLA', 'aceptado', 'admin');
+(1, 'Mi maraton', '2019-11-04', '2019-10-31', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'aceptado', 'ivan'),
+(2, 'Ola', '2019-11-07', '2019-11-30', 'hola', 'hola', 'hola', 'HOla', 'HOLA', 'HOLA', 'aceptado', 'admin');
 
 --
 -- Disparadores `maraton`
@@ -323,7 +335,7 @@ DELIMITER ;
 
 CREATE TABLE `maraton_asistencia` (
   `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
-  `estado` enum('incompleto','completo','cancelado','') NOT NULL DEFAULT 'incompleto',
+  `estado` enum('incompleto','completo','') NOT NULL DEFAULT 'incompleto',
   `usuario` varchar(30) NOT NULL,
   `maraton` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -333,7 +345,45 @@ CREATE TABLE `maraton_asistencia` (
 --
 
 INSERT INTO `maraton_asistencia` (`fecha`, `estado`, `usuario`, `maraton`) VALUES
-('2019-11-06 04:02:54', 'incompleto', 'ivan', 1);
+('2019-11-06 04:02:54', 'completo', 'ivan', 1),
+('2019-11-08 09:15:28', 'incompleto', 'ivan', 2);
+
+--
+-- Disparadores `maraton_asistencia`
+--
+DELIMITER $$
+CREATE TRIGGER `insigniasMaraton` AFTER UPDATE ON `maraton_asistencia` FOR EACH ROW BEGIN 
+IF((SELECT COUNT(*) FROM maraton_asistencia WHERE usuario = NEW.usuario AND estado = 'completo') >=1)
+THEN 
+INSERT INTO usuario_insignias(usuario,insignia) VALUES (NEW.usuario,9);
+END IF;
+IF((SELECT COUNT(*) FROM maraton_asistencia WHERE usuario = NEW.usuario AND estado = 'completo') >=5)
+THEN 
+INSERT INTO usuario_insignias(usuario,insignia) VALUES (NEW.usuario,10);
+END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `maraton_feedback`
+--
+
+CREATE TABLE `maraton_feedback` (
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `texto` text NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `maraton` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `maraton_feedback`
+--
+
+INSERT INTO `maraton_feedback` (`fecha`, `texto`, `usuario`, `maraton`) VALUES
+('2019-11-08 20:38:02', 'Excelente maratÃ³n', 'ivan', 1);
 
 -- --------------------------------------------------------
 
@@ -360,6 +410,46 @@ INSERT INTO `maraton_peliculas` (`orden`, `pelicula`, `maraton`) VALUES
 ('2019-11-04 22:44:47', 'tt1710558', 2),
 ('2019-11-04 03:44:23', 'tt4154756', 1),
 ('2019-11-04 22:44:47', 'tt4154756', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `maraton_progreso`
+--
+
+CREATE TABLE `maraton_progreso` (
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `pelicula` varchar(10) NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `maraton` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `maraton_progreso`
+--
+
+INSERT INTO `maraton_progreso` (`fecha`, `pelicula`, `usuario`, `maraton`) VALUES
+('2019-11-08 20:16:36', '', 'ivan', 1),
+('2019-11-08 18:40:11', 'tt0060196', 'ivan', 1),
+('2019-11-08 19:49:39', 'tt0164063', 'ivan', 1),
+('2019-11-08 18:53:58', 'tt0164063', 'ivan', 2),
+('2019-11-08 19:52:31', 'tt1710558', 'ivan', 1),
+('2019-11-08 19:48:00', 'tt4154756', 'ivan', 1),
+('2019-11-08 18:40:19', 'tt0060196', 'ivxn', 1);
+
+--
+-- Disparadores `maraton_progreso`
+--
+DELIMITER $$
+CREATE TRIGGER `progreso_maraton` AFTER INSERT ON `maraton_progreso` FOR EACH ROW BEGIN 
+INSERT IGNORE INTO vistas(pelicula,usuario) VALUES (NEW.pelicula, NEW.usuario);
+IF((SELECT COUNT(*) FROM maraton_progreso WHERE usuario = NEW.usuario AND maraton = NEW.maraton) = (SELECT COUNT(*) FROM maraton_peliculas WHERE maraton = NEW.maraton))
+THEN 
+UPDATE maraton_asistencia SET estado = 'completo' WHERE usuario = NEW.usuario AND maraton = NEW.maraton;
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -738,7 +828,8 @@ CREATE TABLE `usuario_insignias` (
 INSERT INTO `usuario_insignias` (`insignia`, `usuario`, `fecha`) VALUES
 (1, 'ivan', '2019-10-27'),
 (4, 'ivan', '2019-10-30'),
-(5, 'ivan', '2019-10-30');
+(5, 'ivan', '2019-10-30'),
+(9, 'ivan', '2019-11-08');
 
 -- --------------------------------------------------------
 
@@ -757,6 +848,7 @@ CREATE TABLE `vistas` (
 --
 
 INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
+('', 'ivan', '2019-11-08 20:16:36'),
 ('tt0062622', 'ivan', '2019-09-30 05:00:00'),
 ('tt0114746', 'ivan', '2019-10-30 06:00:00'),
 ('tt0156922', 'ivan', '2019-09-30 05:00:00'),
@@ -773,6 +865,7 @@ INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
 ('tt0485947', 'ivan', '2019-10-01 05:00:00'),
 ('tt0848228', 'ivan', '2019-09-18 05:00:00'),
 ('tt1291547', 'ivan', '2019-10-30 06:00:00'),
+('tt1710558', 'ivan', '2019-11-08 19:52:31'),
 ('tt1920984', 'ivan', '2019-09-30 05:00:00'),
 ('tt2397535', 'ivan', '2019-10-30 06:00:00'),
 ('tt2669336', 'ivan', '2019-10-30 06:00:00'),
@@ -896,11 +989,27 @@ ALTER TABLE `maraton_asistencia`
   ADD KEY `maraton` (`maraton`);
 
 --
+-- Indices de la tabla `maraton_feedback`
+--
+ALTER TABLE `maraton_feedback`
+  ADD PRIMARY KEY (`usuario`,`maraton`),
+  ADD KEY `usuario` (`usuario`),
+  ADD KEY `maraton` (`maraton`);
+
+--
 -- Indices de la tabla `maraton_peliculas`
 --
 ALTER TABLE `maraton_peliculas`
   ADD PRIMARY KEY (`pelicula`,`maraton`),
   ADD KEY `pelicula` (`pelicula`),
+  ADD KEY `maraton` (`maraton`);
+
+--
+-- Indices de la tabla `maraton_progreso`
+--
+ALTER TABLE `maraton_progreso`
+  ADD PRIMARY KEY (`usuario`,`pelicula`,`maraton`),
+  ADD KEY `usuario` (`usuario`),
   ADD KEY `maraton` (`maraton`);
 
 --
@@ -1024,7 +1133,7 @@ ALTER TABLE `watchlist`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de la tabla `insignia`
@@ -1125,10 +1234,24 @@ ALTER TABLE `maraton_asistencia`
   ADD CONSTRAINT `maraton_asistencia_ibfk_2` FOREIGN KEY (`maraton`) REFERENCES `maraton` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `maraton_feedback`
+--
+ALTER TABLE `maraton_feedback`
+  ADD CONSTRAINT `maraton_feedback_ibfk_1` FOREIGN KEY (`maraton`) REFERENCES `maraton` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `maraton_feedback_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `maraton_peliculas`
 --
 ALTER TABLE `maraton_peliculas`
   ADD CONSTRAINT `maraton_peliculas_ibfk_1` FOREIGN KEY (`maraton`) REFERENCES `maraton` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `maraton_progreso`
+--
+ALTER TABLE `maraton_progreso`
+  ADD CONSTRAINT `maraton_progreso_ibfk_1` FOREIGN KEY (`maraton`) REFERENCES `maraton` (`clave`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `maraton_progreso_ibfk_2` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `playlist`

@@ -133,7 +133,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -216,7 +215,7 @@
                 <input type="hidden" name="movie" value="<?php echo $id; ?>">
                 <div class="modal-footer bg-dark">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-warning" onclick="sendReview('<?php echo $id; ?>')">Confirmar</button>
+                    <button type="bu|tton" class="btn btn-warning" onclick="sendReview('<?php echo $id; ?>')">Confirmar</button>
                 </div>
             </div>
         </div>

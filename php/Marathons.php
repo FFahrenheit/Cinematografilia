@@ -254,14 +254,62 @@
 
         public function getAction()
         {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
             if($this->maratonStatus == "end")
             {
-                //Obtener feedback
+                $sql = "SELECT usuario.imagen as img, maraton_feedback.* FROM 
+                usuario, maraton_feedback WHERE maraton_feedback.maraton = $this->key 
+                AND usuario.username = maraton_feedback.usuario ORDER BY maraton_feedback.fecha ASC";
+
+                $rs = mysqli_query($conn,$sql);
+
+                if($rs && $rs->num_rows>0)
+                {
+                    $out = 
+                    '<h3 class="text-warning">Feedback</h3><div style="font-size:14px;"class="row bootstrap snippets reviews">
+                        <div class="comment-wrapper">
+                            <div class="panel panel-info">
+                                <div class="panel-body">
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <div id="reviews rounded">
+                                        <ul class="media-list" id="review-section">';
+                    while($data = mysqli_fetch_assoc($rs))
+                    {
+                        $out .= '<li class="media rounded">';
+            
+                        $texto = $data['texto'];
+                        $fecha = $data['fecha'];
+                        $user = $data['usuario'];
+                        $img = $data['img'];
+                        
+                        $out.='<a href="profile.php?user='.$user.'" class="pull-left">'; 
+                        $out.='<img src="'.$img.'" alt="Imagen" class="img-circle">';
+                        $out.='</a>';
+                        $out.='<div class="media-body">';
+                        $out.='<a href="profile.php?user='.$user.'"><strong class="text-warning">'.$user.'&nbsp;</strong></a>';
+                        $out .= '<small class="text-muted">'.$fecha.'</small>';
+                        $out.='<p>'.$texto.'</p>';
+                        $out.='</div>';           
+                        $out .= '</li>';
+                    }
+                    $out .= 
+                                        '</ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+                    return $out;
+                }
+                else 
+                {
+                    return "<p>No se reportaron feedbacks de este maratón</p>";
+                }
             }
             else if($this->userStatus == "in")
             {
-                $temp = new Connection();
-                $conn = $temp->getConnection();
                 if($this->maratonStatus =="happening")
                 {
 
@@ -311,9 +359,9 @@
                 }
                 else if($this->maratonStatus == "feedback")
                 {
-                    $sql = "SELECT COUNT(*) FROM maraton_feedback WHERE usuario = '$this->user' AND mararon = $this->key";
+                    $sql = "SELECT COUNT(*) FROM maraton_feedback WHERE usuario = '$this->user' AND maraton = $this->key";
                     
-                    return $temp->getCount($conn,$sql) != 0 ?  
+                    return $temp->getCount($conn,$sql) == 0 ?  
                     '<p>Dé su feedback acerca del maratón </p>
                     <form id="feedback" novalidate>
                             <div class="form-group">
@@ -326,6 +374,7 @@
                                     Escriba su feedback
                                 </div>
                             </div>
+                            <input name="marathon" value="'.$this->key.'" hidden>
                             <div class="form-group">
                                 <button class="btn btn-warning"type="submit">
                                     Enviar feedback

@@ -20,6 +20,7 @@
     <link href="../../css/index.css" rel="stylesheet">
     <link href="../../css/styles.css" rel="stylesheet">
     <link href="../../css/communication.css" rel="stylesheet">
+    <link href="../../css/profile.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Overpass' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
 </head>

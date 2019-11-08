@@ -17,10 +17,19 @@ if (feedback != null) {
             }, false);
         }, false);
     })();
+
+    feedback.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (feedback.checkValidity()) {
+            data = new FormData(feedback);
+            path = '../../php/send-feedback.php';
+            proceed();
+        }
+    })
 }
 
 function seeMovie(movie, marathon) {
-    console.log("Matcar");
+    console.log("Marcar");
     data = new FormData();
     data.append("marathon", marathon);
     data.append("movie", movie);
@@ -51,7 +60,7 @@ function exit(marathon) {
 }
 
 function proceed() {
-    $("#confirmationModal").modal("toggle");
+    $("#confirmationModal").modal("hide");
     fetch(path, {
         method: 'POST',
         body: data

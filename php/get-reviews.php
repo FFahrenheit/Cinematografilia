@@ -11,7 +11,7 @@
     WHERE review.pelicula = '$movie' 
     GROUP BY review.clave ORDER BY $order DESC;";
     $result = mysqli_query($conn,$sql);
-    if($result && $result->num_rows>0)
+    if($result && $result->num_rows>0) 
     {
         $out="";
         while($data = mysqli_fetch_assoc($result))
