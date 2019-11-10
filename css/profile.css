@@ -92,6 +92,25 @@
     background: rgb(29, 29, 29);
 }
 
+.nav-pills .nav-link:not(.active) {
+    background-color: transparent;
+}
+
+.nav-pills .nav-link {
+    background-color: transparent;
+    background: transparent;
+}
+
+.red .active a,
+.red .active a:hover {
+    background-color: red;
+}
+
+.nav-pills>.active>a,
+.nav-pills>.active>a:hover {
+    background-color: red;
+}
+
 .sa_modal {
     background-color: gray;
     color: #F6C519;

@@ -48,7 +48,7 @@
         else
         {
             $nav .= '<li class="nav-item">
-                        <a class="nav-link" href="#">Listas
+                        <a class="nav-link" href="playlists.php">Listas
                             <!---span class="sr-only">(current)</span-->
                         </a>
                     </li>

@@ -85,7 +85,7 @@
             </div>
             <div class="tab-pane fade" id="nav-marathons" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <h2><i class="fas fa-medal"></i> Maratones </h2>
-                <?php echo $profile->getFavorites(); ?>
+                <?php echo $profile->getMarathons(); ?>
             </div>
         </div>
     </div>

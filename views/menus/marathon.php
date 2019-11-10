@@ -52,7 +52,7 @@
                         <div class="sa_progress">
                             <?php echo $marathon->getAction(); ?>
                         </div>
-                        <div id="details" style="text-align:left;">
+                        <div style="text-align:left;padding-right:0px;">
                             <?php echo $marathon->getDetails(); ?>
                         </div>
                     <?php

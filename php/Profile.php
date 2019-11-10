@@ -413,6 +413,42 @@
             }
         }
 
+        public function getMarathons()
+        {
+            $temp = new Connection();
+            $conn = $temp->getConnection();
+
+            $sql = "SELECT maraton.*,
+            (SELECT COUNT(*) FROM maraton_peliculas WHERE maraton_peliculas.maraton = maraton.clave) as cont 
+            FROM maraton, maraton_asistencia WHERE maraton.clave = maraton_asistencia.maraton 
+            AND usuario = '$this->username' AND maraton_asistencia.estado = 'completo'";
+
+            $result = mysqli_query($conn,$sql);
+
+            if($result && $result->num_rows>0)
+            {
+                $out = '<table class ="table table-hover sa_table"><tbody>';
+                while($data = mysqli_fetch_assoc($result))
+                {
+                    $out .= '<tr>';
+                    $clave = $data['clave'];
+                    $out .= "<td><a style='color: white;' href='playlist.php?clave=$clave'>".$data['nombre']."</a>";
+                    $out .= '<td><h6>'.$data['descripcion'].'</span></h6>';
+                    $out .= '<td>'.$data['fin'].'</td>';
+                    $out .= '<td>'.$data['cont'].'  <i class="fas fa-film"></i>'.'</td>';
+                    $out .= '<td><a class="btn btn-warning" href="marathon.php?clave='.$clave.'">Ver maratón</a></td>';
+                    $out .= '</tr>';
+                }
+                $out .='</tbody></table>';
+                return $out;
+            }
+            else 
+            {
+                return "<p>El usuario aún no ha completado maratones</p>";
+            }
+
+        }
+
         public function getPlaylist($id)
         {
             $temp = new Connection();
