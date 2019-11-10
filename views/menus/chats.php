@@ -14,7 +14,7 @@
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
     if (!isset($_SESSION['username'])) {
-        header("Location: error.php");
+        header("Location: login.php");
     } ?>
 </head>
 

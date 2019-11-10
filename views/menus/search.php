@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/257fce2446.js"></script>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/main.php');
         include($_SERVER['DOCUMENT_ROOT'] . '/SpoilerAlert/php/Movie.php'); 
-        $title = $_GET['title'];
+        $title = isset($_GET['title'])? $_GET['title'] : "";
         $page = isset($_GET['page'])? $_GET['page'] : 1 ;
         $add = (isset($_GET['year']) && $_GET['year']!="")? "&y=".$_GET['year'] : ""; 
         $add2 = (isset($_GET['year']) && $_GET['year']!="")? "&year=".$_GET['year'] : "" ?>
@@ -22,7 +22,17 @@
 <body>
     <?php getNavBar() ?>
     <div class="sa_search">
-        <h2>Resultados para la búsqueda de "<?php echo $title.'"';
+        <h2>
+        <?php 
+            if($title=="")
+            {
+                echo "Busque su película de preferencia";
+            }
+            else
+            {
+                echo "Resultados para la búsqueda de $title.";
+            }
+
         if(isset($_GET['director']) && $_GET['director']!="")
         {
             echo " del director \"".$_GET['director'].'"';
@@ -46,7 +56,7 @@
                         $_GET['director']);
                 }
             }
-            else 
+            else if($title!="")
             {
                 $arg = str_replace(" ","+",$_GET['title']);
                 if(substr($arg, -1)=="+")
@@ -84,13 +94,17 @@
                     else 
                     {
                         echo '<span class="text-light"> Error de API: '.$json['Error']."</span>";
-                        echo $this->getSearcher("");
+                        echo $cards->getSearcher("");
                     }
                 }
                 else 
                 {
                     echo "Error desconocido...";
                 }
+            }
+            else 
+            {
+                echo $cards->getSearcher("");
             }
         ?>
     </div>

@@ -7,6 +7,6 @@
     }
     else 
     {
-        header("Location: ../views/menus/error.php");
+        header("Location: ../views/menus/login.php");
     }
 ?>
