@@ -137,8 +137,10 @@
         {
             $temp = new Connection();
             $temp2 = new Connection();
+            $temp3 = new Connection();
             $conn = $temp->getConnection();
             $conn2 = $temp2->getConnection();
+            $conn3 = $temp3->getConnection();
             $warnings = 0;
             $out="";
 
@@ -156,6 +158,7 @@
                 $sql = "SELECT pelicula, 
                 (SELECT nombre FROM maraton WHERE clave = maraton_peliculas.maraton) as nombre
                 FROM maraton_peliculas WHERE maraton =".$data['clave'];
+                $k = $data['clave'];
                 $rs2 = mysqli_query($conn2,$sql);
 
                 $compare = $this->getArray($rs2);
@@ -164,9 +167,21 @@
                 $perc = (100 * (count($myMovies) - count($diff))) / (floor((count($myMovies) + count($compare))/2));
                 if($perc >= 75)
                 {
+                    $diff = $temp->getCount($conn3,
+                    "SELECT DATEDIFF((SELECT inicio FROM maraton WHERE clave = $this->key),(SELECT fin FROM maraton WHERE clave = $k))");
+
+                    if($diff>0)
+                    {
+                        $add = " con coincidencia en días";
+                    }
+                    else
+                    {
+                        $add = " sin días coincidientes";
+                    }
                     $out .= '<a class="dropdown-item bg-light text-dark" href="review-marathon.php?clave='.$data['clave'].'">'
-                    .$this->actual." ($perc%)".
+                    .$this->actual." ($perc%)".$add.
                     '</a>';
+
                     $warnings++;
                 }
             }

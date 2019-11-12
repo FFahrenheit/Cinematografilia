@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2019 a las 21:41:05
+-- Tiempo de generación: 12-11-2019 a las 02:05:31
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -429,7 +429,6 @@ CREATE TABLE `maraton_progreso` (
 --
 
 INSERT INTO `maraton_progreso` (`fecha`, `pelicula`, `usuario`, `maraton`) VALUES
-('2019-11-08 20:16:36', '', 'ivan', 1),
 ('2019-11-08 18:40:11', 'tt0060196', 'ivan', 1),
 ('2019-11-08 19:49:39', 'tt0164063', 'ivan', 1),
 ('2019-11-08 18:53:58', 'tt0164063', 'ivan', 2),
@@ -848,7 +847,6 @@ CREATE TABLE `vistas` (
 --
 
 INSERT INTO `vistas` (`pelicula`, `usuario`, `fecha`) VALUES
-('', 'ivan', '2019-11-08 20:16:36'),
 ('tt0062622', 'ivan', '2019-09-30 05:00:00'),
 ('tt0114746', 'ivan', '2019-10-30 06:00:00'),
 ('tt0156922', 'ivan', '2019-09-30 05:00:00'),

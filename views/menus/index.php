@@ -20,7 +20,6 @@
         </a>
     </div>
     <main role="main" class="bg-sa-full">
-
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -42,7 +41,7 @@
             <img class="second-slide" src="../../img/index2.png" alt="Record de películas">
             <div class="container">
               <div class="carousel-caption">
-                <h1 class="shadowed">Mantén el record de tus películas.</h1>
+                <h1 class="shadowed">Mantén el récord de tus películas.</h1>
                 <p class="shadowed">Guarda las películas que ves, clasifícalas y ordénalas</p>
                 <p><a class="btn btn-lg btn-warning" href="../../php/my-profile.php" role="button">Vea su perfil o únase</a></p>
               </div>
@@ -68,84 +67,62 @@
           <span class="sr-only">Siguiente</span>
         </a>
       </div>
-
-
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-
       <div class="container marketing">
-
-        <!-- Three columns of text below the carousel -->
         <div class="row">
           <div class="col-lg-4">
             <img class="rounded-circle" src="../../img/contact1.jpg" alt="Agrega amigos" width="140" height="140" style="object-fit:cover">
             <h2 class="text-warning">Agrega amigos</h2>
             <p class="text-light">Agrega contactos para ver sus gustos fílmicos, ver su recuento cinematográfico y estar más unido con la comunidad</p>
             <p><a class="btn btn-warning" href="friend-requests.php" role="button">Agrega amigos &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
+          </div>
           <div class="col-lg-4">
             <img class="rounded-circle" src="../../img/contact2.jpg" alt="Chats" width="140" height="140" style="object-fit:cover">
             <h2 class="text-warning">Habla con ellos</h2>
             <p class="text-light">No solo veas sus gutos ¡Habla con ellos de lo que quieran!</p>
             <p><a class="btn btn-warning" href="chats.php" role="button">Chatea &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
+          </div>
           <div class="col-lg-4">
             <img class="rounded-circle" src="../../img/contact3.jpg" alt="Recomendaciones" width="140" height="140" style="object-fit:cover">
-            <h2 class="text-warning">Recomiendales peliculas</h2>
+            <h2 class="text-warning">Recomiéndales peliculas</h2>
             <p class="text-light">Si crees que una película le gustará a tu amigo, ¡No dudes en enviársela!</p>
             <p><a class="btn btn-warning" href="recomendations.php" role="button">Empieza a recomendar &raquo;</a></p>
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
-
-
-        <!-- START THE FEATURETTES -->
-
+          </div>
+        </div>
         <hr class="featurette-divider">
-
         <div class="row featurette">
           <div class="col-md-7">
             <h2 class="featurette-heading text-warning">Únete a maratones <span class="txt-wrng-mtd">Y haga los suyos.</span></h2>
             <p class="lead text-light">Acércate a la comunidad uniéndote a maratones para ver películas en un lapso determinado. Sea anfitrión de su propio maratón</p>
-            <a href="marathons.php" class="btn btn-warning text-dark">Ve los maratones</a>  
+            <a href="marathons.php" class="btn btn-warning text-dark">Ve los maratones</a><br>
         </div>
           <div class="col-md-5">
             <img class="featurette-image img-fluid mx-auto sa-ftr" src="../../img/feature1.jpg" alt="Maratones">
           </div>
         </div>
-
         <hr class="featurette-divider">
-
         <div class="row featurette">
           <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading text-warning">Visita las playlists. <span class="txt-wrng-mtd">Y haz las tuyas.</span></h2>
             <p class="lead text-light">Junta tus películas de acuerdo a tus gustos, compártelas con la comunidad y conoce nuevas películas basado en tus intereses.</p>
-            <a href="playlists.php" class="btn btn-warning text-dark">Ve los maratones</a>  
+            <a href="playlists.php" class="btn btn-warning text-dark">Ve los maratones</a><br>
         </div>
           <div class="col-md-5 order-md-1">
             <img class="featurette-image img-fluid mx-auto sa-ftr" src="../../img/feature2.jpeg"  alt="Playlists">
           </div>
         </div>
-
         <hr class="featurette-divider">
-
         <div class="row featurette">
           <div class="col-md-7">
             <h2 class="featurette-heading text-warning">Conoce la comunidad. <span class="txt-wrng-mtd">Y deja que la comunidad te conozca a ti.</span></h2>
             <p class="lead text-light">Únete a la comunidad, al fin y al cabo a todos nos mueve lo mismo: El gusto por las películas.</p>
-            <a href="register.php" class="btn btn-warning text-dark">Únete hoy mismo</a>
+            <a href="register.php" class="btn btn-warning text-dark">Únete hoy mismo</a><br>
           </div>
           <div class="col-md-5">
             <img class="featurette-image img-fluid mx-auto sa-ftr" src="../../img/feature3.jpg" alt="Comunidad">
           </div>
         </div>
-
         <hr class="featurette-divider">
-
-        <!-- /END THE FEATURETTES -->
-
-      </div><!-- /.container -->
-
+      </div>
     </main>
     <div id="footer">
     </div>
