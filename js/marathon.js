@@ -224,3 +224,12 @@ function searchMovie() {
 function searchMoviee() {
     searchMovie();
 }
+
+var sMovie = document.getElementById('answer');
+
+if (sMovie != null) {
+    sMovie.addEventListener('submit', e => {
+        e.preventDefault();
+        searchMoviee();
+    })
+}
