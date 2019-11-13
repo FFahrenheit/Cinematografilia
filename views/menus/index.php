@@ -104,7 +104,7 @@
           <div class="col-md-7 order-md-2">
             <h2 class="featurette-heading text-warning">Visita las playlists. <span class="txt-wrng-mtd">Y haz las tuyas.</span></h2>
             <p class="lead text-light">Junta tus películas de acuerdo a tus gustos, compártelas con la comunidad y conoce nuevas películas basado en tus intereses.</p>
-            <a href="playlists.php" class="btn btn-warning text-dark">Ve los maratones</a><br>
+            <a href="playlists.php" class="btn btn-warning text-dark">Ve las playlists</a><br>
         </div>
           <div class="col-md-5 order-md-1">
             <img class="featurette-image img-fluid mx-auto sa-ftr" src="../../img/feature2.jpeg"  alt="Playlists">
@@ -130,7 +130,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.js" crossorigin="anonymous"></script>
     <script src="../../js/main.js"></script>
-    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
 </body>
 
 </html>

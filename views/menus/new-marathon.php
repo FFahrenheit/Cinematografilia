@@ -16,6 +16,9 @@
     <?php getNavBar() ?>
     <div id="top" class="form">
         <h1>Crear nuevo maraton</h1>
+        <p style="font-size:20;" class="font-weight-bold badge-pill badge-warning">
+            Los maratones se podrán agendar mínimo 3 días antes de la fecha de inicio y máximo 30, deberán durar como mínimo 2 días, como máximo 15 y se tandran que seleccionar mínimo 3 películas, máximo 15.
+</p>
         <p>Por favor, complete este formulario antes de comenzar a elegir películas para el maratón</p>
         <div class="alert alert-dismissible" id="alert">
             <span id="alert-message"></span>

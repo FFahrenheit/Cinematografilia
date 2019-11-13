@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2019 a las 02:05:31
+-- Tiempo de generación: 13-11-2019 a las 06:37:29
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -345,8 +345,8 @@ CREATE TABLE `maraton_asistencia` (
 --
 
 INSERT INTO `maraton_asistencia` (`fecha`, `estado`, `usuario`, `maraton`) VALUES
-('2019-11-06 04:02:54', 'completo', 'ivan', 1),
-('2019-11-08 09:15:28', 'incompleto', 'ivan', 2);
+('2019-11-06 04:02:54', 'incompleto', 'ivan', 1),
+('2019-11-08 09:15:28', 'completo', 'ivan', 2);
 
 --
 -- Disparadores `maraton_asistencia`
@@ -355,11 +355,11 @@ DELIMITER $$
 CREATE TRIGGER `insigniasMaraton` AFTER UPDATE ON `maraton_asistencia` FOR EACH ROW BEGIN 
 IF((SELECT COUNT(*) FROM maraton_asistencia WHERE usuario = NEW.usuario AND estado = 'completo') >=1)
 THEN 
-INSERT INTO usuario_insignias(usuario,insignia) VALUES (NEW.usuario,9);
+INSERT IGNORE INTO usuario_insignias(usuario,insignia) VALUES (NEW.usuario,9);
 END IF;
 IF((SELECT COUNT(*) FROM maraton_asistencia WHERE usuario = NEW.usuario AND estado = 'completo') >=5)
 THEN 
-INSERT INTO usuario_insignias(usuario,insignia) VALUES (NEW.usuario,10);
+INSERT IGNORE INTO usuario_insignias(usuario,insignia) VALUES (NEW.usuario,10);
 END IF;
 END
 $$
@@ -561,8 +561,8 @@ INSERT INTO `preguntas` (`clave`, `pregunta`, `estado`, `fecha`) VALUES
 (19, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:10'),
 (20, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:20'),
 (21, 'Pelicula favorita vista recientemente', 'inactiva', '2019-10-23 04:51:30'),
-(22, 'Pelicula favorita vista recientemente', 'activa', '2019-10-23 04:51:30'),
-(23, 'Pelicula de disney favorita', 'cola', '2019-11-04 22:06:05');
+(22, 'Pelicula favorita vista recientemente', 'inactiva', '2019-11-12 05:37:17'),
+(23, 'Pelicula de disney favorita', 'activa', '2019-11-04 22:06:05');
 
 -- --------------------------------------------------------
 
