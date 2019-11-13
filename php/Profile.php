@@ -43,11 +43,10 @@
             AND usuario_insignias.usuario = '$this->username' ORDER BY fecha DESC";
 
             $rs = mysqli_query($conn,$sql);
-            $i=0;
             if($rs && $rs->num_rows>0)
             {
                 $out = "";
-                $end = $rs->num_rows > 5 ? 5 : 10;
+                $end = $rs->num_rows > 5 ? 10 : 5;
                 for($i=0; $i<$end; $i++)  //Máximas insignias
                 {
                     if($i%5 == 0)

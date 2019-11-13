@@ -34,7 +34,6 @@
         <nav class="profile-nav">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-received" role="tab" aria-controls="nav-received" aria-selected="true">Reportes de reseñas</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-sent" role="tab" aria-controls="nav-sent" aria-selected="false">Spam?</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">

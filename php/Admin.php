@@ -285,15 +285,18 @@
         {
             $temp = new Connection();
             $conn = $temp->getConnection();
-
-            if($temp->getCount($conn,"SELECT estado FROM maraton WHERE clave = $key") == 'revision')
+            $status = $temp->getCount($conn,"SELECT estado FROM maraton WHERE clave = $key");
+            if($status == 'revision')
             {
                 return '<button class="btn btn-danger" onclick="send(\''.$key.'\',\'rechazo\')">Rechazar</button>
                      <button class="btn btn-success" onclick="send(\''.$key.'\',\'aceptado\')">Aceptar</button>';
             }
             else 
             {
-                return '<button class="btn btn-secondary" disabled>Opciones no disponibles</button>';
+                return 
+                "<button class='btn btn-secondary' disabled>
+                    Opciones no disponibles, el maratón ya estás $status
+                </button>";
             }
         }
     }

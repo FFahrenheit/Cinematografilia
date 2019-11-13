@@ -16,6 +16,16 @@ $("#review-list").on('change', () => {
     }
 })
 
+function addOther() {
+    console.log("xd");
+    console.log($("#report-list option:selected").text());
+    if ($("#report-list option:selected").text() == 'Otro') {
+        $("#other-reason").attr("hidden", false);
+    } else {
+        $("#other-reason").attr("hidden", true);
+    }
+}
+
 function calification(type, stars) {
     cal = stars;
     for (var i = 1; i <= stars; i++) {
@@ -228,21 +238,26 @@ function report(rev) {
     console.log("Reportar");
     $("#alertModalLabel").html("Reportar reseña");
     $("#alertModalText").html("<p>Seleccione el motivo</p>" +
-        "<select class='custom-select' id = 'report-list'><option selected>Es ofensivo</option>" +
-        '<option>Es spam</option><option>No tiene relación</option><option>Contiene spoilers o contenido que arruina la experiencia</option>' +
-        '<select>');
+        "<select class='custom-select' id ='report-list' onchange='addOther();'><option selected>Es ofensivo</option>" +
+        '<option>Es spam</option><option>No tiene relación</option><option>Contiene spoilers o contenido que arruina la experiencia</option><option>Otro</option>' +
+        '<select><br><br><input placeholder="Ingrese motivo" maxlength="100" type="text" class="form-control" name="other-reason" id="other-reason" hidden>');
     $("#alertModal").modal("toggle");
 
     url = '../../php/report-review.php';
     arg = rev;
 }
 
+
 function confirm() {
     console.log(url + '\n' + arg);
     var args = new FormData();
     args.append("arg", arg);
     if (report) {
-        args.append("reason", $("#report-list option:selected").text())
+        if ($("#report-list option:selected").text() == 'Otro') {
+            args.append("reason", $("#other-reason").val());
+        } else {
+            args.append("reason", $("#report-list option:selected").text());
+        }
     }
     fetch(url, {
         method: 'POST',
