@@ -328,7 +328,7 @@ function confirmation() {
             generalRequest('../../php/delete-recomendation.php');
             break;
         case 'aDelete':
-            generalRequest('../../php/delete-review-admin.php');
+            generalRequest('../../php/delete-review.php');
             break;
         case 'aDiscard':
             generalRequest('../../php/discard-report-admin.php');

@@ -82,7 +82,6 @@
                     <form id="new-req" novalidate>
                         <div class="form-group">
                             <p>Escriba el nombre de usuario a agregar</p>
-
                             <label for="">Nombre de usuario: </label>
                             <br>
                             <input name="friend" type="text" placeholder="Escriba el nombre de usuario" class="form-control" required minlength="2">

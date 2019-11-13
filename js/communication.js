@@ -11,6 +11,11 @@ function newFriendRequest() {
 
 function sendFriendRequest() {
     var data = new FormData(document.getElementById('new-req'));
+    if (data.get("friend").toLowerCase() == 'admin') {
+        $("#requestModal").modal("toggle");
+        alertar("No es posible agregar al usuario especificado", "danger");
+        return;
+    }
     fetch('../../php/add-friend-check.php', {
         method: 'POST',
         body: data

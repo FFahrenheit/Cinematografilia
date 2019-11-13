@@ -3,7 +3,7 @@ function deleteRev(rev) {
     $("#confirmationModalLabel").html("Eliminar reseña");
     $("#confirmationModalBody").html("¿Seguro que desea borrar esta reseña?");
     args = new FormData();
-    args.append("clave", rev);
+    args.append("arg", rev);
     action = 'aDelete';
     $("#confirmationModal").modal("toggle");
 }

@@ -53,7 +53,10 @@
             {
                 $out.= '<i title="Eliminar reseña" onclick="deleteReview('."'".$clave."'".')" class="fas fa-trash"></i>';
             }
-            $out .= '<i class="fas fa-flag p-r" onclick="report('."'".$clave."'".')" title="Reportar"></i>';
+            if(isset($_SESSION['username']) && $data['usuario'] != $_SESSION['username'])
+            {
+                $out .= '<i class="fas fa-flag p-r" onclick="report('."'".$clave."'".')" title="Reportar"></i>';
+            }
             $out.='</div>';
             $out.='<p>'.$texto.'</p>';
             $out.='</div>';           
