@@ -109,7 +109,7 @@
             {
                 $out = '<table class ="table table-hover sa_table"><tbody>';
                 $out .= '<thead><tr><th>Nombre</th><th>Películas</th><th>Por</th><th>Empieza</th><th>Termina</th>
-                <th>Similaridad</th><th>&nbsp;</th></tr></thead>';
+                <th>Similaridad</th><th>Coincidencia en días</th><th>&nbsp;</th></tr></thead>';
                 while($data = mysqli_fetch_assoc($rs))
                 {
                     $out .= "<tr>";
@@ -119,7 +119,7 @@
                     $out .= '<td><a class="text-light" href="profile.php?user='.$data['creador'].'">'.$data['creador'].'</a></td>';
                     $out .= '<td>'.$data['inicio'].'</td>';
                     $out .= '<td>'.$data['fin'].'</td>';
-                    $out .= '<td>'.$this->getWarnings($data['clave']).'</td>';
+                    $out .= $this->getWarnings($data['clave']);
                     $out .= '<td><a href="review-marathon.php?clave='.$data['clave'].'" class="btn btn-warning text-dark">Ver detalles</a></td>';
 
                     $out .= "</tr>";
@@ -142,7 +142,9 @@
             $conn2 = $temp2->getConnection();
             $conn3 = $temp3->getConnection();
             $warnings = 0;
+            $dates = 0;
             $out="";
+            $out2="";
 
 
             $sql = "SELECT pelicula FROM maraton_peliculas WHERE maraton = $key";
@@ -167,34 +169,45 @@
                 $perc = (100 * (count($myMovies) - count($diff))) / (floor((count($myMovies) + count($compare))/2));
                 if($perc >= 75)
                 {
-                    $diff = $temp->getCount($conn3,
-                    "SELECT DATEDIFF((SELECT inicio FROM maraton WHERE clave = $this->key),(SELECT fin FROM maraton WHERE clave = $k))");
+                    $sql = "SELECT clave FROM maraton WHERE clave = $k AND 
+                    (SELECT inicio FROM maraton WHERE clave = $key) <= fin AND 
+                    (SELECT fin FROM maraton WHERE clave = $key) >= inicio";
+                    $rs3 = mysqli_query($conn3,$sql);
+                    if ($rs3 && $rs3->num_rows > 0)
+                    {
+                        $out2.='<a class="dropdown-item bg-light text-dark" href="review-marathon.php?clave='.$data['clave'].'">'
+                        .$this->actual.'</a>';
 
-                    if($diff>0)
-                    {
-                        $add = " con coincidencia en días";
-                    }
-                    else
-                    {
-                        $add = " sin días coincidientes";
+                        $dates++;
                     }
                     $out .= '<a class="dropdown-item bg-light text-dark" href="review-marathon.php?clave='.$data['clave'].'">'
-                    .$this->actual." ($perc%)".$add.
-                    '</a>';
+                    .$this->actual." ($perc%)".'</a>';
 
                     $warnings++;
                 }
             }
-            return $warnings>0 ?
-                '<a title="Nuevo" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-222" data-toggle="dropdown"
+            $outt = $warnings>0 ?
+                '<td><a title="Nuevo" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-222" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-exclamation-triangle"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-default"
                 aria-labelledby="navbarDropdownMenuLink-222">'.$out.
-                '</div>'
+                '</div></td>'
                 : 
-                '<i title="No hay advertencia de maratón repetido" class="fas fa-check"></i>';
+                '<td> <i title="No hay advertencia de maratón repetido" class="fas fa-check"></i> </td>';
+            $outt .= $dates > 0 ?
+                '<td><a title="Nuevo" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-222" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-exclamation-triangle"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                aria-labelledby="navbarDropdownMenuLink-222">'.$out2.
+                '</div></td>'
+                : 
+                '<td> <i title="Sin fechas coincidientes" class="fas fa-check"></i> </td>';
+
+                return $outt;
         }
 
         private function getArray($result)
