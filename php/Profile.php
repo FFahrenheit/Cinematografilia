@@ -20,13 +20,17 @@
             $this->username = $id;
             $sql = "SELECT imagen, date(origen) as date FROM usuario WHERE username = '$id'";
             $result = mysqli_query($this->conn,$sql);
-            if($result->num_rows>0)
+            if(strtolower($id)=="admin" && $this->user !="admin")
+            {
+                $this->exists = false;
+            }
+            else if($result->num_rows>0)
             {
                 $data = mysqli_fetch_assoc($result);
                 $this->image = $data['imagen'];
                 $this->date = $data['date'];
             }
-            else 
+            else
             {
                 $this->exists = false;
             }
@@ -164,7 +168,6 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item bg-light" onclick="block('.$arg.')">Bloquear</a>
                     <a class="dropdown-item bg-light" onclick="unfriend('.$arg.')">Borrar amigo</a>
-                    <a class="dropdown-item bg-light" href="#">Más</a>                
                 </div>
               </div>';   
             }

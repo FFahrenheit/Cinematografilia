@@ -1,9 +1,12 @@
 var req = document.getElementById('new-req');
 
-req.addEventListener('submit', (e) => {
-    e.preventDefault();
-    sendFriendRequest();
-})
+if (req != null) {
+    req.addEventListener('submit', (e) => {
+        e.preventDefault();
+        sendFriendRequest();
+    })
+
+}
 
 function newFriendRequest() {
     $("#requestModal").modal("toggle");

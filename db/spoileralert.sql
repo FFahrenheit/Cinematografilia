@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2019 a las 06:37:29
+-- Tiempo de generación: 20-11-2019 a las 04:39:00
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -90,6 +90,7 @@ INSERT INTO `calificacion` (`fecha`, `valor`, `usuario`, `pelicula`) VALUES
 ('2019-10-27 21:33:42', 1, 'jjjj', 'tt0363771'),
 ('2019-10-27 21:33:52', 4, 'Johann', 'tt0363771'),
 ('2019-10-01 05:34:32', 1, 'ivan', 'tt0363772'),
+('2019-11-13 06:08:21', 1, 'ivan', 'tt0848228'),
 ('2019-10-13 03:33:33', 1, 'ivan', 'tt4154796'),
 ('2019-10-27 21:34:08', 5, 'ivxn1', 'tt4154796'),
 ('2019-10-27 23:28:45', 1, 'ivan', 'tt5715968');
@@ -140,17 +141,17 @@ INSERT INTO `chat` (`clave`, `fecha`, `mensaje`, `visto`, `emisor`, `receptor`) 
 (11, '2019-10-09 04:20:06', 'hdhd', 1, 'ivan', 'xxyo'),
 (12, '2019-10-09 04:20:15', 'hdh', 1, 'ivan', 'xxyo'),
 (13, '2019-10-09 04:20:32', 'jejej', 1, 'ivan', 'xxyo'),
-(14, '2019-10-11 15:04:36', 'Hola!', 0, 'ivan', 'iv_n'),
+(14, '2019-10-11 15:04:36', 'Hola!', 1, 'ivan', 'iv_n'),
 (15, '2019-10-11 15:04:58', 'Hey!', 1, 'iv_n', 'ivan'),
-(27, '2019-10-13 04:43:01', 'Hola! <span class=\"recomend(jaja)\"> click aquí jaja</span>', 0, 'ivan', 'iv_n'),
-(28, '2019-10-13 04:53:13', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span href=\'movie.php?id=tt0848228\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span href=\'recomendations.php\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
-(29, '2019-10-13 04:56:07', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend onclick=\'window.location.href=\"movie.php?id=tt0848228\">aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
-(30, '2019-10-13 04:57:43', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\">aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
-(31, '2019-10-13 04:59:49', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
-(32, '2019-10-13 05:06:20', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
+(27, '2019-10-13 04:43:01', 'Hola! <span class=\"recomend(jaja)\"> click aquí jaja</span>', 1, 'ivan', 'iv_n'),
+(28, '2019-10-13 04:53:13', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span href=\'movie.php?id=tt0848228\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span href=\'recomendations.php\'>aquÃ­</span>.', 1, 'ivan', 'iv_n'),
+(29, '2019-10-13 04:56:07', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend onclick=\'window.location.href=\"movie.php?id=tt0848228\">aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivan', 'iv_n'),
+(30, '2019-10-13 04:57:43', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\">aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivan', 'iv_n'),
+(31, '2019-10-13 04:59:49', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivan', 'iv_n'),
+(32, '2019-10-13 05:06:20', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivan', 'iv_n'),
 (33, '2019-10-13 05:21:07', 'Â¡Hola! Te recomiendo After Porn Ends de Bryce Wagoner. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt1291547\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'xxyo', 'ivan'),
-(34, '2019-10-13 20:45:25', 'Â¡Hola! Te recomiendo Clown de Jon Watts. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt1780798\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'iv_n'),
-(35, '2019-10-13 20:56:36', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 0, 'ivan', 'xxyo'),
+(34, '2019-10-13 20:45:25', 'Â¡Hola! Te recomiendo Clown de Jon Watts. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt1780798\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivan', 'iv_n'),
+(35, '2019-10-13 20:56:36', 'Â¡Hola! Te recomiendo The Avengers de Joss Whedon. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0848228\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivan', 'xxyo'),
 (36, '2019-10-16 01:47:38', 'Hola!', 1, 'jjjj', 'ivan'),
 (37, '2019-10-16 01:48:03', 'Â¿CÃ³mo estÃ¡s?', 1, 'ivan', 'jjjj'),
 (38, '2019-10-16 01:48:16', ':o', 1, 'jjjj', 'ivan'),
@@ -166,21 +167,26 @@ INSERT INTO `chat` (`clave`, `fecha`, `mensaje`, `visto`, `emisor`, `receptor`) 
 (48, '2019-10-16 02:58:43', 'hola', 1, 'ivan', 'ivxn1k'),
 (49, '2019-10-16 02:59:03', 'Como estÃ¡s', 1, 'ivan', 'ivxn1k'),
 (50, '2019-10-16 02:59:07', 'uwu', 1, 'ivan', 'ivxn1k'),
-(51, '2019-10-16 03:10:20', 'UWU', 0, 'ivan', 'ivxn1'),
+(51, '2019-10-16 03:10:20', 'UWU', 1, 'ivan', 'ivxn1'),
 (52, '2019-10-16 03:22:06', 'Â¡Hola! Te recomiendo Captain America: The First Avenger de Joe Johnston. Visita su ficha haciendo \r\n                click <span class=\'recomend\' onclick=\'window.location.href=\"movie.php?id=tt0458339\"\'>aquÃ­</span>. O velo desde tus recomendaciones \r\n                <span class=\'recomend\' onclick=\'window.location.href=\"recomendations.php\"\'>aquÃ­</span>.', 1, 'ivxn', 'ivan'),
-(53, '2019-10-16 04:37:24', 'hola', 0, 'ivan', 'jjjj'),
+(53, '2019-10-16 04:37:24', 'hola', 1, 'ivan', 'jjjj'),
 (62, '2019-11-05 01:26:59', 'JOLA', 1, 'admin', 'admin'),
 (63, '2019-11-05 01:28:47', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin'),
 (64, '2019-11-06 05:38:03', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin'),
 (65, '2019-11-06 05:47:35', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin'),
-(66, '2019-11-06 15:12:26', 'Tiene nuevos  maratones que revisar', 0, 'admin', 'admin'),
+(66, '2019-11-06 15:12:26', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin'),
 (67, '2019-11-06 15:12:50', '', 1, 'admin', 'ivan'),
-(68, '2019-11-06 15:14:10', 'Tiene nuevos  maratones que revisar', 0, 'admin', 'admin'),
+(68, '2019-11-06 15:14:10', 'Tiene nuevos  maratones que revisar', 1, 'admin', 'admin'),
 (69, '2019-11-06 15:14:22', 'El maratÃ³n ha sido rechazado por los siguientes motivos: Demasiadas coincidencias', 1, 'admin', 'ivan'),
-(70, '2019-11-06 15:16:03', '', 0, 'ivan', 'admin'),
-(71, '2019-11-06 15:16:03', '', 0, 'ivan', 'admin'),
-(72, '2019-11-06 15:16:03', '', 0, 'ivan', 'admin'),
-(73, '2019-11-06 15:16:05', '', 0, 'ivan', 'admin');
+(70, '2019-11-06 15:16:03', '', 1, 'ivan', 'admin'),
+(71, '2019-11-06 15:16:03', '', 1, 'ivan', 'admin'),
+(72, '2019-11-06 15:16:03', '', 1, 'ivan', 'admin'),
+(73, '2019-11-06 15:16:05', '', 1, 'ivan', 'admin'),
+(74, '2019-11-13 06:14:54', 'Tiene nuevos  reportes que atender', 1, 'admin', 'admin'),
+(75, '2019-11-13 06:15:55', 'Tiene nuevos  reportes que atender', 1, 'admin', 'admin'),
+(76, '2019-11-13 06:21:45', 'Tiene nuevos  reportes que atender', 1, 'admin', 'admin'),
+(77, '2019-11-17 18:18:53', 'Tiene nuevos  maratones que revisar', 0, 'admin', 'admin'),
+(78, '2019-11-17 18:18:57', 'Tiene nuevos  maratones que revisar', 0, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -311,7 +317,11 @@ CREATE TABLE `maraton` (
 
 INSERT INTO `maraton` (`clave`, `nombre`, `inicio`, `fin`, `descripcion`, `tipo`, `publico`, `genero`, `intencion`, `razon`, `estado`, `creador`) VALUES
 (1, 'Mi maraton', '2019-11-04', '2019-10-31', 'Un maraton cool', 'Cools', 'Al que sea', 'Variado', 'Pues estÃ¡ chido', 'Porque si', 'aceptado', 'ivan'),
-(2, 'Ola', '2019-11-07', '2019-11-30', 'hola', 'hola', 'hola', 'HOla', 'HOLA', 'HOLA', 'aceptado', 'admin');
+(2, 'Ola', '2019-11-07', '2019-11-30', 'hola', 'hola', 'hola', 'HOla', 'HOLA', 'HOLA', 'aceptado', 'admin'),
+(3, 'jiuu', '2019-11-20', '2019-11-30', 'uuuu', 'kj', 'uju', 'uuu', 'u', 'uu', 'pendiente', 'ivan'),
+(4, 'Prueba 1', '2019-11-29', '2019-12-11', '', '', '', '', '', '', 'revision', 'hola'),
+(7, 'Prueba 2', '2019-11-30', '2019-12-10', '', '', '', '', '', '', 'revision', 'iv_n'),
+(9, 'Prueba 3', '2019-10-15', '2019-11-28', '', '', '', '', '', '', 'aceptado', 'jjjj');
 
 --
 -- Disparadores `maraton`
@@ -408,6 +418,9 @@ INSERT INTO `maraton_peliculas` (`orden`, `pelicula`, `maraton`) VALUES
 ('2019-11-04 22:44:30', 'tt0164063', 2),
 ('2019-11-04 04:21:21', 'tt1710558', 1),
 ('2019-11-04 22:44:47', 'tt1710558', 2),
+('2019-11-17 18:08:45', 'tt1710558', 4),
+('2019-11-17 18:10:56', 'tt1710558', 7),
+('2019-11-17 18:10:56', 'tt1710558', 9),
 ('2019-11-04 03:44:23', 'tt4154756', 1),
 ('2019-11-04 22:44:47', 'tt4154756', 2);
 
@@ -597,8 +610,7 @@ INSERT INTO `recomendacion` (`clave`, `fecha`, `pelicula`, `visto`, `emisor`, `r
 (14, '2019-10-13 04:59:49', 'tt0848228', 0, 'ivan', 'iv_n'),
 (15, '2019-10-13 05:06:19', 'tt0848228', 0, 'ivan', 'iv_n'),
 (17, '2019-10-13 20:45:24', 'tt1780798', 0, 'ivan', 'iv_n'),
-(18, '2019-10-13 20:56:35', 'tt0848228', 1, 'ivan', 'xxyo'),
-(19, '2019-10-16 03:22:05', 'tt0458339', 1, 'ivxn', 'ivan');
+(18, '2019-10-13 20:56:35', 'tt0848228', 1, 'ivan', 'xxyo');
 
 -- --------------------------------------------------------
 
@@ -696,18 +708,7 @@ INSERT INTO `review_like` (`fecha`, `review`, `usuario`) VALUES
 -- Disparadores `review_like`
 --
 DELIMITER $$
-CREATE TRIGGER `insigniasResena` AFTER INSERT ON `review_like` FOR EACH ROW BEGIN
-IF((SELECT COUNT(*) FROM review_like WHERE review = NEW.review) >= 5)
-THEN
-INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (6,(SELECT usuario FROM review WHERE clave = NEW.review));
-ELSEIF ((SELECT COUNT(*) FROM review_like WHERE review = NEW.review) >= 10)
-THEN 
-INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (7,(SELECT usuario FROM review WHERE clave = NEW.review));
-ELSEIF((SELECT COUNT(*) FROM review_like WHERE review = NEW.review) >= 15)
-THEN 
-INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (8,(SELECT usuario FROM review WHERE clave = NEW.review));
-END IF;
-END
+CREATE TRIGGER `insigniasResenaLike` AFTER INSERT ON `review_like` FOR EACH ROW BEGIN IF((SELECT COUNT( * ) FROM review_like WHERE review = NEW.review) >= 5) THEN INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (6,(SELECT usuario FROM review WHERE clave = NEW.review)); END IF; IF((SELECT COUNT( * ) FROM review_like WHERE review = NEW.review) >= 10) THEN INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (7,(SELECT usuario FROM review WHERE clave = NEW.review)); END IF; IF((SELECT COUNT( * ) FROM review_like WHERE review = NEW.review) >= 15) THEN INSERT IGNORE INTO usuario_insignias(insignia,usuario) VALUES (8,(SELECT usuario FROM review WHERE clave = NEW.review)); END IF; END
 $$
 DELIMITER ;
 
@@ -826,9 +827,15 @@ CREATE TABLE `usuario_insignias` (
 
 INSERT INTO `usuario_insignias` (`insignia`, `usuario`, `fecha`) VALUES
 (1, 'ivan', '2019-10-27'),
+(2, 'ivan', '0000-00-00'),
+(3, 'ivan', '0000-00-00'),
 (4, 'ivan', '2019-10-30'),
 (5, 'ivan', '2019-10-30'),
-(9, 'ivan', '2019-11-08');
+(6, 'ivan', '0000-00-00'),
+(7, 'ivan', '0000-00-00'),
+(8, 'ivan', '0000-00-00'),
+(9, 'ivan', '2019-11-08'),
+(10, 'ivan', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -1131,7 +1138,7 @@ ALTER TABLE `watchlist`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT de la tabla `insignia`
@@ -1143,7 +1150,7 @@ ALTER TABLE `insignia`
 -- AUTO_INCREMENT de la tabla `maraton`
 --
 ALTER TABLE `maraton`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `playlist`
@@ -1167,13 +1174,13 @@ ALTER TABLE `recomendacion`
 -- AUTO_INCREMENT de la tabla `review`
 --
 ALTER TABLE `review`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `review_reporte`
 --
 ALTER TABLE `review_reporte`
-  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `clave` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas

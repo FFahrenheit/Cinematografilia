@@ -4,10 +4,11 @@
     $c = new Connection();
     $conn = $c->getConnection() or die('"0"');
 
-    $clave = $_POST['clave'];
+    $movie = $_POST['movie'];
+    $user = $_SESSION['username'];
 
-    $sql = "DELETE FROM review WHERE clave = '$clave'";
-    // echo json_encode($sql);die();
+    $sql = "DELETE FROM recomendacion WHERE receptor = '$user' AND pelicula ='$movie'";
+    // echo json_encode($sql);die();    
     $result = mysqli_query($conn,$sql) or die("1");
     if($result && mysqli_affected_rows($conn)>0)
     {
