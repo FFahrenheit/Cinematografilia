@@ -1,6 +1,21 @@
 body {
     background: black !important;
     border-color: black !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+    padding: 0 !important;
+    /* display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; */
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    flex: 1 1 auto;
+    min-height: 0;
 }
 
 h6 {

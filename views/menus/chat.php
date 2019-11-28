@@ -28,7 +28,7 @@
                 <div class="card border-0 rounded" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10), 0 6px 10px 0 rgba(0, 0, 0, 0.01); overflow: hidden; height: 100vh;">
                     <div style="background: black;border-radius:0;">
                         <?php getNavBar() ?>
-                    </div>
+                    </div> 
                     <div class="card-header p-1 border border-top-0 border-left-0 border-right-0 blacked" style="color: rgba(246,197,25,1.0);">
                         <div class="sa_nav">
                             <a href="chats.php" title="Regresar a chats" class="chat-s">
@@ -46,12 +46,12 @@
                             <div class="dropdown-menu dropdown-menu-right border p-0" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item p-2 text-secondary" href="profile.php?<?php echo $friend?>"> <i class="fa fa-user m-1" aria-hidden="true"></i> Visitar perfil </a>
                                 <hr class="my-1">
-                                <a class="dropdown-item p-2 text-secondary" onclick="<?php echo "'$friend'";?>"> <i class="fas fa-user-lock"></i> Bloquear usuario </a>
+                                <a class="dropdown-item p-2 text-secondary" onclick="(<?php echo "block('$friend')";?>)"> <i class="fas fa-user-lock"></i> Bloquear usuario </a>
                             </div>
                         </div>
                     </div>
-                    <div class="card bg-sohbet border-0 m-0 p-0" style="height: 100vh;">
-                        <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent" style="overflow-y: auto; height: 100vh;">
+                    <div class="card bg-sohbet border-0 m-0 p-0" style="height:66.666%;">
+                        <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent" style="overflow-y: auto;display: flex;flex-flow: column;height: 100%;">
                         </div>
                     </div>
                     <div class="w-100 card-footer p-0 bg-dark border border-bottom-0 border-left-0 border-right-0">

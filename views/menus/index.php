@@ -78,7 +78,7 @@
           <div class="col-lg-4">
             <img class="rounded-circle" src="../../img/contact2.jpg" alt="Chats" width="140" height="140" style="object-fit:cover">
             <h2 class="text-warning">Habla con ellos</h2>
-            <p class="text-light">No solo veas sus gutos ¡Habla con ellos de lo que quieran!</p>
+            <p class="text-light">No solo veas sus gustos ¡Habla con ellos de lo que quieran!</p>
             <p><a class="btn btn-warning" href="chats.php" role="button">Chatea &raquo;</a></p>
           </div>
           <div class="col-lg-4">
